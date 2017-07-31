@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Hello-Books
+        </title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Hello-Books</a>
+                </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                
+            </div>
+        </nav> 
+        <div id="container">
+            <div id="container-body">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="dashboard">
+                            <ul class="nav nav-pills">
+                                <li role="presentation"><a href="#" id="dash1">Profile</a></li>
+                                <li role="presentation"><a href="#" id="dash2">History</a></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div id="d1">
+                                <div class="col-md-6 col-centered">
+                                    <h4 id=col-centered>Edit Your Account Settings Below
+                                        <hr>
+                                    </h4>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon" id="basic-addon3">First Name</span>
+                                        <input type="text" class="form-control" id="fname" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon" id="basic-addon3">Last Name</span>
+                                        <input type="text" class="form-control" id="lname" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon" id="basic-addon3">Location</span>
+                                        <input type="text" class="form-control" id="location" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block">Update</button>
+                                    </div>
+                                    
+                                    <h4 id="col-centered">Change Your Password Below
+                                        <hr/>
+                                    </h4>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon" id="basic-addon3">Old Password</span>
+                                        <input type="text" class="form-control" id="opassword" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon" id="basic-addon3">New password</span>
+                                        <input type="text" class="form-control" id="npassword" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon" id="basic-addon3">Confirm password</span>
+                                        <input type="text" class="form-control" id="cpassword" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-block">Change Password</button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div id="d2">
+                                <h4 id="col-centered">
+                                    Records So Far...
+                                    <hr/>
+                                </h4>
+                            </div>
+                            <div id="d3">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div> 
+        <script src="js/dashboard.js"></script>
+    </body>
+</html>        
