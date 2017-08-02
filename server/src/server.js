@@ -42,6 +42,4 @@ app.put('/api/users/:id/books', (req, res) => {
 })
 
 //  start server
-app.listen(3000, () => {
-    console.log('server started');
-})
+export default app;
