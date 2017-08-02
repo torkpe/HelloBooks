@@ -1,0 +1,20 @@
+{
+  "name": "hellobooks",
+  "version": "1.0.0",
+  "description": "an e-library system",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torkpe/HelloBooks.git"
+  },
+  "keywords": [
+    "hellobooks"
+  ],
+  "author": "Temitope Emmanuel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/torkpe/HelloBooks/issues"
+  },
+  "homepage": "https://github.com/torkpe/HelloBooks#readme"
+
+}
