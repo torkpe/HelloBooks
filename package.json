@@ -6,7 +6,6 @@
   "scripts": {
     "build": "babel ./server/db/src --watch -d ./server/db/dist --presets es2015",
     "start:dev": "nodemon ./server/db/dist/bin/www.js",
-    "start": "babel-watch src test",
     "runtest": "babel ./test --watch -d ./runtest --presets es2015",
     "test":"SET NODE_ENV=test& mocha ./runtest/*",
     "lint": "eslint ./server/src/server.js"

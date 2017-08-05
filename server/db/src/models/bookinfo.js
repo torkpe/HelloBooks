@@ -1,5 +1,5 @@
 const bookInfo = (sequelize, DataTypes) => {
-  const BookInfo = sequelize.define('Book', {
+  const BookInfo = sequelize.define('BookInfo', {
     bookId: DataTypes.STRING
   }, {
     classMethods: {

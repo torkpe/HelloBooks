@@ -7,7 +7,7 @@ const authorize = (req, res, next) => {
   if (token) {
     jwt.verify(token, app.get('secret'), (err, decoded) => {
       if (err) {
-        console.error('JWT Verification Error', err);
+        // console.error('JWT Verification Error', err);
         res.status(403).send(err);
       } else {
         req.decoded = decoded;

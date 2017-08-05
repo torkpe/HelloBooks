@@ -8,7 +8,16 @@ describe('GET /api', () => {
       .get('/api')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
-      .expect(404, { message: 'Nothing to see here' }, done);
+      .expect(200, { message: '<h1>hello landing page<h1>' }, done);
+  });
+});
+describe('GET /api', () => {
+  it('responds with <h1>hello landing page<h1>', (done) => {
+    request(app)
+      .post('/api/books')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, { message: '<h1>hello landing page<h1>' }, done);
   });
 });
 

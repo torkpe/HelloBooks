@@ -1,7 +1,7 @@
 'use strict';
 
 var bookInfo = function bookInfo(sequelize, DataTypes) {
-  var BookInfo = sequelize.define('Book', {
+  var BookInfo = sequelize.define('BookInfo', {
     bookId: DataTypes.STRING
   }, {
     classMethods: {

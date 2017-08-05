@@ -20,7 +20,7 @@ var authorize = function authorize(req, res, next) {
   if (token) {
     _jsonwebtoken2.default.verify(token, _server2.default.get('secret'), function (err, decoded) {
       if (err) {
-        console.error('JWT Verification Error', err);
+        // console.error('JWT Verification Error', err);
         res.status(403).send(err);
       } else {
         req.decoded = decoded;

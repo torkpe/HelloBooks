@@ -1,3 +1,5 @@
 node_modules
 server/db/src/config/config.json
 server/db/dist/config/config.json
+runtest
+server/db/dist

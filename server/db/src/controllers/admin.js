@@ -5,6 +5,7 @@ import model from '../models';
 const Admin = model.Admin;
 
 export default {
+  // sign up user
   create(req, res) {
     return Admin
       .create({
@@ -14,6 +15,7 @@ export default {
       .then(newUser => res.status(201).send(newUser))
       .catch(error => res.status(400).send(error));
   },
+  // sign in user
   findAdmin(req, res) {
     return Admin
       .findOne({

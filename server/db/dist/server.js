@@ -22,7 +22,7 @@ var _controllers2 = _interopRequireDefault(_controllers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import authorize from './middleware/middleware';
+// import authorize from './middleware/middleware';
 
 var app = (0, _express2.default)();
 var logger = _morgan2.default;
@@ -36,7 +36,7 @@ var adminControllers = _controllers2.default.admin;
 var bookControllers = _controllers2.default.book;
 //  show index page
 app.get('/api', function (req, res) {
-    res.send('<h1>hello landing page<h1>');
+    res.send({ message: '<h1>hello landing page<h1>' });
 });
 //  sign up user
 app.post('/api/users/signup', userController.create);
@@ -59,7 +59,7 @@ app.delete('/api/books/:id', function (req, res) {
     res.send('<h1>delete a book<h1>');
 });
 app.get('/api/users/:id/books?returned=false', function (req, res) {
-    res.send('<h1>hello landing page<h1>');
+    res.send('book');
 });
 //  api route to allow user borrow book
 app.post('/api/users/:id/books', function (req, res) {

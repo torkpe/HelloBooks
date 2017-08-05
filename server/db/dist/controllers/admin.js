@@ -21,6 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Admin = _models2.default.Admin;
 
 exports.default = {
+  // sign up user
   create: function create(req, res) {
     return Admin.create({
       username: req.body.username,
@@ -31,6 +32,8 @@ exports.default = {
       return res.status(400).send(error);
     });
   },
+
+  // sign in user
   findAdmin: function findAdmin(req, res) {
     return Admin.findOne({
       where: { username: req.body.username,

@@ -13,6 +13,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var request = _supertest2.default;
 describe('GET /api', function () {
   it('responds with <h1>hello landing page<h1>', function (done) {
-    request(_server2.default).get('/api').set('Accept', 'application/json').expect('Content-Type', /json/).expect(404, { message: 'Nothing to see here' }, done);
+    request(_server2.default).get('/api').set('Accept', 'application/json').expect('Content-Type', /json/).expect(200, { message: '<h1>hello landing page<h1>' }, done);
+  });
+});
+describe('GET /api', function () {
+  it('responds with <h1>hello landing page<h1>', function (done) {
+    request(_server2.default).post('/api/books').set('Accept', 'application/json').expect('Content-Type', /json/).expect(200, { message: '<h1>hello landing page<h1>' }, done);
   });
 });
