@@ -56,13 +56,13 @@ app.post('/api/books', bookControllers.create);
 // get all books
 app.get('/api/books', _middleware2.default, bookControllers.findAll);
 // get a books
-app.get('/api/books/:id', bookControllers.findOne);
+app.get('/api/books/:id', _middleware2.default, bookControllers.findOne);
 // edit a book
-app.put('/api/books/:id', bookControllers.findBook);
+app.put('/api/books/:id', _middleware2.default, bookControllers.findBook);
 //  api route to allow user borrow book
-app.post('/api/users/:userId/:bookId/books', borrowBookControllers.borrowBook);
+app.post('/api/users/:userId/:bookId/books', _middleware2.default, borrowBookControllers.borrowBook);
 // get list of borrowed books
-app.get('/api/users/:userId/books', borrowBookControllers.getBorrowedBooks);
+app.get('/api/users/:userId/books', _middleware2.default, borrowBookControllers.getBorrowedBooks);
 // delete a book
 app.delete('/api/books/:id', function (req, res) {
     res.send('<h1>delete a book<h1>');
