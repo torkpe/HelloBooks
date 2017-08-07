@@ -4,7 +4,7 @@ const book = (sequelize, DataTypes) => {
     author: DataTypes.STRING,
     cover: DataTypes.STRING,
     pdf: DataTypes.STRING,
-    quantity: DataTypes.STRING,
+    quantity: DataTypes.INTEGER,
     genre: DataTypes.STRING,
     description: DataTypes.STRING
 

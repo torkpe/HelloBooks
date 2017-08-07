@@ -12,7 +12,7 @@ export default {
         password: md5(req.body.password)
       })
       .then(newUser => res.status(201).send(newUser))
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send(error.message));
   },
   findUser(req, res) {
     return User
@@ -25,7 +25,7 @@ export default {
           res.send('User not found');
         } else {
           const myToken = jwt.sign({ user: user.id },
-            'secret',
+            'sevbdfbsdbhjdshvjbscret',
             { expiresIn: 24 * 60 * 60 });
           res.send(200, { token: myToken,
             userId: user.id,

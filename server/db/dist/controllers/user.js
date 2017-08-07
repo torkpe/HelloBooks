@@ -28,7 +28,7 @@ exports.default = {
     }).then(function (newUser) {
       return res.status(201).send(newUser);
     }).catch(function (error) {
-      return res.status(400).send(error);
+      return res.status(400).send(error.message);
     });
   },
   findUser: function findUser(req, res) {
@@ -39,7 +39,7 @@ exports.default = {
       if (!user) {
         res.send('User not found');
       } else {
-        var myToken = _jsonwebtoken2.default.sign({ user: user.id }, 'secret', { expiresIn: 24 * 60 * 60 });
+        var myToken = _jsonwebtoken2.default.sign({ user: user.id }, 'sevbdfbsdbhjdshvjbscret', { expiresIn: 24 * 60 * 60 });
         res.send(200, { token: myToken,
           userId: user.id,
           name: user.name });

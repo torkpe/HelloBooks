@@ -18,10 +18,10 @@ var authorize = function authorize(req, res, next) {
   var token = req.body.token || req.headers['x-access-token'];
 
   if (token) {
-    _jsonwebtoken2.default.verify(token, _server2.default.get('secret'), function (err, decoded) {
+    _jsonwebtoken2.default.verify(token, 'sevbdfbsdbhjdshvjbscret', function (err, decoded) {
       if (err) {
         // console.error('JWT Verification Error', err);
-        res.status(403).send(err);
+        res.status(403).send({ message: 'error here' });
       } else {
         req.decoded = decoded;
         return next();

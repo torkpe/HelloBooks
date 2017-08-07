@@ -4,11 +4,13 @@ var user = function user(sequelize, DataTypes) {
   var User = sequelize.define('Users', {
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      email: true
     },
     password: {
       type: DataTypes.STRING,

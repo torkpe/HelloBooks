@@ -29,7 +29,7 @@ const createBook = {
       },
       quantity: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       genre: {
         allowNull: false,

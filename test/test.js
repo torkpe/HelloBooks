@@ -20,5 +20,3 @@ describe('GET /api', () => {
       .expect(200, { message: '<h1>hello landing page<h1>' }, done);
   });
 });
-
-

@@ -2,11 +2,13 @@ const user = (sequelize, DataTypes) => {
   const User = sequelize.define('Users', {
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique:true
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      email:true
     },
     password: {
       type: DataTypes.STRING,

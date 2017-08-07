@@ -1,25 +1,20 @@
-const createUser = {
+const borrowBooks = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('Users', {
+    queryInterface.createTable('BorrowBooks', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+      bookId: {
+        type: Sequelize.INTEGER
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+      userId: {
+        type: Sequelize.INTEGER
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false
+      returned: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -31,7 +26,6 @@ const createUser = {
       }
     }),
   down: (queryInterface, Sequelize) =>
-    queryInterface.dropTable('Users'),
+    queryInterface.dropTable('BorrowBooks'),
 };
-module.exports = createUser;
-
+module.exports = borrowBooks;

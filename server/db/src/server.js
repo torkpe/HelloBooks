@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import controllers from './controllers';
+import authorize from './middleware/middleware';
 // import authorize from './middleware/middleware';
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(logger('dev'));
 const userController = controllers.users;
 const adminControllers = controllers.admin;
 const bookControllers = controllers.book;
+const borrowBookControllers = controllers.borrowBook;
 //  show index page
 app.get('/api', (req, res) => {
   res.send({ message: '<h1>hello landing page<h1>' });
@@ -29,22 +31,19 @@ app.post('/api/admin/signin', adminControllers.findAdmin);
 // add a book
 app.post('/api/books', bookControllers.create);
 // get all books
-app.get('/api/books', bookControllers.findAll);
+app.get('/api/books', authorize, bookControllers.findAll);
 // get a books
-app.get('/api/books/:id', bookControllers.findOne);
+app.get('/api/books/:id', authorize, bookControllers.findOne);
 // edit a book
-app.put('/api/books/:id', bookControllers.findBook);
+app.put('/api/books/:id', authorize, bookControllers.findBook);
+//  api route to allow user borrow book
+app.post('/api/users/:userId/:bookId/books', authorize, borrowBookControllers.borrowBook);
+// get list of borrowed books
+app.get('/api/users/:userId/books', authorize, borrowBookControllers.getBorrowedBooks);
 // delete a book
 app.delete('/api/books/:id', (req, res) => {
     res.send('<h1>delete a book<h1>')
 });
-app.get('/api/users/:id/books?returned=false', (req, res) => {
-    res.send('book')
-})
-//  api route to allow user borrow book
-app.post('/api/users/:id/books', (req, res) => {
-    res.send('borrow book')
-})
 // api route to allow user return a book;
 app.put('/api/users/:id/books', (req, res) => {
     res.send('return book')
