@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "",
-    "database": "helloBooks",
+    "database": "hellobooks",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
@@ -11,6 +11,7 @@
     "password": "password",
     "database": "hellobooks-test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   }
 }

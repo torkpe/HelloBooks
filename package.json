@@ -7,7 +7,7 @@
     "build": "babel ./server/db/src --watch -d ./server/db/dist --presets es2015",
     "start:dev": "nodemon ./server/db/dist/bin/www.js",
     "runtest": "babel ./test --watch -d ./runtest --presets es2015",
-    "test":"SET NODE_ENV=test& mocha ./runtest/*",
+    "test": "SET NODE_ENV=test& mocha ./runtest/*",
     "lint": "eslint ./server/src/server.js"
   },
   "repository": {
@@ -36,9 +36,12 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
     "chai": "^4.1.0",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^7.4.1",
     "md5": "^2.2.1",
     "mocha": "^3.5.0",

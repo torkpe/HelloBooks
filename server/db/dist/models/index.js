@@ -18,6 +18,8 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+require('dotenv').config();
+
 var basename = _path2.default.basename(module.filename);
 var env = process.env.NODE_ENV || 'development';
 var config = _config2.default[env];

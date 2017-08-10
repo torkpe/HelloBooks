@@ -1,8 +1,6 @@
-'use strict';
-
-var createUser = {
-  up: function up(queryInterface, Sequelize) {
-    return queryInterface.createTable('Users', {
+const createUser = {
+  up: (queryInterface, Sequelize) =>
+    queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,7 +13,7 @@ var createUser = {
         unique: true,
         notEmpty: true,
         isAlphanumeric: true,
-        len: [5, 15]
+        len: [5, 15],
       },
       email: {
         type: Sequelize.STRING,
@@ -23,14 +21,14 @@ var createUser = {
         unique: true,
         notEmpty: true,
         isAlphanumeric: true,
-        len: [5, 15]
+        len: [5, 15],
       },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
         notEmpty: true,
         isAlphanumeric: true,
-        len: [5, 15]
+        len: [5, 15],
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,
@@ -44,10 +42,9 @@ var createUser = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
-  },
-  down: function down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Users');
-  }
+    }),
+  down: (queryInterface, Sequelize) =>
+    queryInterface.dropTable('Users'),
 };
 module.exports = createUser;
+

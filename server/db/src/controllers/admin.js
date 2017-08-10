@@ -1,38 +1,60 @@
 import jwt from 'jsonwebtoken';
-import md5 from 'md5';
+import bcrypt from 'bcrypt';
 import model from '../models';
+import app from '../server';
 
-const Admin = model.Admin;
-
+const User = model.Users;
+const salt = bcrypt.genSaltSync(10); // Generate salt for password
 export default {
   // sign up user
   create(req, res) {
-    return Admin
-      .create({
-        username: req.body.username,
-        password: md5(req.body.password)
+    const hash = bcrypt.hashSync(req.body.password, salt);
+    return User
+      .findAll({
+        where: { isAdmin: true }
       })
-      .then(newUser => res.status(201).send(newUser))
-      .catch(error => res.status(400).send(error));
+      .then((admin) => {
+        if (admin.length < 1) {
+          User.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: hash,
+            isAdmin: true
+          })
+            .then(newUser => res.status(201).send(newUser))
+            .catch(error => res.status(400).send(`${error }==============`));
+        } else {
+          return res.status(400).send({ message: 'You have made a bad request' });
+        }
+      }).catch(error => res.status(400).send(error));
   },
   // sign in user
   findAdmin(req, res) {
-    return Admin
+    return User
       .findOne({
-        where: { username: req.body.username,
-          password: md5(req.body.password)
+        where: { name: req.body.username,
+          isAdmin: true
         } })
-      .then((user) => {
-        if (!user) {
-          res.send('User not found');
+      .then((admin) => {
+        if (!admin) {
+          return res.status(404).send('Admin not found');
+        }
+        if (!bcrypt.compareSync(req.body.password, admin.password)) {
+          res.status(406).send({ message: 'Incorrect Password' });
         } else {
-          const myToken = jwt.sign({ user: user.id },
-            'secret',
-            { expiresIn: 24 * 60 * 60 });
-          res.send(200, { token: myToken,
-            userId: user.id,
-            name: user.username });
+          const myToken = jwt.sign({ user: admin.id, category: admin.isAdmin }, app.get('secret'), { expiresIn: 24 * 60 * 60 });
+          res.status.send(200, {
+            token: myToken,
+            userId: admin.id,
+            username: admin.username
+          });
         }
       });
   },
+  findAdmins(req, res) {
+    return User
+      .findAll({
+        where: { isAdmin: true }
+      }).then(admins => res.status(201).send(admins));
+  }
 };

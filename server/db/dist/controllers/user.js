@@ -8,42 +8,53 @@ var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
-var _md = require('md5');
+var _bcrypt = require('bcrypt');
 
-var _md2 = _interopRequireDefault(_md);
+var _bcrypt2 = _interopRequireDefault(_bcrypt);
 
 var _models = require('../models');
 
 var _models2 = _interopRequireDefault(_models);
 
+var _server = require('../server');
+
+var _server2 = _interopRequireDefault(_server);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var salt = _bcrypt2.default.genSaltSync(10);
 var User = _models2.default.Users;
 exports.default = {
   create: function create(req, res) {
+    var hash = _bcrypt2.default.hashSync(req.body.password, salt);
     return User.create({
       name: req.body.name,
       email: req.body.email,
-      password: (0, _md2.default)(req.body.password)
-    }).then(function (newUser) {
-      return res.status(201).send(newUser);
+      password: hash,
+      isAdmin: false
+    }).then(function () {
+      return res.status(200).send({ response: 'Successfully created', err: '======================' });
     }).catch(function (error) {
-      return res.status(400).send(error.message);
+      return res.status(400).send({ response: error.message });
     });
   },
+
+  // Sign user in
   findUser: function findUser(req, res) {
     return User.findOne({
-      where: { name: req.body.name,
-        password: (0, _md2.default)(req.body.password)
+      where: { name: req.body.name
       } }).then(function (user) {
       if (!user) {
-        res.send('User not found');
-      } else {
-        var myToken = _jsonwebtoken2.default.sign({ user: user.id }, 'sevbdfbsdbhjdshvjbscret', { expiresIn: 24 * 60 * 60 });
-        res.send(200, { token: myToken,
-          userId: user.id,
-          name: user.name });
+        return res.status(404).send('User not found');
       }
+      // Check if passwords do not match
+      if (!_bcrypt2.default.compareSync(req.body.password, user.password)) {
+        return res.status(406).send({ message: 'Incorrect Password' });
+      }
+      var myToken = _jsonwebtoken2.default.sign({ user: user.id, category: user.isAdmin }, _server2.default.get('secret'), { expiresIn: 24 * 60 * 60 });
+      return res.status(200).send({ token: myToken, userId: user.id, category: user.isAdmin });
+    }).catch(function (error) {
+      return res.status(400).send(error);
     });
   }
 };

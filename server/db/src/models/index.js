@@ -3,6 +3,8 @@ import path from 'path';
 import Sequelize from 'sequelize';
 import configg from '../config/config.json';
 
+require('dotenv').config();
+
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
 const config = configg[env];
