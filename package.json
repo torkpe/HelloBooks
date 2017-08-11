@@ -10,7 +10,7 @@
     "test": "SET NODE_ENV=test& mocha ./runtest/*",
     "lint": "eslint ./server/src/server.js",
     "start": "node ./server/dist/bin/www.js",
-    "dotest": "sequelize db:migrate"
+    "test:db": "sequelize db:migrate"
   },
   "repository": {
     "type": "git",
