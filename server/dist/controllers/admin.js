@@ -53,7 +53,7 @@ exports.default = {
   // sign in user
   findAdmin: function findAdmin(req, res) {
     return User.findOne({
-      where: { name: req.body.username,
+      where: { name: req.body.name,
         isAdmin: true
       } }).then(function (admin) {
       if (!admin) {
@@ -66,7 +66,7 @@ exports.default = {
         res.status.send(200, {
           token: myToken,
           userId: admin.id,
-          username: admin.username
+          username: admin.name
         });
       }
     });

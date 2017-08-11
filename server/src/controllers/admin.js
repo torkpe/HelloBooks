@@ -22,7 +22,7 @@ export default {
             isAdmin: true
           })
             .then(newUser => res.status(201).send(newUser))
-            .catch(error => res.status(400).send(`${error }`));
+            .catch(error => res.status(400).send(`${error}`));
         } else {
           return res.status(400).send({ message: 'You have made a bad request' });
         }
@@ -32,7 +32,7 @@ export default {
   findAdmin(req, res) {
     return User
       .findOne({
-        where: { name: req.body.username,
+        where: { name: req.body.name,
           isAdmin: true
         } })
       .then((admin) => {
@@ -42,11 +42,12 @@ export default {
         if (!bcrypt.compareSync(req.body.password, admin.password)) {
           res.status(406).send({ message: 'Incorrect Password' });
         } else {
-          const myToken = jwt.sign({ user: admin.id, category: admin.isAdmin }, app.get('secret'), { expiresIn: 24 * 60 * 60 });
+          const myToken = jwt.sign({ user: admin.id, category: admin.isAdmin },
+            app.get('secret'), { expiresIn: 24 * 60 * 60 });
           res.status.send(200, {
             token: myToken,
             userId: admin.id,
-            username: admin.username
+            username: admin.name
           });
         }
       });
