@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "pasword",
-    "database": "hellobooks",
+    "database": "helloBooks",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

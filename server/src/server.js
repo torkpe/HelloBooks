@@ -27,9 +27,9 @@ app.use(adminRoute);
 app.use(landingRoute);
 app.route('*')
   .post((req, res) => {
-    res.status(404).send('This page does not exist');
+    res.status(404).send({ message: 'This page does not exist' });
   })
   .get((req, res) => {
-    res.status(404).send('This page does not exist');
+    res.status(404).send({ message: 'This page does not exist' });
   });
 export default app;
