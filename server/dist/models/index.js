@@ -22,15 +22,15 @@ require('dotenv').config();
 
 var basename = _path2.default.basename(module.filename);
 var env = process.env.NODE_ENV || 'development';
-var config = _config2.default[env];
+var configg = _config2.default[env];
 
 var db = {};
 
 var sequelize = void 0;
-if (config.use_env_variable) {
-  sequelize = new _sequelize2.default(process.env[config.use_env_variable]);
+if (configg.use_env_variable) {
+  sequelize = new _sequelize2.default(process.env[configg.use_env_variable]);
 } else {
-  sequelize = new _sequelize2.default(config.database, config.username, config.password, config);
+  sequelize = new _sequelize2.default(configg.database, configg.username, configg.password, configg);
 }
 
 _fs2.default.readdirSync(__dirname).filter(function (file) {
