@@ -11,7 +11,7 @@
     "lint": "eslint ./server/src/server.js",
     "start": "node ./server/dist/bin/www.js && db:migrate",
     "test:db": "sequelize db:migrate",
-    "heroku-postbuild": "NODE_ENV=production && npm run build && NODE_END=production sequelize db:migrate:undo:all && NODE_END=production sequelize db:migrate && npm run db:seed",    
+    "heroku-postbuild": "NODE_ENV=production && npm run build && NODE_END=production sequelize db:migrate:undo:all && NODE_END=production sequelize db:migrate && npm run db:seed"
   },
   "repository": {
     "type": "git",
