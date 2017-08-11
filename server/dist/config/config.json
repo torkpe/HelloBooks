@@ -15,10 +15,10 @@
     "logging": false
   },
   "production": {
-    "username": "fxsbtrpn",
-    "password": "s9rC1NKeAMeSeVE7dKiMLDprN_8wdMf0",
-    "database": "fxsbtrpn",
-    "host": "http://pellefant.db.elephantsql.com",
+    "username": "tebsocsksazajn",
+    "password": "6a9aa8fbc95dc76b8ba0f5a8bfdcd11e86061b11200e255e63418b6695f6be68",
+    "database": "d7mr4olqhikp33",
+    "host": "http://ec2-107-22-160-199.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
 }
