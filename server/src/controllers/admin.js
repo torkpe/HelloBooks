@@ -14,7 +14,7 @@ export default {
         where: { isAdmin: true }
       })
       .then((admin) => {
-        if (admin.length < 1) {
+        if (admin.length < 100) {
           User.create({
             name: req.body.name,
             email: req.body.email,
@@ -47,7 +47,7 @@ export default {
           res.status.send(200, {
             token: myToken,
             userId: admin.id,
-            username: admin.name
+            name: admin.name
           });
         }
       });
