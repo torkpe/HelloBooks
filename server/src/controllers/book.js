@@ -29,7 +29,7 @@ export default {
         } else {
           res.send(book);
         }
-      });
+      }).catch(error => res.status(400).send(error));
   },
   // show all books
   findAll(req, res) {
@@ -41,7 +41,7 @@ export default {
         } else {
           res.send(book);
         }
-      });
+      }).catch(error => res.status(400).send(error));
   },
   // update a book's info
   findBook(req, res) {
@@ -65,6 +65,6 @@ export default {
               genre: req.body.genre,
             });
         }
-      });
+      }).catch(error => res.status(400).send(error));
   },
 };

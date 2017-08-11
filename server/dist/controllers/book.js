@@ -39,6 +39,8 @@ exports.default = {
       } else {
         res.send(book);
       }
+    }).catch(function (error) {
+      return res.status(400).send(error);
     });
   },
 
@@ -50,6 +52,8 @@ exports.default = {
       } else {
         res.send(book);
       }
+    }).catch(function (error) {
+      return res.status(400).send(error);
     });
   },
 
@@ -72,6 +76,8 @@ exports.default = {
           genre: req.body.genre
         });
       }
+    }).catch(function (error) {
+      return res.status(400).send(error);
     });
   }
 };
