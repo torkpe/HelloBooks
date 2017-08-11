@@ -22,7 +22,7 @@ export default {
             isAdmin: true
           })
             .then(newUser => res.status(201).send(newUser))
-            .catch(error => res.status(400).send(`${error }==============`));
+            .catch(error => res.status(400).send(`${error }`));
         } else {
           return res.status(400).send({ message: 'You have made a bad request' });
         }

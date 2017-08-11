@@ -40,7 +40,7 @@ exports.default = {
         }).then(function (newUser) {
           return res.status(201).send(newUser);
         }).catch(function (error) {
-          return res.status(400).send(error + '==============');
+          return res.status(400).send('' + error);
         });
       } else {
         return res.status(400).send({ message: 'You have made a bad request' });
