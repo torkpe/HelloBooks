@@ -4,11 +4,12 @@
   "description": "an e-library system",
   "main": "server.js",
   "scripts": {
-    "build": "babel ./server/db/src --watch -d ./server/db/dist --presets es2015",
-    "start:dev": "nodemon ./server/db/dist/bin/www.js",
+    "build": "babel ./server/src --watch -d ./server/dist --presets es2015",
+    "start:dev": "nodemon ./server/dist/bin/www.js",
     "runtest": "babel ./test --watch -d ./runtest --presets es2015",
     "test": "SET NODE_ENV=test& mocha ./runtest/*",
-    "lint": "eslint ./server/src/server.js"
+    "lint": "eslint ./server/src/server.js",
+    "start": "node ./server/dist/bin/www.js"
   },
   "repository": {
     "type": "git",
