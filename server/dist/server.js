@@ -35,6 +35,7 @@ var userRoute = _index2.default.user,
     bookRoute = _index2.default.book,
     adminRoute = _index2.default.admin,
     landingRoute = _index2.default.landing;
+
 // Use route for users
 app.use(userRoute);
 // Use route for books
@@ -43,5 +44,9 @@ app.use(bookRoute);
 app.use(adminRoute);
 // Landing route
 app.use(landingRoute);
-
+app.route('*').post(function (req, res) {
+  res.status(404).send('This page does not exist');
+}).get(function (req, res) {
+  res.status(404).send('This page does not exist');
+});
 exports.default = app;

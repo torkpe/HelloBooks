@@ -16,6 +16,7 @@ const userRoute = router.user,
   bookRoute = router.book,
   adminRoute = router.admin,
   landingRoute = router.landing;
+
 // Use route for users
 app.use(userRoute);
 // Use route for books
@@ -24,5 +25,11 @@ app.use(bookRoute);
 app.use(adminRoute);
 // Landing route
 app.use(landingRoute);
-
+app.route('*')
+  .post((req, res) => {
+    res.status(404).send('This page does not exist');
+  })
+  .get((req, res) => {
+    res.status(404).send('This page does not exist');
+  });
 export default app;
