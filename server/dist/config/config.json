@@ -16,7 +16,7 @@
   },
   "production": {
     "username": "fxsbtrpn",
-    "password": "password",
+    "password": "s9rC1NKeAMeSeVE7dKiMLDprN_8wdMf0",
     "database": "fxsbtrpn",
     "host": "pellefant.db.elephantsql.com",
     "dialect": "postgres"
