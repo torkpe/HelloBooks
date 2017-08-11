@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "password",
+    "password": "pasword",
     "database": "hellobooks",
     "host": "127.0.0.1",
     "dialect": "postgres"
@@ -16,9 +16,9 @@
   },
   "production": {
     "username": "fxsbtrpn",
-    "password": "s9rC1NKeAMeSeVE7dKiMLDprN_8wdMf0 ",
+    "password": "s9rC1NKeAMeSeVE7dKiMLDprN_8wdMf0",
     "database": "fxsbtrpn",
-    "host": "pellefant.db.elephantsql.com",
+    "host": "http://pellefant.db.elephantsql.com",
     "dialect": "postgres"
   }
 }

@@ -9,7 +9,8 @@
     "runtest": "babel ./test --watch -d ./runtest --presets es2015",
     "test": "SET NODE_ENV=test& mocha ./runtest/*",
     "lint": "eslint ./server/src/server.js",
-    "start": "node ./server/dist/bin/www.js"
+    "start": "node ./server/dist/bin/www.js",
+    "dotest": "sequelize db:migrate"
   },
   "repository": {
     "type": "git",

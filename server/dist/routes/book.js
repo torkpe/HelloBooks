@@ -21,13 +21,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var bookControllers = _controllers2.default.book;
 var router = _express2.default.Router();
 // add a book
-router.post('/api/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.create);
+router.post('/api/v1/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.create);
 // get all books
-router.get('/api/books', _middleware2.default.checkAuthentication, bookControllers.findAll);
+router.get('/api/v1/books', _middleware2.default.checkAuthentication, bookControllers.findAll);
 // get a book
-router.get('/api/books/:id', _middleware2.default.checkAuthentication, bookControllers.findOne);
+router.get('/api/v1/books/:id', _middleware2.default.checkAuthentication, bookControllers.findOne);
 // edit a book
-router.put('/api/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.findBook);
+router.put('/api/v1/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.findBook);
 // Delete a book
 // API route to allow book delete a book goes in here
 

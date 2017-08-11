@@ -17,8 +17,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var adminControllers = _controllers2.default.admin;
 var router = _express2.default.Router();
 //  signin admin
-router.post('/api/admin/signup', adminControllers.create);
+router.post('/api/v1/admin/signup', adminControllers.create);
 //  signin admin
-router.post('/api/admin/signin', adminControllers.findAdmin);
-router.get('/api/admins', adminControllers.findAdmins);
+router.post('/api/v1/admin/signin', adminControllers.findAdmin);
+router.get('/api/v1/admins', adminControllers.findAdmins);
 exports.default = router;
