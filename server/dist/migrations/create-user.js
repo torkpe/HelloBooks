@@ -25,6 +25,11 @@ var createUser = {
         isAlphanumeric: true,
         len: [5, 15]
       },
+      star: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        notEmpty: true
+      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,

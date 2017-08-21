@@ -25,7 +25,7 @@ exports.default = {
     }).then(function (newBook) {
       return res.status(201).send(newBook);
     }).catch(function (error) {
-      return res.status(400).send({ message: 'You have made an invalid request' });
+      return res.status(400).send({ response: error.message });
     });
   },
 
@@ -35,9 +35,9 @@ exports.default = {
       where: { title: req.params.id
       } }).then(function (book) {
       if (!book) {
-        res.send('Book not found');
+        res.status(404).send('Book not found');
       } else {
-        res.send(book);
+        res.status(200).send(book);
       }
     }).catch(function (error) {
       return res.status(400).send(error);
@@ -50,7 +50,7 @@ exports.default = {
       if (!book) {
         res.send('No book not found');
       } else {
-        res.send(book);
+        res.status(200).send(book);
       }
     }).catch(function (error) {
       return res.status(400).send(error);
@@ -77,7 +77,7 @@ exports.default = {
         });
       }
     }).catch(function (error) {
-      return res.status(400).send(error);
+      return res.status(400).send({ response: error.message });
     });
   }
 };

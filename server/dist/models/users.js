@@ -65,6 +65,13 @@ var user = function user(sequelize, DataTypes) {
         args: false,
         msg: 'User category has to be defined'
       }
+    },
+    star: {
+      type: DataTypes.STRING,
+      allowNull: {
+        args: false,
+        msg: 'User\'s star has to be defined'
+      }
     }
   }, {
     classMethods: {

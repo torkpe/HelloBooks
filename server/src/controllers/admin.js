@@ -22,11 +22,11 @@ export default {
             isAdmin: true
           })
             .then(newUser => res.status(201).send(newUser))
-            .catch(error => res.status(400).send(`${error}`));
+            .catch(error => res.status(400).send({ response: error.message }));
         } else {
           return res.status(400).send({ message: 'You have made a bad request' });
         }
-      }).catch(error => res.status(400).send(error));
+      }).catch(error => res.status(400).send({ response: error.message }));
   },
   // sign in user
   findAdmin(req, res) {
@@ -37,20 +37,20 @@ export default {
         } })
       .then((admin) => {
         if (!admin) {
-          return res.status(404).send('Admin not found');
+          return res.status(404).send({ message: 'Admin not found' });
         }
         if (!bcrypt.compareSync(req.body.password, admin.password)) {
           res.status(406).send({ message: 'Incorrect Password' });
         } else {
           const myToken = jwt.sign({ user: admin.id, category: admin.isAdmin },
             app.get('secret'), { expiresIn: 24 * 60 * 60 });
-          res.status.send(200, {
+          res.status(200).send({
             token: myToken,
             userId: admin.id,
             name: admin.name
           });
         }
-      });
+      }).catch(error => res.status(400).send({ response: error.message }));
   },
   findAdmins(req, res) {
     return User

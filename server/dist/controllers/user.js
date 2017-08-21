@@ -26,7 +26,7 @@ var salt = _bcrypt2.default.genSaltSync(10);
 var User = _models2.default.Users;
 // Function to generate token for user
 var generateToken = function generateToken(user) {
-  return _jsonwebtoken2.default.sign({ user: user.id, category: user.isAdmin }, _server2.default.get('secret'), { expiresIn: 24 * 60 * 60 });
+  return _jsonwebtoken2.default.sign({ user: user.id, star: user.star, category: user.isAdmin }, _server2.default.get('secret'), { expiresIn: 24 * 60 * 60 });
 };
 exports.default = {
   create: function create(req, res) {
@@ -35,14 +35,11 @@ exports.default = {
       name: req.body.name,
       email: req.body.email,
       password: hash,
-      isAdmin: false
+      isAdmin: false,
+      star: 'bronze'
     }).then(function (user) {
       var myToken = generateToken(user); // Generate token for user
-      return res.status(200).send({
-        token: myToken,
-        userId: user.id,
-        name: user.name,
-        category: user.isAdmin });
+      return res.status(200).send({ myToken: myToken, user: user });
     }).catch(function (error) {
       return res.status(400).send({ response: error.message });
     });
@@ -61,11 +58,7 @@ exports.default = {
         return res.status(406).send({ message: 'Incorrect Password' });
       }
       var myToken = generateToken(user);
-      return res.status(200).send({
-        token: myToken,
-        userId: user.id,
-        name: user.name,
-        category: user.isAdmin });
+      return res.status(200).send({ myToken: myToken, user: user });
     }).catch(function (error) {
       return res.status(400).send(error);
     });

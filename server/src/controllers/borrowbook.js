@@ -2,33 +2,59 @@ import model from '../models';
 
 const Book = model.Book;
 const borrowBook = model.BorrowBook;
+// Function to determine return date for each user
+const determineDate = (star) => {
+  let newDate;
+  if (star === 'bronze') {
+    newDate = new Date(new Date().getTime() + (1 * 24 * 60 * 60 * 1000));
+    return newDate;
+  }
+  if (star === 'silver') {
+    newDate = new Date(new Date().getTime() + (2 * 24 * 60 * 60 * 1000));
+    return newDate;
+  }
+  if (star === 'gold') {
+    newDate = new Date(new Date().getTime() + (3 * 24 * 60 * 60 * 1000));
+    return newDate;
+  }
+};
 
 export default {
-  // find a book
+  // Find a book
   borrow(req, res) {
     return Book
       .findOne({
-        // check if request book exists
+        // Check if request book exists
         where: { id: req.params.bookId
         } })
       .then((book) => {
         if (!book || book.quantity < 1) {
-          res.status(404).send({ message: 'Book not found' });
+          res.status(404).send({ message: 'Book not available' });
         } else {
           borrowBook.findOne({ where:
-              // check whether book already has been borrowed by user
+              // Check whether book already has been borrowed by user
               { bookId: req.params.bookId,
-                userId: req.decoded.userId,
+                userId: req.decoded.user,
                 returned: false
               } }).then((foundBorrowed) => {
             if (!foundBorrowed) {
               borrowBook.create({
                 bookId: req.params.bookId,
-                userId: req.decoded.userId,
-                returned: false
-              }).then(borrowed => res.status(201).send(borrowed));
+                userId: req.decoded.user,
+                returned: false,
+                returnDate: determineDate(req.decoded.star)
+              }).then(borrowed => res.status(201).send(borrowed),
+              // Remove from the quantity of books
+                Book.find({
+                  where: { id: req.params.bookId }
+                }).then((foundBook) => {
+                  foundBook.update({
+                    quantity: foundBook.quantity - 1
+                  });
+                })
+              );
             } else {
-              // return 204 not created
+              // Return 400 not created
               res.status(400).send({ message: 'Return book first before borrowing again' });
             }
           });
@@ -44,10 +70,21 @@ export default {
         ],
         where: {
           returned: false,
-          userId: req.decoded.userId,
+          userId: req.decoded.user,
         },
       }).then((books) => {
-        res.status(201).send(books);
+        if (books.length < 1) {
+          return res.status(404).send({ message: 'You have no book pending to be returned' });
+        }
+        const borrowedBooks = [];
+        for (let i = 0; i < books.length; i++) {
+           borrowedBooks.push({ returnDate: books[i].returnDate.toDateString(),
+           dateBorrowed: books[i].createdAt.toDateString(),
+           bookId: books[i].id,
+           user: books[i]
+          });
+        }
+        return res.status(200).send(borrowedBooks);
       });
   },
   // Return a book and update status
@@ -55,17 +92,25 @@ export default {
     return borrowBook
       .findOne({
         where: {
-          userId: req.params.userId,
+          userId: req.decoded.user,
           bookId: req.params.bookId,
           returned: false,
         }
       }).then((book) => {
         if (!book) {
-          return res.status(204).send({ message: 'No book found' });
+          return res.status(404).send({ message: 'No book found' });
         }
-        book.update({ returned: true })
+        book.update({ returned: true
+        })
           .then((updated) => {
             res.status(200).send({ updated, message: 'updated successfully' });
+            Book.find({
+              where: { id: req.params.bookId }
+            }).then((foundBook) => {
+              foundBook.update({
+                quantity: foundBook.quantity + 1
+              });
+            });
           });
       });
   }

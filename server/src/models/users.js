@@ -64,6 +64,13 @@ const user = (sequelize, DataTypes) => {
         msg: 'User category has to be defined'
       }
     },
+    star: {
+      type: DataTypes.STRING,
+      allowNull: {
+        args: false,
+        msg: 'User\'s star has to be defined'
+      }
+    },
   }, {
     classMethods: {
       associate: (models) => {

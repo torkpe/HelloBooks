@@ -3,7 +3,8 @@ const borrowbook = (sequelize, DataTypes) => {
   const BorrowBook = sequelize.define('BorrowBook', {
     userId: DataTypes.INTEGER,
     bookId: DataTypes.INTEGER,
-    returned: DataTypes.BOOLEAN
+    returned: DataTypes.BOOLEAN,
+    returnDate: DataTypes.DATE
   }, {
     classMethods: {
       associate: (models) => {

@@ -16,6 +16,9 @@ const borrowBooks = {
       returned: {
         type: Sequelize.BOOLEAN
       },
+      returnDate: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

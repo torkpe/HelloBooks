@@ -5,7 +5,8 @@ var borrowbook = function borrowbook(sequelize, DataTypes) {
   var BorrowBook = sequelize.define('BorrowBook', {
     userId: DataTypes.INTEGER,
     bookId: DataTypes.INTEGER,
-    returned: DataTypes.BOOLEAN
+    returned: DataTypes.BOOLEAN,
+    returnDate: DataTypes.DATE
   }, {
     classMethods: {
       associate: function associate(models) {

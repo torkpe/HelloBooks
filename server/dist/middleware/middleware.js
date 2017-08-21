@@ -20,14 +20,14 @@ exports.default = {
     if (token) {
       _jsonwebtoken2.default.verify(token, _server2.default.get('secret'), function (err, decoded) {
         if (err) {
-          res.status(403).send({ message: 'error here' });
+          res.status(403).send({ message: 'Expired token' });
         } else {
           req.decoded = decoded;
           next();
         }
       });
     } else {
-      res.status(403).send('Token not provided');
+      res.status(403).send({ message: 'Token not provided' });
     }
   },
   authorizeUser: function authorizeUser(req, res, next) {

@@ -15,7 +15,7 @@ export default {
         genre: req.body.genre
       })
       .then(newBook => res.status(201).send(newBook))
-      .catch(error => res.status(400).send({message: 'You have made an invalid request'}));
+      .catch(error => res.status(400).send({ response: error.message }));
   },
   // find a book
   findOne(req, res) {
@@ -25,9 +25,9 @@ export default {
         } })
       .then((book) => {
         if (!book) {
-          res.send('Book not found');
+          res.status(404).send('Book not found');
         } else {
-          res.send(book);
+          res.status(200).send(book);
         }
       }).catch(error => res.status(400).send(error));
   },
@@ -39,7 +39,7 @@ export default {
         if (!book) {
           res.send('No book not found');
         } else {
-          res.send(book);
+          res.status(200).send(book);
         }
       }).catch(error => res.status(400).send(error));
   },
@@ -65,6 +65,6 @@ export default {
               genre: req.body.genre,
             });
         }
-      }).catch(error => res.status(400).send(error));
+      }).catch(error => res.status(400).send({ response: error.message }));
   },
 };
