@@ -24,7 +24,7 @@ var findBorrows = function findBorrows(id) {
     });
   });
 };
-// Permit user to borrow
+// Permit user to borrow based on user's level
 var checkStar = function checkStar(req, res, next) {
   var user = req.decoded.user;
   var star = req.decoded.star;

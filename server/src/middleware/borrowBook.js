@@ -8,7 +8,7 @@ const findBorrows = id => borrowBook.findAll({
     returned: false
   }
 }).then(foundBorrowed => foundBorrowed.map(borrowedBook => borrowedBook.dataValues));
-// Permit user to borrow
+// Permit user to borrow based on user's level
 const checkStar = (req, res, next) => {
   const user = req.decoded.user;
   const star = req.decoded.star;
