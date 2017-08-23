@@ -43,5 +43,22 @@ const checkStar = (req, res, next) => {
     return res.status(500).send({ message: 'Something went wrong' });
   });
 };
+// Check if user is owing before borrowing
+const checkDebt = (req, res, next) => {
+  borrowBook.findAll({
+    where: {
+      userId: req.decoded.user,
+      owing: true
+    }
+  }).then((foundDebt) => {
+    const debt = foundDebt;
+    if (debt.length > 0) {
+      return res.status(403).send({ message: 'Please pay your debt before borrowing' });
+    }
+    return next();
+  });
+};
 
-export default checkStar;
+export default {
+  checkStar, checkDebt
+};

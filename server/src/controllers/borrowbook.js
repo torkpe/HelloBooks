@@ -78,10 +78,10 @@ export default {
         }
         const borrowedBooks = [];
         for (let i = 0; i < books.length; i++) {
-           borrowedBooks.push({ returnDate: books[i].returnDate.toDateString(),
-           dateBorrowed: books[i].createdAt.toDateString(),
-           bookId: books[i].id,
-           user: books[i]
+          borrowedBooks.push({ returnDate: books[i].returnDate.toDateString(),
+            dateBorrowed: books[i].createdAt.toDateString(),
+            bookId: books[i].id,
+            user: books[i]
           });
         }
         return res.status(200).send(borrowedBooks);
@@ -113,6 +113,20 @@ export default {
             });
           });
       });
+  },
+  // Show all books that has exceeded deadline
+  exceedDeadline(req, res) {
+    const newDate = new Date(new Date().getTime());
+    return borrowBook
+      .findAll({
+        include: [
+          Book,
+        ],
+        where: {
+          returnDate: { $lt: newDate },
+          returned: false
+        },
+      }).then(books => res.status(200).send(books));
   }
 };
 

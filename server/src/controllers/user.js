@@ -21,15 +21,15 @@ export default {
       })
       .then((user) => {
         const myToken = generateToken(user); // Generate token for user
-        return res.status(200).send({ myToken, user });
+        return res.status(201).send({ myToken, user });
       })
-      .catch(error => res.status(400).send({ response: error.message }));
+      .catch(error => res.status(400).send({ message: error.message }));
   },
   // Sign user in
   findUser(req, res) {
     return User
       .findOne({
-        where: { name: req.body.name // Check if user exists first
+        where: { name: req.body.name, // Check if user exists first
         } })
       .then((user) => {
         if (!user) {
@@ -41,6 +41,6 @@ export default {
         }
         const myToken = generateToken(user);
         return res.status(200).send({ myToken, user });
-      }).catch(error => res.status(400).send(error));
+      }).catch(error => res.status(400).send(error.message));
   },
 };

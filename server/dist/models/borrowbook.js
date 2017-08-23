@@ -6,7 +6,8 @@ var borrowbook = function borrowbook(sequelize, DataTypes) {
     userId: DataTypes.INTEGER,
     bookId: DataTypes.INTEGER,
     returned: DataTypes.BOOLEAN,
-    returnDate: DataTypes.DATE
+    returnDate: DataTypes.DATE,
+    owing: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function associate(models) {

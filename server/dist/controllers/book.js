@@ -25,7 +25,7 @@ exports.default = {
     }).then(function (newBook) {
       return res.status(201).send(newBook);
     }).catch(function (error) {
-      return res.status(400).send({ response: error.message });
+      return res.status(400).send({ message: error.message });
     });
   },
 

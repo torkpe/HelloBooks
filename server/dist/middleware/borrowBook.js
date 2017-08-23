@@ -59,5 +59,22 @@ var checkStar = function checkStar(req, res, next) {
     return res.status(500).send({ message: 'Something went wrong' });
   });
 };
+// Check if user is owing before borrowing
+var checkDebt = function checkDebt(req, res, next) {
+  borrowBook.findAll({
+    where: {
+      userId: req.decoded.user,
+      owing: true
+    }
+  }).then(function (foundDebt) {
+    var debt = foundDebt;
+    if (debt.length > 0) {
+      return res.status(403).send({ message: 'Please pay your debt before borrowing' });
+    }
+    return next();
+  });
+};
 
-exports.default = checkStar;
+exports.default = {
+  checkStar: checkStar, checkDebt: checkDebt
+};

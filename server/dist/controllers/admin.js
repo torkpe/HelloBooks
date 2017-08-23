@@ -36,7 +36,8 @@ exports.default = {
           name: req.body.name,
           email: req.body.email,
           password: hash,
-          isAdmin: true
+          isAdmin: true,
+          star: 'admin'
         }).then(function (newUser) {
           return res.status(201).send(newUser);
         }).catch(function (error) {

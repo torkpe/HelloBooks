@@ -19,7 +19,8 @@ export default {
             name: req.body.name,
             email: req.body.email,
             password: hash,
-            isAdmin: true
+            isAdmin: true,
+            star: 'admin'
           })
             .then(newUser => res.status(201).send(newUser))
             .catch(error => res.status(400).send({ response: error.message }));

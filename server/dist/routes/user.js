@@ -30,8 +30,8 @@ router.post('/api/v1/users/signup', userController.create);
 //  signin user
 router.post('/api/v1/users/signin', userController.findUser);
 //  api route to allow user borrow book
-router.post('/api/v1/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, _borrowBook2.default, borrowBookControllers.borrow);
-// get list of borrowed books
+router.post('/api/v1/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, _borrowBook2.default.checkStar, borrowBookControllers.borrow);
+// get list of borrowed books 
 router.get('/api/v1/users/:userId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.getBorrowedBooks);
 // api route to allow user return a book;
 router.put('/api/v1/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.returnBook);

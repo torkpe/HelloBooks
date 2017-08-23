@@ -12,11 +12,11 @@ var _faker = require('faker');
 
 var _faker2 = _interopRequireDefault(_faker);
 
-var _server = require('../server/db/dist/server');
+var _server = require('../dist/server');
 
 var _server2 = _interopRequireDefault(_server);
 
-var _index = require('../server/db/dist/models/index');
+var _index = require('../dist/models/index');
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -24,7 +24,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var expect = _chai2.default.expect;
 var userName = _faker2.default.fake('{{name.lastName}}') + 'johnDoe';
-var email = _faker2.default.internet.email();
+var email = _faker2.default.fake('{{name.firstName}}') + '@email.com';
 var token = '';
 var adminName = _faker2.default.fake('{{name.lastName}}') + 'janDoe';
 var adminEmail = _faker2.default.fake('{{name.firstName}}') + '@email.com';
@@ -36,6 +36,11 @@ var user1 = {
   name: userName,
   email: email,
   password: 'jonbullish'
+};
+var user2 = {
+  name: userName,
+  email: email,
+  password: 'jonbullis'
 };
 var admin = {
   name: adminName,
@@ -60,103 +65,115 @@ describe('Post /api/users/signup', function () {
   console.log(user1.name + '==========================' + admin.name);
 });
 var request = _supertest2.default;
-describe('Post /api/users/signup', function () {
+
+describe('Create new user', function () {
   it('responds with 201 created', function (done) {
-    request(_server2.default).post('/api/users/signup').send(user1).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/v1/users/signup').send(user1).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(201, done);
-      if (err) return done(err);
-      done();
+      if (err) return expect(err.message);
+      return done();
     });
   });
 });
 // Sign up with already existing details
-describe('Post /api/users/signup', function () {
+describe('Sign up with already existing details', function () {
   it('responds with 400 Bad Request', function (done) {
-    request(_server2.default).post('/api/users/signup').send(user1).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/v1/users/signup').send(user1).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
-      expect(404, done);
-      if (err) return done(err);
-      done();
+      expect(400, done);
+      if (err) return done(err.message);
+      return done();
     });
   });
 });
 // Sign up with invalid details
-describe('Post /api/users/signup', function () {
+describe('Sign up with invalid details', function () {
   it('responds with 400 bad request error', function (done) {
-    request(_server2.default).post('/api/users/signup').send(user).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/v1/users/signup').send(user).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(400, done);
       if (err) return done(err);
-      done();
+      return done();
     });
   });
 });
 // Sign in with invalid details
-describe('Post /api/users/signin', function () {
-  it('responds with ', function (done) {
-    request(_server2.default).post('/api/users/signin').send(user).set('Accept', 'application/json').end(function (err) {
+describe('Sign in with invalid details', function () {
+  it('responds with 404', function (done) {
+    request(_server2.default).post('/api/v1/users/signin').send(user).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
-      expect(200, done);
+      expect(404, done);
       if (err) return done(err);
-      done();
+      return done();
     });
   });
 });
-// Sign in valid details
-describe('Post /api/users/signin', function () {
-  it('responds with ', function (done) {
-    request(_server2.default).post('/api/users/signin').send(user1).set('Accept', 'application/json').end(function (err, res) {
-      token = res.body.token;
+// Sign in with incorrect password
+describe('Sign in with incorrect password', function () {
+  it('responds with 406', function (done) {
+    request(_server2.default).post('/api/v1/users/signin').send(user2).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
-      expect(200, done);
+      expect(406, done);
       if (err) return done(err);
-      done();
-    });
-  });
-});
-// Create Admin
-describe('Post /api/users/signup', function () {
-  it('responds with 201 created', function (done) {
-    request(_server2.default).post('/api/admin/signup').send(admin).set('Accept', 'application/json').end(function (err) {
-      expect('Content-Type', /json/);
-      expect(201, done);
-      if (err) return done(err);
-      done();
+      return done();
     });
   });
 });
 // Sign Admin in with valid details
-describe('Post /api/admin/signin', function () {
-  it('responds with ', function (done) {
-    request(_server2.default).post('/api/admin/signin').send(admin).set('Accept', 'application/json').end(function (err, res) {
-      console.log(res);
+describe('Sign user in with valid details', function () {
+  it('responds with 200', function (done) {
+    request(_server2.default).post('/api/v1/users/signin').send(user1).set('Accept', 'application/json').end(function (err, res) {
+      token = res.body.myToken;
       expect('Content-Type', /json/);
       expect(200, done);
       if (err) return done(err);
-      done();
+      return done();
+    });
+  });
+});
+// Create Admin
+describe('Create Admin', function () {
+  it('responds with 201 created', function (done) {
+    request(_server2.default).post('/api/v1/admin/signup').send(admin).set('Accept', 'application/json').end(function (err) {
+      expect('Content-Type', /json/);
+      expect(201, done);
+      if (err) return done(err);
+      return done();
+    });
+  });
+});
+// Sign Admin in with valid details
+describe('Sign Admin in with valid details', function () {
+  it('responds with 200', function (done) {
+    request(_server2.default).post('/api/v1/admin/signin').send(admin).set('Accept', 'application/json').end(function (err, res) {
+      adminToken = res.body.token;
+      expect('Content-Type', /json/);
+      expect(200, done);
+      if (err) return done(err);
+      return done();
     });
   });
 });
 // Post new book by Admin
-describe('POST /api/books', function () {
-  it('responds with ', function (done) {
-    request(_server2.default).post('/api/books').set('x-access-token', adminToken).send(book).end(function (err) {
+describe('Post new book by Admin', function () {
+  it('responds with 201', function (done) {
+    request(_server2.default).post('/api/v1/books').set('x-access-token', adminToken).send(book).end(function (err) {
       expect('Content-Type', /json/);
-      expect(200, done);
+      expect(201, done);
       if (err) return done(err);
-      done();
+      return done();
     });
   });
 });
 // Post new book by user
-describe('POST /api/books', function () {
-  it('responds with ', function (done) {
-    request(_server2.default).post('/api/books').send(book).set('x-access-token', token).end(function (err) {
+describe('Post new book by user', function () {
+  it('responds with 403', function (done) {
+    request(_server2.default).post('/api/v1/books').send(book).set('x-access-token', token).end(function (err) {
       expect('Content-Type', /json/);
-      expect(200, done);
+      expect(403, done);
       if (err) return done(err);
-      done();
+      return done();
     });
   });
 });

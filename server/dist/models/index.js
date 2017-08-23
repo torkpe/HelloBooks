@@ -12,7 +12,7 @@ var _sequelize = require('sequelize');
 
 var _sequelize2 = _interopRequireDefault(_sequelize);
 
-var _config = require('../config/config.json');
+var _config = require('../config/config');
 
 var _config2 = _interopRequireDefault(_config);
 

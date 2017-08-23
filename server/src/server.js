@@ -15,8 +15,8 @@ app.set('secret', 'ghjkcndschyu$%^&*gdshcndsyucbds%^&hc5%^784678wqfewtyy');
 const userRoute = router.user,
   bookRoute = router.book,
   adminRoute = router.admin,
-  landingRoute = router.landing;
-
+  landingRoute = router.landing,
+  notificationsRoute = router.notifications;
 // Use route for users
 app.use(userRoute);
 // Use route for books
@@ -25,6 +25,8 @@ app.use(bookRoute);
 app.use(adminRoute);
 // Landing route
 app.use(landingRoute);
+// Notifications route
+app.use(notificationsRoute);
 app.route('*')
   .post((req, res) => {
     res.status(404).send({ message: 'This page does not exist' });

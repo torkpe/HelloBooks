@@ -12,8 +12,8 @@ router.post('/api/v1/users/signup', userController.create);
 router.post('/api/v1/users/signin', userController.findUser);
 //  api route to allow user borrow book
 router.post('/api/v1/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,
-  authBorrow, borrowBookControllers.borrow);
-// get list of borrowed books
+  authBorrow.checkStar, borrowBookControllers.borrow);
+// get list of borrowed books 
 router.get('/api/v1/users/:userId/books', authorize.checkAuthentication, authorize.authorizeUser,
   borrowBookControllers.getBorrowedBooks);
 // api route to allow user return a book;

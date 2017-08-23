@@ -119,5 +119,19 @@ exports.default = {
         });
       });
     });
+  },
+
+  // Show all books that has exceeded deadline
+  exceedDeadline: function exceedDeadline(req, res) {
+    var newDate = new Date(new Date().getTime());
+    return borrowBook.findAll({
+      include: [Book],
+      where: {
+        returnDate: { $lt: newDate },
+        returned: false
+      }
+    }).then(function (books) {
+      return res.status(200).send(books);
+    });
   }
 };

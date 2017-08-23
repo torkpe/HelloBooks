@@ -15,7 +15,7 @@ export default {
         genre: req.body.genre
       })
       .then(newBook => res.status(201).send(newBook))
-      .catch(error => res.status(400).send({ response: error.message }));
+      .catch(error => res.status(400).send({ message: error.message }));
   },
   // find a book
   findOne(req, res) {
