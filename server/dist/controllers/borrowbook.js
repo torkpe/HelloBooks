@@ -37,37 +37,37 @@ exports.default = {
       where: { id: req.params.bookId
       } }).then(function (book) {
       if (!book || book.quantity < 1) {
-        res.status(404).send({ message: 'Book not available' });
-      } else {
-        borrowBook.findOne({ where:
-          // Check whether book already has been borrowed by user
-          { bookId: req.params.bookId,
-            userId: req.decoded.user,
-            returned: false
-          } }).then(function (foundBorrowed) {
-          if (!foundBorrowed) {
-            borrowBook.create({
-              bookId: req.params.bookId,
-              userId: req.decoded.user,
-              returned: false,
-              returnDate: determineDate(req.decoded.star)
-            }).then(function (borrowed) {
-              return res.status(201).send(borrowed);
-            },
-            // Remove from the quantity of books
-            Book.find({
-              where: { id: req.params.bookId }
-            }).then(function (foundBook) {
-              foundBook.update({
-                quantity: foundBook.quantity - 1
-              });
-            }));
-          } else {
-            // Return 400 not created
-            res.status(400).send({ message: 'Return book first before borrowing again' });
-          }
-        });
+        return res.status(404).send({ message: 'Book not available' });
       }
+      borrowBook.findOne({ where:
+        // Check whether book already has been borrowed by user
+        { bookId: req.params.bookId,
+          userId: req.decoded.user,
+          returned: false
+        } }).then(function (foundBorrowed) {
+        if (!foundBorrowed) {
+          borrowBook.create({
+            bookId: req.params.bookId,
+            userId: req.decoded.user,
+            returned: false,
+            returnDate: determineDate(req.decoded.star),
+            owing: false
+          }).then(function (borrowed) {
+            return res.status(201).send(borrowed);
+          },
+          // Remove from the quantity of books
+          Book.find({
+            where: { id: req.params.bookId }
+          }).then(function (foundBook) {
+            foundBook.update({
+              quantity: foundBook.quantity - 1
+            });
+          }));
+        } else {
+          // Return 400 not created
+          res.status(400).send({ message: 'Return book first before borrowing again' });
+        }
+      });
     });
   },
 

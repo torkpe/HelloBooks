@@ -7,12 +7,13 @@ import db from '../dist/models/index';
 const expect = chai.expect;
 const userName = `${faker.fake('{{name.lastName}}')}johnDoe`;
 const email = `${faker.fake('{{name.firstName}}')}@email.com`;
+const userName1 = `${faker.fake('{{name.lastName}}')}johnDoee`;
+const email1 = `${faker.fake('{{name.firstName}}')}e@email.com`;
 let token = '';
+let token2 = '';
 const adminName = `${faker.fake('{{name.lastName}}')}janDoe`;
 const adminEmail = `${faker.fake('{{name.firstName}}')}@email.com`;
 
-let id = '';
-let bookId = '';
 let adminToken = '';
 const user1 = {
   name: userName,
@@ -23,6 +24,11 @@ const user2 = {
   name: userName,
   email,
   password: 'jonbullis',
+};
+const user3 = {
+  name: userName1,
+  email: email1,
+  password: 'jonbullishki',
 };
 const admin = {
   name: adminName,
@@ -41,10 +47,28 @@ const book = {
   author: 'Chinua Achebe',
   description: 'A young boy from the village who finally goes to school',
   quantity: 5,
-  genre: 'Educational'
+  genre: 'Educational',
+};
+const book2 = {
+  cover: 'sdhdsjcdssnbdsdsbhjsb',
+  pdf: 'bssskskjhdb',
+  title: 'Ali and Simbi',
+  author: 'Joy chinelo',
+  description: 'Ali is a boy and Simbi is a girl',
+  quantity: 0,
+  genre: 'Educational',
+};
+const book3 = {
+  cover: '',
+  pdf: 'bssskskjhdb',
+  title: 'Ali and Simbi',
+  author: '',
+  description: 'Ali is a boy and Simbi is a girl',
+  quantity: 0,
+  genre: 'Educational',
 };
 describe('Post /api/users/signup', () => {
-  console.log(user1.name+'=========================='+admin.name)
+  console.log(user1.name+'=========================='+user3.name);
 });
 const request = supertest;
 
@@ -53,6 +77,20 @@ describe('Create new user', () => {
     request(app)
       .post('/api/v1/users/signup')
       .send(user1)
+      .set('Accept', 'application/json')
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(201, done);
+        if (err) return expect(err.message);
+        return done();
+      });
+  });
+});
+describe('Create new user', () => {
+  it('responds with 201 created', (done) => {
+    request(app)
+      .post('/api/v1/users/signup')
+      .send(user3)
       .set('Accept', 'application/json')
       .end((err) => {
         expect('Content-Type', /json/);
@@ -77,6 +115,7 @@ describe('Sign up with already existing details', () => {
       });
   });
 });
+
 // Sign up with invalid details
 describe('Sign up with invalid details', () => {
   it('responds with 400 bad request error', (done) => {
@@ -92,6 +131,7 @@ describe('Sign up with invalid details', () => {
       });
   });
 });
+
 // Sign in with invalid details
 describe('Sign in with invalid details', () => {
   it('responds with 404', (done) => {
@@ -122,7 +162,7 @@ describe('Sign in with incorrect password', () => {
       });
   });
 });
-// Sign Admin in with valid details
+// Sign user in with valid details
 describe('Sign user in with valid details', () => {
   it('responds with 200', (done) => {
     request(app)
@@ -131,6 +171,22 @@ describe('Sign user in with valid details', () => {
       .set('Accept', 'application/json')
       .end((err, res) => {
         token = res.body.myToken;
+        expect('Content-Type', /json/);
+        expect(200, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Sign user2 in with valid details
+describe('Sign user in with valid details', () => {
+  it('responds with 200', (done) => {
+    request(app)
+      .post('/api/v1/users/signin')
+      .send(user3)
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        token2 = res.body.myToken;
         expect('Content-Type', /json/);
         expect(200, done);
         if (err) return done(err);
@@ -184,6 +240,37 @@ describe('Post new book by Admin', () => {
       });
   });
 });
+// Post another book by Admin
+describe('Post another book by Admin', () => {
+  it('responds with 201', (done) => {
+    request(app)
+      .post('/api/v1/books')
+      .set('x-access-token', adminToken)
+      .send(book2)
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(201, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Post another book by Admin with invalid details
+describe('Post another book by Admin with invalid details', () => {
+  it('responds with 400', (done) => {
+    request(app)
+      .post('/api/v1/books')
+      .set('x-access-token', adminToken)
+      .send(book3)
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(400, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+
 // Post new book by user
 describe('Post new book by user', () => {
   it('responds with 403', (done) => {
@@ -194,6 +281,129 @@ describe('Post new book by user', () => {
       .end((err) => {
         expect('Content-Type', /json/);
         expect(403, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Post new book without token
+describe('Post new book without token', () => {
+  it('responds with 403', (done) => {
+    request(app)
+      .post('/api/v1/books')
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(403, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Get all books by user
+describe('Post new book by user', () => {
+  it('responds with 200', (done) => {
+    request(app)
+      .get('/api/v1/books')
+      .set('x-access-token', token)
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(200, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Get all books by admin
+describe('Get all books by admin', () => {
+  it('responds with 200', (done) => {
+    request(app)
+      .get('/api/v1/books')
+      .set('x-access-token', adminToken)
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(200, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Get all books without token
+describe('Get all books without token', () => {
+  it('responds with 403', (done) => {
+    request(app)
+      .get('/api/v1/books')
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(403, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Borrow book by user
+describe('Borrow book by user', () => {
+  it('responds with 201', (done) => {
+    request(app)
+      .post('/api/v1/users/1/1/books')
+      .set('x-access-token', token)
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(201, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Borrow book by admin
+describe('Borrow book by admin', () => {
+  it('responds with 403', (done) => {
+    request(app)
+      .post('/api/v1/users/1/1/books')
+      .set('x-access-token', adminToken)
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(403, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Borrow book without token
+describe('Borrow book without token', () => {
+  it('responds with 403', (done) => {
+    request(app)
+      .post('/api/v1/users/1/1/books')
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(403, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Borrow book again by user
+describe('Borrow book again by user', () => {
+  it('responds with 400', (done) => {
+    request(app)
+      .post('/api/v1/users/1/1/books')
+      .set('x-access-token', token)
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(400, done);
+        if (err) return done(err);
+        return done();
+      });
+  });
+});
+// Borrow more than avilable book
+describe('Borrow more than avilable book', () => {
+  it('responds with 404', (done) => {
+    request(app)
+      .post('/api/v1/users/1/2/books')
+      .set('x-access-token', token2)
+      .end((err) => {
+        expect('Content-Type', /json/);
+        expect(404, done);
         if (err) return done(err);
         return done();
       });
