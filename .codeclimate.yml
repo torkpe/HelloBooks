@@ -12,4 +12,3 @@ exclude_paths:
 - "test/"
 - "node_modules/"
 - "templates/"
-- "server/src"
