@@ -1,11 +1,11 @@
 language: node_js
 node_js:  
  - node
- before_script:  
+before_script:  
  - npm install -g codeclimate-test-reporter
 script:  
  - npm test
 after_success:  
  - npm run coverage
 services:
-  - postgres
+ -postgresql
