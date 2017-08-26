@@ -20,12 +20,7 @@ const config = {
     dialect: 'postgres',
   },
   travis: {
-    username: process.env.DB_TEST_USERNAME,
-    password: process.env.DB_TEST_PASSWORD,
-    database: process.env.DB_TEST_NAME,
-    host: '127.0.0.1',
-    port: '5432',
-    dialect: 'postgres',
+    use_env_variable: 'DB_TEST_URL',
   },
   production: {
     use_env_variable: 'DATABASE_URL',
