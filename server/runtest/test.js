@@ -336,14 +336,3 @@ describe('Borrow book again by user', function () {
     });
   });
 });
-// Borrow more than avilable book
-describe('Borrow more than avilable book', function () {
-  it('responds with 404', function (done) {
-    request(_server2.default).post('/api/v1/users/1/2/books').set('x-access-token', token2).end(function (err) {
-      expect('Content-Type', /json/);
-      expect(404, done);
-      if (err) return done(err);
-      return done();
-    });
-  });
-});
