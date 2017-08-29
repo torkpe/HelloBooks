@@ -4,6 +4,7 @@
         <title>
             Hello-Books
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = 'stylesheet' href = './mdl/material.min.css'>
         <script src = './mdl/material.min.js'></script>
         <link rel = 'stylesheet' href = 'https://fonts.googleapis.com/icon?family=Material+Icons'>
@@ -11,75 +12,86 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div id="container">
-            <div id="container-body">
-                <div class="col-md-9">
-                    <div class="jumbotron">
-                        <figure class="fluidratio"></figure>
-                    </div>
+        <div class='mdl-layout mdl-js-layout mdl-layout--fixed-header'>
+            <header class='mdl-layout__header'>
+                <div class='mdl-layout__header-row'>
+                    <span class='mdl-layout-title'>Hello-Books</span>
+                    <div class='mdl-layout-spacer'></div>
                 </div>
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                        <center><div id="header">Sign in</div></center>
-                        </div>
-                        <div id="body1">
-                            <div class="panel-body">
-                            <div class='mdl-textfield mdl-js-textfield'>
-                                <input type='email' class='mdl-textfield__input' id='email'/>
-                                <label for='email' class='mdl-textfield__label' for='email'>Email</label>
-                            </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="password" placeholder="Password">
+            </header>
+            <main class='mdl-layout__content '>
+                <div class='page-content'>
+                    <div class='mdl-grid'>
+                        <div class='content' id='body1'>
+                            <div class="card-enlarge mdl-card mdl-shadow--3dp">
+                                <div class='mdl-textfield mdl-js-textfield card-content'>
+                                    <div class='mdl-card__supporting-text'>
+                                        <input type='text' class='mdl-textfield__input' id='username' placeholder='Username'/>
+                                        <label for='username' class='mdl-textfield__label' for='username'>Username</label>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block">Sign in</button>
+                                <div class='mdl-textfield mdl-js-textfield card-content'>
+                                    <div class='mdl-card__supporting-text'>
+                                        <input type='password' class='mdl-textfield__input' id='password' placeholder='Password'/>
+                                        <label for='password' class='mdl-textfield__label' for='password'>Password</label>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-danger btn-block" >Sign in Using Google+</button>
-                                </div>
-                                <div id="ask">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                Sign in
+                                </button>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                Sign in with Google+
+                                </button>
+                                <div class='mdl-card__supporting-text ask'>
                                     Don't Have an Account yet? Create one Below
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-success btn-block" id="b1" >Create Account</button>
-                                </div> 
-                                <div id="ask">
-                                    <a href="#">forgot password?</a>
+                                <button class="mdl-button mdl-js-button mdl-button--raised" id="b1">
+                                Create Account
+                                </button>
+                                <div class='mdl-card__supporting-text ask'>
+                                    <a href=''>forgot password?</a>          
                                 </div>
                             </div>
                         </div>
-                        <div id="body2">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="signEmail" placeholder="Email">
+                        <div class='content' id='body2'>
+                            <div class="card-enlarge mdl-card mdl-shadow--3dp">
+                                <div class='mdl-textfield mdl-js-textfield card-content'>
+                                    <div class='mdl-card__supporting-text'>
+                                        <input type='email' class='mdl-textfield__input' id='email' placeholder='Email'/>
+                                        <label for='email' class='mdl-textfield__label' for='email'>Email</label>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block">Sign Up</button>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                    Sign up
+                                </button>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                    Sign up with Google+
+                                </button>
+                                <div class='mdl-card__supporting-text ask'>
+                                    Already have an account? Sign in below
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-danger btn-block" >Sign Up Using Google+</button>
-                                </div> 
-                                <div id="ask">
-                                    Already Have an Account? Sign In Below
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-success btn-block" id="b2" >Sign in</button>
-                                </div>                     
+                                <button class="mdl-button mdl-js-button mdl-button--raised" id='b2'>
+                                    Sign in
+                                </button>
                             </div>
                         </div>
-                    </div>
+                        </div>
                 </div>
-            <div id="footer">
-                <ul>
+            </main>
+        <footer class='mdl-mini-footer'>
+            <span class='mdl-mini-footer--left-section'>
+                <span class='mdl-logo'>Hello-Books</span>
+                <ul class='mdl-mini-footer--link-list'>
+                </ul>
+            </span>
+            <span class='mdl-mini-footer--right-section'>
+                <ul class='mdl-mini-footer--link-list'>
+                    <li><a href="#">Help</a></li>
                     <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul> 
-            </div>
-            </div>   
+                </ul>
+            </span>
+        </footer>
         </div>
-        <script src= "js/jquery.js"></script>
-	    <script src="js/bootstrap.min.js"></script>
-        <script src="js/landing.js"></script>            
+        <script src="js/landing.js"></script>        
     </body>
 </html>

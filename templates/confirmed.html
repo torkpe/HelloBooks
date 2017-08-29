@@ -11,30 +11,57 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div id="container">
-            <div id="container-body">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                        <center><div id="header">Set Your Password</div></center>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="fPassword" placeholder="Password">
+        <div class='mdl-layout mdl-js-layout mdl-layout--fixed-header'>
+            <header class='mdl-layout__header'>
+                <div class='mdl-layout__header-row'>
+                    <span class='mdl-layout-title'>Hello-Books</span>
+                    <div class='mdl-layout-spacer'></div>
+                </div>
+            </header>
+            <main class='mdl-layout__content '>
+                <div class='page-content'>
+                    <div class='mdl-grid'>
+                        <div class='content' id='body1'>
+                            <div class="card-enlarge mdl-card mdl-shadow--3dp">
+                                <div class='mdl-textfield mdl-js-textfield card-content'>
+                                    <div class='mdl-card__supporting-text'>
+                                        <input type='username' class='mdl-textfield__input' id='username' placeholder='Username'/>
+                                        <label for='username' class='mdl-textfield__label' for='username'>Username</label>
+                                    </div>
+                                </div>
+                                <div class='mdl-textfield mdl-js-textfield card-content'>
+                                    <div class='mdl-card__supporting-text'>
+                                        <input type='password' class='mdl-textfield__input' id='fpassword' placeholder='Password'/>
+                                        <label for='email' class='mdl-textfield__label' for='email'>Email</label>
+                                    </div>
+                                </div>
+                                <div class='mdl-textfield mdl-js-textfield card-content'>
+                                    <div class='mdl-card__supporting-text'>
+                                        <input type='password' class='mdl-textfield__input' id='spassword' placeholder='Repeat Password'/>
+                                        <label for='spassword' class='mdl-textfield__label' for='spassword'>Password</label>
+                                    </div>
+                                </div>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                    Submit
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="sPassword" placeholder="Confirm Password">
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary btn-block">Submit</button>
-                            </div>
-                                                    
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3"></div>
+            </main>            
+            <footer class='mdl-mini-footer'>
+                <span class='mdl-mini-footer--left-section'>
+                    <span class='mdl-logo'>Hello-Books</span>
+                    <ul class='mdl-mini-footer--link-list'>
+                    </ul>
+                </span>
+                <span class='mdl-mini-footer--right-section'>
+                    <ul class='mdl-mini-footer--link-list'>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </span>
+            </footer>
         </div>
     </body>
 </html>        
