@@ -21,10 +21,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var notifications = _controllers2.default.notification;
 var router = _express2.default.Router();
 // Send notification to user for charges
-router.post('/api/v1/notifications', _middleware2.default.checkAuthentication, notifications.createNotification);
+router.post('/api/notifications', _middleware2.default.checkAuthentication, notifications.createNotification);
 // Get notification for user
-router.get('/api/v1/notifications/user', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, notifications.getUserNotifications);
+router.get('/api/notifications/user', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, notifications.getUserNotifications);
 // Get notification for admin
-router.get('/api/v1/notifications/admin', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, notifications.getAdminNotifications);
+router.get('/api/notifications/admin', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, notifications.getAdminNotifications);
 
 exports.default = router;

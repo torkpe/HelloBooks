@@ -75,7 +75,7 @@ const request = supertest;
 describe('Create new user', () => {
   it('responds with 201 created', (done) => {
     request(app)
-      .post('/api/v1/users/signup')
+      .post('/api/users/signup')
       .send(user1)
       .set('Accept', 'application/json')
       .end((err) => {
@@ -89,7 +89,7 @@ describe('Create new user', () => {
 describe('Create new user', () => {
   it('responds with 201 created', (done) => {
     request(app)
-      .post('/api/v1/users/signup')
+      .post('/api/users/signup')
       .send(user3)
       .set('Accept', 'application/json')
       .end((err) => {
@@ -104,7 +104,7 @@ describe('Create new user', () => {
 describe('Sign up with already existing details', () => {
   it('responds with 400 Bad Request', (done) => {
     request(app)
-      .post('/api/v1/users/signup')
+      .post('/api/users/signup')
       .send(user1)
       .set('Accept', 'application/json')
       .end((err) => {
@@ -120,7 +120,7 @@ describe('Sign up with already existing details', () => {
 describe('Sign up with invalid details', () => {
   it('responds with 400 bad request error', (done) => {
     request(app)
-      .post('/api/v1/users/signup')
+      .post('/api/users/signup')
       .send(user)
       .set('Accept', 'application/json')
       .end((err) => {
@@ -136,7 +136,7 @@ describe('Sign up with invalid details', () => {
 describe('Sign in with invalid details', () => {
   it('responds with 404', (done) => {
     request(app)
-      .post('/api/v1/users/signin')
+      .post('/api/users/signin')
       .send(user)
       .set('Accept', 'application/json')
       .end((err) => {
@@ -151,7 +151,7 @@ describe('Sign in with invalid details', () => {
 describe('Sign in with incorrect password', () => {
   it('responds with 406', (done) => {
     request(app)
-      .post('/api/v1/users/signin')
+      .post('/api/users/signin')
       .send(user2)
       .set('Accept', 'application/json')
       .end((err) => {
@@ -166,7 +166,7 @@ describe('Sign in with incorrect password', () => {
 describe('Sign user in with valid details', () => {
   it('responds with 200', (done) => {
     request(app)
-      .post('/api/v1/users/signin')
+      .post('/api/users/signin')
       .send(user1)
       .set('Accept', 'application/json')
       .end((err, res) => {
@@ -182,7 +182,7 @@ describe('Sign user in with valid details', () => {
 describe('Sign user in with valid details', () => {
   it('responds with 200', (done) => {
     request(app)
-      .post('/api/v1/users/signin')
+      .post('/api/users/signin')
       .send(user3)
       .set('Accept', 'application/json')
       .end((err, res) => {
@@ -198,7 +198,7 @@ describe('Sign user in with valid details', () => {
 describe('Create Admin', () => {
   it('responds with 201 created', (done) => {
     request(app)
-      .post('/api/v1/admin/signup')
+      .post('/api/admin/signup')
       .send(admin)
       .set('Accept', 'application/json')
       .end((err) => {
@@ -213,7 +213,7 @@ describe('Create Admin', () => {
 describe('Sign Admin in with valid details', () => {
   it('responds with 200', (done) => {
     request(app)
-      .post('/api/v1/admin/signin')
+      .post('/api/admin/signin')
       .send(admin)
       .set('Accept', 'application/json')
       .end((err, res) => {
@@ -229,7 +229,7 @@ describe('Sign Admin in with valid details', () => {
 describe('Post new book by Admin', () => {
   it('responds with 201', (done) => {
     request(app)
-      .post('/api/v1/books')
+      .post('/api/books')
       .set('x-access-token', adminToken)
       .send(book)
       .end((err) => {
@@ -244,7 +244,7 @@ describe('Post new book by Admin', () => {
 describe('Post another book by Admin', () => {
   it('responds with 201', (done) => {
     request(app)
-      .post('/api/v1/books')
+      .post('/api/books')
       .set('x-access-token', adminToken)
       .send(book2)
       .end((err) => {
@@ -259,7 +259,7 @@ describe('Post another book by Admin', () => {
 describe('Post another book by Admin with invalid details', () => {
   it('responds with 400', (done) => {
     request(app)
-      .post('/api/v1/books')
+      .post('/api/books')
       .set('x-access-token', adminToken)
       .send(book3)
       .end((err) => {
@@ -275,7 +275,7 @@ describe('Post another book by Admin with invalid details', () => {
 describe('Post new book by user', () => {
   it('responds with 403', (done) => {
     request(app)
-      .post('/api/v1/books')
+      .post('/api/books')
       .send(book)
       .set('x-access-token', token)
       .end((err) => {
@@ -290,7 +290,7 @@ describe('Post new book by user', () => {
 describe('Post new book without token', () => {
   it('responds with 403', (done) => {
     request(app)
-      .post('/api/v1/books')
+      .post('/api/books')
       .end((err) => {
         expect('Content-Type', /json/);
         expect(403, done);
@@ -303,7 +303,7 @@ describe('Post new book without token', () => {
 describe('Post new book by user', () => {
   it('responds with 200', (done) => {
     request(app)
-      .get('/api/v1/books')
+      .get('/api/books')
       .set('x-access-token', token)
       .end((err) => {
         expect('Content-Type', /json/);
@@ -317,7 +317,7 @@ describe('Post new book by user', () => {
 describe('Get all books by admin', () => {
   it('responds with 200', (done) => {
     request(app)
-      .get('/api/v1/books')
+      .get('/api/books')
       .set('x-access-token', adminToken)
       .end((err) => {
         expect('Content-Type', /json/);
@@ -331,7 +331,7 @@ describe('Get all books by admin', () => {
 describe('Get all books without token', () => {
   it('responds with 403', (done) => {
     request(app)
-      .get('/api/v1/books')
+      .get('/api/books')
       .end((err) => {
         expect('Content-Type', /json/);
         expect(403, done);
@@ -344,7 +344,7 @@ describe('Get all books without token', () => {
 describe('Borrow book by user', () => {
   it('responds with 201', (done) => {
     request(app)
-      .post('/api/v1/users/1/1/books')
+      .post('/api/users/1/1/books')
       .set('x-access-token', token)
       .end((err) => {
         expect('Content-Type', /json/);
@@ -358,7 +358,7 @@ describe('Borrow book by user', () => {
 describe('Borrow book by admin', () => {
   it('responds with 403', (done) => {
     request(app)
-      .post('/api/v1/users/1/1/books')
+      .post('/api/users/1/1/books')
       .set('x-access-token', adminToken)
       .end((err) => {
         expect('Content-Type', /json/);
@@ -372,7 +372,7 @@ describe('Borrow book by admin', () => {
 describe('Borrow book without token', () => {
   it('responds with 403', (done) => {
     request(app)
-      .post('/api/v1/users/1/1/books')
+      .post('/api/users/1/1/books')
       .end((err) => {
         expect('Content-Type', /json/);
         expect(403, done);
@@ -385,7 +385,7 @@ describe('Borrow book without token', () => {
 describe('Borrow book again by user', () => {
   it('responds with 400', (done) => {
     request(app)
-      .post('/api/v1/users/1/1/books')
+      .post('/api/users/1/1/books')
       .set('x-access-token', token)
       .end((err) => {
         expect('Content-Type', /json/);

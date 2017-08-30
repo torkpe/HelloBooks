@@ -22,10 +22,10 @@ var borrowBookControllers = _controllers2.default.borrowBook;
 
 var adminControllers = _controllers2.default.admin;
 var router = _express2.default.Router();
-router.post('/api/v1/admin/signup', adminControllers.create);
+router.post('/api/admin/signup', adminControllers.create);
 //  signin admin
-router.post('/api/v1/admin/signin', adminControllers.findAdmin);
-router.get('/api/v1/admins', adminControllers.findAdmins);
-router.get('/api/v1/admins/exceed-deadlines', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, borrowBookControllers.exceedDeadline);
+router.post('/api/admin/signin', adminControllers.findAdmin);
+router.get('/api/admins', adminControllers.findAdmins);
+router.get('/api/admins/exceed-deadlines', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, borrowBookControllers.exceedDeadline);
 
 exports.default = router;

@@ -92,7 +92,7 @@ var request = _supertest2.default;
 
 describe('Create new user', function () {
   it('responds with 201 created', function (done) {
-    request(_server2.default).post('/api/v1/users/signup').send(user1).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/users/signup').send(user1).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(201, done);
       if (err) return expect(err.message);
@@ -102,7 +102,7 @@ describe('Create new user', function () {
 });
 describe('Create new user', function () {
   it('responds with 201 created', function (done) {
-    request(_server2.default).post('/api/v1/users/signup').send(user3).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/users/signup').send(user3).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(201, done);
       if (err) return expect(err.message);
@@ -113,7 +113,7 @@ describe('Create new user', function () {
 // Sign up with already existing details
 describe('Sign up with already existing details', function () {
   it('responds with 400 Bad Request', function (done) {
-    request(_server2.default).post('/api/v1/users/signup').send(user1).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/users/signup').send(user1).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(400, done);
       if (err) return done(err.message);
@@ -125,7 +125,7 @@ describe('Sign up with already existing details', function () {
 // Sign up with invalid details
 describe('Sign up with invalid details', function () {
   it('responds with 400 bad request error', function (done) {
-    request(_server2.default).post('/api/v1/users/signup').send(user).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/users/signup').send(user).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(400, done);
       if (err) return done(err);
@@ -137,7 +137,7 @@ describe('Sign up with invalid details', function () {
 // Sign in with invalid details
 describe('Sign in with invalid details', function () {
   it('responds with 404', function (done) {
-    request(_server2.default).post('/api/v1/users/signin').send(user).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/users/signin').send(user).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(404, done);
       if (err) return done(err);
@@ -148,7 +148,7 @@ describe('Sign in with invalid details', function () {
 // Sign in with incorrect password
 describe('Sign in with incorrect password', function () {
   it('responds with 406', function (done) {
-    request(_server2.default).post('/api/v1/users/signin').send(user2).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/users/signin').send(user2).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(406, done);
       if (err) return done(err);
@@ -159,7 +159,7 @@ describe('Sign in with incorrect password', function () {
 // Sign user in with valid details
 describe('Sign user in with valid details', function () {
   it('responds with 200', function (done) {
-    request(_server2.default).post('/api/v1/users/signin').send(user1).set('Accept', 'application/json').end(function (err, res) {
+    request(_server2.default).post('/api/users/signin').send(user1).set('Accept', 'application/json').end(function (err, res) {
       token = res.body.myToken;
       expect('Content-Type', /json/);
       expect(200, done);
@@ -171,7 +171,7 @@ describe('Sign user in with valid details', function () {
 // Sign user2 in with valid details
 describe('Sign user in with valid details', function () {
   it('responds with 200', function (done) {
-    request(_server2.default).post('/api/v1/users/signin').send(user3).set('Accept', 'application/json').end(function (err, res) {
+    request(_server2.default).post('/api/users/signin').send(user3).set('Accept', 'application/json').end(function (err, res) {
       token2 = res.body.myToken;
       expect('Content-Type', /json/);
       expect(200, done);
@@ -183,7 +183,7 @@ describe('Sign user in with valid details', function () {
 // Create Admin
 describe('Create Admin', function () {
   it('responds with 201 created', function (done) {
-    request(_server2.default).post('/api/v1/admin/signup').send(admin).set('Accept', 'application/json').end(function (err) {
+    request(_server2.default).post('/api/admin/signup').send(admin).set('Accept', 'application/json').end(function (err) {
       expect('Content-Type', /json/);
       expect(201, done);
       if (err) return done(err);
@@ -194,7 +194,7 @@ describe('Create Admin', function () {
 // Sign Admin in with valid details
 describe('Sign Admin in with valid details', function () {
   it('responds with 200', function (done) {
-    request(_server2.default).post('/api/v1/admin/signin').send(admin).set('Accept', 'application/json').end(function (err, res) {
+    request(_server2.default).post('/api/admin/signin').send(admin).set('Accept', 'application/json').end(function (err, res) {
       adminToken = res.body.token;
       expect('Content-Type', /json/);
       expect(200, done);
@@ -206,7 +206,7 @@ describe('Sign Admin in with valid details', function () {
 // Post new book by Admin
 describe('Post new book by Admin', function () {
   it('responds with 201', function (done) {
-    request(_server2.default).post('/api/v1/books').set('x-access-token', adminToken).send(book).end(function (err) {
+    request(_server2.default).post('/api/books').set('x-access-token', adminToken).send(book).end(function (err) {
       expect('Content-Type', /json/);
       expect(201, done);
       if (err) return done(err);
@@ -217,7 +217,7 @@ describe('Post new book by Admin', function () {
 // Post another book by Admin
 describe('Post another book by Admin', function () {
   it('responds with 201', function (done) {
-    request(_server2.default).post('/api/v1/books').set('x-access-token', adminToken).send(book2).end(function (err) {
+    request(_server2.default).post('/api/books').set('x-access-token', adminToken).send(book2).end(function (err) {
       expect('Content-Type', /json/);
       expect(201, done);
       if (err) return done(err);
@@ -228,7 +228,7 @@ describe('Post another book by Admin', function () {
 // Post another book by Admin with invalid details
 describe('Post another book by Admin with invalid details', function () {
   it('responds with 400', function (done) {
-    request(_server2.default).post('/api/v1/books').set('x-access-token', adminToken).send(book3).end(function (err) {
+    request(_server2.default).post('/api/books').set('x-access-token', adminToken).send(book3).end(function (err) {
       expect('Content-Type', /json/);
       expect(400, done);
       if (err) return done(err);
@@ -240,7 +240,7 @@ describe('Post another book by Admin with invalid details', function () {
 // Post new book by user
 describe('Post new book by user', function () {
   it('responds with 403', function (done) {
-    request(_server2.default).post('/api/v1/books').send(book).set('x-access-token', token).end(function (err) {
+    request(_server2.default).post('/api/books').send(book).set('x-access-token', token).end(function (err) {
       expect('Content-Type', /json/);
       expect(403, done);
       if (err) return done(err);
@@ -251,7 +251,7 @@ describe('Post new book by user', function () {
 // Post new book without token
 describe('Post new book without token', function () {
   it('responds with 403', function (done) {
-    request(_server2.default).post('/api/v1/books').end(function (err) {
+    request(_server2.default).post('/api/books').end(function (err) {
       expect('Content-Type', /json/);
       expect(403, done);
       if (err) return done(err);
@@ -262,7 +262,7 @@ describe('Post new book without token', function () {
 // Get all books by user
 describe('Post new book by user', function () {
   it('responds with 200', function (done) {
-    request(_server2.default).get('/api/v1/books').set('x-access-token', token).end(function (err) {
+    request(_server2.default).get('/api/books').set('x-access-token', token).end(function (err) {
       expect('Content-Type', /json/);
       expect(200, done);
       if (err) return done(err);
@@ -273,7 +273,7 @@ describe('Post new book by user', function () {
 // Get all books by admin
 describe('Get all books by admin', function () {
   it('responds with 200', function (done) {
-    request(_server2.default).get('/api/v1/books').set('x-access-token', adminToken).end(function (err) {
+    request(_server2.default).get('/api/books').set('x-access-token', adminToken).end(function (err) {
       expect('Content-Type', /json/);
       expect(200, done);
       if (err) return done(err);
@@ -284,7 +284,7 @@ describe('Get all books by admin', function () {
 // Get all books without token
 describe('Get all books without token', function () {
   it('responds with 403', function (done) {
-    request(_server2.default).get('/api/v1/books').end(function (err) {
+    request(_server2.default).get('/api/books').end(function (err) {
       expect('Content-Type', /json/);
       expect(403, done);
       if (err) return done(err);
@@ -295,7 +295,7 @@ describe('Get all books without token', function () {
 // Borrow book by user
 describe('Borrow book by user', function () {
   it('responds with 201', function (done) {
-    request(_server2.default).post('/api/v1/users/1/1/books').set('x-access-token', token).end(function (err) {
+    request(_server2.default).post('/api/users/1/1/books').set('x-access-token', token).end(function (err) {
       expect('Content-Type', /json/);
       expect(201, done);
       if (err) return done(err);
@@ -306,7 +306,7 @@ describe('Borrow book by user', function () {
 // Borrow book by admin
 describe('Borrow book by admin', function () {
   it('responds with 403', function (done) {
-    request(_server2.default).post('/api/v1/users/1/1/books').set('x-access-token', adminToken).end(function (err) {
+    request(_server2.default).post('/api/users/1/1/books').set('x-access-token', adminToken).end(function (err) {
       expect('Content-Type', /json/);
       expect(403, done);
       if (err) return done(err);
@@ -317,7 +317,7 @@ describe('Borrow book by admin', function () {
 // Borrow book without token
 describe('Borrow book without token', function () {
   it('responds with 403', function (done) {
-    request(_server2.default).post('/api/v1/users/1/1/books').end(function (err) {
+    request(_server2.default).post('/api/users/1/1/books').end(function (err) {
       expect('Content-Type', /json/);
       expect(403, done);
       if (err) return done(err);
@@ -328,7 +328,7 @@ describe('Borrow book without token', function () {
 // Borrow book again by user
 describe('Borrow book again by user', function () {
   it('responds with 400', function (done) {
-    request(_server2.default).post('/api/v1/users/1/1/books').set('x-access-token', token).end(function (err) {
+    request(_server2.default).post('/api/users/1/1/books').set('x-access-token', token).end(function (err) {
       expect('Content-Type', /json/);
       expect(400, done);
       if (err) return done(err);
