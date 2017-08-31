@@ -24,8 +24,12 @@ var _notifications = require('./notifications');
 
 var _notifications2 = _interopRequireDefault(_notifications);
 
+var _google = require('./google');
+
+var _google2 = _interopRequireDefault(_google);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  user: _user2.default, book: _book2.default, admin: _admin2.default, landing: _landing2.default, notifications: _notifications2.default
+  user: _user2.default, book: _book2.default, admin: _admin2.default, landing: _landing2.default, notifications: _notifications2.default, google: _google2.default
 };

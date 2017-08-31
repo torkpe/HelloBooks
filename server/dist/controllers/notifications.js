@@ -16,6 +16,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var User = _models2.default.Users;
 var Notifications = _models2.default.Notification;
+var dotenv = require('dotenv');
+
+dotenv.config();
 
 // Function to send email to users
 var sendEmail = function sendEmail(message, type, userId) {
@@ -34,8 +37,8 @@ var sendEmail = function sendEmail(message, type, userId) {
           secure: true,
           port: 25,
           auth: {
-            user: 'hellobooks9@gmail.com',
-            pass: 'silvershoe12'
+            user: process.env.USER_EMAIL,
+            pass: process.env.USER_PASSWORD
           },
           tls: {
             rejectUnauthorized: false

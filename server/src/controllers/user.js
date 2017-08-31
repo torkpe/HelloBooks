@@ -17,7 +17,7 @@ export default {
         email: req.body.email,
         password: hash,
         isAdmin: false,
-        star: 'bronze'
+        star: 'bronze',
       })
       .then((user) => {
         const myToken = generateToken(user); // Generate token for user

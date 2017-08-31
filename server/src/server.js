@@ -1,6 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import passport from 'passport';
+import cookie from 'cookie-parser';
+import session from 'express-session';
 import router from './routes/index';
 
 const app = express();
@@ -11,12 +14,28 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(logger('dev'));
 app.set('secret', 'ghjkcndschyu$%^&*gdshcndsyucbds%^&hc5%^784678wqfewtyy');
+app.use((cookie)());
+app.use((session)({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+
+passport.deserializeUser((obj, cb) => {
+  cb(null, obj);
+});
+
+
 // Require express routes from route
-const userRoute = router.user,
-  bookRoute = router.book,
-  adminRoute = router.admin,
-  landingRoute = router.landing,
-  notificationsRoute = router.notifications;
+const userRoute = router.user;
+const bookRoute = router.book;
+const adminRoute = router.admin;
+const landingRoute = router.landing;
+const notificationsRoute = router.notifications;
+const googleRoute = router.google;
+
 // Use route for users
 app.use(userRoute);
 // Use route for books
@@ -27,6 +46,8 @@ app.use(adminRoute);
 app.use(landingRoute);
 // Notifications route
 app.use(notificationsRoute);
+// Google route
+app.use(googleRoute);
 app.route('*')
   .post((req, res) => {
     res.status(404).send({ message: 'This page does not exist' });

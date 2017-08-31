@@ -16,6 +16,18 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
+var _passport = require('passport');
+
+var _passport2 = _interopRequireDefault(_passport);
+
+var _cookieParser = require('cookie-parser');
+
+var _cookieParser2 = _interopRequireDefault(_cookieParser);
+
+var _expressSession = require('express-session');
+
+var _expressSession2 = _interopRequireDefault(_expressSession);
+
 var _index = require('./routes/index');
 
 var _index2 = _interopRequireDefault(_index);
@@ -30,12 +42,27 @@ app.use(_bodyParser2.default.text());
 app.use(_bodyParser2.default.json({ type: 'application/json' }));
 app.use(logger('dev'));
 app.set('secret', 'ghjkcndschyu$%^&*gdshcndsyucbds%^&hc5%^784678wqfewtyy');
+app.use((0, _cookieParser2.default)());
+app.use((0, _expressSession2.default)({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(_passport2.default.initialize());
+app.use(_passport2.default.session());
+
+_passport2.default.serializeUser(function (user, cb) {
+  cb(null, user);
+});
+
+_passport2.default.deserializeUser(function (obj, cb) {
+  cb(null, obj);
+});
+
 // Require express routes from route
-var userRoute = _index2.default.user,
-    bookRoute = _index2.default.book,
-    adminRoute = _index2.default.admin,
-    landingRoute = _index2.default.landing,
-    notificationsRoute = _index2.default.notifications;
+var userRoute = _index2.default.user;
+var bookRoute = _index2.default.book;
+var adminRoute = _index2.default.admin;
+var landingRoute = _index2.default.landing;
+var notificationsRoute = _index2.default.notifications;
+var googleRoute = _index2.default.google;
+
 // Use route for users
 app.use(userRoute);
 // Use route for books
@@ -46,6 +73,8 @@ app.use(adminRoute);
 app.use(landingRoute);
 // Notifications route
 app.use(notificationsRoute);
+// Google route
+app.use(googleRoute);
 app.route('*').post(function (req, res) {
   res.status(404).send({ message: 'This page does not exist' });
 }).get(function (req, res) {
