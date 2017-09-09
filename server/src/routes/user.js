@@ -10,6 +10,8 @@ const router = express.Router();
 router.post('/api/users/signup', userController.create);
 //  signin user
 router.post('/api/users/signin', userController.findUser);
+// update user upon confirmation
+router.put('/api/confimation/:key', userController.updateUser);
 //  api route to allow user borrow book
 router.post('/api/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,
   authBorrow.checkStar, borrowBookControllers.borrow);

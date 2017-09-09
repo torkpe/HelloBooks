@@ -1,51 +1,8 @@
-import nodemailer from 'nodemailer';
 import model from '../models';
+import sendEmail from './email';
 
-const User = model.Users;
 const Notifications = model.Notification;
-const dotenv = require('dotenv');
 
-dotenv.config();
-
-// Function to send email to users
-const sendEmail = (message, type, userId) => {
-  if (type === 'user') {
-    User.findAll({
-      where: {
-        id: userId,
-      },
-    }).then((foundUser) => {
-      const userEmail = foundUser.map(user => user.dataValues.email);
-      if (foundUser) {
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          secure: true,
-          port: 25,
-          auth: {
-            user: process.env.USER_EMAIL,
-            pass: process.env.USER_PASSWORD,
-          },
-          tls: {
-            rejectUnauthorized: false,
-          },
-        });
-        const mailOptions = {
-          from: '"hello-books Admin" <hellobooks9@gmail.com>',
-          to: userEmail,
-          subject: 'Notification from hello-books',
-          text: message,
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log(`Email sent: ${info.response}`);
-          }
-        });
-      }
-    });
-  }
-};
 export default {
   createNotification(req, res) {
     return Notifications
@@ -54,7 +11,7 @@ export default {
         type: req.body.type, // Admin or User
         viewed: false,
         userId: req.body.userId,
-        from: req.decoded.user
+        from: req.decoded.user,
       }).then(notification => res.status(201).send({ notification, message: 'successfully created notification' }),
         sendEmail(req.body.message, req.body.type, req.body.userId))
       .catch(err => res.status(403).send({ message: err.message }));

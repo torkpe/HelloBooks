@@ -29,6 +29,8 @@ var router = _express2.default.Router();
 router.post('/api/users/signup', userController.create);
 //  signin user
 router.post('/api/users/signin', userController.findUser);
+// update user upon confirmation
+router.put('/api/confimation/:key', userController.updateUser);
 //  api route to allow user borrow book
 router.post('/api/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, _borrowBook2.default.checkStar, borrowBookControllers.borrow);
 // get list of borrowed books 

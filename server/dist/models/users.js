@@ -4,26 +4,10 @@ var user = function user(sequelize, DataTypes) {
   var User = sequelize.define('Users', {
     name: {
       type: DataTypes.STRING,
-      allowNull: {
-        args: false,
-        msg: 'Username is required'
-      },
-      unique: {
-        args: true,
-        msg: ' Username should be unique'
-      },
       validate: {
-        notEmpty: {
-          args: true,
-          msg: 'Empty field for username is not allowed'
-        },
-        isAlphanumeric: {
-          args: true,
-          msg: 'Username should contain alphabets and numbers allowed only'
-        },
         len: {
-          args: [5, 15],
-          msg: 'Username should be between 5 to 15 characters'
+          args: [3, 100],
+          msg: 'Full name should be between 3 to 100 characters'
         }
       }
     },
@@ -47,14 +31,13 @@ var user = function user(sequelize, DataTypes) {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
       validate: {
         notEmpty: {
           args: true,
           msg: 'Empty field for password is not allowed'
         },
         len: {
-          args: [5, 100],
+          args: [5, 1000],
           msg: 'Password length should be between 5 to 15 characters'
         }
       }
@@ -71,6 +54,20 @@ var user = function user(sequelize, DataTypes) {
       allowNull: {
         args: false,
         msg: 'User\'s star has to be defined'
+      }
+    },
+    confirmed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: {
+        args: false,
+        msg: 'User must be confirmed'
+      }
+    },
+    key: {
+      type: DataTypes.BOOLEAN,
+      allowNull: {
+        args: false,
+        msg: 'key must be provided'
       }
     }
   }, {

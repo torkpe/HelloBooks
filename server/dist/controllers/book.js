@@ -76,6 +76,7 @@ exports.default = {
           genre: req.body.genre
         });
       }
+      return book;
     }).catch(function (error) {
       return res.status(400).send({ response: error.message });
     });

@@ -10,12 +10,7 @@ var createUser = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-        notEmpty: true,
-        isAlphanumeric: true,
-        len: [5, 15]
+        type: Sequelize.STRING
       },
       email: {
         type: Sequelize.STRING,
@@ -23,7 +18,7 @@ var createUser = {
         unique: true,
         notEmpty: true,
         isAlphanumeric: true,
-        len: [5, 15]
+        len: [5, 45]
       },
       star: {
         type: Sequelize.STRING,
@@ -32,13 +27,19 @@ var createUser = {
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
-        notEmpty: true,
         isAlphanumeric: true,
         len: [5, 15]
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,
+        allowNull: false
+      },
+      confirmed: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+      },
+      key: {
+        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {

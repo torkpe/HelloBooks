@@ -12,7 +12,7 @@ export default {
         author: req.body.author,
         description: req.body.description,
         quantity: req.body.quantity,
-        genre: req.body.genre
+        genre: req.body.genre,
       })
       .then(newBook => res.status(201).send(newBook))
       .catch(error => res.status(400).send({ message: error.message }));
@@ -21,7 +21,7 @@ export default {
   findOne(req, res) {
     return Book
       .findOne({
-        where: { title: req.params.id
+        where: { title: req.params.id,
         } })
       .then((book) => {
         if (!book) {
@@ -47,8 +47,8 @@ export default {
   findBook(req, res) {
     return Book
       .findBook({
-        where: { id: req.params.id
-        }
+        where: { id: req.params.id,
+        },
       })
       .then((book) => {
         if (!book) {
@@ -65,6 +65,7 @@ export default {
               genre: req.body.genre,
             });
         }
+        return book;
       }).catch(error => res.status(400).send({ response: error.message }));
   },
 };
