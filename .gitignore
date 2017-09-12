@@ -1,13 +1,1 @@
 node_modules
-hellobooks
-.babelrc
-.eslintrc
-src
-server
-public
-hellobooks
-.vscode
-README.md
-webpack.config.js
-package.json
-npm-debug.log.3319985034

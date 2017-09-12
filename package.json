@@ -1,0 +1,42 @@
+{
+  "name": "hellobooks",
+  "version": "1.0.0",
+  "description": "an e-library system",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "classnames": "^2.2.5",
+    "express": "^4.15.4",
+    "from": "^0.1.7",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-router": "^3.0.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "thunk": "0.0.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.13"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torkpe/HelloBooks.git"
+  },
+  "keywords": [
+    "hellobooks"
+  ],
+  "author": "Temitope Emmanuel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/torkpe/HelloBooks/issues"
+  },
+  "homepage": "https://github.com/torkpe/HelloBooks#readme"
+}
