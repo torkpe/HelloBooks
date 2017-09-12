@@ -68,6 +68,8 @@ exports.default = {
           res.status(400).send({ message: 'Return book first before borrowing again' });
         }
       });
+    }).catch(function (err) {
+      return res.status(400).send({ message: err.message });
     });
   },
 

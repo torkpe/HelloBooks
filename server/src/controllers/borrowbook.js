@@ -59,7 +59,7 @@ export default {
             res.status(400).send({ message: 'Return book first before borrowing again' });
           }
         });
-      });
+      }).catch(err => res.status(400).send({message: err.message}))
   },
   // Get borrowed books
   getBorrowedBooks(req, res) {

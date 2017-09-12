@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import passport from 'passport';
 import cookie from 'cookie-parser';
 import session from 'express-session';
+import cors from 'cors';
 import router from './routes/index';
 
 const app = express();
@@ -18,7 +19,7 @@ app.use((cookie)());
 app.use((session)({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(cors())
 passport.serializeUser((user, cb) => {
   cb(null, user);
 });

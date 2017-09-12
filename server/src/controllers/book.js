@@ -41,7 +41,7 @@ export default {
         } else {
           res.status(200).send(book);
         }
-      }).catch(error => res.status(400).send(error));
+      }).catch(error => res.status(400).send({message: error.message}));
   },
   // update a book's info
   findBook(req, res) {
@@ -66,6 +66,6 @@ export default {
             });
         }
         return book;
-      }).catch(error => res.status(400).send({ response: error.message }));
+      }).catch(error => res.status(400).send({ message: error.message }));
   },
 };

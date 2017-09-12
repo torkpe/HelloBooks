@@ -28,6 +28,10 @@ var _expressSession = require('express-session');
 
 var _expressSession2 = _interopRequireDefault(_expressSession);
 
+var _cors = require('cors');
+
+var _cors2 = _interopRequireDefault(_cors);
+
 var _index = require('./routes/index');
 
 var _index2 = _interopRequireDefault(_index);
@@ -46,7 +50,7 @@ app.use((0, _cookieParser2.default)());
 app.use((0, _expressSession2.default)({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(_passport2.default.initialize());
 app.use(_passport2.default.session());
-
+app.use((0, _cors2.default)());
 _passport2.default.serializeUser(function (user, cb) {
   cb(null, user);
 });

@@ -53,7 +53,7 @@ exports.default = {
         res.status(200).send(book);
       }
     }).catch(function (error) {
-      return res.status(400).send(error);
+      return res.status(400).send({ message: error.message });
     });
   },
 
@@ -78,7 +78,7 @@ exports.default = {
       }
       return book;
     }).catch(function (error) {
-      return res.status(400).send({ response: error.message });
+      return res.status(400).send({ message: error.message });
     });
   }
 };
