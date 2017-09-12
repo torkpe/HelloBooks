@@ -24,7 +24,7 @@ export default {
           key: random.generate(50),
         })
         .then((user) => {
-          const link = `http://localhost:8080/api/confimation/${user.key}`;
+          const link = `http://localhost:3000/confimation/${user.key}`;
           const message = `
 Hello there, thank you for registering for helloBooks.
 Please click on the click below to confirm your email address
