@@ -8,7 +8,7 @@ class Confirm extends Component {
             password1: '',
             password2: '',
             isLoading: false,
-            key: this.props.params
+            key: this.props.params.key
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -17,10 +17,10 @@ class Confirm extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
     onSubmit(e) {
-        console.log(this.state)
+        e.preventDefault()
+        console.log(this.state.key)
     }
   render() {
-    const {key} = this.props
     return (
         <div className='mdl-grid'>
                 <div className='contents'>
@@ -52,5 +52,4 @@ class Confirm extends Component {
     );
   }
 }
-
 export default Confirm;

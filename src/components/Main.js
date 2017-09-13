@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
-
+import './Main.css';
+import './mdl/material.min.css';
 class Main extends Component {
     render(){
         return(
