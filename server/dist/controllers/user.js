@@ -51,7 +51,7 @@ exports.default = {
         confirmed: false,
         key: _randomKey2.default.generate(50)
       }).then(function (user) {
-        var link = 'http://localhost:3000/confimation/' + user.key;
+        var link = 'http://localhost:3000/confirmation/' + user.key;
         var message = '\nHello there, thank you for registering for helloBooks.\nPlease click on the click below to confirm your email address\n                         ' + link;
         (0, _email2.default)(message, 'user', user.id);
         return res.status(201).send({ user: user, message: 'A mail has been sent to your email' });
