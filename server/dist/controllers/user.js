@@ -65,7 +65,7 @@ exports.default = {
   // Sign user in
   findUser: function findUser(req, res) {
     return User.findOne({
-      where: { name: req.body.email // Check if user exists first
+      where: { email: req.body.email // Check if user exists first
       } }).then(function (user) {
       if (!user) {
         return res.status(404).send('User not found');
