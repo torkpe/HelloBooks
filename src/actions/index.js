@@ -27,3 +27,10 @@ export const userConfirmRequest = (userData) => {
         })
     }
 }
+export const logout = () => {
+    return dispatch => {
+        localStorage.removeItem('jwt');
+        setAuthToken(false);
+        dispatch(setCurrentUser({}));
+    }
+}
