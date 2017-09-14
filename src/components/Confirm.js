@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
+import { browserHistory } from 'react-router';
+import {  connect } from 'react-redux';
+
+import { userConfirmRequest } from '../actions/index';
 
 class Confirm extends Component {
         constructor(props) {
@@ -8,7 +13,8 @@ class Confirm extends Component {
             password1: '',
             password2: '',
             isLoading: false,
-            key: this.props.params.key
+            key: this.props.params.key,
+            confirmed: true
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -17,8 +23,15 @@ class Confirm extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
     onSubmit(e) {
+        this.setState({ errors: {}, isLoading: true });
         e.preventDefault()
-        console.log(this.state.key)
+        this.props.userConfirmRequest(this.state).then(
+            () => {
+                browserHistory.push('/home');
+            },
+            ({response}) => this.setState({ errors: response.data, isLoading: false }),
+            console.log(this.state)
+        )
     }
   render() {
     return (
@@ -29,7 +42,7 @@ class Confirm extends Component {
                             <div className='mdl-textfield mdl-js-textfield card-content'>
                                 <input type='text' className='mdl-textfield__input'
                                 onChange={this.onChange} name='name'  id='name'/>
-                                <label htmlFor='email' className='mdl-textfield__label'>Email</label>
+                                <label htmlFor='email' className='mdl-textfield__label'>Full Name</label>
                             </div>
                             <div className='mdl-textfield mdl-js-textfield card-content'>
                                 <input type='password' className='mdl-textfield__input'
@@ -41,7 +54,7 @@ class Confirm extends Component {
                                 onChange={this.onChange} name='password2' id='password2'/>
                                 <label htmlFor='password2' className='mdl-textfield__label'>Confirm Password</label>                           
                             </div>
-                            <button onClick={this.onSubmit} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                            <button disabled={this.state.isLoading} onClick={this.onSubmit} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
                              id="button">
                             Sign in
                             </button>
@@ -52,4 +65,7 @@ class Confirm extends Component {
     );
   }
 }
-export default Confirm;
+Confirm.propTypes = {
+    userConfirmRequest: propTypes.func.isRequired
+}
+export default connect(null, { userConfirmRequest })(Confirm);

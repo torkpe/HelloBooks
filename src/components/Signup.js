@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import propTypes from 'prop-types';
 import {  connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { userSignupRequest } from '../actions/signupActions';
+import { userSignupRequest } from '../actions/index';
 
 class Signup extends Component{
     constructor(props) {
