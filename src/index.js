@@ -17,6 +17,7 @@ import Home from './components/Home';
 import setAuth from './utils/setAuthToken';
 import rootReducer from './reducers/index';
 import { setCurrentUser } from './actions/index';
+import requireAuth from './utils/requireAuth';
 
 const store =createStore(
     rootReducer,
@@ -40,7 +41,7 @@ const router =(
                 <Route path='/signin' component={Signin}></Route>
                 <Route path= '/redirect' component={Redirect}></Route>
                 <Route path= '/confirmation/:key' component={Confirm}></Route>
-                <Route path= '/home' component={Home}></Route>
+                <Route path= '/home' component={requireAuth(Home)}></Route>
             </Route>
         </Router>
     </Provider>

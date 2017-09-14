@@ -20,15 +20,15 @@ class Main extends Component {
         );
         const guestLinks = (
                     <nav className="mdl-navigation mdl-layout--large-screen-only">
-                        <a className="mdl-navigation__link" href="">Signin</a>
-                        <a className="mdl-navigation__link" href="">Signup</a>
+                        <Link to='/signin' className="mdl-navigation__link">Signin</Link>
+                        <Link to='/signup' className="mdl-navigation__link">Signup</Link>
                     </nav>
         )
         return(
             <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                 <header className="mdl-layout__header">
                     <div className="mdl-layout__header-row">
-                        <span className="mdl-layout-title"><Link to ='/'>hello-books</Link></span>
+                        <Link to ='/' className="mdl-layout-title">hello-books</Link>
                         <div className="mdl-layout-spacer"></div>
                         { isAuthenticated ? userLinks : guestLinks}    
                     </div>
