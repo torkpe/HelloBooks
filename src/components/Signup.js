@@ -26,8 +26,7 @@ class Signup extends Component{
             () => {
                 browserHistory.push('/redirect');
             },
-            ({response}) => this.setState({ errors: response.data, isLoading: false }),
-            console.log(this.state)
+            ({response}) => this.setState({ errors: response.data, isLoading: false })
         )
     }
     render(){

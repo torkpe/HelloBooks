@@ -27,6 +27,17 @@ export const userConfirmRequest = (userData) => {
         })
     }
 }
+export const userSigninRequest = (userData) => {
+    return dispatch => {
+        return axios.post(`https://hellobooks-project.herokuapp.com/api/users/signin`, userData)
+        .then(res => {
+            const token = res.data.myToken
+            localStorage.setItem('jwt', token);
+            setAuthToken(token);
+            dispatch(setCurrentUser(jwt.decode(token)));
+        })
+    }
+}
 export const logout = () => {
     return dispatch => {
         localStorage.removeItem('jwt');
