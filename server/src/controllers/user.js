@@ -40,7 +40,7 @@ Please click on the click below to confirm your email address
   findUser(req, res) {
     return User
       .findOne({
-        where: { name: req.body.name, // Check if user exists first
+        where: { name: req.body.email, // Check if user exists first
         } })
       .then((user) => {
         if (!user) {
