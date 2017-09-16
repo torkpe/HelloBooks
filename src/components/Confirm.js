@@ -39,17 +39,17 @@ class Confirm extends Component {
                 <div className='contents'>
                     <div className="card-enlarge mdl-card mdl-shadow--3dp">
                         <form action="">
-                            <div className='mdl-textfield mdl-js-textfield card-content'>
+                            <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
                                 <input type='text' className='mdl-textfield__input'
                                 onChange={this.onChange} name='name'  id='name'/>
                                 <label htmlFor='email' className='mdl-textfield__label'>Full Name</label>
                             </div>
-                            <div className='mdl-textfield mdl-js-textfield card-content'>
+                            <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
                                 <input type='password' className='mdl-textfield__input'
                                 onChange={this.onChange} name='password1' id='password1'/>
                                 <label htmlFor='password1' className='mdl-textfield__label'>Password</label>                           
                             </div>
-                            <div className='mdl-textfield mdl-js-textfield card-content'>
+                            <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
                                 <input type='password' className='mdl-textfield__input'
                                 onChange={this.onChange} name='password2' id='password2'/>
                                 <label htmlFor='password2' className='mdl-textfield__label'>Confirm Password</label>                           

@@ -17,7 +17,7 @@ import Home from './components/Home';
 import setAuth from './utils/setAuthToken';
 import rootReducer from './reducers/index';
 import { setCurrentUser } from './actions/index';
-import requireAuth from './utils/requireAuth';
+import { Authenticate, isAlreadySignedin } from './utils/requireAuth';
 
 const store =createStore(
     rootReducer,
@@ -36,12 +36,12 @@ const router =(
     <Provider store= {store}>
         <Router history = {browserHistory}>
             <Route path = '/' component={Main}>
-                <IndexRoute component={Landing}></IndexRoute>
+                <IndexRoute component={isAlreadySignedin(Landing)}></IndexRoute>
                 <Route path='/signup' component={Signup}></Route>
                 <Route path='/signin' component={Signin}></Route>
                 <Route path= '/redirect' component={Redirect}></Route>
                 <Route path= '/confirmation/:key' component={Confirm}></Route>
-                <Route path= '/home' component={requireAuth(Home)}></Route>
+                <Route path= '/home' component={Authenticate(Home)}></Route>
             </Route>
         </Router>
     </Provider>

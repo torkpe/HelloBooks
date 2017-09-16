@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import propTypes from 'prop-types';
 import {  connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import { userSignupRequest } from '../actions/index';
 
 class Signup extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            errors: {},
-            isLoading: false
+            email: ''
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -20,17 +17,11 @@ class Signup extends Component{
         this.setState({[e.target.name]: e.target.value})
     }
     onSubmit(e) {
-        this.setState({ errors: {}, isLoading: true });
         e.preventDefault();
-        this.props.userSignupRequest(this.state).then(
-            () => {
-                browserHistory.push('/redirect');
-            },
-            ({response}) => this.setState({ errors: response.data, isLoading: false })
-        )
+        this.props.userSignupRequest(this.state)
     }
     render(){
-        const errors = this.state.errors
+        const {errors} = this.props.signup
         return(
             <div className='mdl-grid'>
                 <div className='contents'>
@@ -40,9 +31,9 @@ class Signup extends Component{
                                 <input type='email' onChange={this.onChange}
                                 className='mdl-textfield__input' name='email' />
                                 <label htmlFor='email' className='mdl-textfield__label'>Email</label>
-                                <span className="error">{errors.message}</span>
+                                <span className="error">{ errors.message }</span>
                             </div>                        
-                            <button disabled={this.state.isLoading} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="button">
+                            <button disabled = {this.props.signup.isLoading} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="button">
                                 Sign up
                             </button>
                         </form>
@@ -68,4 +59,9 @@ class Signup extends Component{
 Signup.propTypes = {
     userSignupRequest: propTypes.func.isRequired
 }
-export default connect(null, { userSignupRequest })(Signup);
+const mapStateToProps = (state) => {
+    return {
+        signup: state.signup
+    }
+}
+export default connect(mapStateToProps, { userSignupRequest })(Signup);

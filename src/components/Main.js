@@ -14,12 +14,12 @@ class Main extends Component {
     render(){
         const { isAuthenticated } = this.props.auth;
         const userLinks = (
-            <nav className="mdl-navigation mdl-layout--large-screen-only">
+            <nav className="mdl-navigation">
                 <a className="mdl-navigation__link" onClick={this.logout.bind(this)} href="">Signout</a>
             </nav>
         );
         const guestLinks = (
-                    <nav className="mdl-navigation mdl-layout--large-screen-only">
+                    <nav className="mdl-navigation">
                         <Link to='/signin' className="mdl-navigation__link">Signin</Link>
                         <Link to='/signup' className="mdl-navigation__link">Signup</Link>
                     </nav>
@@ -30,9 +30,15 @@ class Main extends Component {
                     <div className="mdl-layout__header-row">
                         <Link to ='/' className="mdl-layout-title">hello-books</Link>
                         <div className="mdl-layout-spacer"></div>
-                        { isAuthenticated ? userLinks : guestLinks}    
+                        <nav className='mdl-layout--large-screen-only'>
+                            { isAuthenticated ? userLinks : guestLinks}
+                        </nav>
                     </div>
                 </header>
+                  <div className="mdl-layout__drawer">
+                    <Link to ='/' className="mdl-layout-title">hello-books</Link>
+                        { isAuthenticated ? userLinks : guestLinks}
+                  </div>
                 <main className='mdl-layout__content'>
                     {React.cloneElement(this.props.children, this.props)}
                 </main>
@@ -53,7 +59,6 @@ class Main extends Component {
         )
     }
 }
-
 Main.prototypes = {
     auth: Proptypes.object.isRequired,
     logout: Proptypes.func.isRequired
