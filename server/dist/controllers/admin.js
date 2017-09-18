@@ -27,22 +27,29 @@ var salt = _bcrypt2.default.genSaltSync(10); // Generate salt for password
 exports.default = {
   // sign up user
   create: function create(req, res) {
-    var hash = _bcrypt2.default.hashSync(req.body.password, salt);
     return User.findAll({
       where: { isAdmin: true }
     }).then(function (admin) {
       if (admin.length < 100) {
-        User.create({
-          name: req.body.name,
-          email: req.body.email,
-          password: hash,
-          isAdmin: true,
-          star: 'admin'
-        }).then(function (newUser) {
-          return res.status(201).send(newUser);
-        }).catch(function (error) {
-          return res.status(400).send({ response: error.message });
-        });
+        if (req.body.password1 != req.body.password1) {
+          return res.status(400).send({ Password: 'Passwords do not match' });
+        }
+        if (validator.isEmail(req.body.email)) {
+          var hash = _bcrypt2.default.hashSync(req.body.password, salt);
+          User.create({
+            email: req.body.email,
+            password: hash,
+            isAdmin: true,
+            star: 'admin',
+            confirmed: true
+          }).then(function (newUser) {
+            return res.status(201).send(newUser);
+          }).catch(function (error) {
+            return res.status(400).send({ response: error.message });
+          });
+        } else {
+          return res.status(400).send({ Email: 'Input must be an email' });
+        }
       } else {
         return res.status(400).send({ message: 'You have made a bad request' });
       }
@@ -54,7 +61,7 @@ exports.default = {
   // sign in user
   findAdmin: function findAdmin(req, res) {
     return User.findOne({
-      where: { name: req.body.name,
+      where: { email: req.body.email,
         isAdmin: true
       } }).then(function (admin) {
       if (!admin) {
@@ -67,7 +74,7 @@ exports.default = {
         res.status(200).send({
           token: myToken,
           userId: admin.id,
-          name: admin.name
+          email: admin.email
         });
       }
     }).catch(function (error) {
