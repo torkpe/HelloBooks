@@ -6,9 +6,15 @@ import { browserHistory } from 'react-router';
 import { SET_CURRENT_USER } from './types';
 
 export const userSignupRequest = (userData) => {
+    const determine = (user) => {
+        if(user==='user'){
+            return axios.post('https://hellobooks-project.herokuapp.com/api/users/signup', userData)
+        }
+        return axios.post('https://hellobooks-project.herokuapp.com/api/admin/signup', userData)
+    }
     return dispatch =>{
         dispatch({ type: 'SIGNING_UP' })
-        axios.post('https://hellobooks-project.herokuapp.com/api/users/signup', userData)
+        determine(userData.signupType)
         .then((response) => {
             if(response){
                 dispatch({
@@ -17,7 +23,11 @@ export const userSignupRequest = (userData) => {
                 browserHistory.push('/redirect');
             }
         }).catch((err) => {
-            dispatch({ type: 'SIGNUP_FAILED', payload: err.response.data })
+            if(err){
+                if(err.response.data){
+                dispatch({ type: 'SIGNUP_FAILED', payload: err.response.data })
+            }
+            }
         });
     }
 }

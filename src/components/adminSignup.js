@@ -4,12 +4,13 @@ import propTypes from 'prop-types';
 import {  connect } from 'react-redux';
 import { userSignupRequest } from '../actions/index';
 
-class Signup extends Component{
+class adminSignup extends Component{
     constructor(props) {
         super(props);
         this.state = {
             email: '',
-            signupType:'user',
+            password:'',
+            signupType:'admin',
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,22 +23,26 @@ class Signup extends Component{
         this.props.userSignupRequest(this.state)
     }
     render(){
-        const {errors, isLoading } = this.props.signup
-        const loading = <div id="p2" className="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+        const {errors, isLoading } = this.props.adminSignup
         const span =<span></span>
         return(
             <div className='mdl-grid'>
                 <div className='contents'>
                     <div className="card-enlarge mdl-card mdl-shadow--3dp">
-                    { isLoading ? loading :span }
                         <form onSubmit={this.onSubmit}>
                             <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
                                 <input type='email' onChange={this.onChange}
                                 className='mdl-textfield__input' name='email' />
                                 <label htmlFor='email' className='mdl-textfield__label'>Email</label>
                                 <span className="error">{ errors.message }</span>
-                            </div>                        
-                            <button disabled = {isLoading} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="button">
+                            </div>
+                            <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
+                                <input type='password' onChange={this.onChange}
+                                className='mdl-textfield__input' name='password' />
+                                <label htmlFor='password' className='mdl-textfield__label'>Password</label>
+                                <span className="error">{ errors.message }</span>
+                            </div>                  
+                            <button disabled  = {isLoading} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="button">
                                 Sign up
                             </button>
                         </form>
@@ -60,12 +65,12 @@ class Signup extends Component{
         )
     }
 }
-Signup.propTypes = {
+adminSignup.propTypes = {
     userSignupRequest: propTypes.func.isRequired
 }
 const mapStateToProps = (state) => {
     return {
-        signup: state.signup
+        adminSignup: state.signup
     }
 }
-export default connect(mapStateToProps, { userSignupRequest })(Signup);
+export default connect(mapStateToProps, { userSignupRequest })(adminSignup);
