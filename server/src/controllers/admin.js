@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import validator from 'validator';
 import bcrypt from 'bcrypt';
 import model from '../models';
 import app from '../server';

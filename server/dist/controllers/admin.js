@@ -8,6 +8,10 @@ var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
+var _validator = require('validator');
+
+var _validator2 = _interopRequireDefault(_validator);
+
 var _bcrypt = require('bcrypt');
 
 var _bcrypt2 = _interopRequireDefault(_bcrypt);
@@ -34,7 +38,7 @@ exports.default = {
         if (req.body.password1 != req.body.password1) {
           return res.status(400).send({ Password: 'Passwords do not match' });
         }
-        if (validator.isEmail(req.body.email)) {
+        if (_validator2.default.isEmail(req.body.email)) {
           var hash = _bcrypt2.default.hashSync(req.body.password, salt);
           User.create({
             email: req.body.email,
