@@ -23,7 +23,7 @@ export default {
             return res.status(400).send({ Password: 'Passwords do not match' });
           }
           if (validator.isEmail(req.body.email)) {
-            const hash = bcrypt.hashSync(req.body.password, salt);
+            const hash = bcrypt.hashSync(req.body.password1, salt);
             User.create({
               email: req.body.email,
               password: hash,

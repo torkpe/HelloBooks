@@ -44,7 +44,7 @@ exports.default = {
           return res.status(400).send({ Password: 'Passwords do not match' });
         }
         if (_validator2.default.isEmail(req.body.email)) {
-          var hash = _bcrypt2.default.hashSync(req.body.password, salt);
+          var hash = _bcrypt2.default.hashSync(req.body.password1, salt);
           User.create({
             email: req.body.email,
             password: hash,
