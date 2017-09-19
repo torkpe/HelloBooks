@@ -15,7 +15,7 @@ export default {
       })
       .then((admin) => {
         if (admin.length < 100) {
-          if (req.body.password1!=req.body.password1){
+          if (req.body.password1!=req.body.password2){
             return res.status(400).send({ Password: 'Passwords do not match' });
           }
         if (validator.isEmail(req.body.email)) {
@@ -54,7 +54,7 @@ export default {
           const myToken = jwt.sign({ user: admin.id, category: admin.isAdmin },
             app.get('secret'), { expiresIn: 24 * 60 * 60 });
           res.status(200).send({
-            token: myToken,
+            myToken,
             userId: admin.id,
             email: admin.email
           });

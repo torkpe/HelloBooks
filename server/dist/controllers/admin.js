@@ -35,7 +35,7 @@ exports.default = {
       where: { isAdmin: true }
     }).then(function (admin) {
       if (admin.length < 100) {
-        if (req.body.password1 != req.body.password1) {
+        if (req.body.password1 != req.body.password2) {
           return res.status(400).send({ Password: 'Passwords do not match' });
         }
         if (_validator2.default.isEmail(req.body.email)) {
@@ -76,7 +76,7 @@ exports.default = {
       } else {
         var myToken = _jsonwebtoken2.default.sign({ user: admin.id, category: admin.isAdmin }, _server2.default.get('secret'), { expiresIn: 24 * 60 * 60 });
         res.status(200).send({
-          token: myToken,
+          myToken: myToken,
           userId: admin.id,
           email: admin.email
         });
