@@ -78,8 +78,8 @@ exports.default = {
       if (!admin) {
         return res.status(404).send({ message: 'Admin not found' });
       }
-      if (!_bcrypt2.default.compareSync(req.body.password, admin.password)) {
-        return res.status(406).send({ message: !_bcrypt2.default.compareSync(req.body.password, admin.password) });
+      if (_bcrypt2.default.compareSync(req.body.password, admin.password)) {
+        return res.status(406).send({ message: _bcrypt2.default.compareSync(req.body.password, admin.password) });
       }
       var myToken = generateToken(admin);
       res.status(200).send({
