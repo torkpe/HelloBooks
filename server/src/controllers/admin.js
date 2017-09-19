@@ -50,23 +50,19 @@ export default {
     return User
       .findOne({
         where: { email: req.body.email,
-          isAdmin: true
+          isAdmin: true // Check if user exists first
         } })
       .then((admin) => {
         if (!admin) {
-          return res.status(404).send({ message: 'Admin not found' });
+          return res.status(404).send('Admin not found');
         }
         // Check if passwords do not match
         if (!bcrypt.compareSync(req.body.password, admin.password)) {
           return res.status(406).send({ message: 'Incorrect Password' });
         }
         const myToken = generateToken(admin);
-        res.status(200).send({
-          myToken,
-          userId: admin.id,
-          email: admin.email
-        });
-      }).catch(error => res.status(400).send({ response: error.message }));
+        return res.status(200).send({ myToken, admin });
+      }).catch(error => res.status(400).send({ error: error.message }));
   },
   findAdmins(req, res) {
     return User

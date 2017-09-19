@@ -73,23 +73,19 @@ exports.default = {
   findAdmin: function findAdmin(req, res) {
     return User.findOne({
       where: { email: req.body.email,
-        isAdmin: true
+        isAdmin: true // Check if user exists first
       } }).then(function (admin) {
       if (!admin) {
-        return res.status(404).send({ message: 'Admin not found' });
+        return res.status(404).send('Admin not found');
       }
       // Check if passwords do not match
       if (!_bcrypt2.default.compareSync(req.body.password, admin.password)) {
         return res.status(406).send({ message: 'Incorrect Password' });
       }
       var myToken = generateToken(admin);
-      res.status(200).send({
-        myToken: myToken,
-        userId: admin.id,
-        email: admin.email
-      });
+      return res.status(200).send({ myToken: myToken, admin: admin });
     }).catch(function (error) {
-      return res.status(400).send({ response: error.message });
+      return res.status(400).send({ error: error.message });
     });
   },
   findAdmins: function findAdmins(req, res) {
