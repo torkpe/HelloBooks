@@ -35,7 +35,7 @@ exports.default = {
       where: { isAdmin: true }
     }).then(function (admin) {
       if (admin.length < 100) {
-        if (req.body.password1 != req.body.password2) {
+        if (req.body.password1 !== req.body.password2) {
           return res.status(400).send({ Password: 'Passwords do not match' });
         }
         if (_validator2.default.isEmail(req.body.email)) {
@@ -45,7 +45,8 @@ exports.default = {
             password: hash,
             isAdmin: true,
             star: 'admin',
-            confirmed: true
+            confirmed: true,
+            key: 'admin'
           }).then(function (newUser) {
             return res.status(201).send(newUser);
           }).catch(function (error) {

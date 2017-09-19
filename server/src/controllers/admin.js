@@ -15,23 +15,24 @@ export default {
       })
       .then((admin) => {
         if (admin.length < 100) {
-          if (req.body.password1!=req.body.password2){
+          if (req.body.password1 !== req.body.password2) {
             return res.status(400).send({ Password: 'Passwords do not match' });
           }
-        if (validator.isEmail(req.body.email)) {
-          const hash = bcrypt.hashSync(req.body.password, salt);
-          User.create({
-            email: req.body.email,
-            password: hash,
-            isAdmin: true,
-            star: 'admin',
-            confirmed: true,
-          })
-            .then(newUser => res.status(201).send(newUser))
-            .catch(error => res.status(400).send({ response: error.message }));
-        }else{
+          if (validator.isEmail(req.body.email)) {
+            const hash = bcrypt.hashSync(req.body.password, salt);
+            User.create({
+              email: req.body.email,
+              password: hash,
+              isAdmin: true,
+              star: 'admin',
+              confirmed: true,
+              key: 'admin',
+            })
+              .then(newUser => res.status(201).send(newUser))
+              .catch(error => res.status(400).send({ response: error.message }));
+          } else{
             return res.status(400).send({ Email: 'Input must be an email' });
-        }
+          }
         } else {
           return res.status(400).send({ message: 'You have made a bad request' });
         }
