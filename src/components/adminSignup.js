@@ -38,10 +38,16 @@ class adminSignup extends Component{
                             </div>
                             <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
                                 <input type='password' onChange={this.onChange}
-                                className='mdl-textfield__input' name='password' />
+                                className='mdl-textfield__input' name='password1' />
                                 <label htmlFor='password' className='mdl-textfield__label'>Password</label>
                                 <span className="error">{ errors.message }</span>
-                            </div>                  
+                            </div>
+                            <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
+                                <input type='password' onChange={this.onChange}
+                                className='mdl-textfield__input' name='password2' />
+                                <label htmlFor='password' className='mdl-textfield__label'>Confirm Password</label>
+                                <span className="error">{ errors.message }</span>
+                            </div>
                             <button disabled  = {isLoading} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="button">
                                 Sign up
                             </button>
