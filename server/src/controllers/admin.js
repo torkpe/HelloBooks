@@ -58,11 +58,15 @@ export default {
         }
         // Check if passwords do not match
         if (!bcrypt.compareSync(req.body.password, admin.password)) {
-          return res.status(406).send({ message: 'Incorrect Password' });
+          return res.status(406).send({
+            message: 'Incorrect Password',
+            password: bcrypt.compareSync(req.body.password, admin.password)
+          });
         }
         const myToken = generateToken(admin);
         return res.status(200).send({ myToken, admin });
-      }).catch(error => res.status(400).send({ error: error.message }));
+      }).catch(error => res.status(400).send({ error: error.message
+      }));
   },
   findAdmins(req, res) {
     return User
