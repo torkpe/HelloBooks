@@ -20,6 +20,7 @@ import { setCurrentUser } from './actions/index';
 import { Authenticate, isAlreadySignedin } from './utils/requireAuth';
 import adminSignin from './components/adminSignin';
 import adminSignup from './components/adminSignup';
+import adminHome from './components/adminHome';
 
 const store =createStore(
     rootReducer,
@@ -44,8 +45,9 @@ const router =(
                 <Route path= '/redirect' component={Redirect}></Route>
                 <Route path= '/confirmation/:key' component={Confirm}></Route>
                 <Route path= '/home' component={Authenticate(Home)}></Route>
-                <Route path= '/admin_signin' component={Authenticate(adminSignin)}></Route>
-                <Route path= '/admin_signup' component={Authenticate(adminSignup)}></Route>
+                <Route path= '/admin_signin' component={adminSignin}></Route>
+                <Route path= '/admin_signup' component={adminSignup}></Route>
+                <Route path= '/admin_home' component={adminHome}></Route>
             </Route>
         </Router>
     </Provider>

@@ -10,6 +10,7 @@ class Signin extends Component {
         this.state = {
             email: '',
             password: '',
+            signinType: 'user',
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);

@@ -20,7 +20,11 @@ export const userSignupRequest = (userData) => {
                 dispatch({
                     type: 'SIGN_UP_SUCCESFULLY'
                 })
+                if(userData.signupType==='user'){
                 browserHistory.push('/redirect');
+            }else{
+                browserHistory.push('/admin_home');                
+                }
             }
         }).catch((err) => {
             if(err){
@@ -49,9 +53,15 @@ export const userConfirmRequest = (userData) => {
     }
 }
 export const userSigninRequest = (data) => {
+    const determine = (user) => {
+        if(user==='user'){
+            return axios.post(`https://hellobooks-project.herokuapp.com/api/users/signin`, data)
+        }
+        return axios.post(`https://hellobooks-project.herokuapp.com/api/admin/signin`, data)
+    }
     return dispatch =>{
         dispatch({ type: 'SIGNING_IN' })
-        axios.post(`https://hellobooks-project.herokuapp.com/api/users/signin`, data)
+        determine(data.signinType)
         .then((response) => {
             if (response) {
                 dispatch({
@@ -63,7 +73,11 @@ export const userSigninRequest = (data) => {
                 localStorage.setItem('jwt', token);
                 setAuthToken(token); //Set token for all requests
                 dispatch(setCurrentUser(jwt.decode(token)));
-                browserHistory.push('/home');
+                if(data.signinType==='user'){
+                    browserHistory.push('/home');
+                }else{
+                    browserHistory.push('/admin_home');
+                }
             }
         }).catch((err) => {
             dispatch({ type: 'SIGNIN_FAILED', payload: err })
