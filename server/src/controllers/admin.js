@@ -57,7 +57,7 @@ export default {
           return res.status(404).send({ message: 'Admin not found' });
         }
         if (!bcrypt.compareSync(req.body.password, admin.password)) {
-          return res.status(406).send({ message: 'Incorrect Password' });
+          return res.status(406).send({ message: !bcrypt.compareSync(req.body.password, admin.password) });
         }
         const myToken = generateToken(admin);
         res.status(200).send({
