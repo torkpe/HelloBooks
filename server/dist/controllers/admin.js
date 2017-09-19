@@ -28,6 +28,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var User = _models2.default.Users;
 var salt = _bcrypt2.default.genSaltSync(10); // Generate salt for password
+// Generate Token
+var generateToken = function generateToken(user) {
+  return _jsonwebtoken2.default.sign({ user: user.id, star: user.star, category: user.isAdmin }, _server2.default.get('secret'), { expiresIn: 24 * 60 * 60 });
+};
+
 exports.default = {
   // sign up user
   create: function create(req, res) {
@@ -48,7 +53,8 @@ exports.default = {
             confirmed: true,
             key: 'admin'
           }).then(function (newUser) {
-            return res.status(201).send(newUser);
+            var myToken = generateToken(newUser);
+            res.status(201).send({ myToken: myToken, newUser: newUser });
           }).catch(function (error) {
             return res.status(400).send({ response: error.message });
           });
@@ -75,7 +81,7 @@ exports.default = {
       if (!_bcrypt2.default.compareSync(req.body.password, admin.password)) {
         res.status(406).send({ message: 'Incorrect Password' });
       } else {
-        var myToken = _jsonwebtoken2.default.sign({ user: admin.id, category: admin.isAdmin }, _server2.default.get('secret'), { expiresIn: 24 * 60 * 60 });
+        var myToken = generateToken(admin);
         res.status(200).send({
           myToken: myToken,
           userId: admin.id,

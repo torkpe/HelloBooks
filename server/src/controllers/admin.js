@@ -6,6 +6,10 @@ import app from '../server';
 
 const User = model.Users;
 const salt = bcrypt.genSaltSync(10); // Generate salt for password
+// Generate Token
+const generateToken = user => jwt.sign({ user: user.id, star: user.star, category: user.isAdmin },
+  app.get('secret'), { expiresIn: 24 * 60 * 60 });
+
 export default {
   // sign up user
   create(req, res) {
@@ -28,9 +32,12 @@ export default {
               confirmed: true,
               key: 'admin',
             })
-              .then(newUser => res.status(201).send(newUser))
+              .then((newUser) => {
+                const myToken = generateToken(newUser);
+                res.status(201).send({ myToken, newUser });
+              })
               .catch(error => res.status(400).send({ response: error.message }));
-          } else{
+          } else {
             return res.status(400).send({ Email: 'Input must be an email' });
           }
         } else {
@@ -52,8 +59,7 @@ export default {
         if (!bcrypt.compareSync(req.body.password, admin.password)) {
           res.status(406).send({ message: 'Incorrect Password' });
         } else {
-          const myToken = jwt.sign({ user: admin.id, category: admin.isAdmin },
-            app.get('secret'), { expiresIn: 24 * 60 * 60 });
+          const myToken = generateToken(admin);
           res.status(200).send({
             myToken,
             userId: admin.id,
