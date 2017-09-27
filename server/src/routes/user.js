@@ -14,10 +14,10 @@ router.post('/api/users/signin', userController.findUser);
 router.put('/api/confimation/:key', userController.updateUser);
 //  api route to allow user borrow book
 router.post('/api/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,
-  authBorrow.checkStar, borrowBookControllers.borrow);
+  authBorrow.checkStar, authBorrow.checkDebt, borrowBookControllers.borrow);
 // get list of borrowed books 
 router.get('/api/users/:userId/books', authorize.checkAuthentication, authorize.authorizeUser,
-  borrowBookControllers.getBorrowedBooks);
+  borrowBookControllers.getBorrowedBooks); 
 // api route to allow user return a book;
 router.put('/api/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,
   borrowBookControllers.returnBook);

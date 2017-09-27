@@ -59,7 +59,7 @@ export default {
             res.status(400).send({ message: 'Return book first before borrowing again' });
           }
         });
-      }).catch(err => res.status(400).send({message: err.message}))
+      }).catch(err => res.status(400).send({ message: err.message }));
   },
   // Get borrowed books
   getBorrowedBooks(req, res) {
@@ -81,7 +81,8 @@ export default {
           borrowedBooks.push({ returnDate: books[i].returnDate.toDateString(),
             dateBorrowed: books[i].createdAt.toDateString(),
             bookId: books[i].id,
-            user: books[i],
+            user: books[i].userId,
+            owing: books[i].owing
           });
         }
         return res.status(200).send(borrowedBooks);

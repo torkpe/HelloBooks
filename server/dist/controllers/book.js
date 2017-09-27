@@ -32,7 +32,7 @@ exports.default = {
   // find a book
   findOne: function findOne(req, res) {
     return Book.findOne({
-      where: { title: req.params.id
+      where: { id: req.params.id
       } }).then(function (book) {
       if (!book) {
         res.status(404).send('Book not found');
@@ -59,7 +59,7 @@ exports.default = {
 
   // update a book's info
   findBook: function findBook(req, res) {
-    return Book.findBook({
+    return Book.findOne({
       where: { id: req.params.id
       }
     }).then(function (book) {

@@ -90,7 +90,8 @@ exports.default = {
         borrowedBooks.push({ returnDate: books[i].returnDate.toDateString(),
           dateBorrowed: books[i].createdAt.toDateString(),
           bookId: books[i].id,
-          user: books[i]
+          user: books[i].userId,
+          owing: books[i].owing
         });
       }
       return res.status(200).send(borrowedBooks);

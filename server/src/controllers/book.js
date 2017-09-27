@@ -21,7 +21,7 @@ export default {
   findOne(req, res) {
     return Book
       .findOne({
-        where: { title: req.params.id,
+        where: { id: req.params.id,
         } })
       .then((book) => {
         if (!book) {
@@ -46,7 +46,7 @@ export default {
   // update a book's info
   findBook(req, res) {
     return Book
-      .findBook({
+      .findOne({
         where: { id: req.params.id,
         },
       })

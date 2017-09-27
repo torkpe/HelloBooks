@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var bookControllers = _controllers2.default.book;
 var router = _express2.default.Router();
 // add a book
-router.post('/api/books', bookControllers.create);
+router.post('/api/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.create);
 // get all books
 router.get('/api/books', _middleware2.default.checkAuthentication, bookControllers.findAll);
 // get a book

@@ -5,7 +5,7 @@ import authorize from '../middleware/middleware';
 const bookControllers = controllers.book;
 const router = express.Router();
 // add a book
-router.post('/api/books', bookControllers.create);
+router.post('/api/books', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.create);
 // get all books
 router.get('/api/books', authorize.checkAuthentication, bookControllers.findAll);
 // get a book
