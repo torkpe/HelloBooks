@@ -17,11 +17,11 @@ import Home from './components/Home';
 import setAuth from './utils/setAuthToken';
 import rootReducer from './reducers/index';
 import { setCurrentUser } from './actions/index';
-import { Authenticate, isAlreadySignedin } from './utils/requireAuth';
+import { Authenticate, isAlreadySignedin, isUser, isAdmin } from './utils/requireAuth';
 import adminSignin from './components/adminSignin';
 import adminSignup from './components/adminSignup';
 import adminHome from './components/adminHome';
-
+import Restrict from './components/Restrict';
 const store =createStore(
     rootReducer,
     compose(
@@ -44,10 +44,11 @@ const router =(
                 <Route path='/signin' component={Signin}></Route>
                 <Route path= '/redirect' component={Redirect}></Route>
                 <Route path= '/confirmation/:key' component={Confirm}></Route>
-                <Route path= '/home' component={Authenticate(Home)}></Route>
+                <Route path= '/home' component={Authenticate(isUser(Home))}></Route>
                 <Route path= '/admin_signin' component={adminSignin}></Route>
                 <Route path= '/admin_signup' component={adminSignup}></Route>
-                <Route path= '/admin_home' component={adminHome}></Route>
+                <Route path= '/admin_home' component={Authenticate(isAdmin(adminHome))}></Route>
+                <Route path= '/restrict/:key' component={Authenticate((Restrict))}></Route>
             </Route>
         </Router>
     </Provider>

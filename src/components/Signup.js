@@ -14,29 +14,34 @@ class Signup extends Component{
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+    componentDidMount(checker){
+            if (checker===true) {
+              return (<div id="p2" className="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>)
+        }
+    }
     onChange(e) {
         this.setState({[e.target.name]: e.target.value})
     }
     onSubmit(e) {
         e.preventDefault();
         this.props.userSignupRequest(this.state)
+        this.refs.signupForm.reset();
     }
     render(){
         const {errors, isLoading } = this.props.signup
-        const loading = <div id="p2" className="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
         const span =<span></span>
         return(
             <div className='mdl-grid'>
                 <div className='contents'>
                     <div className="card-enlarge mdl-card mdl-shadow--3dp">
-                    { isLoading ? loading :span }
-                        <form onSubmit={this.onSubmit}>
+                        {this.componentDidMount({isLoading})}
+                        <form ref='signupForm' onSubmit={this.onSubmit}>
                             <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
                                 <input type='email' onChange={this.onChange}
                                 className='mdl-textfield__input' name='email' />
                                 <label htmlFor='email' className='mdl-textfield__label'>Email</label>
                                 <span className="error">{ errors.message }</span>
-                            </div>                        
+                            </div>
                             <button disabled = {isLoading} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="button">
                                 Sign up
                             </button>

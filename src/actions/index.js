@@ -23,6 +23,10 @@ export const userSignupRequest = (userData) => {
                 if(userData.signupType==='user'){
                 browserHistory.push('/redirect');
             }else{
+                const token = response.data.myToken
+                localStorage.setItem('jwt', token);
+                setAuthToken(token); //Set token for all requests
+                dispatch(setCurrentUser(jwt.decode(token)));
                 browserHistory.push('/admin_home');                
                 }
             }

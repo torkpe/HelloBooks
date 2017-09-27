@@ -4,6 +4,8 @@ import propTypes from 'prop-types';
 import {  connect } from 'react-redux';
 import { userSignupRequest } from '../actions/index';
 
+import Loading from './Loading';
+
 class adminSignup extends Component{
     constructor(props) {
         super(props);
@@ -11,6 +13,7 @@ class adminSignup extends Component{
             email: '',
             password:'',
             signupType:'admin',
+            loading: false,
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -24,9 +27,9 @@ class adminSignup extends Component{
     }
     render(){
         const {errors, isLoading } = this.props.adminSignup
-        const span =<span></span>
         return(
             <div className='mdl-grid'>
+                <Loading isLoading={isLoading} />                                               
                 <div className='contents'>
                     <div className="card-enlarge mdl-card mdl-shadow--3dp">
                         <form onSubmit={this.onSubmit}>
