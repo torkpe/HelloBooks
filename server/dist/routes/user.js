@@ -33,7 +33,7 @@ router.post('/api/users/signin', userController.findUser);
 router.put('/api/confimation/:key', userController.updateUser);
 //  api route to allow user borrow book
 router.post('/api/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, _borrowBook2.default.checkStar, _borrowBook2.default.checkDebt, borrowBookControllers.borrow);
-// get list of borrowed books 
+// get list of borrowed books
 router.get('/api/users/:userId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.getBorrowedBooks);
 // api route to allow user return a book;
 router.put('/api/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.returnBook);

@@ -64,7 +64,7 @@ var user = function user(sequelize, DataTypes) {
       }
     },
     key: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: {
         args: false,
         msg: 'key must be provided'

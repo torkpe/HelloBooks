@@ -15,7 +15,7 @@ router.put('/api/confimation/:key', userController.updateUser);
 //  api route to allow user borrow book
 router.post('/api/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,
   authBorrow.checkStar, authBorrow.checkDebt, borrowBookControllers.borrow);
-// get list of borrowed books 
+// get list of borrowed books
 router.get('/api/users/:userId/books', authorize.checkAuthentication, authorize.authorizeUser,
   borrowBookControllers.getBorrowedBooks); 
 // api route to allow user return a book;

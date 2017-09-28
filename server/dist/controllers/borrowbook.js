@@ -85,15 +85,9 @@ exports.default = {
       if (books.length < 1) {
         return res.status(404).send({ message: 'You have no book pending to be returned' });
       }
-      var borrowedBooks = [];
-      for (var i = 0; i < books.length; i++) {
-        borrowedBooks.push({ returnDate: books[i].returnDate.toDateString(),
-          dateBorrowed: books[i].createdAt.toDateString(),
-          bookId: books[i].id,
-          user: books[i].userId,
-          owing: books[i].owing
-        });
-      }
+      var borrowedBooks = books.map(function (book) {
+        return book;
+      });
       return res.status(200).send(borrowedBooks);
     });
   },

@@ -76,15 +76,7 @@ export default {
         if (books.length < 1) {
           return res.status(404).send({ message: 'You have no book pending to be returned' });
         }
-        const borrowedBooks = [];
-        for (let i = 0; i < books.length; i++) {
-          borrowedBooks.push({ returnDate: books[i].returnDate.toDateString(),
-            dateBorrowed: books[i].createdAt.toDateString(),
-            bookId: books[i].id,
-            user: books[i].userId,
-            owing: books[i].owing
-          });
-        }
+        const borrowedBooks = books.map(book => book);
         return res.status(200).send(borrowedBooks);
       });
   },
