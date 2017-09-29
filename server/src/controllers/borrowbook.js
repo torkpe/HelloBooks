@@ -65,18 +65,17 @@ export default {
   getBorrowedBooks(req, res) {
     return borrowBook
       .findAll({
-        include: [{
+        include: [
           Book,
-          where: {
-            returned: false,
-            userId: req.decoded.user,
-          },
-        }]
+        ],
+        where: {
+          returned: false,
+          userId: req.decoded.user,
+        },
       }).then((books) => {
         if (books.length < 1) {
           return res.status(404).send({
-            message: 'You have no book pending to be returned'
-          });
+            message: 'You have no book pending to be returned' });
         }
         const borrowedBooks = books.map(book => book);
         return res.status(200).send(borrowedBooks);

@@ -48,7 +48,7 @@ exports.default = {
   findAll: function findAll(req, res) {
     return Book.findAll({}).then(function (book) {
       if (!book) {
-        res.send('No book not found');
+        res.status(400).send('No book not found');
       } else {
         res.status(200).send(book);
       }

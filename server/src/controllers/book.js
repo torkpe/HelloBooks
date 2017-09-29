@@ -37,7 +37,7 @@ export default {
       .findAll({})
       .then((book) => {
         if (!book) {
-          res.send('No book not found');
+          res.status(400).send('No book not found');
         } else {
           res.status(200).send(book);
         }
