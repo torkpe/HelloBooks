@@ -25,14 +25,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var userController = _controllers2.default.users;
 var borrowBookControllers = _controllers2.default.borrowBook;
 var router = _express2.default.Router();
-//  sign up user
+//  sign up user 
 router.post('/api/users/signup', userController.create);
 //  signin user
 router.post('/api/users/signin', userController.findUser);
 // update user upon confirmation
 router.put('/api/confimation/:key', userController.updateUser);
 //  api route to allow user borrow book
-router.post('/api/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, _borrowBook2.default.checkDebt, borrowBookControllers.borrow);
+router.post('/api/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, _borrowBook2.default.checkStar, _borrowBook2.default.checkDebt, borrowBookControllers.borrow);
 // get list of borrowed books 
 router.get('/api/users/:userId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.getBorrowedBooks);
 // api route to allow user return a book;

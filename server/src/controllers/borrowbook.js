@@ -77,9 +77,8 @@ export default {
           return res.status(404).send({
             message: 'You have no book pending to be returned' });
         }
-        const borrowedBooks = books.map(book => book);
-        return res.status(200).send(borrowedBooks);
-      });
+        return res.status(200).send(books);
+      }).catch(err => res.status(400).send({ message: err.message }));
   },
   // Return a book and update status
   returnBook(req, res) {
