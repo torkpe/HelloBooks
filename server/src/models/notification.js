@@ -3,7 +3,7 @@ const notification = (sequelize, DataTypes) => {
     message: DataTypes.STRING,
     type: DataTypes.STRING,
     viewed: DataTypes.BOOLEAN,
-    from: DataTypes.INTEGER,
+    from: DataTypes.STRING,
     userId: DataTypes.INTEGER
   }, {
     classMethods: {

@@ -12,6 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Book = _models2.default.Book;
 var borrowBook = _models2.default.BorrowBook;
+var Notify = _models2.default.Notification;
 // Function to determine return date for each user
 var determineDate = function determineDate(star) {
   var newDate = void 0;
@@ -53,7 +54,20 @@ exports.default = {
             returnDate: determineDate(req.decoded.star),
             owing: false
           }).then(function (borrowed) {
-            return res.status(201).send(borrowed);
+            return (
+              // Notify admin of borrowed book
+              Notify.create({
+                message: req.body.message,
+                type: 'admin',
+                viewed: false,
+                from: req.body.name,
+                userId: 1
+              }).then(function (notification) {
+                return res.status(200).send({ borrowed: borrowed, notification: notification });
+              }).catch(function (err) {
+                return res.status(500).send({ message: err });
+              })
+            );
           },
           // Remove from the quantity of books
           Book.find({
@@ -86,10 +100,9 @@ exports.default = {
         return res.status(404).send({
           message: 'You have no book pending to be returned' });
       }
-      var borrowedBooks = books.map(function (book) {
-        return book;
-      });
-      return res.status(200).send(borrowedBooks);
+      return res.status(200).send(books);
+    }).catch(function (err) {
+      return res.status(400).send({ message: err.message });
     });
   },
 

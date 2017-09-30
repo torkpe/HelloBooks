@@ -38,7 +38,12 @@ var salt = _bcrypt2.default.genSaltSync(10);
 var User = _models2.default.Users;
 // Function to generate token for user
 var generateToken = function generateToken(user) {
-  return _jsonwebtoken2.default.sign({ user: user.id, star: user.star, category: user.isAdmin }, _server2.default.get('secret'), { expiresIn: 24 * 60 * 60 });
+  return _jsonwebtoken2.default.sign({
+    user: user.id,
+    name: user.name,
+    star: user.star,
+    category: user.isAdmin
+  }, _server2.default.get('secret'), { expiresIn: 24 * 60 * 60 });
 };
 
 exports.default = {

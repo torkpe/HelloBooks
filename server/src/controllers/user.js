@@ -9,8 +9,13 @@ import sendEmail from './email';
 const salt = bcrypt.genSaltSync(10);
 const User = model.Users;
 // Function to generate token for user
-const generateToken = user => jwt.sign({ user: user.id, star: user.star, category: user.isAdmin },
-  app.get('secret'), { expiresIn: 24 * 60 * 60 });
+const generateToken = user => jwt.sign({
+  user: user.id,
+  name: user.name,
+  star: user.star,
+  category: user.isAdmin
+},
+app.get('secret'), { expiresIn: 24 * 60 * 60 });
 
 export default {
   create(req, res) {

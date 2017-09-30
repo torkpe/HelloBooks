@@ -36,7 +36,7 @@ const notification = {
         },
       },
       from: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: {
           args: false,
           msg: 'from is required'

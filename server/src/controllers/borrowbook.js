@@ -2,6 +2,7 @@ import model from '../models';
 
 const Book = model.Book;
 const borrowBook = model.BorrowBook;
+const Notify = model.Notification;
 // Function to determine return date for each user
 const determineDate = (star) => {
   let newDate;
@@ -44,15 +45,16 @@ export default {
               returned: false,
               returnDate: determineDate(req.decoded.star),
               owing: false,
-            }).then(borrowed => res.status(201).send(borrowed),
+            }).then(borrowed => res.status(201).send({ borrowed })
+              .catch(err => res.status(500).send({ message: err })),
               // Remove from the quantity of books
-              Book.find({
-                where: { id: req.params.bookId },
-              }).then((foundBook) => {
-                foundBook.update({
-                  quantity: foundBook.quantity - 1,
-                });
-              }),
+            Book.find({
+              where: { id: req.params.bookId },
+            }).then((foundBook) => {
+              foundBook.update({
+                quantity: foundBook.quantity - 1,
+              });
+            }),
             );
           } else {
             // Return 400 not created
@@ -96,15 +98,17 @@ export default {
         book.update({ returned: true,
         })
           .then((updated) => {
-            res.status(200).send({ updated, message: 'updated successfully' });
+            res.status(201).send({ updated });
             Book.find({
               where: { id: req.params.bookId },
             }).then((foundBook) => {
               foundBook.update({
                 quantity: foundBook.quantity + 1,
               });
-            });
-          });
+            })
+              .catch(err => res.status(500).send({ message: err.message }));
+          })
+          .catch(err => res.status(500).send({ message: err.message }));
       });
   },
   // Show all books that has exceeded deadline
