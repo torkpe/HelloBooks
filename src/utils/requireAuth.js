@@ -7,12 +7,12 @@ export const Authenticate = (ComposedComponent) => {
     class Authenticate extends Component {
         componentWillMount() {
             if (!this.props.isAuthenticated) {
-                browserHistory.push('/signin');
+                return browserHistory.push('/signin');
             }
         }
         componentWillUpdate(nextProps) {
             if(!nextProps.isAuthenticated) {
-                browserHistory.push('/');
+               return browserHistory.push('/');
             }
         }
         render() {

@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
 
 class Books extends Component {
   render() {
     const book = this.props.book
-    const borrowed = this.props.borrowed
     const userId = this.props.userId
-    const onClick=(e)=>{
-    e.preventDefault()
-    this.props.borrowBook(userId, book.id)
-  }
+    const data={
+      name: this.props.name,
+      userId,
+      message: `${this.props.name} just borrowed the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`
+    }
+    const data2={
+      name: this.props.name,
+      userId,
+      message: `${this.props.name} just returned the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`
+    }
+    const borrow=(e)=>{
+      this.props.borrowBook(userId, book.id, data)
+    }
+    const returnBorrowed=(e)=>{
+      
+      this.props.returnBook(userId, book.id, data2)
+    }
     return (
       <div className="mdl-cell mdl-cell--4-col">
         <div className="demo-card-square mdl-card mdl-shadow--2dp home-card">
@@ -19,18 +30,12 @@ class Books extends Component {
             <img src={book.cover} alt="Book cover"/>
           <div className="mdl-card__supporting-text">
             {book.description}
-            
-              {this.props.borrowedBook.forEach(function(element) {
-               if(element.userId===userId){
-                return 'yes'
-               }
-              })}
           </div>
           <div className="mdl-card__actions mdl-card--border">
-            <a onClick={onClick} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
+            <a onClick={borrow} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
               borrow book
             </a>
-            <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
+            <a onClick={returnBorrowed} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
               return book
             </a>
           </div>
@@ -38,9 +43,5 @@ class Books extends Component {
       </div>
     );
   }
-}
-Books.propTypes = {
-    borrowBook: propTypes.func.isRequired,
-    returnBook: propTypes.func.isRequired,
 }
 export default Books;

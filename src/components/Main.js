@@ -30,21 +30,33 @@ class Main extends Component {
             </nav>
         );
         const guestLinks = (
-                    <nav className="mdl-navigation">
-                        <Link to='/signin' className="mdl-navigation__link">Signin</Link>
-                        <Link to='/signup' className="mdl-navigation__link">Signup</Link>
-                    </nav>
+                <nav className="mdl-navigation">
+                    <Link to='/signin' className="mdl-navigation__link">Signin</Link>
+                    <Link to='/signup' className="mdl-navigation__link">Signup</Link>
+                </nav>
         )
-        const adminNav = (
-            <div className="mdl-layout__tab-bar mdl-js-ripple-effect">
-                <a href="#scroll-tab-1" className="mdl-layout__tab is-active">Tab 1</a>
-                <a href="#scroll-tab-2" className="mdl-layout__tab">Tab 2</a>
-                <a href="#scroll-tab-3" className="mdl-layout__tab">Tab 3</a>
-                <a href="#scroll-tab-4" className="mdl-layout__tab">Tab 4</a>
-                <a href="#scroll-tab-5" className="mdl-layout__tab">Tab 5</a>
-                <a href="#scroll-tab-6" className="mdl-layout__tab">Tab 6</a>
-            </div>
-        )
+        const determineNav =(category, authenticated) =>{
+            if(category===true && authenticated === true){
+                return (
+                   <div>
+                        <Link to='/admin_home' className="mdl-layout__tab">Home</Link>
+                        <Link to='/requests' className="mdl-layout__tab">Requests</Link>
+                        <Link to='/notification' className="mdl-layout__tab">Notifications</Link>
+                        <Link to='/log' className="mdl-layout__tab">Log</Link>
+                        <Link to='/all_books' className="mdl-layout__tab">All Books</Link>
+                        
+                   </div>
+                )
+            }else if(category===false && authenticated===true){
+            return (
+                <div>
+                    <Link to='/home' className="mdl-layout__tab">Home</Link>
+                    <Link to='/history' className="mdl-layout__tab">History</Link>
+                    <Link to='/settings' className="mdl-layout__tab">Settings</Link>
+                </div>
+                )
+            }
+        }
         return(
             <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                 <header className="mdl-layout__header">
@@ -55,7 +67,10 @@ class Main extends Component {
                             { isAuthenticated ? userLinks : guestLinks}
                         </nav>
                     </div>
-                    {category ? adminNav : ''}
+                    {/*display navbar for admin if authnt*/}
+                    <div className="mdl-layout__tab-bar mdl-js-ripple-effect">
+                        {determineNav(category, isAuthenticated)}
+                    </div>
                 </header>
                   <div className="mdl-layout__drawer">
                     <Link to ={category ? '/admin_home' : '/'} className="mdl-layout-title">hello-books</Link>

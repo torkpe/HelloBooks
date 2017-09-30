@@ -36,7 +36,6 @@ class Admin extends Component {
     }
     pdfChange(e) {
         e.preventDefault()
-        let reader = new FileReader();
         let pdf = e.target.files[0];
         this.setState({
             pdf
@@ -66,7 +65,7 @@ class Admin extends Component {
                         <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
                             <input type='text' className='mdl-textfield__input' onChange={this.onChange}
                                 name='title' id='title' required/>
-                            <label htmlFor='title' className='mdl-textfield__label'>Title</label>                           
+                            <label htmlFor='title' className='mdl-textfield__label'>Title</label>
                         </div>
                         <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content'>
                             <input type='text' className='mdl-textfield__input' onChange={this.onChange}

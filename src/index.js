@@ -22,6 +22,15 @@ import adminSignin from './components/adminSignin';
 import adminSignup from './components/adminSignup';
 import adminHome from './components/adminHome';
 import Restrict from './components/Restrict';
+import book from './components/SingleBook';
+import Profile from './components/Profile';
+import Password from './components/Password';
+import userHistory from './components/userHistory';
+import allBorrowed from './components/allBorrowed';
+import allNotReturned from './components/allNotReturned';
+
+
+
 const store =createStore(
     rootReducer,
     compose(
@@ -48,6 +57,11 @@ const router =(
                 <Route path= '/admin_signin' component={adminSignin}></Route>
                 <Route path= '/admin_signup' component={adminSignup}></Route>
                 <Route path= '/admin_home' component={Authenticate(isAdmin(adminHome))}></Route>
+                <Route path= '/book/:id' component={Authenticate(book)} />
+                <Route path= '/change_password' component={Authenticate(isUser(Password))} />
+                <Route path= '/settings' component={Authenticate(isUser(Profile))} />
+                <Route path= '/all_borrowed_books' component={Authenticate(isUser(allBorrowed))} />
+                <Route path= '/history' component={Authenticate(isUser(allNotReturned))} />
                 <Route path= '/restrict/:key' component={Authenticate((Restrict))}></Route>
             </Route>
         </Router>
