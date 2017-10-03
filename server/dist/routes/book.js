@@ -30,5 +30,6 @@ router.get('/api/books/:id', _middleware2.default.checkAuthentication, bookContr
 router.put('/api/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.findBook);
 // Delete a book
 // API route to allow book delete a book goes in here
+router.delete('/api/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.deleteBook);
 
 exports.default = router;

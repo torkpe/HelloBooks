@@ -2,7 +2,6 @@ import model from '../models';
 
 const Book = model.Book;
 const borrowBook = model.BorrowBook;
-const Notify = model.Notification;
 // Function to determine return date for each user
 const determineDate = (star) => {
   let newDate;
@@ -124,5 +123,35 @@ export default {
           returned: false,
         },
       }).then(books => res.status(200).send(books));
+  },
+  // Charge for exceeding deadline
+  chargeUser(req, res) {
+    return borrowBook
+      .findOne({
+        where: {
+          userId: req.params.userId,
+          bookId: req.params.bookId,
+        },
+      }).then((books) => {
+        console.log('updated')
+        if (!books) {
+          return res.status(404).send({
+            message: 'User not found'
+          });
+        }
+        books.update({
+          owing: req.body.owing
+        }).then(updated => res.status(200).send({
+          updated,
+          message: 'Successfully charged user',
+        }))
+          .catch(err => res.status(500).send({
+            message: err.message
+          }));
+      })
+      .catch(err => res.status(500).send({
+        error: err.message,
+        message: 'something went wrong'
+      }));
   },
 };

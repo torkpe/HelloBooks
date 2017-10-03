@@ -27,5 +27,6 @@ router.post('/api/admin/signup', adminControllers.create);
 router.post('/api/admin/signin', adminControllers.findAdmin);
 router.get('/api/admins', adminControllers.findAdmins);
 router.get('/api/admins/exceed-deadlines', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, borrowBookControllers.exceedDeadline);
+router.put('/api/admins/charge-user/:userId/:bookId', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, borrowBookControllers.chargeUser);
 
 exports.default = router;

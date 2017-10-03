@@ -56,6 +56,18 @@ exports.default = {
       return res.status(400).send({ message: error.message });
     });
   },
+  deleteBook: function deleteBook(req, res) {
+    return Book.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (deleted) {
+      return res.status(200).send({ deleted: deleted });
+    }).catch(function (err) {
+      return res.status(400).send({ err: err });
+    });
+  },
+
 
   // update a book's info
   findBook: function findBook(req, res) {

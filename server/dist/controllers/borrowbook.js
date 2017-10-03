@@ -12,7 +12,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Book = _models2.default.Book;
 var borrowBook = _models2.default.BorrowBook;
-var Notify = _models2.default.Notification;
 // Function to determine return date for each user
 var determineDate = function determineDate(star) {
   var newDate = void 0;
@@ -54,20 +53,9 @@ exports.default = {
             returnDate: determineDate(req.decoded.star),
             owing: false
           }).then(function (borrowed) {
-            return (
-              // Notify admin of borrowed book
-              Notify.create({
-                message: req.body.message,
-                type: 'admin',
-                viewed: false,
-                from: req.body.name,
-                userId: 1
-              }).then(function (notification) {
-                return res.status(200).send({ borrowed: borrowed, notification: notification });
-              }).catch(function (err) {
-                return res.status(500).send({ message: err });
-              })
-            );
+            return res.status(201).send({ borrowed: borrowed }).catch(function (err) {
+              return res.status(500).send({ message: err });
+            });
           },
           // Remove from the quantity of books
           Book.find({
@@ -120,14 +108,18 @@ exports.default = {
       }
       book.update({ returned: true
       }).then(function (updated) {
-        res.status(200).send({ updated: updated, message: 'updated successfully' });
+        res.status(201).send({ updated: updated });
         Book.find({
           where: { id: req.params.bookId }
         }).then(function (foundBook) {
           foundBook.update({
             quantity: foundBook.quantity + 1
           });
+        }).catch(function (err) {
+          return res.status(500).send({ message: err.message });
         });
+      }).catch(function (err) {
+        return res.status(500).send({ message: err.message });
       });
     });
   },
@@ -143,6 +135,40 @@ exports.default = {
       }
     }).then(function (books) {
       return res.status(200).send(books);
+    });
+  },
+
+  // Charge for exceeding deadline
+  chargeUser: function chargeUser(req, res) {
+    return borrowBook.findOne({
+      where: {
+        userId: req.params.userId,
+        bookId: req.params.bookId
+      }
+    }).then(function (books) {
+      console.log('updated');
+      if (!books) {
+        return res.status(404).send({
+          message: 'User not found'
+        });
+      }
+      books.update({
+        owing: req.body.owing
+      }).then(function (updated) {
+        return res.status(200).send({
+          updated: updated,
+          message: 'Successfully charged user'
+        });
+      }).catch(function (err) {
+        return res.status(500).send({
+          message: err.message
+        });
+      });
+    }).catch(function (err) {
+      return res.status(500).send({
+        error: err.message,
+        message: 'something went wrong'
+      });
     });
   }
 };

@@ -43,6 +43,16 @@ export default {
         }
       }).catch(error => res.status(400).send({ message: error.message }));
   },
+  deleteBook(req, res) {
+    return Book
+      .destroy({
+        where: {
+          id: req.params.id
+        }
+      }).then(deleted => res.status(200).send({ deleted }))
+      .catch(err => res.status(400).send({ err }));
+  },
+
   // update a book's info
   findBook(req, res) {
     return Book

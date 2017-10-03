@@ -14,5 +14,6 @@ router.get('/api/books/:id', authorize.checkAuthentication, bookControllers.find
 router.put('/api/books/:id', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.findBook);
 // Delete a book
 // API route to allow book delete a book goes in here
+router.delete('/api/books/:id', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.deleteBook);
 
 export default router;

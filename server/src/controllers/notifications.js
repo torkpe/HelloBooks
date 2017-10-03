@@ -11,7 +11,7 @@ export default {
         type: req.body.type, // Admin or User
         viewed: false,
         userId: req.body.userId,
-        from: req.decoded.user,
+        from: req.body.user,
       }).then(notification => res.status(201).send({ notification, message: 'successfully created notification' }),
         sendEmail(req.body.message, req.body.type, req.body.userId))
       .catch(err => res.status(403).send({ message: err.message }));
