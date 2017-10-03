@@ -5,21 +5,25 @@ class Books extends Component {
     const book = this.props.book
     const userId = this.props.userId
     const data={
-      name: this.props.name,
+      user: this.props.name,
       userId,
+      type: 'admin',
       message: `${this.props.name} just borrowed the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`
     }
     const data2={
-      name: this.props.name,
+      user: this.props.name,
       userId,
+      type: 'admin',
       message: `${this.props.name} just returned the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`
     }
     const borrow=(e)=>{
       this.props.borrowBook(userId, book.id, data)
     }
-    const returnBorrowed=(e)=>{
-      
+    const returnBorrowed=(e)=>{      
       this.props.returnBook(userId, book.id, data2)
+    }
+    const chargeUser = (e) => {
+      this.props.charge(4, 5)
     }
     return (
       <div className="mdl-cell mdl-cell--4-col">
@@ -32,12 +36,21 @@ class Books extends Component {
             {book.description}
           </div>
           <div className="mdl-card__actions mdl-card--border">
-            <a onClick={borrow} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
-              borrow book
-            </a>
-            <a onClick={returnBorrowed} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
+            { this.props.charge ? '' :
+            <a onClick={borrow}
+            className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            borrow book
+            </a> }
+            { this.props.charge ? '' :
+            <a onClick={returnBorrowed}
+            className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
               return book
+            </a>}
+            { this.props.charge ?
+              <a onClick={chargeUser} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
+                chage
             </a>
+            : ''}
           </div>
         </div>
       </div>

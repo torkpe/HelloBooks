@@ -41,7 +41,7 @@ class Main extends Component {
                    <div>
                         <Link to='/admin_home' className="mdl-layout__tab">Home</Link>
                         <Link to='/requests' className="mdl-layout__tab">Requests</Link>
-                        <Link to='/notification' className="mdl-layout__tab">Notifications</Link>
+                        <Link to='/notifications' className="mdl-layout__tab">Notifications</Link>
                         <Link to='/log' className="mdl-layout__tab">Log</Link>
                         <Link to='/all_books' className="mdl-layout__tab">All Books</Link>
                         
@@ -53,6 +53,7 @@ class Main extends Component {
                     <Link to='/home' className="mdl-layout__tab">Home</Link>
                     <Link to='/history' className="mdl-layout__tab">History</Link>
                     <Link to='/settings' className="mdl-layout__tab">Settings</Link>
+                    <Link to='/notifications' className="mdl-layout__tab">notifications</Link>
                 </div>
                 )
             }

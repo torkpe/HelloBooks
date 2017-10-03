@@ -27,6 +27,36 @@ export const getBooks = (state = initialState, action ={}) => {
         default: return state;
     }
 }
+const getExceedsState = {
+    fetching: false,
+    exceeds: [],
+    errors:''
+}
+// Get all exceed deadlines
+export const getExceeds = (state = getExceedsState, action ={}) => {
+    switch(action.type) {
+        case 'GET_EXCEEDS': {
+            return {...state,
+                fetching: true
+            }
+        }
+        case 'GET_BOOKS_EXCEEDS':{
+            return {
+                ...state,
+                fetching: false,
+                exceeds: action.payload
+            }
+        }
+        case 'FAILED_TO_GET_EXCEEDS':{
+            return {
+                ...state,
+                fetching: false,
+                errors: action.payload
+            }
+        }
+        default: return state;
+    }
+}
 // Get a book
 const getABookState = {
     fetching: false,

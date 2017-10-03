@@ -25,6 +25,28 @@ export const getBooks = () => {
         });
     }
 }
+// Get all books exceeding deadline
+export const exceedDeadlines = () => {
+    return dispatch =>{
+        dispatch({ type: 'GET_EXCEEDS' })
+        axios.get('http://localhost:8080/api/admins/exceed-deadlines')
+        .then((response) => {
+            if(response.data){
+               return dispatch({
+                    type: 'GET_BOOKS_EXCEEDS',
+                    payload: response.data
+                })
+            }
+        }).catch((err) => {
+            if(err){
+               return dispatch({
+                   type: 'FAILED_TO_GET_EXCEEDS',
+                   payload: err
+                })
+            }
+        });
+    }
+}
 // Get a book
 export const getABook = (id) => {
     return dispatch =>{

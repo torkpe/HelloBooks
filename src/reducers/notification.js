@@ -30,7 +30,7 @@ export const notify = (state = notifyState, action ={}) => {
 const notificationState = {
     isLoading:false,
     errors:{},
-    notification: []
+    notifications: []
 }
 export const getNotification = (state = notificationState, action ={}) => {
     switch(action.type) {
@@ -43,7 +43,7 @@ export const getNotification = (state = notificationState, action ={}) => {
             return {
                 ...state,
                 fetching: false,
-                books: action.payload
+                notifications: action.payload
             }
         }
         case 'FAILED_TO_GET_NOTIFICATION':{

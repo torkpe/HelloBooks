@@ -12,7 +12,7 @@ class Home extends Component {
     this.props.getBorrows(this.props.userId)
   }
   render() {
-    const books = this.props.books  
+    const books = this.props.books
     console.log(books) 
     return (
       <div className='mdl-grid '>

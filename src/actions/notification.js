@@ -21,10 +21,16 @@ export const notify = (data) => {
         });
     }
 }
-export const getNotifictaion = (data) => {
+export const getNotification = (category) => {
+    const determineCat = (category) =>{
+        if (category==='admin'){
+            return axios.get('http://localhost:8080/api/notifications/admin')
+        }
+        return axios.get('http://localhost:8080/api/notifications/user')
+    }
     return dispatch =>{
         dispatch({ type: 'GET_NOTIFICATION' })
-        axios.get('http://localhost:8080/api/notifications/user')
+        determineCat(category)
         .then((response) => {
             if(response.data){
                return dispatch({
