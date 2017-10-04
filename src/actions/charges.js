@@ -8,7 +8,7 @@ export const chargeUser = (userId, bookId) => {
         dispatch({
             type: 'CHARGE_USER'
         })
-        return axios.put(`http://localhost:8080/api/admins/charge-user/${userId}/${bookId}`, data)
+        return axios.put(`https://hellobooks-project.herokuapp.com/api/admins/charge-user/${userId}/${bookId}`, data)
         .then(response => {
             if (response) {
                 return dispatch({

@@ -14,10 +14,10 @@ export const notify = (state = notifyState, action ={}) => {
             return {
                 ...state,
                 fetching: false,
-                books: action.payload
+                books: action.payload,
             }
         }
-        case 'FAILD_TO_POST_NOTIFICATION':{
+        case 'FAILED_TO_POST_NOTIFICATION':{
             return {
                 ...state,
                 fetching: false,

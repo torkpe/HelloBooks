@@ -1,7 +1,7 @@
 const initialState = {
     fetching: false,
     books: [],
-    errors:''
+    errors:'',
 }
 export const getBooks = (state = initialState, action ={}) => {
     switch(action.type) {
@@ -14,7 +14,7 @@ export const getBooks = (state = initialState, action ={}) => {
             return {
                 ...state,
                 fetching: false,
-                books: action.payload
+                books: action.payload,
             }
         }
         case 'FAILED_TO_GETBOOKS':{
@@ -91,7 +91,8 @@ export const getABook = (state = getABookState, action ={}) => {
 const borrowBookState ={
     requesting: false,
     response:[],
-    errors:[]
+    errors:[],
+    successfullyBorrowed:false
 }
 export const borrowBook = (state = borrowBookState, action ={}) => {
     switch(action.type) {
@@ -104,7 +105,8 @@ export const borrowBook = (state = borrowBookState, action ={}) => {
             return {
                 ...state,
                 requesting: false,
-                response: action.payload
+                response: action.payload,
+                successfullyBorrowed:true
             }
         }
         case 'FAILED_TO_BORROW_BOOK':{

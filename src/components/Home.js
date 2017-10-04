@@ -13,7 +13,6 @@ class Home extends Component {
   }
   render() {
     const books = this.props.books
-    console.log(books) 
     return (
       <div className='mdl-grid '>
         <div className="mdl-cell mdl-cell--1-col"></div>
@@ -31,7 +30,9 @@ class Home extends Component {
               name={this.props.name}
               borrowBook={this.props.borrowBook}
               returnBook={this.props.returnBook}
+              successfullyBorrowed={this.props.successfullyBorrowed}
               borrowedBook={this.props.borrowed}
+              notify = {this.props.notify}
             />)}
           </div>
           <div className='mdl-grid '>
@@ -53,7 +54,8 @@ const mapStateToProps = (state) => {
         fetching: state.getBooks.fetching,
         borrowed: state.getBorrows.books,
         userId: state.auth.user.user,
-        name: state.auth.user.name
+        name: state.auth.user.name,
+        successfullyBorrowed: state.borrowBook.successfullyBorrowed
     }
 }
-export default connect(mapStateToProps, { getBooks, getBorrows, borrowBook, returnBook })(Home);
+export default connect(mapStateToProps, { getBooks, getBorrows, borrowBook, returnBook, notify })(Home);

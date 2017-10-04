@@ -29,7 +29,7 @@ export const getBooks = () => {
 export const exceedDeadlines = () => {
     return dispatch =>{
         dispatch({ type: 'GET_EXCEEDS' })
-        axios.get('http://localhost:8080/api/admins/exceed-deadlines')
+        axios.get('https://hellobooks-project.herokuapp.com/api/admins/exceed-deadlines')
         .then((response) => {
             if(response.data){
                return dispatch({
@@ -96,7 +96,7 @@ export const borrowBook = (id, bookId, data) => {
     console.log(id, bookId)
     return dispatch =>{
         dispatch({ type: 'BORROW_BOOK' })
-        axios.post(`http://localhost:8080/api/users/${id}/${bookId}/books`, data)
+        axios.post(`https://hellobooks-project.herokuapp.com/api/users/${id}/${bookId}/books`, data)
         .then((response) => {
             if(response.data){
                notify(data)
@@ -121,7 +121,7 @@ export const returnBook = (id, bookId, data) => {
     console.log(id, bookId)
     return dispatch =>{
         dispatch({ type: 'RETURN_BOOK' })
-        axios.put(`http://localhost:8080/api/users/${id}/${bookId}/books`, data)
+        axios.put(`https://hellobooks-project.herokuapp.com/api/users/${id}/${bookId}/books`, data)
         .then((response) => {
             if(response.data){
                 notify(data)

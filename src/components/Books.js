@@ -13,10 +13,11 @@ class Books extends Component {
     const data2={
       user: this.props.name,
       userId,
-      type: 'admin',
+      type: 'adnin',
       message: `${this.props.name} just returned the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`
     }
     const borrow=(e)=>{
+      e.preventDefault()
       this.props.borrowBook(userId, book.id, data)
     }
     const returnBorrowed=(e)=>{      
@@ -24,6 +25,9 @@ class Books extends Component {
     }
     const chargeUser = (e) => {
       this.props.charge(4, 5)
+    }
+    if(this.props.successfullyBorrowed){
+      this.props.notify(data)
     }
     return (
       <div className="mdl-cell mdl-cell--4-col">
