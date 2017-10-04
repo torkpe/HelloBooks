@@ -25,7 +25,7 @@ exports.default = {
       userId: req.body.userId,
       from: req.body.user
     }).then(function (notification) {
-      return res.status(201).send({ notification: notification, message: 'successfully created notification' });
+      return res.status(200).send({ notification: notification, message: 'successfully created notification' });
     }, (0, _email2.default)(req.body.message, req.body.type, req.body.userId)).catch(function (err) {
       return res.status(403).send({ message: err.message });
     });
