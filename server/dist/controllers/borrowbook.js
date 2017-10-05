@@ -130,7 +130,7 @@ exports.default = {
     return borrowBook.findAll({
       include: [Book],
       where: {
-        returnDate: { $lt: newDate },
+        returnDate: { $gt: newDate },
         returned: false
       }
     }).then(function (books) {

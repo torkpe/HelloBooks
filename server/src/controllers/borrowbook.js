@@ -119,7 +119,7 @@ export default {
           Book,
         ],
         where: {
-          returnDate: { $lt: newDate },
+          returnDate: { $gt: newDate },
           returned: false,
         },
       }).then(books => res.status(200).send(books))
