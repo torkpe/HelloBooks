@@ -119,10 +119,11 @@ export default {
           Book,
         ],
         where: {
-          returnDate: { $lt: newDate },
+          returnDate: { $gt: newDate },
           returned: false,
         },
-      }).then(books => res.status(200).send(books));
+      }).then(books => res.status(200).send(books))
+        .catch(err => res.status(500).send(err))
   },
   // Charge for exceeding deadline
   chargeUser(req, res) {

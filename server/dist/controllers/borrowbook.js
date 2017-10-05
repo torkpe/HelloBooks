@@ -16,7 +16,7 @@ var borrowBook = _models2.default.BorrowBook;
 var determineDate = function determineDate(star) {
   var newDate = void 0;
   if (star === 'bronze') {
-    newDate = new Date(new Date().getTime() + 1 * 24 * 60 * 60 * 1000);
+    newDate = new Date(new Date().getTime() + 1 * 60 * 1000);
     return newDate;
   }
   if (star === 'silver') {
@@ -130,11 +130,13 @@ exports.default = {
     return borrowBook.findAll({
       include: [Book],
       where: {
-        returnDate: { $lt: newDate },
+        returnDate: { $gt: newDate },
         returned: false
       }
     }).then(function (books) {
       return res.status(200).send(books);
+    }).catch(function (err) {
+      return res.status(500).send(err);
     });
   },
 
