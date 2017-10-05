@@ -48,7 +48,7 @@ exports.default = {
     return Notifications.findAll({
       where: {
         type: 'user',
-        userId: req.decoded.userId
+        userId: req.params.id
       }
     }).then(function (foundNotifications) {
       if (foundNotifications) {

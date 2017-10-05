@@ -148,7 +148,6 @@ exports.default = {
         bookId: req.params.bookId
       }
     }).then(function (books) {
-      console.log('updated');
       if (!books) {
         return res.status(404).send({
           message: 'User not found'

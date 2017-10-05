@@ -23,7 +23,7 @@ var router = _express2.default.Router();
 // Send notification to user for charges
 router.post('/api/notifications', _middleware2.default.checkAuthentication, notifications.createNotification);
 // Get notification for user
-router.get('/api/notifications/user', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, notifications.getUserNotifications);
+router.get('/api/notifications/user/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, notifications.getUserNotifications);
 // Get notification for admin
 router.get('/api/notifications/admin', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, notifications.getAdminNotifications);
 
