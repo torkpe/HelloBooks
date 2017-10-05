@@ -6,7 +6,7 @@ const borrowBook = model.BorrowBook;
 const determineDate = (star) => {
   let newDate;
   if (star === 'bronze') {
-    newDate = new Date(new Date().getTime() + (1 * 60 * 60 * 1000));
+    newDate = new Date(new Date().getTime() + (1 * 60 * 1000));
     return newDate;
   }
   if (star === 'silver') {
