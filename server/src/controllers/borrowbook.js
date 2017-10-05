@@ -141,7 +141,7 @@ export default {
           });
         }
         books.update({
-          owing: req.body.owing
+          owing: true
         }).then(updated => res.status(200).send({
           updated,
           message: 'Successfully charged user',

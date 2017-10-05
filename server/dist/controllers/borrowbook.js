@@ -155,7 +155,7 @@ exports.default = {
         });
       }
       books.update({
-        owing: req.body.owing
+        owing: true
       }).then(function (updated) {
         return res.status(200).send({
           updated: updated,
