@@ -21,7 +21,8 @@ router.get('/api/users/:userId/books', authorize.checkAuthentication, authorize.
 // get list borrowed books, both borrowed and returned
 router.get('/api/users/:userId/books/all-borrowed', authorize.checkAuthentication, authorize.authorizeUser,
   borrowBookControllers.getAllBorrowedBooks);
-router.put('/api/users/:userId/books/payback', authorize.checkAuthentication, authorize.authorizeUser,
+// pay back debt
+router.put('/api/users/:userId/:bookId/book/payback', authorize.checkAuthentication, authorize.authorizeUser,
   borrowBookControllers.payBack);
 // api route to allow user return a book;
 router.put('/api/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,

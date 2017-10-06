@@ -116,8 +116,8 @@ exports.default = {
   payBack: function payBack(req, res) {
     return borrowBook.findAll({
       where: {
-        userId: req.params.id,
-        bookId: req.params.id,
+        userId: req.params.userId,
+        bookId: req.params.bookId,
         owing: true
       }
     }).then(function (found) {
