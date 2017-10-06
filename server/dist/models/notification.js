@@ -6,7 +6,8 @@ var notification = function notification(sequelize, DataTypes) {
     type: DataTypes.STRING,
     viewed: DataTypes.BOOLEAN,
     from: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    bookId: DataTypes.STRING
   }, {
     classMethods: {
       associate: function associate(models) {

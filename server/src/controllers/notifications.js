@@ -13,7 +13,10 @@ export default {
         userId: req.body.userId,
         from: req.body.user,
         bookId: req.body.bookId,
-      }).then(notification => res.status(200).send({ notification, message: 'successfully created notification' }),
+      }).then(notification => res.status(200).send({
+        notification,
+        message: 'successfully created notification'
+      }),
         sendEmail(req.body.message, req.body.type, req.body.userId))
       .catch(err => res.status(403).send({ message: err.message }));
   },

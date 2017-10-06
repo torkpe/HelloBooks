@@ -35,7 +35,7 @@ const notification = {
           msg: 'userId is required'
         },
       },
-      userId: {
+      bookId: {
         type: Sequelize.INTEGER,
         allowNull: {
           args: false,
