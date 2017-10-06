@@ -35,6 +35,13 @@ const notification = {
           msg: 'userId is required'
         },
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: {
+          args: false,
+          msg: 'userId is required'
+        },
+      },
       from: {
         type: Sequelize.STRING,
         allowNull: {

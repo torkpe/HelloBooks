@@ -93,6 +93,57 @@ exports.default = {
       return res.status(400).send({ message: err.message });
     });
   },
+  getAllBorrowedBooks: function getAllBorrowedBooks(req, res) {
+    return borrowBook.findAll({
+      include: [Book],
+      where: {
+        returned: true,
+        userId: req.decoded.user
+      }
+    }).then(function (books) {
+      if (books.length < 1) {
+        return res.status(404).send({
+          message: 'You have not borrowed any book at this time'
+        });
+      }
+      return res.status(200).send(books);
+    }).catch(function (err) {
+      return res.status(400).send({ message: err.message });
+    });
+  },
+
+  // Pay back debts
+  payBack: function payBack(req, res) {
+    return borrowBook.findAll({
+      where: {
+        userId: req.params.id,
+        bookId: req.params.id,
+        owing: true
+      }
+    }).then(function (found) {
+      if (found.length < 1) {
+        return res.status(404).send({
+          message: 'You have not borrowed this book'
+        });
+      }
+      books.update({
+        owing: false
+      }).then(function (updated) {
+        return res.status(200).send({
+          message: 'successfully updated',
+          updated: updated
+        });
+      }).catch(function (err) {
+        return res.status(500).send({
+          message: 'Something went wrong'
+        });
+      });
+    }).catch(function (err) {
+      return res.status.send({
+        message: err.message
+      });
+    });
+  },
 
   // Return a book and update status
   returnBook: function returnBook(req, res) {
