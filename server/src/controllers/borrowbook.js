@@ -103,37 +103,23 @@ export default {
   // Pay back debts
   payBack(req, res){
     return borrowBook
-      .findAll({
-        where:{
-          userId: req.params.userId,
-          bookId: req.params.bookId,
-          owing: true
-        }
-      }).then((found) => {
-        if (found.length < 1) {
-          return res.status(404).send({
-            message: `You have not borrowed this book`
-          })
-        }
-        books.update({
-          owing: false
-        }).then((updated) => {
-          return res.status(200).send({
-            message: 'successfully updated',
-            updated
-          })
-        })
-        .catch((err) => {
-          return res.status(500).send({
-            message: 'Something went wrong',
-          })
-        })
+    .findOne({
+      where: {
+        userId: req.decoded.user,
+        bookId: req.params.bookId,
+        owing: true,
+      },
+    }).then((book) => {
+      if (!book) {
+        return res.status(404).send({ message: 'No book found' });
+      }
+      book.update({ owing: false,
       })
-      .catch((err) => {
-        return res.status.send({
-          message: err.message
+        .then((updated) => {
+          res.status(201).send({ updated });
         })
-      });
+      .catch(err => res.status(500).send({ message: err.message }));
+    });
   },
   // Return a book and update status
   returnBook(req, res) {

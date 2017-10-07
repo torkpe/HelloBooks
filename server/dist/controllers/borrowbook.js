@@ -114,33 +114,21 @@ exports.default = {
 
   // Pay back debts
   payBack: function payBack(req, res) {
-    return borrowBook.findAll({
+    return borrowBook.findOne({
       where: {
-        userId: req.params.userId,
+        userId: req.decoded.user,
         bookId: req.params.bookId,
         owing: true
       }
-    }).then(function (found) {
-      if (found.length < 1) {
-        return res.status(404).send({
-          message: 'You have not borrowed this book'
-        });
+    }).then(function (book) {
+      if (!book) {
+        return res.status(404).send({ message: 'No book found' });
       }
-      books.update({
-        owing: false
+      book.update({ owing: false
       }).then(function (updated) {
-        return res.status(200).send({
-          message: 'successfully updated',
-          updated: updated
-        });
+        res.status(201).send({ updated: updated });
       }).catch(function (err) {
-        return res.status(500).send({
-          message: 'Something went wrong'
-        });
-      });
-    }).catch(function (err) {
-      return res.status.send({
-        message: err.message
+        return res.status(500).send({ message: err.message });
       });
     });
   },
