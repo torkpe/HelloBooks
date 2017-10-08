@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 class Books extends Component {
   render() {
     const book = this.props.book
-    const userId = this.props.userId
+    const userId = this.props.borrowedUserId
     const data={
       user: this.props.name,
-      userId,
+      userId: userId,
       type: 'admin',
-      message: `${this.props.name} just borrowed the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`
+      message: `${this.props.name} just borrowed the book https://hellobooks-project.herokuapp.com/api/books/'>${book.title}</a>`,
+      bookId: book.id
     }
     const data2={
       user: this.props.name,
-      userId,
-      type: 'adnin',
-      message: `${this.props.name} just returned the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`
+      userId: userId,
+      type: 'admin',
+      message: `${this.props.name} just returned the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`,
+      bookId: book.id
+    }
+    const data3={
+      user: this.props.name,
+      userId: this.props.borrowedUserId,
+      type: 'user',
+      message: `The Admin just charged you for exceeding the deadline ${book.id}`,
+      bookId: book.id
     }
     const borrow=(e)=>{
       e.preventDefault()
@@ -24,14 +34,20 @@ class Books extends Component {
       this.props.returnBook(userId, book.id, data2)
     }
     const chargeUser = (e) => {
-      this.props.charge(4, 5)
+      this.props.charge(userId, book.id, data3)
     }
     if(this.props.successfullyBorrowed){
       this.props.notify(data)
     }
+    if(this.props.successfullyReturned){
+      this.props.notify(data2)
+    }
+    if(this.props.successfullyCharged){
+      this.props.notify(data3)
+    }
     return (
       <div className="mdl-cell mdl-cell--4-col">
-        <div className="demo-card-square mdl-card mdl-shadow--2dp home-card">
+        <div className="demo-card-square mdl-card mdl-shadow--2dp home-card contents">
           <div className="mdl-card__title mdl-card--expand">
             <h2 className="mdl-card__title-text">{book.title}</h2>
           </div>
@@ -52,9 +68,12 @@ class Books extends Component {
             </a>}
             { this.props.charge ?
               <a onClick={chargeUser} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
-                chage
-            </a>
+                charge
+              </a>
             : ''}
+            <Link to = {`single/${book.id}`} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              Details
+            </Link>
           </div>
         </div>
       </div>

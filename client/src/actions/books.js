@@ -1,7 +1,6 @@
 import axios from 'axios';
 import sha1 from 'sha1';
 import superagent from 'superagent';
-import { notify } from './notification';
 
 // Get all books
 export const getBooks = () => {
@@ -93,13 +92,11 @@ export const getBorrows = (id) => {
 }
 // Borrow a book
 export const borrowBook = (id, bookId, data) => {
-    console.log(id, bookId)
     return dispatch =>{
         dispatch({ type: 'BORROW_BOOK' })
         axios.post(`https://hellobooks-project.herokuapp.com/api/users/${id}/${bookId}/books`, data)
         .then((response) => {
             if(response.data){
-               notify(data)
                return dispatch({
                     type: 'BORROW_BOOK_SUCCESSFUL',
                     payload: response.data
@@ -114,17 +111,14 @@ export const borrowBook = (id, bookId, data) => {
             }
         });
     }
-    // 
 }
 // Return a book
 export const returnBook = (id, bookId, data) => {
-    console.log(id, bookId)
     return dispatch =>{
         dispatch({ type: 'RETURN_BOOK' })
         axios.put(`https://hellobooks-project.herokuapp.com/api/users/${id}/${bookId}/books`, data)
         .then((response) => {
             if(response.data){
-                notify(data)
                return dispatch({
                     type: 'RETURN_BOOK_SUCCESSFUL',
                     payload: response.data
@@ -132,7 +126,10 @@ export const returnBook = (id, bookId, data) => {
             }
         }).catch((err) => {
             if(err){
-               return dispatch({ type: 'FAILED_TO_RETURN_BOOK', payload: err.response.data })
+               return dispatch({
+                   type: 'FAILED_TO_RETURN_BOOK',
+                   payload: err.response.data
+                })
             }
         });
     }
@@ -140,7 +137,6 @@ export const returnBook = (id, bookId, data) => {
 }
 
 export const postBook = (data) => {
-    console.log(data.cover)
     return dispatch => {
         dispatch({type: 'UPLOAD_COVER'})
         const cloudName = 'hellobooks'
@@ -164,7 +160,6 @@ export const postBook = (data) => {
         uploadRequest.end((err, resp) => {
             if(err){
             dispatch({type: 'UPLOAD_COVER_FAILED'})
-                console.log(err)
                 return 
             }
             const cover = resp.body.url
@@ -177,31 +172,27 @@ export const postBook = (data) => {
             uploadRequest.end((err, resp) => {
                 if(err){
                     dispatch({type: 'UPLOAD_PDF_FAILED'})
-                    console.log(err)
                     return 
                 }
                 const pdf = resp.body.url
                 data.cover = cover
                 data.pdf = pdf
-                console.log(data)
                 dispatch({ type: 'POST_BOOK'})
                 return axios.post(`https://hellobooks-project.herokuapp.com/api/books`, data)
                 .then((response) => {
                     if(response.data){
-                        dispatch({ 
+                        return dispatch({ 
                             type: 'POST_BOOK_SUCCESSFUL',
                             payload: response.data
                      })
-                        console.log(response)
                     }
                 }).catch((err) => {
                     if(err){
                         if(err.data)
-                        dispatch({
+                        return dispatch({
                             type: 'POST_BOOK_FAILED',
                             payload: err.response.data
                         })
-                        console.log(err)
                     }
                 })
             })

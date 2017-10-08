@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 
 import { exceedDeadlines } from '../actions/books';
 import Books from './Books';
+import { notify } from '../actions/notification';
 import { chargeUser } from '../actions/charges'
+
 class Log extends Component {
   componentWillMount(){
     this.props.exceedDeadlines()
   }
   render() {
     const books = this.props.exceedDeadline.exceeds
+    const successfullyCharged = this.props.charge.successfullyCharged
     return (
       <div className='mdl-grid '>
         <div className="mdl-cell mdl-cell--1-col"></div>
@@ -24,7 +27,9 @@ class Log extends Component {
               key={book.id}
               book={book.Book}
               charge= {this.props.chargeUser}
-              userId={book.userId}
+              borrowedUserId={book.userId}
+              successfullyCharged={successfullyCharged}
+              notify={this.props.notify}
               />)}
           </div>
           <div className='mdl-grid '>
@@ -38,7 +43,8 @@ class Log extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    exceedDeadline: state.getExceeds
+    exceedDeadline: state.getExceeds,
+    charge: state.charge
   }
 }
-export default connect(mapStateToProps, {  exceedDeadlines, chargeUser })(Log);
+export default connect(mapStateToProps, {  exceedDeadlines, chargeUser, notify })(Log);

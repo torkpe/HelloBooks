@@ -1,25 +1,25 @@
-const chargeUserState = {
+const payBackState = {
     isLoading:false,
     errors:{},
     response:{},
-    successfullyCharged: false,
+    successfullyPaid: false,
 }
-export default (state = chargeUserState, action ={}) => {
+export default (state = payBackState, action ={}) => {
     switch(action.type) {
-        case 'CHARGE_USER': {
+        case 'PAY_BACK': {
             return {...state,
                 isLoading: true
             }
         }
-        case 'SUCCESSFULLY_CHARGED_USER':{
+        case 'PAY_BACK_SUCCESSFUL':{
             return {
                 ...state,
                 isLoading: false,
                 response: action.payload,
-                successfullyCharged: true
+                successfullyPaid: true
             }
         }
-        case 'CHARGE_USER_FAILED':{
+        case 'PAY_BACK_FAILED':{
             return {
                 ...state,
                 isLoading: false,

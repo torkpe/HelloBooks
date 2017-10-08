@@ -31,6 +31,7 @@ class Home extends Component {
               borrowBook={this.props.borrowBook}
               returnBook={this.props.returnBook}
               successfullyBorrowed={this.props.successfullyBorrowed}
+              successfullyReturned={this.props.successfullyReturned}
               borrowedBook={this.props.borrowed}
               notify = {this.props.notify}
             />)}
@@ -55,7 +56,8 @@ const mapStateToProps = (state) => {
         borrowed: state.getBorrows.books,
         userId: state.auth.user.user,
         name: state.auth.user.name,
-        successfullyBorrowed: state.borrowBook.successfullyBorrowed
+        successfullyBorrowed: state.borrowBook.successfullyBorrowed,
+        successfullyReturned: state.returnBook.successfullyReturned
     }
 }
 export default connect(mapStateToProps, { getBooks, getBorrows, borrowBook, returnBook, notify })(Home);

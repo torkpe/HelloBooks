@@ -30,7 +30,7 @@ export const getBooks = (state = initialState, action ={}) => {
 const getExceedsState = {
     fetching: false,
     exceeds: [],
-    errors:''
+    errors:{}
 }
 // Get all exceed deadlines
 export const getExceeds = (state = getExceedsState, action ={}) => {
@@ -119,11 +119,12 @@ export const borrowBook = (state = borrowBookState, action ={}) => {
         default: return state;
     }
 }
-// Borrow a book
+// return a book
 const returnBookState ={
     requesting: false,
     response:[],
-    errors:[]
+    errors:[],
+    successfullyReturned: false
 }
 export const returnBook = (state = returnBookState, action ={}) => {
     switch(action.type) {
@@ -136,7 +137,8 @@ export const returnBook = (state = returnBookState, action ={}) => {
             return {
                 ...state,
                 requesting: false,
-                response: action.payload
+                response: action.payload,
+                successfullyReturned:true
             }
         }
         case 'FAILED_TO_RETURN_BOOK':{

@@ -29,6 +29,7 @@ import userHistory from './components/userHistory';
 import allBorrowed from './components/allBorrowed';
 import allNotReturned from './components/allNotReturned';
 import notification from './components/Notifications';
+import SingleBook from './components/SingleBook';
 import Log from './components/Log';
 const store =createStore(
     rootReducer,
@@ -62,8 +63,10 @@ const router =(
                 <Route path= '/all_borrowed_books' component={Authenticate(isUser(allBorrowed))} />
                 <Route path= '/history' component={Authenticate(isUser(allNotReturned))} />
                 <Route path= '/notifications' component={Authenticate(notification)} />
+                <Route path= '/single/:id' component={Authenticate(SingleBook)} />
                 <Route path= '/log' component={Authenticate(Log)} />
                 <Route path= '/restrict/:key' component={Authenticate((Restrict))}></Route>
+
             </Route>
         </Router>
     </Provider>

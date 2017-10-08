@@ -7,6 +7,7 @@ import { getBooks, createBook, getBorrows, borrowBook, returnBook, getABook, get
 import { getAllBorrowed, allNotReturned } from './history';
 import { notify, getNotification } from './notification';
 import charge from './charge';
+import payback from './payback';
 
 const rootReducer = combineReducers({
     auth,
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
     notify,
     getNotification,
     getExceeds,
-    charge
+    charge,
+    payback
 });
 
 export default rootReducer;

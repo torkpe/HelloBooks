@@ -3,13 +3,10 @@ import axios from 'axios';
 export const notify = (data) => {
     return dispatch =>{
         dispatch({ type: 'POST_NOTIFICATION' })
-        console.log('hi')
         axios.post('https://hellobooks-project.herokuapp.com/api/notifications', data)
         .then((response) => {
-            console.log('there')
             if(response.data){
-                console.log(response.data)
-               return dispatch({
+                return dispatch({
                     type: 'POST_NOTIFICATION_SUCCESSFUL',
                     payload: response.data
                 })
@@ -24,12 +21,12 @@ export const notify = (data) => {
         });
     }
 }
-export const getNotification = (category) => {
+export const getNotification = (category, id) => {
     const determineCat = (category) =>{
         if (category==='admin'){
             return axios.get('https://hellobooks-project.herokuapp.com/api/notifications/admin')
         }
-        return axios.get('https://hellobooks-project.herokuapp.com/api/notifications/user')
+        return axios.get(`https://hellobooks-project.herokuapp.com/api/notifications/user/${id}`)
     }
     return dispatch =>{
         dispatch({ type: 'GET_NOTIFICATION' })

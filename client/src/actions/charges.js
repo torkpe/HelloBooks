@@ -1,14 +1,11 @@
 import axios from 'axios';
 
-const data ={
-    owing: true
-}
 export const chargeUser = (userId, bookId) => {
     return dispatch => {
         dispatch({
             type: 'CHARGE_USER'
         })
-        return axios.put(`https://hellobooks-project.herokuapp.com/api/admins/charge-user/${userId}/${bookId}`, data)
+        return axios.put(`https://hellobooks-project.herokuapp.com/api/admins/charge-user/${userId}/${bookId}`)
         .then(response => {
             if (response) {
                 return dispatch({
