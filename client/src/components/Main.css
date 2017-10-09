@@ -40,7 +40,8 @@ img{
 }
 .contentss{
     margin: 0 auto;
-	text-align: center;
+    text-align: center;
+    text-decoration: none;
 }
 .card-content{
     margin: 0 auto;

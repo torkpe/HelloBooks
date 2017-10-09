@@ -31,6 +31,8 @@ import allNotReturned from './components/allNotReturned';
 import notification from './components/Notifications';
 import SingleBook from './components/SingleBook';
 import Log from './components/Log';
+import Pdf from './components/Pdf';
+
 const store =createStore(
     rootReducer,
     compose(
@@ -64,9 +66,10 @@ const router =(
                 <Route path= '/history' component={Authenticate(isUser(allNotReturned))} />
                 <Route path= '/notifications' component={Authenticate(notification)} />
                 <Route path= '/single/:id' component={Authenticate(SingleBook)} />
+                <Route path= '/read-book/:key' component={Authenticate((Pdf))}></Route>
                 <Route path= '/log' component={Authenticate(Log)} />
                 <Route path= '/restrict/:key' component={Authenticate((Restrict))}></Route>
-
+                
             </Route>
         </Router>
     </Provider>

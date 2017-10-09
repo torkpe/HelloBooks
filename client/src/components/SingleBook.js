@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { getABook, borrowBook, returnBook } from '../actions/books';
 
@@ -52,9 +53,9 @@ class Book extends Component {
                     </a>
                     :''
                     }
-                    <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    <Link to={`/read-book/${books.id}`} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                         Read online
-                    </a>
+                    </Link>
                     {this.props.auth.user.category ?
                     <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                         Delete

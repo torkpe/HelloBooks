@@ -30,7 +30,6 @@ class Confirm extends Component {
                 browserHistory.push('/home');
             },
             ({response}) => this.setState({ errors: response.data, isLoading: false }),
-            console.log(this.state)
         )
     }
   render() {
