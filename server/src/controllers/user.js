@@ -90,4 +90,56 @@ Please click on the click below to confirm your email address
     }
     return res.status(400).send({ message: 'All fields are required' });
   },
+  setPassword(req, res) {
+    const { password1, password2} = req.body;
+    // validate
+    if (password1 && password2) {
+      if (password2.length > 5 && password1.length > 5) {
+        if (validator.equals(password1, password2)) {
+          const hash = bcrypt.hashSync( req.body.password1, salt);
+          return User
+          .find({
+              where: {
+                id: req.params.id
+              }
+            }).then(user => {
+              user.update({
+                password: hash
+              }).then(updated => res.status(200).send(uodated))
+              .catch(err => res.status(200).send({message: err.message}))
+            })
+          .catch(err => res.status(500).send({message: err.message}))
+        }
+        return res.status(400).send({message: 'Passwords do not match'})
+      }
+      return res.status(400).send({message: 'Password is too short'})
+    }
+    return res.status(400).send({message: 'Password field missing'})
+  },
+  updateName(req, res) {
+    const { name } = req.body;
+    if (name && name.length> 4) {
+      return User.find({
+        where: {
+          id: req.params.id
+        }
+      }).then(user => {
+        user.update({
+          name: req.body.name
+        }).then(updated => res.status(200).send(updated))
+        .catch(err => res.status(500).send({message: err.message}))
+      })
+      .catch(err=> res.status(500).send({ message:err.message }))
+    }
+  },
+  getUser(req, res) {
+    return User
+      .find({
+        where: {
+          id: req.params.id
+        }
+      }).then(user => res.status(200).send(user))
+      .then( err => res.status(400).send({ message: err.message }))
+  }
 };
+

@@ -27,4 +27,16 @@ router.put('/api/users/:userId/:bookId/book/payback', authorize.checkAuthenticat
 // api route to allow user return a book;
 router.put('/api/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,
   borrowBookControllers.returnBook);
+// Api to set password
+router.put('/api/users/setPassword/:id', authorize.checkAuthentication, authorize.authorizeUser,
+  userController.setPassword
+);
+// update usernamne
+router.put('/api/users/updateUser/:id', authorize.checkAuthentication, authorize.authorizeUser,
+ userController.updateName
+);
+router.get('/api/users/:id', authorize.checkAuthentication, authorize.authorizeUser,
+ userController.getuser
+)
+
 export default router;

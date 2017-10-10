@@ -121,5 +121,69 @@ exports.default = {
       return res.status(400).send({ message: 'Invalid input' });
     }
     return res.status(400).send({ message: 'All fields are required' });
+  },
+  setPassword: function setPassword(req, res) {
+    var _req$body2 = req.body,
+        password1 = _req$body2.password1,
+        password2 = _req$body2.password2;
+    // validate
+
+    if (password1 && password2) {
+      if (password2.length > 5 && password1.length > 5) {
+        if (_validator2.default.equals(password1, password2)) {
+          var hash = _bcrypt2.default.hashSync(req.body.password1, salt);
+          return User.find({
+            where: {
+              id: req.params.id
+            }
+          }).then(function (user) {
+            user.update({
+              password: hash
+            }).then(function (updated) {
+              return res.status(200).send(uodated);
+            }).catch(function (err) {
+              return res.status(200).send({ message: err.message });
+            });
+          }).catch(function (err) {
+            return res.status(500).send({ message: err.message });
+          });
+        }
+        return res.status(400).send({ message: 'Passwords do not match' });
+      }
+      return res.status(400).send({ message: 'Password is too short' });
+    }
+    return res.status(400).send({ message: 'Password field missing' });
+  },
+  updateName: function updateName(req, res) {
+    var name = req.body.name;
+
+    if (name && name.length > 4) {
+      return User.find({
+        where: {
+          id: req.params.id
+        }
+      }).then(function (user) {
+        user.update({
+          name: req.body.name
+        }).then(function (updated) {
+          return res.status(200).send(updated);
+        }).catch(function (err) {
+          return res.status(500).send({ message: err.message });
+        });
+      }).catch(function (err) {
+        return res.status(500).send({ message: err.message });
+      });
+    }
+  },
+  getUser: function getUser(req, res) {
+    return User.find({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (user) {
+      return res.status(200).send(user);
+    }).then(function (err) {
+      return res.status(400).send({ message: err.message });
+    });
   }
 };
