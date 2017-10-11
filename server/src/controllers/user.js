@@ -103,7 +103,7 @@ Please click on the click below to confirm your email address
                 id: req.params.id
               }
             }).then(user => {
-              if (!bcrypt.compareSync(req.body.password1, user.password)) {
+              if (!bcrypt.compareSync(req.body.password, user.password)) {
                 return res.status(406).send({ message: 'Incorrect Password' });
               }
               user.update({

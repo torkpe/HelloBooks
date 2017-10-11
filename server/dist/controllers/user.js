@@ -137,7 +137,7 @@ exports.default = {
               id: req.params.id
             }
           }).then(function (user) {
-            if (!_bcrypt2.default.compareSync(req.body.password1, user.password)) {
+            if (!_bcrypt2.default.compareSync(req.body.password, user.password)) {
               return res.status(406).send({ message: 'Incorrect Password' });
             }
             user.update({
