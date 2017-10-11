@@ -8,6 +8,10 @@ import { getAllBorrowed, allNotReturned } from './history';
 import { notify, getNotification } from './notification';
 import charge from './charge';
 import payback from './payback';
+import { getPdf } from './getPdf';
+import changePassword from './changePassword';
+import updateUser from './updateUser';
+import { getUser } from './getUser';
 
 const rootReducer = combineReducers({
     auth,
@@ -25,7 +29,11 @@ const rootReducer = combineReducers({
     getNotification,
     getExceeds,
     charge,
-    payback
+    payback,
+    getPdf,
+    changePassword,
+    updateUser,
+    getUser
 });
 
 export default rootReducer;

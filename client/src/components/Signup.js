@@ -16,7 +16,7 @@ class Signup extends Component{
     }
     componentDidMount(checker){
             if (checker===true) {
-              return (<div id="p2" className="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>)
+              return (<div id="p2" className="mdl-progress mdl-js-progress mdl-progress__indeterminate loading"></div>)
         }
     }
     onChange(e) {

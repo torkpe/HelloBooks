@@ -135,41 +135,80 @@ export const returnBook = (id, bookId, data) => {
     }
     // 
 }
-
-export const postBook = (data) => {
+const cloudinaryUpload = (fileInput) => {
+    const cloudName = 'hellobooks'
+    const url = 'https://api.cloudinary.com/v1_1/'+cloudName+'/auto/upload'
+    const timestamp = Date.now()/1000
+    const uploadPreset = 'wad3pvmg'
+    const paramsStr = 'timestamp='+timestamp+'&upload_preset='+uploadPreset+'8c060McBdeyZClXXNfNgpG8QqXU'
+    const signature = sha1(paramsStr)
+    const params = {
+        'api_key': '521381859673832',
+        'timestamp': timestamp,
+        'upload_preset': uploadPreset,
+        'signature': signature
+    }
+    let uploadRequest = superagent.post(url)
+    uploadRequest.attach('file', fileInput)
+    Object.keys(params).forEach((key) => {
+        uploadRequest.field(key, params[key])
+    })
+    return uploadRequest
+}
+export const editBook = (data) => {
     return dispatch => {
         dispatch({type: 'UPLOAD_COVER'})
-        const cloudName = 'hellobooks'
-        const url = 'https://api.cloudinary.com/v1_1/'+cloudName+'/auto/upload'
-        const url1 = 'https://api.cloudinary.com/v1_1/'+cloudName+'/auto/upload'
-        const timestamp = Date.now()/1000
-        const uploadPreset = 'wad3pvmg'
-        const paramsStr = 'timestamp='+timestamp+'&upload_preset='+uploadPreset+'8c060McBdeyZClXXNfNgpG8QqXU'
-        const signature = sha1(paramsStr)
-        const params = {
-            'api_key': '521381859673832',
-            'timestamp': timestamp,
-            'upload_preset': uploadPreset,
-            'signature': signature
-        }
-        let uploadRequest = superagent.post(url)
-        uploadRequest.attach('file', data.cover)
-        Object.keys(params).forEach((key) => {
-            uploadRequest.field(key, params[key])
-        })
-        uploadRequest.end((err, resp) => {
+        cloudinaryUpload(data.cover).end((err, resp) => {
             if(err){
             dispatch({type: 'UPLOAD_COVER_FAILED'})
+                console.log(err)
                 return 
             }
             const cover = resp.body.url
             dispatch({type: 'UPLOAD_PDF'})
-            let uploadRequest = superagent.post(url1)
-            uploadRequest.attach('file', data.pdf)
-            Object.keys(params).forEach((key) => {
-                uploadRequest.field(key, params[key])
+            cloudinaryUpload(data.pdf).end((err, resp) => {
+                if(err){
+                    dispatch({type: 'UPLOAD_PDF_FAILED'})
+                    return 
+                }
+                const pdf = resp.body.url
+                data.cover = cover
+                data.pdf = pdf
+                dispatch({ type: 'POST_BOOK'})
+                return axios.post(`https://hellobooks-project.herokuapp.com/api/books`, data)
+                .then((response) => {
+                    if(response.data){
+                        return dispatch({ 
+                            type: 'POST_BOOK_SUCCESSFUL',
+                            payload: response.data
+                     })
+                    }
+                }).catch((err) => {
+                    if(err){
+                        if(err.data)
+                        return dispatch({
+                            type: 'POST_BOOK_FAILED',
+                            payload: err.response.data
+                        })
+                    }
+                })
             })
-            uploadRequest.end((err, resp) => {
+        })
+    
+    }
+}
+export const postBook = (data) => {
+    return dispatch => {
+        dispatch({type: 'UPLOAD_COVER'})
+        cloudinaryUpload(data.cover).end((err, resp) => {
+            if(err){
+            dispatch({type: 'UPLOAD_COVER_FAILED'})
+                console.log(err)
+                return 
+            }
+            const cover = resp.body.url
+            dispatch({type: 'UPLOAD_PDF'})
+            cloudinaryUpload(data.pdf).end((err, resp) => {
                 if(err){
                     dispatch({type: 'UPLOAD_PDF_FAILED'})
                     return 

@@ -32,6 +32,8 @@ import notification from './components/Notifications';
 import SingleBook from './components/SingleBook';
 import Log from './components/Log';
 import Pdf from './components/Pdf';
+import setPassword from './components/changePassword';
+import updateBook from './components/bookForm';
 
 const store =createStore(
     rootReducer,
@@ -69,6 +71,8 @@ const router =(
                 <Route path= '/read-book/:key' component={Authenticate((Pdf))}></Route>
                 <Route path= '/log' component={Authenticate(Log)} />
                 <Route path= '/restrict/:key' component={Authenticate((Restrict))}></Route>
+                <Route path= '/set-password' component={Authenticate((setPassword))}></Route>
+                <Route path= '/edit-book/:id' component={Authenticate((updateBook))}></Route>
                 
             </Route>
         </Router>

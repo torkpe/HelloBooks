@@ -14,6 +14,28 @@ class Main extends Component {
     render(){
         const { isAuthenticated } = this.props.auth;
         const { category } =this.props.auth.user
+        const determineNav =(category) =>{
+            if(category===true){
+                return (
+                   <nav className="mdl-navigation">
+                        <Link to='/admin_home' className="mdl-layout__tab navLink">Home</Link>
+                        <Link to='/requests' className="mdl-layout__tab navLink">Requests</Link>
+                        <Link to='/notifications' className="mdl-layout__tab navLink">Notifications</Link>
+                        <Link to='/log' className="mdl-layout__tab navLink">Log</Link>
+                        <Link to='/all_books' className="mdl-layout__tab navLink">All Books</Link>                        
+                   </nav>
+                )
+            }else if(category===false){
+            return (
+                <nav className="mdl-navigation navLink">
+                    <Link to='/home' className="mdl-layout__tab">Home</Link>
+                    <Link to='/history' className="mdl-layout__tab">History</Link>
+                    <Link to='/settings' className="mdl-layout__tab">Settings</Link>
+                    <Link to='/notifications' className="mdl-layout__tab">notifications</Link>
+                </nav>
+                )
+            }
+        }
         const userLinks = (
             <nav className="mdl-navigation">
                 <a className="mdl-navigation__link" onClick={this.logout.bind(this)} href="">Signout</a>
@@ -23,7 +45,7 @@ class Main extends Component {
                     <i className="material-icons">search</i>
                     </label>
                     <div className="mdl-textfield__expandable-holder">
-                    <input className="mdl-textfield__input" type="text" name="sample"
+                        <input className="mdl-textfield__input" type="text" name="sample"
                             id="waterfall-exp" />
                     </div>
                 </div>
@@ -35,29 +57,6 @@ class Main extends Component {
                     <Link to='/signup' className="mdl-navigation__link">Signup</Link>
                 </nav>
         )
-        const determineNav =(category, authenticated) =>{
-            if(category===true && authenticated === true){
-                return (
-                   <div>
-                        <Link to='/admin_home' className="mdl-layout__tab">Home</Link>
-                        <Link to='/requests' className="mdl-layout__tab">Requests</Link>
-                        <Link to='/notifications' className="mdl-layout__tab">Notifications</Link>
-                        <Link to='/log' className="mdl-layout__tab">Log</Link>
-                        <Link to='/all_books' className="mdl-layout__tab">All Books</Link>
-                        
-                   </div>
-                )
-            }else if(category===false && authenticated===true){
-            return (
-                <div>
-                    <Link to='/home' className="mdl-layout__tab">Home</Link>
-                    <Link to='/history' className="mdl-layout__tab">History</Link>
-                    <Link to='/settings' className="mdl-layout__tab">Settings</Link>
-                    <Link to='/notifications' className="mdl-layout__tab">notifications</Link>
-                </div>
-                )
-            }
-        }
         return(
             <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                 <header className="mdl-layout__header">
@@ -67,14 +66,11 @@ class Main extends Component {
                         <nav className='mdl-layout--large-screen-only'>
                             { isAuthenticated ? userLinks : guestLinks}
                         </nav>
-                    </div>
-                    {/*display navbar for admin if authnt*/}
-                    <div className="mdl-layout__tab-bar mdl-js-ripple-effect">
-                        {determineNav(category, isAuthenticated)}
-                    </div>
+                    </div>                    
                 </header>
                   <div className="mdl-layout__drawer">
                     <Link to ={category ? '/admin_home' : '/'} className="mdl-layout-title">hello-books</Link>
+                        {determineNav(category)}
                         { isAuthenticated ? userLinks : guestLinks}
                   </div>
                 <main className='mdl-layout__content'>
@@ -101,11 +97,9 @@ Main.prototypes = {
     auth: Proptypes.object.isRequired,
     logout: Proptypes.func.isRequired,
 }
-
 const mapStateToProps = (state) => {
     return {
         auth: state.auth
     }
 }
-
 export default connect(mapStateToProps, { logout })(Main);
