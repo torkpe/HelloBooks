@@ -63,8 +63,8 @@ export default {
       })
       .then((book) => {
         if (!book) {
-          res.send('No book not found');
-        } else {
+          return res.send('No book not found');
+        }
           return Book
             .update({
               cover: req.body.cover,
@@ -75,7 +75,6 @@ export default {
               quantity: req.body.quantity,
               genre: req.body.genre,
             });
-        }
         return book;
       }).catch(error => res.status(400).send({ message: error.message }));
   },

@@ -77,18 +77,17 @@ exports.default = {
       }
     }).then(function (book) {
       if (!book) {
-        res.send('No book not found');
-      } else {
-        return Book.update({
-          cover: req.body.cover,
-          pdf: req.body.pdf,
-          title: req.body.title,
-          author: req.body.author,
-          description: req.body.description,
-          quantity: req.body.quantity,
-          genre: req.body.genre
-        });
+        return res.send('No book not found');
       }
+      return Book.update({
+        cover: req.body.cover,
+        pdf: req.body.pdf,
+        title: req.body.title,
+        author: req.body.author,
+        description: req.body.description,
+        quantity: req.body.quantity,
+        genre: req.body.genre
+      });
       return book;
     }).catch(function (error) {
       return res.status(400).send({ message: error.message });
