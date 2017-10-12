@@ -54,7 +54,7 @@ export default {
   },
 
   // update a book's info
-  updateUser(req, res) {
+  findBook(req, res) {
       return Book
         .findOne({
           where: { id: `${req.params.id}`, // Check if user exists first

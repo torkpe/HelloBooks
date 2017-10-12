@@ -70,7 +70,7 @@ exports.default = {
 
 
   // update a book's info
-  updateUser: function updateUser(req, res) {
+  findBook: function findBook(req, res) {
     return Book.findOne({
       where: { id: '' + req.params.id // Check if user exists first
       } }).then(function (book) {
