@@ -72,7 +72,8 @@ exports.default = {
   // update a book's info
   findBook: function findBook(req, res) {
     return Book.findOne({
-      where: { id: req.params.id
+      where: {
+        id: req.params.id
       }
     }).then(function (book) {
       if (!book) {

@@ -57,7 +57,8 @@ export default {
   findBook(req, res) {
     return Book
       .findOne({
-        where: { id: req.params.id,
+        where: {
+          id: req.params.id, 
         },
       })
       .then((book) => {
