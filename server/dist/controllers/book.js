@@ -70,16 +70,15 @@ exports.default = {
 
 
   // update a book's info
-  findBook: function findBook(req, res) {
+  updateUser: function updateUser(req, res) {
     return Book.findOne({
-      where: {
-        id: req.params.id
-      }
-    }).then(function (book) {
+      where: { id: '' + req.params.id // Check if user exists first
+      } }).then(function (book) {
       if (!book) {
-        return res.send('No book not found');
+        return res.status(404).send({ message: 'Book not found' });
       }
-      return Book.update({
+      // Update user info
+      book.update({
         cover: req.body.cover,
         pdf: req.body.pdf,
         title: req.body.title,
@@ -87,10 +86,13 @@ exports.default = {
         description: req.body.description,
         quantity: req.body.quantity,
         genre: req.body.genre
+      }).then(function (updatedBook) {
+        return res.status(200).send({ updatedBook: updatedBook });
+      }).catch(function (error) {
+        return res.status(400).send(error.message);
       });
-      return book;
     }).catch(function (error) {
-      return res.status(400).send({ message: error.message });
+      return res.status(400).send(error.message);
     });
   }
 };
