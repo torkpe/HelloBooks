@@ -5,11 +5,52 @@ import Proptypes from 'prop-types';
 import './Main.css';
 import './mdl/material.min.css';
 import { logout } from '../actions/index';
+import { notifications,
+     home,
+     adminHome,
+     log,
+     allBooks,
+     settings,
+     history,
+     requests
+    } from '../actions/routes';
 
 class Main extends Component {
     logout(e) {
         e.preventDefault();
         this.props.logout()
+    }
+    notifications(e) {
+        e.preventDefault();
+        this.props.notifications()
+    }
+    adminHome(e) {
+        e.preventDefault();
+        this.props.adminHome()
+    }
+    log(e) {
+        e.preventDefault();
+        this.props.log()
+    }
+    requests(e) {
+        e.preventDefault();
+        this.props.requests()
+    }
+    allBooks(e) {
+        e.preventDefault();
+        this.props.allBooks()
+    }
+    home(e) {
+        e.preventDefault();
+        this.props.home()
+    }
+    history(e) {
+        e.preventDefault();
+        this.props.history()
+    }
+    settings(e) {
+        e.preventDefault();
+        this.props.settings()
     }
     render(){
         const { isAuthenticated } = this.props.auth;
@@ -18,20 +59,20 @@ class Main extends Component {
             if(category===true){
                 return (
                    <nav className="mdl-navigation">
-                        <Link to='/admin_home' className="mdl-layout__tab navLink">Home</Link>
-                        <Link to='/requests' className="mdl-layout__tab navLink">Requests</Link>
-                        <Link to='/notifications' className="mdl-layout__tab navLink">Notifications</Link>
-                        <Link to='/log' className="mdl-layout__tab navLink">Log</Link>
-                        <Link to='/all_books' className="mdl-layout__tab navLink">All Books</Link>                        
+                        <a className="mdl-navigation__link" onClick={this.adminHome.bind(this)} href="">Home</a>
+                        <a className="mdl-navigation__link" onClick={this.requests.bind(this)} href="">Requests</a>
+                        <a className="mdl-navigation__link" onClick={this.notifications.bind(this)} href="">Notifications</a>
+                        <a className="mdl-navigation__link" onClick={this.log.bind(this)} href="">Logs</a>
+                        <a className="mdl-navigation__link" onClick={this.allBooks.bind(this)} href="">All Books</a>                       
                    </nav>
                 )
             }else if(category===false){
             return (
                 <nav className="mdl-navigation navLink">
-                    <Link to='/home' className="mdl-layout__tab">Home</Link>
-                    <Link to='/history' className="mdl-layout__tab">History</Link>
-                    <Link to='/settings' className="mdl-layout__tab">Settings</Link>
-                    <Link to='/notifications' className="mdl-layout__tab">notifications</Link>
+                    <a className="mdl-navigation__link" onClick={this.home.bind(this)} href="">Home</a>
+                    <a className="mdl-navigation__link" onClick={this.history.bind(this)} href="">History</a>
+                    <a className="mdl-navigation__link" onClick={this.settings.bind(this)} href="">Settings</a>
+                    <a className="mdl-navigation__link" onClick={this.notifications.bind(this)} href="">Notifications</a>
                 </nav>
                 )
             }
@@ -71,7 +112,6 @@ class Main extends Component {
                   <div className="mdl-layout__drawer">
                     <Link to ={category ? '/admin_home' : '/'} className="mdl-layout-title">hello-books</Link>
                         {determineNav(category)}
-                        { isAuthenticated ? userLinks : guestLinks}
                   </div>
                 <main className='mdl-layout__content'>
                     {React.cloneElement(this.props.children, this.props)}
@@ -102,4 +142,15 @@ const mapStateToProps = (state) => {
         auth: state.auth
     }
 }
-export default connect(mapStateToProps, { logout })(Main);
+export default connect(mapStateToProps,
+    {
+        logout,
+        notifications,
+        home,
+        adminHome,
+        log,
+        allBooks,
+        settings,
+        history,
+        requests 
+    })(Main);

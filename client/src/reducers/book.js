@@ -61,7 +61,7 @@ export const getExceeds = (state = getExceedsState, action ={}) => {
 const getABookState = {
     fetching: false,
     books: {},
-    errors:''
+    errors:{}
 }
 export const getABook = (state = getABookState, action ={}) => {
     switch(action.type) {
@@ -90,8 +90,8 @@ export const getABook = (state = getABookState, action ={}) => {
 // Borrow a book
 const borrowBookState ={
     requesting: false,
-    response:[],
-    errors:[],
+    response:{},
+    errors:{},
     successfullyBorrowed:false,
 }
 export const borrowBook = (state = borrowBookState, action ={}) => {
@@ -122,8 +122,8 @@ export const borrowBook = (state = borrowBookState, action ={}) => {
 // return a book
 const returnBookState ={
     requesting: false,
-    response:[],
-    errors:[],
+    response:{},
+    errors:{},
     successfullyReturned: false
 }
 export const returnBook = (state = returnBookState, action ={}) => {
@@ -178,23 +178,15 @@ export const getBorrows = (state = initialState, action ={}) => {
 }
 const createBookState = {
           isLoading: false,
-          resp:'',
-          errors:''
+          resp:{},
+          errors:{}
 }
+// Create book
 export const createBook = (state = createBookState, action ={}) => {
     switch(action.type) {
-        case 'UPLOAD_COVER': {
-            return {...state,
-                isLoading: true
-            }
-        }
-        case 'UPLOAD_COVER_FAILED': {
-            return {...state,
-                isLoading: false
-            }
-        }
-        case 'UPLOAD_PDF_FAILED': {
-            return {...state,
+        case 'POST_BOOK': {
+            return {
+                ...state,
                 isLoading: false
             }
         }
@@ -206,6 +198,37 @@ export const createBook = (state = createBookState, action ={}) => {
             }
         }
         case 'POST_BOOK_FAILED':{
+            return {
+                ...state,
+                isLoading: false,
+                errors: action.payload
+            }
+        }
+        default: return state;
+    }
+}
+// Edit book
+const editBookState = {
+    isLoading: false,
+    resp:{},
+    errors:{}
+}
+export const editBook = (state = editBookState, action ={}) => {
+    switch(action.type) {
+        case 'EDIT_BOOK': {
+            return {
+                ...state,
+                isLoading: false
+            }
+        }
+        case 'EDIT_BOOK_SUCCESSFUL':{
+            return {
+                ...state,
+                isLoading: false,
+                resp: action.payload
+            }
+        }
+        case 'EDIT_BOOK_FAILED':{
             return {
                 ...state,
                 isLoading: false,

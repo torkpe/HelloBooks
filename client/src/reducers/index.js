@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import signin from './signin';
 import signup from './signup';
-import { getBooks, createBook, getBorrows, borrowBook, returnBook, getABook, getExceeds } from './book';
+import { getBooks, createBook, getBorrows, borrowBook, returnBook, getABook, getExceeds, editBook } from './book';
 import { getAllBorrowed, allNotReturned } from './history';
 import { notify, getNotification } from './notification';
 import charge from './charge';
@@ -12,6 +12,7 @@ import { getPdf } from './getPdf';
 import changePassword from './changePassword';
 import updateUser from './updateUser';
 import { getUser } from './getUser';
+import { uploadCover, uploadPdf } from './upload';
 
 const rootReducer = combineReducers({
     auth,
@@ -33,7 +34,10 @@ const rootReducer = combineReducers({
     getPdf,
     changePassword,
     updateUser,
-    getUser
+    getUser,
+    uploadCover,
+    uploadPdf,
+    editBook
 });
 
 export default rootReducer;

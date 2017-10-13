@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import {  connect } from 'react-redux';
 import { postBook } from '../actions/books';
+import uploader from '../actions/upload';
 
+// Set initial state
 const initialState = {
           cover: '',
           pdf: '',
@@ -13,6 +15,7 @@ const initialState = {
           genre: '',
           isLoading: false,
 }
+
 class Admin extends Component {    
     constructor(props) {
         super(props);
@@ -23,10 +26,9 @@ class Admin extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     coverChange(e) {
+        e.preventDefault()
         let cover = e.target.files[0];
-        this.setState({
-            cover
-        })
+        this.props.uploader(cover, 'cover')
     }
         onChange(e) {
         e.preventDefault()
@@ -37,24 +39,23 @@ class Admin extends Component {
     pdfChange(e) {
         e.preventDefault()
         let pdf = e.target.files[0];
-        this.setState({
-            pdf
-        })
+        this.props.uploader(pdf, 'pdf')
     }
     onSubmit(e) {
         e.preventDefault()
         this.props.postBook(this.state)
         this.refs.bookForm.reset();
         this.setState({
-          cover: '',
-          pdf: '',
-          title: '',
-          author: '',
-          description: '',
-          quantity: '',
-          genre: '',
-          isLoading: false,
+            initialState
         })
+    }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.cover && nextProps.pdf){
+            this.setState({
+                cover: nextProps.cover,
+                pdf: nextProps.pdf
+            })
+        }
     }
   render() {
     return (
@@ -112,8 +113,10 @@ Admin.propTypes = {
 }
 const mapStateToProps = (state) => {
     return {
-        admin: state.createBook
+        admin: state.createBook,
+        cover: state.uploadCover.uploaded,
+        pdf: state.uploadPdf.uploaded
     }
 }
 
-export default connect(mapStateToProps, { postBook })(Admin);
+export default connect(mapStateToProps, { postBook, uploader })(Admin);

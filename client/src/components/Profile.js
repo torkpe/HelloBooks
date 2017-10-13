@@ -15,12 +15,10 @@ class Profile extends Component {
         this.onChange = this.onChange.bind(this);
     }
     componentDidMount(){
-        console.log(this.props.auth.user.user)
         this.props.getUser(this.props.auth.user.user)
     }
     onChange(e){
         e.preventDefault()
-        console.log(e.target.value)
         this.setState({
             [e.target.name]: e.target.value
         })
