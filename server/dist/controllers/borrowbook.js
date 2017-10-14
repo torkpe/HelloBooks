@@ -34,7 +34,9 @@ exports.default = {
   borrow: function borrow(req, res) {
     return Book.findOne({
       // Check if request book exists
-      where: { id: req.params.bookId
+      where: {
+        id: req.params.bookId,
+        deleted: false
       } }).then(function (book) {
       if (!book || book.quantity < 1) {
         return res.status(404).send({ message: 'Book not available' });

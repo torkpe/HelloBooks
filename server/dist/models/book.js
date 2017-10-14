@@ -8,8 +8,8 @@ var book = function book(sequelize, DataTypes) {
     pdf: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
     genre: DataTypes.STRING,
-    description: DataTypes.STRING
-
+    description: DataTypes.STRING,
+    deleted: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function associate(models) {

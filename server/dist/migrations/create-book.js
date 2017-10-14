@@ -37,6 +37,10 @@ var createBook = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      deleted: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

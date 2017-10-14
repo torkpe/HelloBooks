@@ -21,7 +21,8 @@ exports.default = {
       author: req.body.author,
       description: req.body.description,
       quantity: req.body.quantity,
-      genre: req.body.genre
+      genre: req.body.genre,
+      deleted: false
     }).then(function (newBook) {
       return res.status(201).send(newBook);
     }).catch(function (error) {
@@ -32,7 +33,8 @@ exports.default = {
   // find a book
   findOne: function findOne(req, res) {
     return Book.findOne({
-      where: { id: req.params.id
+      where: { id: req.params.id,
+        deleted: false
       } }).then(function (book) {
       if (!book) {
         res.status(404).send('Book not found');
@@ -46,7 +48,11 @@ exports.default = {
 
   // show all books
   findAll: function findAll(req, res) {
-    return Book.findAll({}).then(function (book) {
+    return Book.findAll({
+      where: {
+        deleted: false
+      }
+    }).then(function (book) {
       if (!book) {
         res.status(400).send('No book not found');
       } else {
@@ -57,12 +63,17 @@ exports.default = {
     });
   },
   deleteBook: function deleteBook(req, res) {
-    return Book.destroy({
+    return Book.findOne({
       where: {
         id: req.params.id
       }
-    }).then(function (deleted) {
-      return res.status(200).send({ deleted: deleted });
+    }).then(function (book) {
+      if (!book) {
+        return res.status(404).send({ message: 'Book is not found' });
+      }
+      book.update({
+        deleted: false
+      });
     }).catch(function (err) {
       return res.status(400).send({ err: err });
     });

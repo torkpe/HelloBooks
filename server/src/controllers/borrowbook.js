@@ -25,7 +25,9 @@ export default {
     return Book
       .findOne({
         // Check if request book exists
-        where: { id: req.params.bookId,
+        where: {
+          id: req.params.bookId,
+          deleted: false
         } })
       .then((book) => {
         if (!book || book.quantity < 1) {

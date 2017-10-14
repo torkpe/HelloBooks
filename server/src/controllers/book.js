@@ -13,6 +13,7 @@ export default {
         description: req.body.description,
         quantity: req.body.quantity,
         genre: req.body.genre,
+        deleted: false,
       })
       .then(newBook => res.status(201).send(newBook))
       .catch(error => res.status(400).send({ message: error.message }));
@@ -22,6 +23,7 @@ export default {
     return Book
       .findOne({
         where: { id: req.params.id,
+          deleted: false
         } })
       .then((book) => {
         if (!book) {
@@ -34,7 +36,11 @@ export default {
   // show all books
   findAll(req, res) {
     return Book
-      .findAll({})
+      .findAll({
+        where: {
+          deleted: false,
+        }
+      })
       .then((book) => {
         if (!book) {
           res.status(400).send('No book not found');
@@ -45,11 +51,18 @@ export default {
   },
   deleteBook(req, res) {
     return Book
-      .destroy({
+      .findOne({
         where: {
           id: req.params.id
         }
-      }).then(deleted => res.status(200).send({ deleted }))
+      }).then(book => {
+        if (!book) {
+          return res.status(404).send({message: 'Book is not found'})
+        }
+        book.update({
+          deleted: false
+        })
+      })
       .catch(err => res.status(400).send({ err }));
   },
 
