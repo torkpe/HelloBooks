@@ -72,7 +72,11 @@ exports.default = {
         return res.status(404).send({ message: 'Book is not found' });
       }
       book.update({
-        deleted: false
+        deleted: true
+      }).then(function (deletedBook) {
+        return res.status(200).send(deletedBook);
+      }).catch(function (err) {
+        return res.status(500).send({ message: err.message });
       });
     }).catch(function (err) {
       return res.status(400).send({ err: err });

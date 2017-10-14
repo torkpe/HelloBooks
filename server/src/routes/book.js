@@ -13,7 +13,8 @@ router.get('/api/books/:id', authorize.checkAuthentication, bookControllers.find
 // edit a book
 router.put('/api/books/:id', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.findBook);
 // Delete a book
+router.put('/api/books/:id/delete', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.findBook);
 // API route to allow book delete a book goes in here
-router.delete('/api/books/:id', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.deleteBook);
+router.put('/api/books/:id', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.deleteBook);
 
 export default router;

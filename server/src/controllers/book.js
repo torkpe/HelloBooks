@@ -60,8 +60,9 @@ export default {
           return res.status(404).send({message: 'Book is not found'})
         }
         book.update({
-          deleted: false
-        })
+          deleted: true
+        }).then(deletedBook => res.status(200).send(deletedBook))
+        .catch(err => res.status(500).send({ message: err.message }))
       })
       .catch(err => res.status(400).send({ err }));
   },
