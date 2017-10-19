@@ -57,7 +57,7 @@ const router =(
                 <Route path='/signin' component={Signin}></Route>
                 <Route path= '/redirect' component={Redirect}></Route>
                 <Route path= '/confirmation/:key' component={Confirm}></Route>
-                <Route path= '/home' component={Authenticate(isUser(Home))}></Route>
+                <Route path= '/home' component={Authenticate(Home)}></Route>
                 <Route path= '/admin_signin' component={adminSignin}></Route>
                 <Route path= '/admin_signup' component={adminSignup}></Route>
                 <Route path= '/admin_home' component={Authenticate(isAdmin(adminHome))}></Route>

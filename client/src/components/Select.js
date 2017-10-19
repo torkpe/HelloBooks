@@ -18,7 +18,7 @@ class Select extends Component {
         <select name='view' onChange={this.onChange}>
             <option value="" disabled selected hidden>View By</option>
             <option value="all" >All Borrowed Books</option>
-        </select>        
+        </select>
     );
   }
 }

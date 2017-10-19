@@ -18,6 +18,9 @@ body{
     font-size: 1px;
     
 }
+table {
+    width: 100%
+}
 .content{
     margin: 0 auto;
 	text-align: center;

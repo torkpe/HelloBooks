@@ -63,7 +63,8 @@ class Main extends Component {
                         <a className="mdl-navigation__link" onClick={this.requests.bind(this)} href="">Requests</a>
                         <a className="mdl-navigation__link" onClick={this.notifications.bind(this)} href="">Notifications</a>
                         <a className="mdl-navigation__link" onClick={this.log.bind(this)} href="">Logs</a>
-                        <a className="mdl-navigation__link" onClick={this.allBooks.bind(this)} href="">All Books</a>                       
+                        <a className="mdl-navigation__link" onClick={this.allBooks.bind(this)} href="">All Books</a>
+                        <a className="mdl-navigation__link" onClick={this.logout.bind(this)} href="">Signout</a>
                    </nav>
                 )
             }else if(category===false){
@@ -73,6 +74,7 @@ class Main extends Component {
                     <a className="mdl-navigation__link" onClick={this.history.bind(this)} href="">History</a>
                     <a className="mdl-navigation__link" onClick={this.settings.bind(this)} href="">Settings</a>
                     <a className="mdl-navigation__link" onClick={this.notifications.bind(this)} href="">Notifications</a>
+                    <a className="mdl-navigation__link" onClick={this.logout.bind(this)} href="">Signout</a>
                 </nav>
                 )
             }

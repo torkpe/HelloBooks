@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {  connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { getABook, borrowBook, returnBook } from '../actions/books';
+import { getABook, borrowBook, returnBook, deleteBook } from '../actions/books';
 
 class Book extends Component {
   componentWillMount(){
@@ -13,6 +13,9 @@ class Book extends Component {
     const userId = this.props.userId
     const borrow=(e)=>{
     this.props.borrowBook(userId, books.id)
+    }
+    const deleteABook = (e) => {
+        this.props.deleteBook(books.id)
     }
     const returnBorrowed=(e)=>{    
     this.props.returnBook(userId, books.id)
@@ -57,7 +60,7 @@ class Book extends Component {
                         </Link>
                         {this.props.auth.user.category ?
                         <div>
-                        <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                        <a onClick={deleteABook} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                             Delete
                         </a>
                         </div>
@@ -80,4 +83,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getABook, borrowBook, returnBook })(Book);
+export default connect(mapStateToProps, {
+    getABook,
+    borrowBook,
+    returnBook,
+    deleteBook
+})(Book);

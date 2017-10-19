@@ -13,7 +13,7 @@ export const log = () => {
     return dispatch => browserHistory.push('/log')
 }
 export const allBooks = () => {
-    return dispatch => browserHistory.push('/all_books')
+    return dispatch => browserHistory.push('/home')
 }
 export const home = () => {
     return dispatch => browserHistory.push('/home')

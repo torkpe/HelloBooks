@@ -3,8 +3,8 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import signin from './signin';
 import signup from './signup';
-import { getBooks, createBook, getBorrows, borrowBook, returnBook, getABook, getExceeds, editBook } from './book';
-import { getAllBorrowed, allNotReturned } from './history';
+import { getBooks, createBook, getBorrows, borrowBook, returnBook, getABook, getExceeds, editBook, deleteBook } from './book';
+import { getAllBorrowed, allNotReturned, getBorrowHistory } from './history';
 import { notify, getNotification } from './notification';
 import charge from './charge';
 import payback from './payback';
@@ -37,7 +37,9 @@ const rootReducer = combineReducers({
     getUser,
     uploadCover,
     uploadPdf,
-    editBook
+    editBook,
+    deleteBook,
+    getBorrowHistory
 });
 
 export default rootReducer;

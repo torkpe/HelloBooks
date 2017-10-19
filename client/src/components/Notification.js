@@ -15,11 +15,13 @@ class SingleNotification extends Component {
             {   
               notification.message
             }
+            {this.props.category? '' :
             <a onClick={payBack}className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect notifyButton">
             Pay back
             </a>
+            }
             < Link to={`/single/${notification.bookId}`} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect notifyButton">
-                View Detail
+                View Book
             </Link>
             <hr />
         </div>

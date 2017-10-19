@@ -29,6 +29,9 @@ class Admin extends Component {
         e.preventDefault()
         let cover = e.target.files[0];
         this.props.uploader(cover, 'cover')
+        this.setState({
+            isLoading: true
+        })
     }
         onChange(e) {
         e.preventDefault()
@@ -40,20 +43,29 @@ class Admin extends Component {
         e.preventDefault()
         let pdf = e.target.files[0];
         this.props.uploader(pdf, 'pdf')
+        this.setState({
+            isLoading: true
+        })
     }
     onSubmit(e) {
         e.preventDefault()
         this.props.postBook(this.state)
         this.refs.bookForm.reset();
         this.setState({
-            initialState
+            isLoading: true
         })
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.cover && nextProps.pdf){
             this.setState({
                 cover: nextProps.cover,
-                pdf: nextProps.pdf
+                pdf: nextProps.pdf,
+                isLoading: false
+            })
+        }
+        if (nextProps.createBook) {
+            this.setState({
+                initialState
             })
         }
     }
@@ -95,10 +107,9 @@ class Admin extends Component {
                   
                         <label htmlFor='file-upload2' className='mdl-button mdl-js-button mdl-button--raised mdl-button--accent file-upload btn2'>Upload Pdf</label>
                             <input type='file' className='mdl-textfield__input' onChange={this.pdfChange}
-                                name='pdf' id="file-upload2"required/>                      
-                 
+                                name='pdf' id="file-upload2"required/>                 
                         </div>
-                        <button disabled = {this.props.admin.isLoading} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="button">
+                        <button disabled = {this.state.isLoading} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="button">
                             Create Book
                         </button>
                     </form>
@@ -115,7 +126,8 @@ const mapStateToProps = (state) => {
     return {
         admin: state.createBook,
         cover: state.uploadCover.uploaded,
-        pdf: state.uploadPdf.uploaded
+        pdf: state.uploadPdf.uploaded,
+        createBook: state.createBook.resp
     }
 }
 

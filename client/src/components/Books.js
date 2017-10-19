@@ -6,7 +6,8 @@ class Books extends Component {
   constructor(props){
     super(props);
     this.state = {
-      pointer: false
+      pointer: false,
+      borrowedStatus: false
     }
   }
   componentWillReceiveProps(nextProps){
@@ -21,26 +22,31 @@ class Books extends Component {
       user: this.props.name,
       userId: userId,
       type: 'admin',
-      message: `${this.props.name} just borrowed the book https://hellobooks-project.herokuapp.com/api/books/'>${book.title}</a>`,
+      message: `${this.props.name} just borrowed the book ${book.title}`,
       bookId: book.id
     }
     const data2={
       user: this.props.name,
       userId: userId,
       type: 'admin',
-      message: `${this.props.name} just returned the book <a href='https://hellobooks-project.herokuapp.com/api/books/${book.id}'>${book.title}</a>`,
+      message: `${this.props.name} just returned the book ${book.title}`,
       bookId: book.id
     }
     const data3={
       user: this.props.name,
       userId: this.props.borrowedUserId,
       type: 'user',
-      message: `The Admin just charged you for exceeding the deadline ${book.id}`,
+      message: `The Admin just charged you for exceeding the deadline`,
       bookId: book.id
     }
     const borrow=(e)=>{
       e.preventDefault()
-      this.props.borrowBook(userId, book.id, data);
+      this.props.borrowBook(userId, book.id, data).then(response =>
+        this.setState({
+          borrowedStatus: true
+        })
+      
+      )
     }
     const returnBorrowed=(e)=>{
       e.preventDefault()
@@ -75,18 +81,8 @@ class Books extends Component {
           <div className="mdl-card__supporting-text">
             {book.description}
           </div>
-          <div className="mdl-card__actions mdl-card--border">
-            { this.props.charge ? '' :
-            <a onClick={borrow}
-            className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-            borrow book
-            </a> }
-            { this.props.charge ? '' :
-            <a onClick={returnBorrowed}
-            className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
-              return book
-            </a>}
-            { this.props.charge ?
+          <div className="mdl-card__actions mdl-card--border">            
+            { this.props.charge || this.props.category ?
               <a onClick={chargeUser} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">              
                 charge
               </a>

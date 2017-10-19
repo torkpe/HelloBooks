@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import {  connect } from 'react-redux';
 
-import { getBooks, getBorrows, borrowBook, returnBook } from '../actions/books';
+import { getBooks, borrowBook, returnBook } from '../actions/books';
 import { notify } from '../actions/notification';
 import Books from './Books';
 
 class Home extends Component {
   componentWillMount(){
     this.props.getBooks()
-    this.props.getBorrows(this.props.userId)
   }
   render() {
     const books = this.props.books
@@ -34,6 +33,7 @@ class Home extends Component {
               successfullyReturned={this.props.successfullyReturned}
               borrowedBook={this.props.borrowed}
               notify = {this.props.notify}
+              category={this.props.auth.user.category}
             />)}
           </div>
           <div className='mdl-grid '>
@@ -60,4 +60,4 @@ const mapStateToProps = (state) => {
         successfullyReturned: state.returnBook.successfullyReturned
     }
 }
-export default connect(mapStateToProps, { getBooks, getBorrows, borrowBook, returnBook, notify })(Home);
+export default connect(mapStateToProps, { getBooks, borrowBook, returnBook, notify })(Home);

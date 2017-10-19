@@ -7,14 +7,14 @@ export const getBooks = () => {
     return dispatch =>{
         dispatch({ type: 'GET_BOOKS' })
         axios.get('https://hellobooks-project.herokuapp.com/api/books')
-        .then((response) => {
+        .then(response => {
             if(response.data){
                return dispatch({
                     type: 'GET_BOOKS_SUCCESSFUL',
                     payload: response.data
                 })
             }
-        }).catch((err) => {
+        }).catch(err => {
             if(err){
                return dispatch({
                    type: 'FAILED_TO_GETBOOKS',
@@ -94,7 +94,7 @@ export const getBorrows = (id) => {
 export const borrowBook = (id, bookId, data) => {
     return dispatch =>{
         dispatch({ type: 'BORROW_BOOK' })
-        axios.post(`https://hellobooks-project.herokuapp.com/api/users/${id}/${bookId}/books`, data)
+        return axios.post(`https://hellobooks-project.herokuapp.com/api/users/${id}/${bookId}/books`, data)
         .then((response) => {
             if(response.data){
                return dispatch({
@@ -155,6 +155,32 @@ export const postBook = (data) => {
                     type: 'POST_BOOK_FAILED',
                     payload: err.response.data
                 })
+            }
+        })
+    }
+}
+
+// Delete a book 
+export const deleteBook = (data) => {
+    console.log(data)
+    return dispatch => {
+        dispatch({type: 'DELETE_BOOK'})
+        return axios.put(`https://hellobooks-project.herokuapp.com/api/books/${data}/delete`)
+        .then((response) => {
+            if(response.data) {
+                return dispatch({
+                    type: 'DELETE_BOOK_SUCCESSFUL',
+                    poayLoad: response.data
+                })
+            }
+        }).catch((err) => {
+            if(err) {
+                if(err.data) {
+                    return dispatch({
+                        type: 'DELETE_BOOK_FAILED',
+                        poayLoad: err.data
+                    })
+                }
             }
         })
     }

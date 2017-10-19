@@ -207,6 +207,37 @@ export const createBook = (state = createBookState, action ={}) => {
         default: return state;
     }
 }
+// Delete book
+const deleteBookState = {
+    isLoading: false,
+    resp:{},
+    errors:{}
+}
+export const deleteBook = (state = deleteBookState, action ={}) => {
+    switch(action.type) {
+        case 'DELETE_BOOK': {
+            return {
+                ...state,
+                isLoading: false
+            }
+        }
+        case 'DELETE_BOOK_SUCCESSFUL':{
+            return {
+                ...state,
+                isLoading: false,
+                resp: action.payLoad
+            }
+        }
+        case 'DELETE_BOOK_FAILED':{
+            return {
+                ...state,
+                isLoading: false,
+                errors: action.payload
+            }
+        }
+        default: return state;
+    }
+}
 // Edit book
 const editBookState = {
     isLoading: false,

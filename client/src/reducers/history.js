@@ -51,3 +51,29 @@ export const allNotReturned= (state = notReturnedState, action ={}) => {
         default: return state;
     }
 }
+
+const getBorrowHistoryState = {
+    borrowHistory: []
+}
+export const getBorrowHistory= (state = getBorrowHistoryState, action ={}) => {
+    switch(action.type) {
+        case 'GET_HISTORY_OF_BORROWS': {
+            return {...state,
+                isLoading: true
+            }
+        }
+        case 'GET_HISTORY_OF_BORROW_SUCCESSFUL': {
+            return {...state,
+                isLoading: false,
+                notReturned: action.payload
+            }
+        }
+        case 'FAILED_TO_GET_HISTORY_OF_BORROWS': {
+            return {...state,
+                isLoading: false,
+                errors: action.payload
+            }
+        }
+        default: return state;
+    }
+}

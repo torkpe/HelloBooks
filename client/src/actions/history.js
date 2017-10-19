@@ -13,10 +13,32 @@ export const getHistory = (val) => {
         }
     }
 }
+export const getBorrowHistory = (star, id) => {
+    return dispatch =>{
+        dispatch({ type: 'GET_HISTORY_OF_BORROWS' })
+        axios.get(`https://hellobooks-project.herokuapp.com/api/users/${id}/star/all-borrowed`)
+        .then((response) => {
+            if(response.data){
+               return dispatch({
+                    type: 'GET_HISTORY_OF_BORROW_SUCCESSFUL',
+                    payload: response.data
+                })
+            }
+        }).catch((err) => {
+            if(err){
+               return dispatch({
+                   type: 'FAILED_TO_GET_HISTORY_OF_BORROWS',
+                   payload: err.response.data
+                })
+            }
+        });
+    }
+}
+
 export const getAllBorrowed = (id) => {
     return dispatch =>{
         dispatch({ type: 'GET_ALL_BORROWED_BOOKS' })
-        axios.get(`https://hellobooks-project.herokuapp.com/api/users/${id}/books`)
+        axios.get(`https://hellobooks-project.herokuapp.com/api/users/${id}/books/all-borrowed`)
         .then((response) => {
             if(response.data){
                return dispatch({
