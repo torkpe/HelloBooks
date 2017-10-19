@@ -83,45 +83,60 @@ export default {
         return res.status(200).send(books);
       }).catch(err => res.status(400).send({ message: err.message }));
   },
-  getAllBorrowedBooks(req, res){
+  getAllBorrowedBooks(req, res) {
     return borrowBook
-    .findAll({
-      include: [
-        Book,
-      ],
-      where: {
-        returned: true,
-        userId: req.decoded.user,
-      },
-    }).then((books) => {
-      if (books.length < 1) {
-        return res.status(404).send({
-          message: 'You have not borrowed any book at this time'
-        });
-      }
-      return res.status(200).send(books);
-    }).catch(err => res.status(400).send({ message: err.message }));
+      .findAll({
+        include: [
+          Book,
+        ],
+        where: {
+          returned: true,
+          userId: req.decoded.user,
+        },
+      }).then((books) => {
+        if (books.length < 1) {
+          return res.status(404).send({
+            message: 'You have not borrowed any book at this time'
+          });
+        }
+        return res.status(200).send(books);
+      }).catch(err => res.status(400).send({ message: err.message }));
   },
   // Pay back debts
-  payBack(req, res){
+  payBack(req, res) {
     return borrowBook
-    .findOne({
-      where: {
-        userId: req.decoded.user,
-        bookId: req.params.bookId,
-        owing: true,
-      },
-    }).then((book) => {
-      if (!book) {
-        return res.status(404).send({ message: 'No book found' });
-      }
-      book.update({ owing: false,
-      })
-        .then((updated) => {
-          res.status(201).send({ updated });
+      .findOne({
+        where: {
+          userId: req.decoded.user,
+          bookId: req.params.bookId,
+          owing: true,
+        },
+      }).then((book) => {
+        if (!book) {
+          return res.status(404).send({ message: 'No book found' });
+        }
+        book.update({ owing: false,
         })
-      .catch(err => res.status(500).send({ message: err.message }));
-    });
+          .then((updated) => {
+            res.status(201).send({ updated });
+          })
+          .catch(err => res.status(500).send({ message: err.message }));
+      });
+  },
+  // Check if book has been borrowed before
+  getABorrowed(req, res) {
+    return borrowBook
+      .findOne({
+        where: {
+          bookId: req.params.bookId,
+          returned: false,
+        },
+      }).then((book) => {
+        if (!book) {
+          return res.status(404).send({ message: 'No book found' });
+        }
+        return res.status(200).send(book);
+      });
   },
   // Return a book and update status
   returnBook(req, res) {
@@ -165,7 +180,7 @@ export default {
           returned: false,
         },
       }).then(books => res.status(200).send(books))
-        .catch(err => res.status(500).send(err))
+      .catch(err => res.status(500).send(err));
   },
   // Charge for exceeding deadline
   chargeUser(req, res) {

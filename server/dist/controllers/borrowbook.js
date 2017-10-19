@@ -135,6 +135,21 @@ exports.default = {
     });
   },
 
+  // Check if book has been borrowed before
+  getABorrowed: function getABorrowed(req, res) {
+    return borrowBook.findOne({
+      where: {
+        bookId: req.params.bookId,
+        returned: false
+      }
+    }).then(function (book) {
+      if (!book) {
+        return res.status(404).send({ message: 'No book found' });
+      }
+      return res.status(200).send(book);
+    });
+  },
+
   // Return a book and update status
   returnBook: function returnBook(req, res) {
     return borrowBook.findOne({

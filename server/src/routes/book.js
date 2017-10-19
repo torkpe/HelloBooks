@@ -3,6 +3,7 @@ import controllers from '../controllers';
 import authorize from '../middleware/middleware';
 
 const bookControllers = controllers.book;
+const borrowBookController = controllers.borrowBook;
 const router = express.Router();
 // add a book
 router.post('/api/books', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.create);
@@ -16,5 +17,7 @@ router.put('/api/books/:id', authorize.checkAuthentication, authorize.authorizeA
 router.put('/api/books/:id/delete', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.deleteBook);
 // API route to allow book delete a book goes in here
 router.put('/api/books/:id', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.deleteBook);
+// Check if the book has been borrowed already
+router.get('/api/book/:id', authorize.checkAuthentication, authorize.authorizeAdmin, borrowBookController.getABorrowed);
 
 export default router;

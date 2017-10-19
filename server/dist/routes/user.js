@@ -46,5 +46,5 @@ router.put('/api/users/setPassword/:id', _middleware2.default.checkAuthenticatio
 // update usernamne
 router.put('/api/users/updateUser/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, userController.updateName);
 router.get('/api/users/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, userController.getUser);
-
+router.get('/api/users/:id/:star/request', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.getUser);
 exports.default = router;
