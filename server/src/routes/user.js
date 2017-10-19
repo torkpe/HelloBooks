@@ -35,10 +35,5 @@ router.put('/api/users/setPassword/:id', authorize.checkAuthentication, authoriz
 router.put('/api/users/updateUser/:id', authorize.checkAuthentication, authorize.authorizeUser,
   userController.updateName
 );
-router.get('/api/users/:id', authorize.checkAuthentication, authorize.authorizeUser,
-  userController.getUser
-);
-router.get('/api/users/:id/:star/request', authorize.checkAuthentication, authorize.authorizeUser,
-  borrowBookControllers.getUser
-);
+
 export default router;
