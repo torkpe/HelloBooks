@@ -34,6 +34,6 @@ router.put('/api/books/:id/delete', _middleware2.default.checkAuthentication, _m
 // API route to allow book delete a book goes in here
 router.put('/api/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.deleteBook);
 // Check if the book has been borrowed already
-router.get('/api/book/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, borrowBookController.getABorrowed);
+router.get('/api/book/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookController.getABorrowed);
 
 exports.default = router;

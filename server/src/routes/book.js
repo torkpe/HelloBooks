@@ -18,6 +18,6 @@ router.put('/api/books/:id/delete', authorize.checkAuthentication, authorize.aut
 // API route to allow book delete a book goes in here
 router.put('/api/books/:id', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.deleteBook);
 // Check if the book has been borrowed already
-router.get('/api/book/:id', authorize.checkAuthentication, authorize.authorizeAdmin, borrowBookController.getABorrowed);
+router.get('/api/book/:id', authorize.checkAuthentication, authorize.authorizeUser, borrowBookController.getABorrowed);
 
 export default router;
