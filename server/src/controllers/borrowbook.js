@@ -130,6 +130,7 @@ export default {
         where: {
           bookId: req.params.id,
           returned: false,
+          userId: req.params.userId
         },
       }).then((book) => {
         if (!book) {

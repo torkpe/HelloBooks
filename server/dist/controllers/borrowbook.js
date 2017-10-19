@@ -140,7 +140,8 @@ exports.default = {
     return borrowBook.findOne({
       where: {
         bookId: req.params.id,
-        returned: false
+        returned: false,
+        userId: req.params.userId
       }
     }).then(function (book) {
       if (!book) {
