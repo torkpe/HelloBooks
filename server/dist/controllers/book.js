@@ -102,7 +102,8 @@ exports.default = {
         quantity: req.body.quantity,
         genre: req.body.genre
       }).then(function (updatedBook) {
-        return res.status(200).send({ updatedBook: updatedBook });
+        return res.status(200).send({
+          updatedBook: updatedBook });
       }).catch(function (error) {
         return res.status(400).send(error.message);
       });
