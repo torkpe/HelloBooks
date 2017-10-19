@@ -136,7 +136,8 @@ export default {
           return res.status(404).send({ message: 'No book found' });
         }
         return res.status(200).send(book);
-      });
+      })
+      .catch(err => res.status(500).send({ messsage: err.message }));
   },
   // Return a book and update status
   returnBook(req, res) {

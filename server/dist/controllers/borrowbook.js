@@ -147,6 +147,8 @@ exports.default = {
         return res.status(404).send({ message: 'No book found' });
       }
       return res.status(200).send(book);
+    }).catch(function (err) {
+      return res.status(500).send({ messsage: err.message });
     });
   },
 
