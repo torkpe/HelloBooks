@@ -139,7 +139,7 @@ exports.default = {
   getABorrowed: function getABorrowed(req, res) {
     return borrowBook.findOne({
       where: {
-        bookId: req.params.bookId,
+        bookId: req.params.id,
         returned: false
       }
     }).then(function (book) {
