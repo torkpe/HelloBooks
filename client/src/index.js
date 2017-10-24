@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
-import jwt from'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 import registerServiceWorker from './registerServiceWorker';
 import Main from './components/Main';
@@ -22,9 +22,7 @@ import adminSignin from './components/adminSignin';
 import adminSignup from './components/adminSignup';
 import adminHome from './components/adminHome';
 import Restrict from './components/Restrict';
-import book from './components/SingleBook';
 import Profile from './components/Profile';
-import Password from './components/Password';
 import userHistory from './components/userHistory';
 import allBorrowed from './components/allBorrowed';
 import allNotReturned from './components/allNotReturned';
@@ -35,48 +33,46 @@ import Pdf from './components/Pdf';
 import setPassword from './components/changePassword';
 import updateBook from './components/bookForm';
 
-const store =createStore(
-    rootReducer,
-    compose(
-        applyMiddleware(thunk),
-        window.devToolsExtension ? window.devToolsExtension() : f => f
-    )
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f,
+  ),
 );
 
 if (localStorage.jwt) {
-    setAuth(localStorage.jwt)
-    store.dispatch(setCurrentUser(jwt.decode(localStorage.jwt)));
+  setAuth(localStorage.jwt);
+  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwt)));
 }
 
-const router =(
-    <Provider store= {store}>
-        <Router history = {browserHistory}>
-            <Route path = '/' component={Main}>
-                <IndexRoute component={isAlreadySignedin(Landing)}></IndexRoute>
-                <Route path='/signup' component={Signup}></Route>
-                <Route path='/signin' component={Signin}></Route>
-                <Route path= '/redirect' component={Redirect}></Route>
-                <Route path= '/confirmation/:key' component={Confirm}></Route>
-                <Route path= '/home' component={Authenticate(Home)}></Route>
-                <Route path= '/admin_signin' component={adminSignin}></Route>
-                <Route path= '/admin_signup' component={adminSignup}></Route>
-                <Route path= '/admin_home' component={Authenticate(isAdmin(adminHome))}></Route>
-                <Route path= '/book/:id' component={Authenticate(book)} />
-                <Route path= '/change_password' component={Authenticate(isUser(Password))} />
-                <Route path= '/settings' component={Authenticate(isUser(Profile))} />
-                <Route path= '/all_borrowed_books' component={Authenticate(isUser(allBorrowed))} />
-                <Route path= '/history' component={Authenticate(isUser(allNotReturned))} />
-                <Route path= '/notifications' component={Authenticate(notification)} />
-                <Route path= '/single/:id' component={Authenticate(SingleBook)} />
-                <Route path= '/read-book/:key' component={Authenticate((Pdf))}></Route>
-                <Route path= '/log' component={Authenticate(Log)} />
-                <Route path= '/restrict/:key' component={Authenticate((Restrict))}></Route>
-                <Route path= '/set-password' component={Authenticate((setPassword))}></Route>
-                <Route path= '/edit-book/:id' component={Authenticate((updateBook))}></Route>
-                
-            </Route>
-        </Router>
-    </Provider>
-)
+const router = (
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={Main}>
+        <IndexRoute component={isAlreadySignedin(Landing)} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/signin" component={Signin} />
+        <Route path="/redirect" component={Redirect} />
+        <Route path="/confirmation/:key" component={Confirm} />
+        <Route path="/home" component={Authenticate(Home)} />
+        <Route path="/admin_signin" component={adminSignin} />
+        <Route path="/admin_signup" component={adminSignup} />
+        <Route path="/admin_home" component={Authenticate(isAdmin(adminHome))} />
+        <Route path="/book/:id" component={Authenticate(SingleBook)} />
+        <Route path="/settings" component={Authenticate(isUser(Profile))} />
+        <Route path="/all_borrowed_books" component={Authenticate(isUser(allBorrowed))} />
+        <Route path="/history" component={Authenticate(isUser(allNotReturned))} />
+        <Route path="/notifications" component={Authenticate(notification)} />
+        <Route path="/single/:id" component={Authenticate(SingleBook)} />
+        <Route path="/read-book/:key" component={Authenticate((Pdf))} />
+        <Route path="/log" component={Authenticate(Log)} />
+        <Route path="/restrict/:key" component={Authenticate((Restrict))} />
+        <Route path="/set-password" component={Authenticate((setPassword))} />
+        <Route path="/edit-book/:id" component={Authenticate((updateBook))} />
+      </Route>
+    </Router>
+  </Provider>
+);
 ReactDOM.render(router, document.getElementById('root'));
 registerServiceWorker();
