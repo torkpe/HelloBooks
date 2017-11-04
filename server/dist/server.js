@@ -68,17 +68,17 @@ var notificationsRoute = _index2.default.notifications;
 var googleRoute = _index2.default.google;
 
 // Use route for users
-app.use(userRoute);
+app.use('/api/v1/', userRoute);
 // Use route for books
-app.use(bookRoute);
+app.use('/api/v1/', bookRoute);
 // Use route for admin
-app.use(adminRoute);
+app.use('/api/v1/', adminRoute);
 // Landing route
-app.use(landingRoute);
+app.use('/api/v1/', landingRoute);
 // Notifications route
-app.use(notificationsRoute);
+app.use('/api/v1/', notificationsRoute);
 // Google route
-app.use(googleRoute);
+app.use('/api/v1/', googleRoute);
 app.route('*').post(function (req, res) {
   res.status(404).send({ message: 'This page does not exist' });
 }).get(function (req, res) {

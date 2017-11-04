@@ -26,24 +26,24 @@ var userController = _controllers2.default.users;
 var borrowBookControllers = _controllers2.default.borrowBook;
 var router = _express2.default.Router();
 //  sign up user 
-router.post('/api/users/signup', userController.create);
+router.post('/users/signup', userController.create);
 //  signin user
-router.post('/api/users/signin', userController.findUser);
+router.post('/users/signin', userController.findUser);
 // update user upon confirmation
-router.put('/api/confimation/:key', userController.updateUser);
+router.put('/confimation/:key', userController.updateUser);
 //  api route to allow user borrow book
-router.post('/api/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, _borrowBook2.default.checkStar, _borrowBook2.default.checkDebt, borrowBookControllers.borrow);
+router.post('/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, _borrowBook2.default.checkStar, _borrowBook2.default.checkDebt, borrowBookControllers.borrow);
 // get list of borrowed books but not returned
-router.get('/api/users/:userId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.getBorrowedBooks);
+router.get('/users/:userId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.getBorrowedBooks);
 // get list borrowed books, both borrowed and returned
-router.get('/api/users/:userId/books/all-borrowed', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.getAllBorrowedBooks);
+router.get('/users/:userId/books/all-borrowed', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.getAllBorrowedBooks);
 // pay back debt
-router.put('/api/users/:userId/:bookId/book/payback', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.payBack);
+router.put('/users/:userId/:bookId/book/payback', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.payBack);
 // api route to allow user return a book;
-router.put('/api/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.returnBook);
+router.put('/users/:userId/:bookId/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookControllers.returnBook);
 // Api to set password
-router.put('/api/users/setPassword/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, userController.setPassword);
+router.put('/users/setPassword/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, userController.setPassword);
 // update usernamne
-router.put('/api/users/updateUser/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, userController.updateName);
+router.put('/users/updateUser/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, userController.updateName);
 
 exports.default = router;

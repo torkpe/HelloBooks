@@ -22,18 +22,18 @@ var bookControllers = _controllers2.default.book;
 var borrowBookController = _controllers2.default.borrowBook;
 var router = _express2.default.Router();
 // add a book
-router.post('/api/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.create);
+router.post('/books', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.create);
 // get all books
-router.get('/api/books', _middleware2.default.checkAuthentication, bookControllers.findAll);
+router.get('/books', _middleware2.default.checkAuthentication, bookControllers.findAll);
 // get a book
-router.get('/api/books/:id', _middleware2.default.checkAuthentication, bookControllers.findOne);
+router.get('/books/:id', _middleware2.default.checkAuthentication, bookControllers.findOne);
 // edit a book
-router.put('/api/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.findBook);
+router.put('/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.findBook);
 // Delete a book
-router.put('/api/books/:id/delete', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.deleteBook);
+router.put('/books/:id/delete', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.deleteBook);
 // API route to allow book delete a book goes in here
-router.put('/api/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.deleteBook);
+router.put('/books/:id', _middleware2.default.checkAuthentication, _middleware2.default.authorizeAdmin, bookControllers.deleteBook);
 // Check if the book has been borrowed already
-router.get('/api/book/:id/:userId', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookController.getABorrowed);
+router.get('/book/:id/:userId', _middleware2.default.checkAuthentication, _middleware2.default.authorizeUser, borrowBookController.getABorrowed);
 
 exports.default = router;

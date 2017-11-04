@@ -19,7 +19,7 @@ app.use((cookie)());
 app.use((session)({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors())
+app.use(cors());
 passport.serializeUser((user, cb) => {
   cb(null, user);
 });
@@ -38,17 +38,17 @@ const notificationsRoute = router.notifications;
 const googleRoute = router.google;
 
 // Use route for users
-app.use(userRoute);
+app.use('/api/v1/', userRoute);
 // Use route for books
-app.use(bookRoute);
+app.use('/api/v1/', bookRoute);
 // Use route for admin
-app.use(adminRoute);
+app.use('/api/v1/', adminRoute);
 // Landing route
-app.use(landingRoute);
+app.use('/api/v1/', landingRoute);
 // Notifications route
-app.use(notificationsRoute);
+app.use('/api/v1/', notificationsRoute);
 // Google route
-app.use(googleRoute);
+app.use('/api/v1/', googleRoute);
 app.route('*')
   .post((req, res) => {
     res.status(404).send({ message: 'This page does not exist' });
