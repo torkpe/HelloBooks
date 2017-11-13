@@ -7,13 +7,15 @@ export default {
     if (token) {
       jwt.verify(token, app.get('secret'), (err, decoded) => {
         if (err) {
-          return res.status(403).send({ message: 'Expired token' });
+          res.status(403).send({ message: 'Expired token' });
+        } else {
+          req.decoded = decoded;
+          next();
         }
-        req.decoded = decoded;
-        next();
       });
+    } else {
+      res.status(403).send({ message: 'Token not provided' });
     }
-    return res.status(403).send({ message: 'Token not provided' });
   },
   authorizeUser(req, res, next) {
     if (req.decoded.category === false) {
