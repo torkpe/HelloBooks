@@ -14,6 +14,9 @@
     "seed":"node ./dist/seed.js",
     "heroku-postbuild": "NODE_ENV=production  && NODE_END=production sequelize db:migrate:undo:all && NODE_END=production sequelize db:migrate && npm run seed"
   },
+  "engines":{
+    "node": "6.11.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/torkpe/HelloBooks.git"
