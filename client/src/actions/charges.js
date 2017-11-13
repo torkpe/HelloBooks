@@ -1,11 +1,13 @@
 import axios from 'axios';
 
+import url from '../utils/url';
+
 export const chargeUser = (userId, bookId) => {
     return dispatch => {
         dispatch({
             type: 'CHARGE_USER'
         })
-        return axios.put(`https://hellobooks-project.herokuapp.com/api/admins/charge-user/${userId}/${bookId}`)
+        return axios.put(`${url}/admins/charge-user/${userId}/${bookId}`)
         .then(response => {
             if (response) {
                 return dispatch({

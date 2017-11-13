@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { userSignupRequest } from '../actions/index';
+
+import { userSignup } from '../actions/user';
 
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      signupType: 'user',
-    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-  componentDidMount(checker) {
-    if (checker === true) {
-      return (
-        <div
-        id="p2"
-        className="mdl-progress mdl-js-progress mdl-progress__indeterminate loading" />
-      );
+  componentWillReceiveProps(nextProps) {
+    const { successfullySignedup } = nextProps.signup;
+    if (successfullySignedup.message) {
+      browserHistory.push('/redirect');
     }
   }
   onChange(e) {
@@ -28,8 +22,7 @@ class Signup extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    this.props.userSignupRequest(this.state);
-    this.refs.signupForm.reset();
+    this.props.userSignup(this.state);
   }
   render() {
     const { errors, isLoading } = this.props.signup;
@@ -38,30 +31,22 @@ class Signup extends Component {
       <div className="mdl-grid">
         <div className="contents">
           <div className="card-enlarge mdl-card mdl-shadow--3dp">
-            {this.componentDidMount({ isLoading })}
-            <form ref="signupForm" onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit}>
               <div
-               className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                    type="email" onChange={this.onChange}
-                    className="mdl-textfield__input" name="email" />
+                  type="email" onChange={this.onChange}
+                  className="mdl-textfield__input" name="email" />
                 <label htmlFor="email" className="mdl-textfield__label">Email</label>
-                <span className="error">{ errors.message }</span>
+                <span className="error">{ errors && errors.message }</span>
               </div>
               <button
-              disabled={isLoading}
-              className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-              id="button">
+                disabled={isLoading}
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                id="button">
                 Sign up
               </button>
             </form>
-            <Link to="dshbskj">
-              <button
-              className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
-              id="button">
-                Google+
-              </button>
-            </Link>
             <div className="mdl-card__supporting-text ask">
               Already have an account? Sign in below
             </div>
@@ -70,16 +55,17 @@ class Signup extends Component {
                 Sign in
               </button>
             </Link>
-          </div>                    
+          </div>
         </div>
       </div>
     );
   }
 }
 Signup.propTypes = {
-  userSignupRequest: propTypes.func.isRequired,
+  userSignup: propTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
-  signup: state.signup,
+  signup: state.userSignup,
 });
-export default connect(mapStateToProps, { userSignupRequest })(Signup);
+export default connect(mapStateToProps,
+  { userSignup })(Signup);

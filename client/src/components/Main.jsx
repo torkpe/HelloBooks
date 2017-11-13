@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import './Main.css';
 import './mdl/material.min.css';
-import { logout } from '../actions/index';
+import { logout } from '../actions/user';
 import { notifications,
   home,
   adminHome,

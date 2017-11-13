@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { userSignupRequest } from '../actions/index';
+import { userSignupRequest } from '../actions/user';
 
 import Loading from './Loading';
 

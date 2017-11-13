@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+import url from '../utils/url';
+
 export const notify = data => (dispatch) => {
   dispatch({ type: 'POST_NOTIFICATION' });
-  axios.post('https://hellobooks-project.herokuapp.com/api/notifications', data)
+  axios.post(`${url}/notifications`, data)
     .then((response) => {
       if (response.data) {
         return dispatch({
@@ -24,9 +26,9 @@ export const notify = data => (dispatch) => {
 export const getNotification = (category, id) => {
   const determineCategory = () => {
     if (category === 'admin') {
-      return axios.get('https://hellobooks-project.herokuapp.com/api/notifications/admin');
+      return axios.get(`${url}/notifications/admin`);
     }
-    return axios.get(`https://hellobooks-project.herokuapp.com/api/notifications/user/${id}`);
+    return axios.get(`${url}/notifications/user/${id}`);
   };
   return (dispatch) => {
     dispatch({ type: 'GET_NOTIFICATION' });

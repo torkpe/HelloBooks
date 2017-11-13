@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Select from './Select';
+import Select from './Select.jsx';
 
 class userHistory extends Component {
   render() {

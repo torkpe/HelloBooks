@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getAllBorrowed } from '../actions/history';
-import Books from './Books';
+import { clearBooks } from '../actions/books';
+import Books from './Books.jsx';
 
 class allBorrowed extends Component {
   constructor(props) {
@@ -21,6 +22,9 @@ class allBorrowed extends Component {
       });
     }
   }
+  componentWillUnmount() {
+    this.props.clearBooks();
+  }
   render() {
     const books = this.props.getAllBorrowedBooks.borrowedBooks;
     return (
@@ -38,15 +42,17 @@ class allBorrowed extends Component {
           <div className="mdl-grid">
             {books && books.length > 0 ?
               books.map(book => (<Books
-              {...this.props}
+                {...this.props}
                 key={book.Book.id}
                 book={book.Book}
                 userId={this.props.userId}
                 borrowBook={this.props.borrowBook}
                 returnBook={this.props.returnBook}
                 borrowedBook={this.props.borrowed}
-          />)) : this.state.isProperties ? <div className="contents">
-            You have not borrowed any book at this point in time</div> : ''}
+              />)) : this.state.isProperties ? <div className="contents">
+            You have not borrowed any book at this point in time
+              </div> :
+                ''}
           </div>
           <div className="mdl-grid ">
             <div className="mdl-cell mdl-cell--2-col" />
@@ -62,4 +68,7 @@ const mapStateToProps = state => ({
   getAllBorrowedBooks: state.getAllBorrowed,
   loading: state.getAllBorrowed.isLoading,
 });
-export default connect(mapStateToProps, { getAllBorrowed })(allBorrowed);
+export default connect(mapStateToProps, {
+  getAllBorrowed,
+  clearBooks,
+})(allBorrowed);

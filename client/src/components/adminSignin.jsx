@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { userSigninRequest } from '../actions/index';
+import { userSigninRequest } from '../actions/user';
 
 class Signin extends Component {
   constructor(props) {

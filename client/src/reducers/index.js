@@ -2,9 +2,8 @@ import { combineReducers } from 'redux';
 
 import auth from './auth';
 import signin from './signin';
-import signup from './signup';
 import { getBooks, createBook, getBorrows,
-  borrowBook, returnBook, getABook, 
+  borrowBook, returnBook, getABook,
   getExceeds, editBook, deleteBook,
   checkIfBorrowed,
 } from './book';
@@ -17,11 +16,12 @@ import changePassword from './changePassword';
 import updateUser from './updateUser';
 import getUser from './getUser';
 import { uploadCover, uploadPdf } from './upload';
+import { userSignup, confirmationRequest, userSignin } from './user';
 
 const rootReducer = combineReducers({
   auth,
-  signin,
-  signup,
+  userSignin,
+  userSignup,
   getBooks,
   createBook,
   getBorrows,

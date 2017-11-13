@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
+import url from '../utils/url';
+
 export const getHistory = val => (dispatch) => {
   if (val === 'all') {
     dispatch({ type: 'SWITCH_TO_ALL_BORROWED' });
@@ -13,7 +15,7 @@ export const getHistory = val => (dispatch) => {
 };
 export const getBorrowHistory = (star, id) => (dispatch) => {
   dispatch({ type: 'GET_HISTORY_OF_BORROWS' });
-  axios.get(`https://hellobooks-project.herokuapp.com/api/users/${id}/star/all-borrowed`)
+  axios.get(`${url}/users/${id}/star/all-borrowed`)
     .then((response) => {
       if (response.data) {
         return dispatch({
@@ -35,7 +37,7 @@ export const getBorrowHistory = (star, id) => (dispatch) => {
 
 export const getAllBorrowed = id => (dispatch) => {
   dispatch({ type: 'GET_ALL_BORROWED_BOOKS' });
-  axios.get(`https://hellobooks-project.herokuapp.com/api/users/${id}/books/all-borrowed`)
+  axios.get(`${url}/users/${id}/books/all-borrowed`)
     .then((response) => {
       if (response.data) {
         return dispatch({
@@ -57,7 +59,7 @@ export const getAllBorrowed = id => (dispatch) => {
 
 export const allNotReturned = id => (dispatch) => {
   dispatch({ type: 'GET_NOT_RETURNED_BOOKS' });
-  axios.get(`https://hellobooks-project.herokuapp.com/api/users/${id}/books`)
+  axios.get(`${url}/users/${id}/books`)
     .then((response) => {
       if (response.data) {
         return dispatch({

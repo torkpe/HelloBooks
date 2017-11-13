@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+import url from '../utils/url';
+
 export const setPassword = (userId, body) => {
     console.log(body)
     return dispatch => {
         dispatch ({
             type: 'SET_PASSWORD'
         })
-        return axios.put(`https://hellobooks-project.herokuapp.com/api/users/setPassword/${userId}`, body)
+        return axios.put(`${url}/users/setPassword/${userId}`, body)
         .then(response => {
             if (response) {
                 return dispatch({

@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+import url from '../utils/url';
+
 const payBack = (userId, bookId) => (dispatch) => {
   dispatch({ type: 'PAY_BACK' });
-  return axios.put(`https://hellobooks-project.herokuapp.com/api/users/${userId}/${bookId}/book/payback`)
+  return axios.put(`${url}/users/${userId}/${bookId}/book/payback`)
     .then((response) => {
       if (response.data) {
         return dispatch({

@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 
 import { getBooks, borrowBook, returnBook } from '../actions/books';
 import { notify } from '../actions/notification';
-import Books from './Books';
+import Books from './Books.jsx';
 
 class Home extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.getBooks();
   }
   render() {
@@ -47,8 +47,6 @@ class Home extends Component {
 }
 Home.propTypes = {
   getBooks: propTypes.func.isRequired,
-  getBorrows: propTypes.func.isRequired,
-  books: propTypes.object.isRequired,
 };
 const mapStateToProps = state => ({
   books: state.getBooks.books,
@@ -60,5 +58,5 @@ const mapStateToProps = state => ({
   successfullyReturned: state.returnBook.successfullyReturned,
 });
 export default connect(mapStateToProps, {
-  getBooks, borrowBook, returnBook, notify, 
+  getBooks, borrowBook, returnBook, notify,
 })(Home);

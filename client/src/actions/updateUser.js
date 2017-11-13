@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+import url from '../utils/url';
+
 const updateUser = (userId, body) => (dispatch) => {
   dispatch({
     type: 'UPDATE_USER',
   });
-  return axios.put(`https://hellobooks-project.herokuapp.com/api/users/updateUser/${userId}`, body)
+  return axios.put(`${url}/users/updateUser/${userId}`, body)
     .then((response) => {
       if (response) {
         return dispatch({
@@ -12,6 +14,7 @@ const updateUser = (userId, body) => (dispatch) => {
           payload: response.data,
         });
       }
+      return null;
     }).catch((err) => {
       if (err) {
         return dispatch({
@@ -19,6 +22,7 @@ const updateUser = (userId, body) => (dispatch) => {
           payload: err,
         });
       }
+      return null;
     });
 };
 export default updateUser;

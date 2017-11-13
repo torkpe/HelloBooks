@@ -1,11 +1,13 @@
 import axios from 'axios';
 
+import url from '../utils/url';
+
 const getUser = userId => (dispatch) => {
   console.log(userId)
   dispatch({
     type: 'GET_USER',
   });
-  return axios.get(`https://hellobooks-project.herokuapp.com/api/users/${userId}`)
+  return axios.get(`${url}/users/${userId}`)
     .then((response) => {
       if (response) {
         return dispatch({

@@ -6,7 +6,7 @@ const initialState = {
 export const getBooks = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'GET_BOOKS': {
-      return { 
+      return {
         ...state,
         fetching: true,
       };
@@ -31,7 +31,7 @@ export const getBooks = (state = initialState, action = {}) => {
 const getExceedsState = {
   fetching: false,
   exceeds: [],
-  errors: {},
+  errors: '',
 };
 // Get all exceed deadlines
 export const getExceeds = (state = getExceedsState, action = {}) => {
@@ -42,7 +42,7 @@ export const getExceeds = (state = getExceedsState, action = {}) => {
         fetching: true,
       };
     }
-    case 'GET_BOOKS_EXCEEDS': {
+    case 'GET_EXCEEDS_SUCCESSFUL': {
       return {
         ...state,
         fetching: false,
@@ -62,8 +62,9 @@ export const getExceeds = (state = getExceedsState, action = {}) => {
 // Get a book
 const getABookState = {
   fetching: false,
-  books: {},
-  errors: {},
+  book: {},
+  bookQuantity: -1,
+  errors: '',
 };
 export const getABook = (state = getABookState, action = {}) => {
   switch (action.type) {
@@ -77,7 +78,8 @@ export const getABook = (state = getABookState, action = {}) => {
       return {
         ...state,
         fetching: false,
-        books: action.payload,
+        bookQuantity: action.payload.quantity,
+        book: action.payload,
       };
     }
     case 'FAILED_TO_GETBOOK': {
@@ -87,6 +89,14 @@ export const getABook = (state = getABookState, action = {}) => {
         errors: action.payload,
       };
     }
+    case 'CLEAR_SINGLE_BOOK': {
+      return {
+        ...state,
+        fetching: false,
+        bookQuantity: -1,
+        book: {},
+      };
+    }
     default: return state;
   }
 };
@@ -94,7 +104,7 @@ export const getABook = (state = getABookState, action = {}) => {
 export const checkIfBorrowed = (state = getABookState, action = {}) => {
   switch (action.type) {
     case 'CHECK_IF_BORROWED': {
-      return { 
+      return {
         ...state,
         fetching: true,
       };
@@ -103,7 +113,7 @@ export const checkIfBorrowed = (state = getABookState, action = {}) => {
       return {
         ...state,
         fetching: false,
-        books: action.payload,
+        book: action.payload,
       };
     }
     case 'CHECK_IF_BORROWED_FAILED': {
@@ -126,7 +136,7 @@ const borrowBookState = {
 export const borrowBook = (state = borrowBookState, action = {}) => {
   switch (action.type) {
     case 'BORROW_BOOK': {
-      return { 
+      return {
         ...state,
         requesting: true,
       };

@@ -35,33 +35,33 @@ class Profile extends Component {
             {Object.keys(this.props.user).length > 0 &&
             <form onSubmit={this.onSubmit}>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="email" onChange={this.onChange}
-                     className="mdl-textfield__input"
-                     disabled value={this.props.user.email} name="email" />
+                  className="mdl-textfield__input"
+                  disabled value={this.props.user.email} name="email" />
                 <span className="error" />
               </div>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                    type="text" onChange={this.onChange}
-                      className="mdl-textfield__input" defaultValue={
-                        this.props.user.name
-                      } name="name" />
+                  type="text" onChange={this.onChange}
+                  className="mdl-textfield__input" defaultValue={
+                    this.props.user.name
+                  } name="name" />
                 <span className="error" />
               </div>
               <button
-              className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-              id="button">
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                id="button">
                   update
               </button>
             </form>
-                }
+            }
             <div>
               <Link to="/set-password">Set Password </Link>
             </div>
-          </div>                    
+          </div>
         </div>
       </div>
     );

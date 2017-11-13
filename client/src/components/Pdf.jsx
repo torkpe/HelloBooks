@@ -16,17 +16,17 @@ class MyPdfViewer extends Component {
     return (
       <div>
         {
-            Object.keys(book).length > 0 && <PDFReader
+          Object.keys(book).length > 0 && <PDFReader
             file={book.pdf}
             renderType="svg"
-            />
-            }
+          />
+        }
       </div>
     );
   }
 }
 const mapStateToProps = state => ({
-  book: state.getABook.books,
+  book: state.getABook.book,
   userId: state.auth.user.user,
 });
 

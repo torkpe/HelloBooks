@@ -14,6 +14,7 @@ class Books extends Component {
     if (nextProps.successfullyBorrowed) {
       return allowNotification = true;
     }
+    return null;
   }
   render() {
     const book = this.props.book;
@@ -56,17 +57,14 @@ class Books extends Component {
     if (this.props.successfullyBorrowed && allowNotification === true) {
       this.props.notify(data);
       allowNotification = false;
-      return;
     }
     if (this.props.successfullyReturned && allowNotification === true) {
       this.props.notify(data2);
       allowNotification = false;
-      return;
     }
     if (this.props.successfullyCharged && allowNotification === true) {
       this.props.notify(data3);
       allowNotification = false;
-      return;
     }
     return (
       <div className="mdl-cell mdl-cell--4-col">
@@ -79,13 +77,15 @@ class Books extends Component {
             {book.description}
           </div>
           <div className="mdl-card__actions mdl-card--border">
-            { this.props.charge || this.props.category ?
-              <a onClick={chargeUser} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                charge
-              </a>
-            : ''}
+            { this.props.charge ?
+              <button
+                onClick={chargeUser}
+                className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  charge
+              </button>
+              : ''}
             <Link to={`single/${book.id}`} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-              Details
+                Details
             </Link>
           </div>
         </div>

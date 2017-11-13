@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { exceedDeadlines } from '../actions/books';
-import Books from './Books';
+import { exceedDeadlines, clearBooks } from '../actions/books';
+import Books from './Books.jsx';
 import { notify } from '../actions/notification';
 import { chargeUser } from '../actions/charges';
 
 class Log extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isExceedDeadlinesReceived: false,
+    };
+  }
+  componentDidMount() {
     this.props.exceedDeadlines();
+  }
+  componentWillUnmount() {
+    this.props.clearBooks();
   }
   render() {
     const books = this.props.exceedDeadline.exceeds;
@@ -20,7 +29,6 @@ class Log extends Component {
           <div className="mdl-grid ">
             <div className="mdl-cell mdl-cell--2-col" />
           </div>
-          <div className="ask">{this.props.fetching ? 'Loading' : ''}</div>
           <div className="mdl-grid">
             {books.map(book => (<Books
               {...this.props}
@@ -30,7 +38,9 @@ class Log extends Component {
               borrowedUserId={book.userId}
               successfullyCharged={successfullyCharged}
               notify={this.props.notify}
-              />))}
+              isAdmin={this.props.isAdmin}
+            />))}
+            {books.length < 1 ? <div className="ask"> There are no books in the log at this point in time </div> : ''}
           </div>
           <div className="mdl-grid ">
             <div className="mdl-cell mdl-cell--2-col" />
@@ -45,4 +55,9 @@ const mapStateToProps = state => ({
   exceedDeadline: state.getExceeds,
   charge: state.charge,
 });
-export default connect(mapStateToProps, { exceedDeadlines, chargeUser, notify })(Log);
+export default connect(mapStateToProps, {
+  exceedDeadlines,
+  chargeUser,
+  notify,
+  clearBooks,
+})(Log);

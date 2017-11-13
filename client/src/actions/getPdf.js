@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+import url from '../utils/url';
+
 const getPdf = id => (dispatch) => {
   dispatch({ type: 'GET_PDF' });
-  axios.get(`https://hellobooks-project.herokuapp.com/api/books/${id}`)
+  axios.get(`${url}/books/${id}`)
     .then((response) => {
       if (response.data) {
         return dispatch({

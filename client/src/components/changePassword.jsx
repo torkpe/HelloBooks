@@ -24,38 +24,38 @@ class Password extends Component {
   }
   render() {
     return (
-      <div className="mdl-grid">                                               
+      <div className="mdl-grid">
         <div className="contents">
-          <div className="card-enlarge mdl-card mdl-shadow--3dp">        
+          <div className="card-enlarge mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                type="password" onChange={this.onChange}
-                className="mdl-textfield__input" name="password" />
+                  type="password" onChange={this.onChange}
+                  className="mdl-textfield__input" name="password" />
                 <label htmlFor="password" className="mdl-textfield__label">Old Password</label>
                 <span className="error" />
               </div>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                type="password" onChange={this.onChange}
-                className="mdl-textfield__input" name="password1" />
+                  type="password" onChange={this.onChange}
+                  className="mdl-textfield__input" name="password1" />
                 <label htmlFor="password" className="mdl-textfield__label">New Password</label>
                 <span className="error" />
               </div>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                type="password" onChange={this.onChange}
-                className="mdl-textfield__input" name="password2" />
+                  type="password" onChange={this.onChange}
+                  className="mdl-textfield__input" name="password2" />
                 <label htmlFor="password" className="mdl-textfield__label">Confirm Password</label>
                 <span className="error" />
               </div>
               <button
                 disabled={this.props.setPassword.isLoading}
-                        className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                        id="button">
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                id="button">
                 Reset Password
               </button>
             </form>

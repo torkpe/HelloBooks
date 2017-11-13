@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SingleNotification from './Notification';
+import SingleNotification from './Notification.jsx';
 import { getNotification } from '../actions/notification';
 import payBack from '../actions/payback';
 import { getAllBorrowed } from '../actions/history';
@@ -14,7 +14,8 @@ class Notifications extends Component {
     };
   }
   componentWillMount() {
-    this.props.getNotification(this.props.auth.user.star, this.props.auth.user.user);
+    this.props.getNotification(this.props.auth.user.star,
+      this.props.auth.user.user);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.borrowedBooks) {
@@ -36,11 +37,11 @@ class Notifications extends Component {
           <div className="ask">{this.props.loading ? 'Loading...' : ''}</div>
           <div className="mdl-grid contents">
             {notifications.map(notification => (<SingleNotification
-                key={notification.id}
-                notification={notification}
-                payBack={this.props.payBack}
-                userId={this.props.auth.user.user}
-                category={this.props.auth.user.category}
+              key={notification.id}
+              notification={notification}
+              payBack={this.props.payBack}
+              userId={this.props.auth.user.user}
+              category={this.props.auth.user.category}
             />))
             }
           </div>

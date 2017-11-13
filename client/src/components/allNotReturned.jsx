@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import { allNotReturned } from '../actions/history';
-import { getBooks, getBorrows, borrowBook, returnBook } from '../actions/books';
-import Books from './Books';
+import { getBooks, getBorrows, borrowBook, returnBook, clearBooks } from '../actions/books';
+import Books from './Books.jsx';
 
 class notReturned extends Component {
   componentWillMount() {
     this.props.allNotReturned(this.props.auth.user.user);
+  }
+  componentWillUnmount() {
+    this.props.clearBooks();
   }
   render() {
     const books = this.props.notReturned.notReturned;
@@ -21,7 +24,7 @@ class notReturned extends Component {
           </div>
           <div className="contents">
             <span className="ask">
-              <h1>Books yet to be returned</h1>
+              <h2>Books yet to be returned</h2>
             </span>View all Borrowed books <Link to="/all_borrowed_books">here</Link>
             <hr />
           </div>
@@ -51,4 +54,9 @@ const mapStateToProps = state => ({
   notReturned: state.allNotReturned,
   loading: state.allNotReturned.isLoading,
 });
-export default connect(mapStateToProps, { allNotReturned, borrowBook, returnBook })(notReturned);
+export default connect(mapStateToProps, {
+  allNotReturned,
+  borrowBook,
+  returnBook,
+  clearBooks,
+})(notReturned);

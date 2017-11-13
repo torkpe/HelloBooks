@@ -6,32 +6,31 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import jwt from 'jsonwebtoken';
 
-import registerServiceWorker from './registerServiceWorker';
-import Main from './components/Main';
-import Landing from './components/Landing';
-import Signin from './components/Signin';
-import Signup from './components/Signup';
-import Redirect from './components/Redirect';
-import Confirm from './components/Confirm';
-import Home from './components/Home';
+import Main from './components/Main.jsx';
+import Landing from './components/Landing.jsx';
+import Signin from './components/Signin.jsx';
+import Signup from './components/Signup.jsx';
+import Redirect from './components/Redirect.jsx';
+import Confirm from './components/Confirm.jsx';
+import Home from './components/Home.jsx';
 import setAuth from './utils/setAuthToken';
 import rootReducer from './reducers/index';
-import { setCurrentUser } from './actions/index';
-import { Authenticate, isAlreadySignedin, isUser, isAdmin } from './utils/requireAuth';
-import adminSignin from './components/adminSignin';
-import adminSignup from './components/adminSignup';
-import adminHome from './components/adminHome';
-import Restrict from './components/Restrict';
-import Profile from './components/Profile';
-import userHistory from './components/userHistory';
-import allBorrowed from './components/allBorrowed';
-import allNotReturned from './components/allNotReturned';
-import notification from './components/Notifications';
-import SingleBook from './components/SingleBook';
-import Log from './components/Log';
-import Pdf from './components/Pdf';
-import setPassword from './components/changePassword';
-import updateBook from './components/bookForm';
+import { setCurrentUser } from './actions/user';
+import { Authenticate, isAlreadySignedin, isUser, isAdmin } from './utils/requireAuth.jsx';
+import adminSignin from './components/adminSignin.jsx';
+import adminSignup from './components/adminSignup.jsx';
+import adminHome from './components/adminHome.jsx';
+import Restrict from './components/Restrict.jsx';
+import Profile from './components/Profile.jsx';
+import userHistory from './components/userHistory.jsx';
+import allBorrowed from './components/allBorrowed.jsx';
+import allNotReturned from './components/allNotReturned.jsx';
+import notification from './components/Notifications.jsx';
+import SingleBook from './components/SingleBook.jsx';
+import Log from './components/Log.jsx';
+import Pdf from './components/Pdf.jsx';
+import setPassword from './components/changePassword.jsx';
+import updateBook from './components/bookForm.jsx';
 
 const store = createStore(
   rootReducer,
@@ -51,8 +50,8 @@ const router = (
     <Router history={browserHistory}>
       <Route path="/" component={Main}>
         <IndexRoute component={isAlreadySignedin(Landing)} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/signin" component={Signin} />
+        <Route path="/signup" component={isAlreadySignedin(Signup)} />
+        <Route path="/signin" component={isAlreadySignedin(Signin)} />
         <Route path="/redirect" component={Redirect} />
         <Route path="/confirmation/:key" component={Confirm} />
         <Route path="/home" component={Authenticate(Home)} />
@@ -75,4 +74,3 @@ const router = (
   </Provider>
 );
 ReactDOM.render(router, document.getElementById('root'));
-registerServiceWorker();

@@ -24,6 +24,13 @@ export const getAllBorrowed = (state = initialState, action = {}) => {
         errors: action.payload,
       };
     }
+    case 'CLEAR_BOOKS': {
+      return {
+        ...state,
+        isLoading: false,
+        borrowedBooks: [],
+      };
+    }
     default: return state;
   }
 };
@@ -48,10 +55,17 @@ export const allNotReturned = (state = notReturnedState, action = {}) => {
       };
     }
     case 'FAILED_TO_GET_NOT_RETURNED_BOOKS': {
-      return { 
+      return {
         ...state,
         isLoading: false,
         errors: action.payload,
+      };
+    }
+    case 'CLEAR_BOOKS': {
+      return {
+        ...state,
+        isLoading: false,
+        notReturned: [],
       };
     }
     default: return state;
@@ -60,6 +74,7 @@ export const allNotReturned = (state = notReturnedState, action = {}) => {
 
 const getBorrowHistoryState = {
   borrowHistory: [],
+  isLoading: false,
 };
 export const getBorrowHistory = (state = getBorrowHistoryState, action = {}) => {
   switch (action.type) {
@@ -81,6 +96,13 @@ export const getBorrowHistory = (state = getBorrowHistoryState, action = {}) => 
         ...state,
         isLoading: false,
         errors: action.payload,
+      };
+    }
+    case 'CLEAR_BOOKS': {
+      return {
+        ...state,
+        isLoading: false,
+        borrowHistory: [],
       };
     }
     default: return state;

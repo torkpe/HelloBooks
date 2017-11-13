@@ -5,7 +5,7 @@ import { getABook, editBook } from '../actions/books';
 import uploader from '../actions/upload';
 
 let checker = true;
-class updateBook extends Component {    
+class updateBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +15,9 @@ class updateBook extends Component {
     this.onChange = this.onChange.bind(this);
     this.pdfChange = this.pdfChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+  componentWillMount() {
+    this.props.getABook(this.props.params.id);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.book && checker) {
@@ -74,89 +77,85 @@ class updateBook extends Component {
       loading: true,
     });
   }
-  componentWillMount() {
-    this.props.getABook(this.props.params.id);
-  }
   render() {
     const { books } = this.props.book;
+    console.log(this.props.book)
     return (
       <div className="mdl-grid">
         <div className="contents">
-          {Object.keys(books).length > 0 &&
           <div
-              className="card-enlarge mdl-card mdl-shadow--3dp">
+            className="card-enlarge mdl-card mdl-shadow--3dp">
             <form ref="bookForm" onSubmit={this.onSubmit}>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                 <input
-                type="text"
-                className="mdl-textfield__input" defaultValue={books.title} onChange={this.onChange}
-                                name="title" id="title" required />
+                  type="text"
+                  className="mdl-textfield__input" onChange={this.onChange}
+                  name="title" id="title" required />
               </div>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                 <input
-                type="text"
-                className="mdl-textfield__input"defaultValue={books.author} onChange={this.onChange}
-                                name="author" id="author"required />
+                  type="text"
+                  className="mdl-textfield__input" onChange={this.onChange}
+                  name="author" id="author"required />
               </div>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                 <input
-                type="text"
-                className="mdl-textfield__input"
-                defaultValue={books.description} onChange={this.onChange}
-                                name="description" id="description"required />
+                  type="text"
+                  className="mdl-textfield__input"
+                  onChange={this.onChange}
+                  name="description" id="description"required />
               </div>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                 <input
-                type="text"
-                className="mdl-textfield__input" defaultValue={books.genre} onChange={this.onChange}
-                                name="genre" id="genre"required />
+                  type="text"
+                  className="mdl-textfield__input" onChange={this.onChange}
+                  name="genre" id="genre"required />
               </div>
               <div
-              className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
+                className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                 <input
-                type="number"
-                className="mdl-textfield__input"
-                defaultValue={books.quantity} onChange={this.onChange}
-                                name="quantity" id="text"required />
+                  type="number"
+                  className="mdl-textfield__input"
+                  onChange={this.onChange}
+                  name="quantity" id="text"required />
               </div>
               <div
-              className="card-content upload file-upload">
+                className="card-content upload file-upload">
                 <label
-                htmlFor="file-upload"
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent file-upload btn1">
+                  htmlFor="file-upload"
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent file-upload btn1">
                 Upload cover
                 </label>
                 <input
-                type="file"
-                accept="image/*"
-                className="mdl-textfield__input"
-                defaultValue={books.cover} onChange={this.coverChange}
-                name="cover" id="file-upload" />                 
+                  type="file"
+                  accept="image/*"
+                  className="mdl-textfield__input"
+                  onChange={this.coverChange}
+                  name="cover" id="file-upload" />
                 <label
-                htmlFor="file-upload2"
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent file-upload btn2">
+                  htmlFor="file-upload2"
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent file-upload btn2">
                 Upload Pdf
                 </label>
                 <input
-                type="file"
-                className="mdl-textfield__input"
-                defaultValue={books.pdf}
-                onChange={this.pdfChange}
-                name="pdf" id="file-upload2" />
+                  type="file"
+                  className="mdl-textfield__input"
+                  
+                  onChange={this.pdfChange}
+                  name="pdf" id="file-upload2" />
               </div>
               <button
-              disabled={this.state.loading}
-              className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-              id="button">
+                disabled={this.state.loading}
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                id="button">
                 Update book
               </button>
-            </form>                    
+            </form>
           </div>
-                }
         </div>
       </div>
     );

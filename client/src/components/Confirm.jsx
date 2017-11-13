@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import { userConfirmRequest } from '../actions/index';
+import { userConfirmRequest } from '../actions/user';
 
 class Confirm extends Component {
   constructor(props) {
