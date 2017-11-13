@@ -4,8 +4,8 @@
   "description": "an e-library system",
   "main": "server.js",
   "scripts": {
-    "start": "npm-run-all --parallel test:watch open:src lint:watch",
-    "build": "webpack -d && webpack-dev-server --open --hot",
+    "start": "npm run build",
+    "build": "webpack -p && webpack-dev-server --open --hot",
     "start:dev": "npm run build"
   },
   "dependencies": {
