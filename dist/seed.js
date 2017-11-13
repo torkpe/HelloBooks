@@ -25,4 +25,7 @@ User.create({
   star: 'admin',
   confirmed: true,
   key: 'admin'
+}, function (response) {
+  console.log(response);
+  process.exit(0);
 });

@@ -5,11 +5,11 @@
   "main": "server.js",
   "scripts": {
     "build": "babel ./src --watch -d ./dist --presets es2015",
-    "start:dev": "nodemon ./dist/bin/www.js && npm run seed --watch",
+    "start:dev": "nodemon ./dist/bin/www.js --watch",
     "test": "cross-env-shell NODE_ENV=travis && sequelize db:migrate:undo:all && sequelize db:migrate && nyc mocha ./dist/test/*",
     "test:local": "cross-env-shell NODE_ENV=test && sequelize db:migrate:undo:all && sequelize db:migrate && nyc mocha .dist/test/*",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "start": "node ./dist/bin/www.js && db:migrate",
+    "start": "node ./dist/bin/www.js",
     "test:db": "sequelize db:migrate",
     "seed":"node ./dist/seed.js",
     "heroku-postbuild": "NODE_ENV=production  && NODE_END=production sequelize db:migrate:undo:all && NODE_END=production sequelize db:migrate"
