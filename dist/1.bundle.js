@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 632:
+/***/ 637:
 /*!******************************************!*\
   !*** ./~/pdfjs-dist/build/pdf.worker.js ***!
   \******************************************/
@@ -45395,7 +45395,7 @@ webpackJsonp([1],{
 	/******/ ]);
 	});
 	//# sourceMappingURL=pdf.worker.js.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/process/browser.js */ 3), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../process/browser.js */ 3), (function() { return this; }())))
 
 /***/ })
 

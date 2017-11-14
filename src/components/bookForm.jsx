@@ -21,15 +21,16 @@ class updateBook extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.book && checker) {
-      const { books } = nextProps.book;
+      const book = nextProps.book
+      console.log(book)
       this.setState({
-        cover: books.cover,
-        pdf: books.pdf,
-        title: books.title,
-        author: books.author,
-        description: books.description,
-        quantity: books.quantity,
-        genre: books.genre,
+        cover: book.cover,
+        pdf: book.pdf,
+        title: book.title,
+        author: book.author,
+        description: book.description,
+        quantity: book.quantity,
+        genre: book.genre,
         loading: false,
       });
     }
@@ -78,26 +79,26 @@ class updateBook extends Component {
     });
   }
   render() {
-    const { books } = this.props.book;
-    console.log(this.props.book)
+    const book = this.props.book;
     return (
       <div className="mdl-grid">
         <div className="contents">
           <div
             className="card-enlarge mdl-card mdl-shadow--3dp">
+            {Object.keys(book).length > 0 ?
             <form ref="bookForm" onSubmit={this.onSubmit}>
               <div
                 className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                 <input
                   type="text"
                   className="mdl-textfield__input" onChange={this.onChange}
-                  name="title" id="title" required />
+                  name="title" id="title" defaultValue= {this.state.title} required />
               </div>
               <div
                 className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                 <input
                   type="text"
-                  className="mdl-textfield__input" onChange={this.onChange}
+                  className="mdl-textfield__input" defaultValue= {this.state.author} onChange={this.onChange}
                   name="author" id="author"required />
               </div>
               <div
@@ -106,13 +107,13 @@ class updateBook extends Component {
                   type="text"
                   className="mdl-textfield__input"
                   onChange={this.onChange}
-                  name="description" id="description"required />
+                  name="description" defaultValue= {this.state.description} id="description"required />
               </div>
               <div
                 className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                 <input
                   type="text"
-                  className="mdl-textfield__input" onChange={this.onChange}
+                  className="mdl-textfield__input" defaultValue= {this.state.genre}  onChange={this.onChange}
                   name="genre" id="genre"required />
               </div>
               <div
@@ -121,7 +122,7 @@ class updateBook extends Component {
                   type="number"
                   className="mdl-textfield__input"
                   onChange={this.onChange}
-                  name="quantity" id="text"required />
+                  name="quantity" defaultValue= {this.state.quantity}  id="text"required />
               </div>
               <div
                 className="card-content upload file-upload">
@@ -155,6 +156,7 @@ class updateBook extends Component {
                 Update book
               </button>
             </form>
+            :''}
           </div>
         </div>
       </div>
@@ -164,7 +166,7 @@ class updateBook extends Component {
 
 const mapStateToProps = state => ({
   admin: state.createBook,
-  book: state.getABook,
+  book: state.getABook.book,
   cover: state.uploadCover.uploaded,
   pdf: state.uploadPdf.uploaded,
   updatedDetail: state.editBook.resp.updatedBook,

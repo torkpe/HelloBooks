@@ -162,6 +162,7 @@ export const returnBook = (id, bookId, data) => (dispatch) => {
 
 // Post a book
 export const postBook = data => (dispatch) => {
+  console.log(data)
   dispatch({ type: 'POST_BOOK' });
   return axios.post(`${url}/books`, data)
     .then((response) => {

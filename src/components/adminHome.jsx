@@ -50,7 +50,6 @@ class Admin extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.postBook(this.state);
-    this.refs.bookForm.reset();
     this.setState({
       isLoading: true,
     });
@@ -79,32 +78,32 @@ class Admin extends Component {
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="text" className="mdl-textfield__input" onChange={this.onChange}
-                  name="title" id="title" required />
+                  name="title" id="title"  />
                 <label htmlFor="title" className="mdl-textfield__label">Title</label>
               </div>
               <div
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="text" className="mdl-textfield__input" onChange={this.onChange}
-                  name="author" id="author"required />
+                  name="author" id="author" />
                 <label htmlFor="author" className="mdl-textfield__label">Author</label>
               </div>
               <div className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="text" className="mdl-textfield__input" onChange={this.onChange}
-                  name="description" id="description"required />
+                  name="description" id="description" />
                 <label htmlFor="description" className="mdl-textfield__label">Description</label>
               </div>
               <div className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="text" className="mdl-textfield__input" onChange={this.onChange}
-                  name="genre" id="genre"required />
+                  name="genre" id="genre" />
                 <label htmlFor="genre" className="mdl-textfield__label">Genre</label>
               </div>
               <div className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="number" className="mdl-textfield__input" onChange={this.onChange}
-                  name="quantity" id="text"required />
+                  name="quantity" id="text" />
                 <label htmlFor="quantity" className="mdl-textfield__label">Quantity</label>
               </div>
               <div className="card-content upload file-upload">
@@ -127,7 +126,7 @@ class Admin extends Component {
                 </label>
                 <input
                   type="file" className="mdl-textfield__input" onChange={this.pdfChange}
-                  name="pdf" id="file-upload2"required />
+                  name="pdf" id="file-upload2" />
               </div>
               <button
                 disabled={this.state.isLoading}

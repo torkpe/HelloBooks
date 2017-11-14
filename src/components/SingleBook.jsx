@@ -13,10 +13,6 @@ class Book extends Component {
       checkForBorrowed: null,
     };
   }
-  // componentWillMount() {
-  //   this.props.checkForBorrowed = undefined;
-  //   this.props.clearSingleBook();
-  // }
   componentDidMount() {
     this.props.getABook(this.props.params.id);
     if (!this.props.auth.user.category) {
@@ -24,11 +20,15 @@ class Book extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    if (Object.keys(nextProps.checkForBorrowed).length > 0) {
+    if (Object.keys(nextProps.checkForBorrowed).length > 1) {
       this.setState({
         isBorrowed: true,
       });
       // console.log(nextProps.checkForBorrowed)
+    } else{
+      this.setState({
+        isBorrowed: false,
+      });
     }
     if (nextProps.book.bookQuantity > -1) {
       this.setState({
@@ -39,9 +39,17 @@ class Book extends Component {
   componentWillUnmount() {
     this.setState({
       isBorrowed: false,
+      quantity: undefined,
     });
+    this.props.checkForBorrowed.owing = undefined;
+    this.props.checkForBorrowed.bookId = undefined;
+    this.props.checkForBorrowed.createdAt = undefined;
+    this.props.checkForBorrowed.id = undefined;
+    this.props.checkForBorrowed.returnDate = undefined;
+    this.props.checkForBorrowed.updatedAt = undefined;
+    this.props.checkForBorrowed.userId = undefined;
+    this.props.checkForBorrowed.returned = undefined;
     this.props.clearSingleBook();
-    this.props.checkForBorrowed.owing = true;
   }
   render() {
     const { fetching, book } = this.props.book;

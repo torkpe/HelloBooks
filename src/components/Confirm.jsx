@@ -45,7 +45,7 @@ class Confirm extends Component {
                             <input
 type="text" className="mdl-textfield__input"
                                 onChange={this.onChange} name="name" id="name" />
-                            <label htmlFor="email" className="mdl-textfield__label">Full Name</label>
+                            <label htmlFor="name" className="mdl-textfield__label">Full Name</label>
                           </div>
                         <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label card-content">
                             <input

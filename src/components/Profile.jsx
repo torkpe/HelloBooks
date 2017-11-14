@@ -30,9 +30,9 @@ class Profile extends Component {
   render() {
     return (
       <div className="mdl-grid">
-        <div className="contents">
+        {Object.keys(this.props.user).length > 0 &&<div className="contents">
           <div className="card-enlarge mdl-card mdl-shadow--3dp">
-            {Object.keys(this.props.user).length > 0 &&
+            
             <form onSubmit={this.onSubmit}>
               <div
                 className="mdl-textfield mdl-js-textfield card-content">
@@ -57,12 +57,13 @@ class Profile extends Component {
                   update
               </button>
             </form>
-            }
+        
             <div>
               <Link to="/set-password">Set Password </Link>
             </div>
           </div>
         </div>
+        }
       </div>
     );
   }
