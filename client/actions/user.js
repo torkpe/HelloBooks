@@ -34,7 +34,7 @@ export const userSignup = userData =>
 
 export const userConfirmRequest = userData =>
   dispatch =>
-    axios.put(`${url}/confimation/${userData.key}`, userData)
+    axios.put(`${url}/confirmation/${userData.key}`, userData)
       .then((response) => {
         const token = response.data.myToken;
         localStorage.setItem('jwt', token);
