@@ -71,7 +71,6 @@ export default {
       })
       .catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
-
   // update a book's info
   editBook(request, response) {
     return Book

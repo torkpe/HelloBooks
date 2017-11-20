@@ -3,7 +3,8 @@ const userRequests = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     message: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    bookId: DataTypes.STRING
+    bookId: DataTypes.STRING,
+    isTreated: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: (models) => {

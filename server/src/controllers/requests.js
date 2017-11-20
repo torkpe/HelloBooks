@@ -4,16 +4,10 @@ const { Request } = model;
 
 export default {
   createRequest(request, response) {
-    const { userId, message, bookId } = request.body;
-    if ((message.trim()).length < 10) {
-      return response.status(400).send({
-        message: 'Message is too short'
-      })
-    }
-    Request.create({
+    const { userId, bookId } = request.body;
+    return Request.create({
       userId,
-      message,
-      bookId,
+      message: 'the following user wishes to upgrade to the next level',
       type: 'upgrade'
     })
       .then(createdRequest => response.status(201).send(createdRequest))
@@ -23,8 +17,24 @@ export default {
   },
   getRequests(request, response) {
     return Request
-      .findAll({})
+      .findAll({
+        where: {
+          isTreated: false
+        }
+      })
       .then(requests => response.status(200).send(requests))
       .catch(error => response.status(500).send({ error: error.message }));
+  },
+  updateRequests(userId) {
+    return Request.findAll({
+      where: {
+        isTreated: false,
+        userId,
+      }
+    }).then(requests => requests.map(request =>
+      request.update({
+        isTreated: true
+      })))
+      .catch(() => ({ message: 'Something went wrong' }));
   }
 };

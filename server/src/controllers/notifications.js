@@ -56,20 +56,29 @@ export default {
       return response.status(200).send({ message: 'No notification at this time' });
     }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
-  updateNotification(user, bookId) {
-    return Notifications.findOne({
+  updateNotification(request, response) {
+    const { userId } = request.params;
+    return Notifications.findAll({
       where: {
-        userId: user,
-        bookId,
-        isTreated: false,
+        userId,
+        isTreated: true,
       }
     }).then((foundNotification) => {
-      console.log(foundNotification);
-      foundNotification.update({
+      foundNotification.map(notification => notification.update({
         isTreated: true
-      }).then(updated => (
-        console.log(updated)
-      ));
+      }).then(updated => updated))
+    });
+  },
+  updateAdminNotification(request, response) {
+    const { userId } = request.params;
+    return Notifications.findAll({
+      where: {
+        type: 'admin'
+      }
+    }).then((foundNotification) => {
+      foundNotification.map(notification => notification.update({
+        isTreated: true
+      }).then(updated => updated))
     });
   }
 };

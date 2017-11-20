@@ -101,31 +101,6 @@ export default {
         return response.status(200).send(books);
       }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
-  // Pay back debts
-  payBack(request, response) {
-    const { bookId } = request.params;
-    const { user } = request.decoded;
-    return BorrowBook
-      .findOne({
-        where: {
-          userId: user,
-          bookId,
-          owing: true,
-        },
-      }).then((book) => {
-        if (!book) {
-          return response.status(404).send({ message: 'No book found' });
-        }
-        book.update({ owing: false })
-          .then((updated) => {
-            updateNotification(user, bookId)
-            return response.status(200).send({
-              message: 'A notification has been sent to admin to confirm your request'
-            });
-          })
-          .catch(() => response.status(500).send({ message: 'Something went wrong' }));
-      });
-  },
   // Check if book has been borrowed before
   getABorrowed(request, response) {
     return BorrowBook
@@ -182,9 +157,6 @@ export default {
     const newDate = new Date(new Date().getTime());
     return BorrowBook
       .findAll({
-        include: [
-          Book,
-        ],
         where: {
           returnDate: { $lt: newDate },
           returned: false,
@@ -193,8 +165,8 @@ export default {
       }).then(books => response.status(200).send(books))
       .catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
-  // Charge for exceeding deadline
-  chargeUser(request, response) {
+  // remind for exceeding deadline
+  remindUser(request, response) {
     const { userId, bookId } = request.params;
     return BorrowBook
       .findOne({
@@ -203,31 +175,24 @@ export default {
           bookId,
         },
       }).then((book) => {
-        if (!book) {
-          return response.status(404).send({
+        if (book.length < 1) {
+          return response.status(200).send({
             message: 'No detail concerning this book was found'
           });
         }
-        book.update({
-          owing: true
-        }).then((updated) => {
-          Book.find({
-            where: {
-              id: bookId
-            }
-          }).then((foundBook) => {
-            const type = 'user';
-            const message = `you just got charged for the book '${foundBook.title}'`;
-            notify(message, type, userId, bookId);
-            response.status(200).send({
-              updated,
-              message: 'Successfully charged user',
-            });
+        Book.find({
+          where: {
+            id: bookId
+          }
+        }).then((foundBook) => {
+          const type = 'user';
+          const message = `Gentle reminder concerning the book '${foundBook.title}'.
+          Please return as you have exceeded the deadline in order to continue using this service`;
+          notify(message, type, userId, bookId);
+          response.status(200).send({
+            message: 'Successfully sent a notification to user',
           });
-        })
-          .catch(() => response.status(500).send({
-            message: 'Something went wrong'
-          }));
+        });
       })
       .catch(() => response.status(500).send({
         message: 'Something went wrong'

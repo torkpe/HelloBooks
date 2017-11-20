@@ -25,35 +25,6 @@ class Admin extends Component {
     this.pdfChange = this.pdfChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-  coverChange(e) {
-    e.preventDefault();
-    const cover = e.target.files[0];
-    this.props.uploader(cover, 'cover');
-    this.setState({
-      isLoading: true,
-    });
-  }
-  onChange(e) {
-    e.preventDefault();
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
-  pdfChange(e) {
-    e.preventDefault();
-    const pdf = e.target.files[0];
-    this.props.uploader(pdf, 'pdf');
-    this.setState({
-      isLoading: true,
-    });
-  }
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.postBook(this.state);
-    this.setState({
-      isLoading: true,
-    });
-  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.cover && nextProps.pdf) {
       this.setState({
@@ -68,6 +39,55 @@ class Admin extends Component {
       });
     }
   }
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.postBook(this.state);
+    this.setState({
+      isLoading: true,
+    });
+  }
+  onChange(event) {
+    event.preventDefault();
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+  coverChange(event) {
+    event.preventDefault();
+    const cover = event.target.files[0];
+    const coverReader = new FileReader();
+    if (cover) {
+      coverReader.onload = () => {
+        const newUpload = new Image();
+        newUpload.src = coverReader.result;
+        newUpload.onload = () => {
+          this.props.uploader(cover, 'cover');
+          this.setState({
+            isLoading: true,
+          });
+        };
+      };
+    }
+    coverReader.readAsDataURL(cover);
+  }
+  pdfChange(event) {
+    event.preventDefault();
+    const pdf = event.target.files[0];
+    const pdfReader = new FileReader();
+    if (pdf) {
+      pdfReader.onload = () => {
+        const newUpload = new Image();
+        newUpload.src = pdfReader.result;
+        newUpload.onload = () => {
+          this.props.uploader(pdf, 'pdf');
+          this.setState({
+            isLoading: true,
+          });
+        };
+      };
+    }
+    pdfReader.readAsDataURL(pdf);
+  }
   render() {
     return (
       <div className="mdl-grid">
@@ -78,7 +98,7 @@ class Admin extends Component {
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="text" className="mdl-textfield__input" onChange={this.onChange}
-                  name="title" id="title"  />
+                  name="title" id="title" />
                 <label htmlFor="title" className="mdl-textfield__label">Title</label>
               </div>
               <div

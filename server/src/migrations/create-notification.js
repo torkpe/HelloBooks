@@ -35,6 +35,9 @@ const notification = {
           msg: 'userId is required'
         },
       },
+      isTreated: {
+        type: Sequelize.BOOLEAN
+      },
       from: {
         type: Sequelize.STRING,
         allowNull: {

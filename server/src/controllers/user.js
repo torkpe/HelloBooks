@@ -2,10 +2,14 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import random from 'random-key';
 import validator from 'validator';
+
 import model from '../models';
 import app from '../server';
 import { sendEmail, generateToken } from '../utils/index';
+import notification from './notifications';
+import userRequest from './requests';
 
+const notify = notification.createNotification;
 const salt = bcrypt.genSaltSync(10);
 const User = model.Users;
 
@@ -228,6 +232,41 @@ Please click on the click below to confirm your email addresponses
         return response.status(404).send({ message: 'User not found' });
       })
       .catch(() => response.status(500).send({ message: 'Something went wrong' }));
+  },
+  upgradeUser(request, response) {
+    const { userId } = request.params;
+    return User.findOne({
+      where: {
+        id: userId
+      }
+    }).then((user) => {
+      if (!user) {
+        return response.status(404).send({
+          message: 'This user cannot be found'
+        });
+      }
+      if (user.star === 'bronze') {
+        return user.update({
+          star: 'silver'
+        }).then((upgradedUser) => {
+          const message = `Congratulations! You have just been upgraded to ${upgradedUser.star} level`;
+          notify(message, 'user', userId);
+          userRequest.updateRequests(userId);
+          return response.status({
+            message: 'successfully upgraded user'
+          });
+        })
+          .catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      }
+      if (user.star === 'silver') {
+        return user.update({
+          star: 'gold'
+        }).then(upgradedUser => response.status({
+          message: 'successfully upgraded user'
+        }))
+          .catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      }
+    });
   }
 };
 

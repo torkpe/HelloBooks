@@ -21,7 +21,7 @@ class updateBook extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.book && checker) {
-      const book = nextProps.book
+      const { book } = nextProps;
       this.setState({
         cover: book.cover,
         pdf: book.pdf,

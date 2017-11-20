@@ -13,7 +13,7 @@ class Signup extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const { successfullySignedup } = nextProps.signup;
-    if (successfullySignedup.message) {
+    if (successfullySignedup.message.length > 0) {
       browserHistory.push('/redirect');
     }
   }

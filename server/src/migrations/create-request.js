@@ -16,6 +16,9 @@ const userRequest = {
       userId: {
         type: Sequelize.INTEGER
       },
+      isTreated: {
+        type: Sequelize.BOOLEAN
+      },
       bookId: {
         type: Sequelize.STRING
       },
