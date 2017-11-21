@@ -61,12 +61,14 @@ class Admin extends Component {
         const newUpload = new Image();
         newUpload.src = coverReader.result;
         newUpload.onload = () => {
-          this.props.uploader(cover, 'cover');
-          this.setState({
-            isLoading: true,
-          });
         };
       };
+    }
+    coverReader.onloadend = () => {
+      this.props.uploader(cover, 'cover');
+      this.setState({
+        isLoading: true,
+      });
     }
     coverReader.readAsDataURL(cover);
   }
@@ -76,7 +78,7 @@ class Admin extends Component {
     const pdfReader = new FileReader();
     if (pdf) {
       pdfReader.onload = () => {
-        const newUpload = new Image();
+        const newUpload = new File([''], pdf.name);
         newUpload.src = pdfReader.result;
         newUpload.onload = () => {
           this.props.uploader(pdf, 'pdf');
