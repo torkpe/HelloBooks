@@ -6,7 +6,7 @@ dotenv.config();
 
 const upload = (data) => {
   const cloudName = 'hellobooks';
-  const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
+  const url = `http://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const timestamp = Date.now() / 1000;
   const uploadPreset = process.env.UPLOAD_PRESET;
   const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset}${process.env.PARAM_STRING}`;
