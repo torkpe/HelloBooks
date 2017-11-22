@@ -28,7 +28,7 @@ export default {
         message: 'Your description for this book seems to be too short'
       });
     }
-    if (/^[0-9]{1,10}$/.test(tempVal)) {
+    if (!(/^[0-9]{1,10}$/.test(quantity))) {
       return response.status(400).send({
         message: 'Quantity of book should a nubmer'
       });
