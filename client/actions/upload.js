@@ -25,7 +25,6 @@ const upload = (data) => {
   return uploadRequest;
 };
 const uploader = (data, uploadType) => (dispatch) => {
-  console.log(data)
   if (uploadType === 'cover') {
     dispatch({ type: 'UPLOAD_COVER' });
   } else {

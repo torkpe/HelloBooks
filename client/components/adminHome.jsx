@@ -14,6 +14,10 @@ const initialState = {
   quantity: '',
   genre: '',
   isLoading: false,
+  isImageAndPdf: false,
+  isImageSet: false,
+  isPdfSet: false,
+  error: ''
 };
 
 class Admin extends Component {
@@ -24,27 +28,36 @@ class Admin extends Component {
     this.onChange = this.onChange.bind(this);
     this.pdfChange = this.pdfChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onPostCover = this.onPostCover.bind(this);
+    this.onPostPdf = this.onPostPdf.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.cover && nextProps.pdf) {
+    if (nextProps.cover) {
       this.setState({
         cover: nextProps.cover,
+      });
+    }
+    if (nextProps.pdf) {
+      this.setState({
         pdf: nextProps.pdf,
-        isLoading: false,
+      });
+    }
+    if (nextProps.cover && nextProps.pdf) {
+      this.setState({
+        isImageAndPdf: false
       });
     }
     if (nextProps.createBook) {
       this.setState({
-        initialState,
+        isLoading: false,
+        isImageSet: false,
+        isPdfSet: false,
       });
     }
   }
   onSubmit(event) {
     event.preventDefault();
     this.props.postBook(this.state);
-    this.setState({
-      isLoading: true,
-    });
   }
   onChange(event) {
     event.preventDefault();
@@ -52,50 +65,38 @@ class Admin extends Component {
       [event.target.name]: event.target.value,
     });
   }
+  onPostCover(event) {
+    event.preventDefault();
+    this.props.uploader(this.state.cover, 'cover');
+  }
+  onPostPdf(event) {
+    event.preventDefault();
+    this.props.uploader(this.state.pdf, 'pdf');
+  }
   coverChange(event) {
     event.preventDefault();
     const cover = event.target.files[0];
-    const coverReader = new FileReader();
-    if (cover) {
-      coverReader.onload = () => {
-        const newUpload = new Image();
-        newUpload.src = coverReader.result;
-        newUpload.onload = () => {
-        };
-      };
-    }
-    coverReader.onloadend = () => {
-      this.props.uploader(cover, 'cover');
-      this.setState({
-        isLoading: true,
-      });
-    }
-    coverReader.readAsDataURL(cover);
+    this.setState({
+      cover,
+      isImageSet: true,
+      isImageAndPdf: true
+    });
   }
   pdfChange(event) {
     event.preventDefault();
     const pdf = event.target.files[0];
-    const pdfReader = new FileReader();
-    if (pdf) {
-      pdfReader.onload = () => {
-        const newUpload = new File([''], pdf.name);
-        newUpload.src = pdfReader.result;
-        newUpload.onload = () => {
-          this.props.uploader(pdf, 'pdf');
-          this.setState({
-            isLoading: true,
-          });
-        };
-      };
-    }
-    pdfReader.readAsDataURL(pdf);
+    this.setState({
+      pdf,
+      isPdfSet: true,
+      isImageAndPdf: true
+    });
   }
   render() {
     return (
       <div className="mdl-grid">
         <div className="contents">
           <div className="card-enlarge mdl-card mdl-shadow--3dp">
-            <form ref="bookForm" onSubmit={this.onSubmit}>
+            <form ref="bookForm">
               <div
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
@@ -150,8 +151,24 @@ class Admin extends Component {
                   type="file" className="mdl-textfield__input" onChange={this.pdfChange}
                   name="pdf" id="file-upload2" />
               </div>
+              {this.state.isImageSet ?
+                <button
+                disabled={this.state.isLoading} onClick={this.onPostCover}
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                id="button">
+                  Upload Cover
+                </button> : ''
+              }
+              {this.state.isPdfSet ?
+                <button
+                disabled={this.state.isLoading} onClick={this.onPostPdf}
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                id="button">
+                  Upload Pdf
+                </button> : ''
+              }
               <button
-                disabled={this.state.isLoading}
+                disabled={this.state.isImageAndPdf} onClick={this.onSubmit}
                 className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
                 id="button">
                   Create Book
