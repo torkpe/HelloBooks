@@ -22,6 +22,7 @@ class Log extends Component {
   }
   render() {
     const books = this.props.exceedDeadline.exceeds;
+
     const { successfullyCharged } = this.props.charge;
     return (
       <div className="mdl-grid ">
@@ -38,7 +39,7 @@ class Log extends Component {
                   <th>Action</th>
                 </tr>
               </thead>
-              {books.map(book => (<Table
+              {books.map(book => console.log(book)(<Table
               {...this.props}
               key={book.id}
               book={book.Book}
