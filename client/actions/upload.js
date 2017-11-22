@@ -1,13 +1,9 @@
 import superagent from 'superagent';
 import sha1 from 'sha1';
 
-const dotenv = require('dotenv');
-
-dotenv.load();
 
 const upload = (data) => {
   const cloudName = process.env.CLOUD_NAME;
-  console.log(cloudName);
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const timestamp = Date.now() / 1000;
   const uploadPreset = process.env.UPLOAD_PRESET;
