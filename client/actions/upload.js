@@ -5,14 +5,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const upload = (data) => {
-  const cloudName = 'hellobooks';
-  const url = `http://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
+  const cloudName = process.env.CLOUD_NAME;
+  const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const timestamp = Date.now() / 1000;
-  const uploadPreset = 'wad3pvmg';
-  const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset}8c060McBdeyZClXXNfNgpG8QqXU`;
+  const uploadPreset = process.env.UPLOAD_PRESET;
+  const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset + process.env.PARAM_STRING}`;
   const signature = sha1(paramsStr);
   const params = {
-    api_key: '521381859673832',
+    api_key: process.env.API_KEY,
     timestamp,
     upload_preset: uploadPreset,
     signature,
