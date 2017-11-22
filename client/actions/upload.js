@@ -8,11 +8,11 @@ const upload = (data) => {
   const cloudName = 'hellobooks';
   const url = `http://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const timestamp = Date.now() / 1000;
-  const uploadPreset = process.env.UPLOAD_PRESET;
-  const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset}${process.env.PARAM_STRING}`;
+  const uploadPreset = 'wad3pvmg';
+  const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset}8c060McBdeyZClXXNfNgpG8QqXU`;
   const signature = sha1(paramsStr);
   const params = {
-    api_key: process.env.API_KEY,
+    api_key: '521381859673832',
     timestamp,
     upload_preset: uploadPreset,
     signature,
