@@ -2,9 +2,10 @@ const notification = (sequelize, DataTypes) => {
   const Notification = sequelize.define('Notification', {
     message: DataTypes.STRING,
     type: DataTypes.STRING,
-    viewed: DataTypes.BOOLEAN,
-    from: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    isTreated: DataTypes.BOOLEAN,
+    from: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
+    bookId: DataTypes.STRING
   }, {
     classMethods: {
       associate: (models) => {

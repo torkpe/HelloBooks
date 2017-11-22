@@ -15,8 +15,7 @@ let sequelize;
 if (configg.use_env_variable) {
   sequelize = new Sequelize(process.env[configg.use_env_variable]);
 } else {
-  sequelize = new Sequelize(
-    configg.database, configg.username, configg.password, configg);
+  sequelize = new Sequelize(configg.database, configg.username, configg.password, configg);
 }
 
 fs

@@ -1,84 +1,84 @@
-import nodemailer from 'nodemailer';
 import model from '../models';
+import { sendEmail } from '../utils/index';
 
-const User = model.Users;
 const Notifications = model.Notification;
+const User = model.Users;
 
-// Function to send email to users
-const sendEmail = (message, type, userId) => {
-  if (type === 'user') {
-    User.findAll({
+export default {
+  createNotification(message, type, userId, bookId) {
+    return User.findOne({
       where: {
         id: userId
       }
-    }).then((foundUser) => {
-      const userEmail = foundUser.map(user => user.dataValues.email);
-      if (foundUser) {
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          secure: true,
-          port: 25,
-          auth: {
-            user: 'hellobooks9@gmail.com',
-            pass: 'silvershoe12'
-          },
-          tls: {
-            rejectUnauthorized: false
-          }
-        });
-        const mailOptions = {
-          from: '"hello-books Admin" <hellobooks9@gmail.com>',
-          to: userEmail,
-          subject: 'Notification from hello-books',
-          text: message
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log(`Email sent: ${info.response}`);
-          }
-        });
-      }
-    });
-  }
-};
-export default {
-  createNotification(req, res) {
-    return Notifications
-      .create({
-        message: req.body.message,
-        type: req.body.type, // Admin or User
-        viewed: false,
-        userId: req.body.userId,
-        from: req.decoded.user
-      }).then(notification => res.status(201).send({ notification, message: 'successfully created notification' }),
-        sendEmail(req.body.message, req.body.type, req.body.userId))
-      .catch(err => res.status(403).send({ message: err.message }));
+    }).then((user) => {
+      Notifications
+        .create({
+          message: `${user.name}, ${message}`,
+          type, // Admin or User
+          isTreated: false,
+          userId,
+          from: user.name,
+          bookId,
+        }).then(
+          notification => ({
+            notification,
+            message: 'successfully created notification'
+          }),
+          sendEmail(message, type, userId)
+        )
+        .catch(() => ({ message: 'Something went wrong' }));
+    })
+      .catch(() => ({ message: 'Something went wrong' }));
   },
-  getAdminNotifications(req, res) {
+  getAdminNotifications(request, response) {
     return Notifications.findAll({
       where: {
         type: 'admin',
       }
     }).then((foundNotifications) => {
       if (foundNotifications) {
-        return res.status(200).send(foundNotifications);
+        return response.status(200).send(foundNotifications);
       }
-      return res.status(200).send({ message: 'No notification at this time' });
-    }).catch(err => res.status(400).send({ message: err.message }));
+      return response.status(200).send({ message: 'No notification at this time' });
+    }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
-  getUserNotifications(req, res) {
+  getUserNotifications(request, response) {
     return Notifications.findAll({
       where: {
         type: 'user',
-        userId: req.decoded.userId
-      }
+        userId: request.params.id,
+        isTreated: false
+      },
     }).then((foundNotifications) => {
       if (foundNotifications) {
-        return res.status(200).send(foundNotifications);
+        return response.status(200).send(foundNotifications);
       }
-      return res.status(200).send({ message: 'No notification at this time' });
-    }).catch(err => res.status(400).send({ message: err.message }));
+      return response.status(200).send({ message: 'No notification at this time' });
+    }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
+  updateNotification(request, response) {
+    const { userId } = request.params;
+    return Notifications.findAll({
+      where: {
+        userId,
+        isTreated: true,
+      }
+    }).then((foundNotification) => {
+      foundNotification.map(notification => notification.update({
+        isTreated: true
+      }).then(updated => updated))
+    });
+  },
+  updateAdminNotification(request, response) {
+    const { userId } = request.params;
+    return Notifications.findAll({
+      where: {
+        type: 'admin'
+      }
+    }).then((foundNotification) => {
+      foundNotification.map(notification => notification.update({
+        isTreated: true
+      }).then(updated => updated))
+    });
+  }
 };

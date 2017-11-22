@@ -21,13 +21,6 @@ const notification = {
           msg: 'Type is required'
         },
       },
-      viewed: {
-        type: Sequelize.BOOLEAN,
-        allowNull: {
-          args: false,
-          msg: 'Viewed is required'
-        },
-      },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: {
@@ -35,8 +28,18 @@ const notification = {
           msg: 'userId is required'
         },
       },
-      from: {
+      bookId: {
         type: Sequelize.INTEGER,
+        allowNull: {
+          args: false,
+          msg: 'userId is required'
+        },
+      },
+      isTreated: {
+        type: Sequelize.BOOLEAN
+      },
+      from: {
+        type: Sequelize.STRING,
         allowNull: {
           args: false,
           msg: 'from is required'

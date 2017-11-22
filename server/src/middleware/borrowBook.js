@@ -9,56 +9,60 @@ const findBorrows = id => borrowBook.findAll({
   }
 }).then(foundBorrowed => foundBorrowed.map(borrowedBook => borrowedBook.dataValues));
 // Permit user to borrow based on user's level
-const checkStar = (req, res, next) => {
-  const user = req.decoded.user;
-  const star = req.decoded.star;
+const checkStar = (request, response, next) => {
+  const { user } = request.decoded;
+  const { star } = request.decoded;
   findBorrows(user).then((foundBorrowedBooks) => {
-    let statusMessage = true;
+    let isQualified = true;
     if (star === 'bronze') {
       const countBorrowed = foundBorrowedBooks.length;
-      if (countBorrowed === 1) {
-        statusMessage = false;
+      if (countBorrowed >= 1) {
+        isQualified = false;
       }
-      return statusMessage;
+      return isQualified;
     } else if (star === 'silver') {
       const countBorrowed = foundBorrowedBooks.length;
-      if (countBorrowed === 2) {
-        statusMessage = false;
+      if (countBorrowed >= 2) {
+        isQualified = false;
       }
-      return statusMessage;
+      return isQualified;
     } else if (star === 'gold') {
       const countBorrowed = foundBorrowedBooks.length;
-      if (countBorrowed === 3) {
-        statusMessage = false;
+      if (countBorrowed >= 3) {
+        isQualified = false;
       }
-      return statusMessage;
+      return isQualified;
     }
   }).then((result) => {
     if (result === true) {
       return next();
     }
     if (result === false) {
-      return res.status(400).send({ message: 'Sorry!!! This action cannot be completed due to your current star level' });
+      return response.status(400).send({
+        message: 'Sorry!!! This action cannot be completed due to your current star level'
+      });
     }
-    return res.status(500).send({ message: 'Something went wrong' });
+    return response.status(500).send({ message: 'Something went wrong' });
   });
 };
 // Check if user is owing before borrowing
-const checkDebt = (req, res, next) => {
+const checkForExceededDeadline = (request, response, next) => {
+  const newDate = new Date(new Date().getTime());
   borrowBook.findAll({
     where: {
-      userId: req.decoded.user,
-      owing: true
-    }
-  }).then((foundDebt) => {
-    const debt = foundDebt;
-    if (debt.length > 0) {
-      return res.status(403).send({ message: 'Please pay your debt before borrowing' });
+      returnDate: { $lt: newDate },
+      returned: false,
+    },
+  }).then((foundExceed) => {
+    if (foundExceed.length > 0) {
+      return response.status(403).send({
+        message: 'Apparently you have book(s) that are due for return. Please return and try to borrow again'
+      });
     }
     return next();
   });
 };
 
 export default {
-  checkStar, checkDebt
+  checkStar, checkForExceededDeadline
 };
