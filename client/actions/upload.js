@@ -7,7 +7,7 @@ dotenv.config();
 
 const upload = (data) => {
   const cloudName = process.env.CLOUD_NAME;
-  console.log(cloudName)
+  console.log(cloudName);
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const timestamp = Date.now() / 1000;
   const uploadPreset = process.env.UPLOAD_PRESET;
