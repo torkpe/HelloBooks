@@ -7,7 +7,7 @@
     "start": "babel-node ./server/src/bin/www",
     "test": "babel-node ./server/src/test",
     "seed": "sequelize db:migrate:undo:all && sequelize db:migrate && babel-node ./server/src/seed",
-    "heroku-postbuild": "NODE_ENV=production  && NODE_END=production sequelize db:migrate:undo:all && NODE_END=production sequelize db:migrate"
+    "heroku-postbuild": "NODE_ENV=production  && NODE_END=production"
   },
   "dependencies": {
     "axios": "^0.16.2",
