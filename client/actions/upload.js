@@ -1,6 +1,7 @@
 import superagent from 'superagent';
 import sha1 from 'sha1';
-import dotenv from 'dotenv';
+
+const dotenv = require('dotenv');
 
 dotenv.config();
 
