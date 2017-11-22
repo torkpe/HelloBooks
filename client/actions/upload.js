@@ -3,7 +3,7 @@ import sha1 from 'sha1';
 
 const dotenv = require('dotenv');
 
-dotenv.config();
+dotenv.load();
 
 const upload = (data) => {
   const cloudName = process.env.CLOUD_NAME;
