@@ -157,6 +157,9 @@ export default {
     const newDate = new Date(new Date().getTime());
     return BorrowBook
       .findAll({
+        include: [
+          Book,
+        ],
         where: {
           returnDate: { $lt: newDate },
           returned: false,

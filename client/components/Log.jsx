@@ -39,7 +39,7 @@ class Log extends Component {
                   <th>Action</th>
                 </tr>
               </thead>
-              {books.map(book => console.log(book)(<Table
+              {books.map(book => (<Table
               {...this.props}
               key={book.id}
               book={book.Book}
