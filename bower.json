@@ -1,0 +1,20 @@
+{
+  "name": "hellobooks",
+  "description": "an e-library system",
+  "main": "server.js",
+  "authors": [
+    "Temitope Emmanuel"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "hellobooks"
+  ],
+  "homepage": "https://github.com/torkpe/HelloBooks",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
