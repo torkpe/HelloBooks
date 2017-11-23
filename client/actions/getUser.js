@@ -19,7 +19,7 @@ const getUser = userId => (dispatch) => {
       if (error) {
         return dispatch({
           type: 'GET_USER_FAILED',
-          payload: error,
+          payload: error.response.data
         });
       }
       return null;

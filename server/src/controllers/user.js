@@ -98,21 +98,21 @@ Please click on the click below to confirm your email addresponses
   },
   // Update user after email confirmation
   updateUser(request, response) {
-    const { name, password1, password2 } = request.body;
+    const { name, password, confirmPassword } = request.body;
     // A little validation
-    if (name && password1 && password2) {
+    if (name && password && confirmPassword) {
       if (name.length > 3) {
-        if (password1.length < 5) {
+        if (password.length < 5) {
           return response.status(400).send({
             message: 'password is too short'
           });
         }
-        if (!validator.equals(password1, password2)) {
+        if (!validator.equals(password, confirmPassword)) {
           return response.status(400).send({
             message: 'Passwords do not match'
           });
         }
-        const hash = bcrypt.hashSync(request.body.password1, salt);
+        const hash = bcrypt.hashSync(password, salt);
         return User
           .findOne({
             where: {
@@ -127,7 +127,7 @@ Please click on the click below to confirm your email addresponses
             }
             // Update user info
             user.update({
-              name: request.body.name,
+              name,
               password: hash,
             }).then((updatedUser) => {
               const myToken = generateToken(updatedUser); // Generate token for user
@@ -148,23 +148,23 @@ Please click on the click below to confirm your email addresponses
       });
     }
     return response.status(400).send({
-      message: 'All fields are requestuired'
+      message: 'All fields are required'
     });
   },
   setPassword(request, response) {
-    const { password1, password2 } = request.body;
+    const { password, confirmPassword, oldPassword } = request.body;
     // validate
-    if (password1 && password2) {
-      if (password2.length > 5 && password1.length > 5) {
-        if (validator.equals(password1, password2)) {
-          const hash = bcrypt.hashSync(request.body.password1, salt);
+    if (password && confirmPassword) {
+      if (confirmPassword.length > 5 && password.length > 5) {
+        if (validator.equals(password, confirmPassword)) {
+          const hash = bcrypt.hashSync(password, salt);
           return User
             .find({
               where: {
                 id: request.params.id
               }
             }).then((user) => {
-              if (!bcrypt.comparesponseync(request.body.password, user.password)) {
+              if (!bcrypt.compareSync(oldPassword, user.password)) {
                 return response.status(406).send({ message: 'Incorrect Password' });
               }
               user.update({

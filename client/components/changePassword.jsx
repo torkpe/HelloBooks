@@ -6,9 +6,9 @@ class Password extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      oldPassword: '',
       password: '',
-      password1: '',
-      password2: '',
+      confirmPassword: '',
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -32,7 +32,7 @@ class Password extends Component {
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="password" onChange={this.onChange}
-                  className="mdl-textfield__input" name="password" />
+                  className="mdl-textfield__input" name="oldPassword" />
                 <label htmlFor="password" className="mdl-textfield__label">Old Password</label>
                 <span className="error" />
               </div>
@@ -40,7 +40,7 @@ class Password extends Component {
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="password" onChange={this.onChange}
-                  className="mdl-textfield__input" name="password1" />
+                  className="mdl-textfield__input" name="password" />
                 <label htmlFor="password" className="mdl-textfield__label">New Password</label>
                 <span className="error" />
               </div>
@@ -48,7 +48,7 @@ class Password extends Component {
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="password" onChange={this.onChange}
-                  className="mdl-textfield__input" name="password2" />
+                  className="mdl-textfield__input" name="confirmPassword" />
                 <label htmlFor="password" className="mdl-textfield__label">Confirm Password</label>
                 <span className="error" />
               </div>
