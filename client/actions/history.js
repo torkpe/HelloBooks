@@ -72,7 +72,7 @@ export const allNotReturned = id => (dispatch) => {
       if (error) {
         return dispatch({
           type: 'FAILED_TO_GET_NOT_RETURNED_BOOKS',
-          payload: error,
+          payload: error.response.data
         });
       }
       return null;

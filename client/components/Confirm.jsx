@@ -10,8 +10,8 @@ class Confirm extends Component {
     super(props);
     this.state = {
       name: '',
-      password1: '',
-      password2: '',
+      password: '',
+      confirmPassword: '',
       isLoading: false,
       key: this.props.params.key,
       confirmed: true,
@@ -51,13 +51,13 @@ class Confirm extends Component {
                         <div className="mdl-textfield mdl-js-textfield card-content">
                             <input
                                 type="password" className="mdl-textfield__input"
-                                onChange={this.onChange} name="password1" id="password1" />
+                                onChange={this.onChange} name="password" id="password1" />
                             <label htmlFor="password1" className="mdl-textfield__label">Password</label>                           
                           </div>
                         <div className="mdl-textfield mdl-js-textfield card-content">
                             <input
                                 type="password" className="mdl-textfield__input"
-                                onChange={this.onChange} name="password2" id="password2" />
+                                onChange={this.onChange} name="confirmPassword" id="password2" />
                             <label htmlFor="password2"
                             className="mdl-textfield__label">Confirm Password</label>                           
                           </div>

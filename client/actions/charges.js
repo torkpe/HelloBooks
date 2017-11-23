@@ -18,7 +18,7 @@ const chargeUser = (userId, bookId) => (dispatch) => {
       if (error) {
         return dispatch({
           type: 'CHARGE_USER_FAILED',
-          payload: error
+          payload: error.response.data
         });
       }
     });

@@ -18,7 +18,7 @@ export const setPassword = (userId, body) => (dispatch) => {
       if (error) {
         return dispatch({
           type: 'PASSWORD_SET_FAILED',
-          payload: error
+          payload: error.response.data
         });
       }
     });
