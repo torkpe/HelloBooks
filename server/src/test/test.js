@@ -109,6 +109,20 @@ describe('Users', () => {
         done();
       });
   });
+  it('should not sign up with existing emails', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send(user1)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        if (error) {
+          expect(error.response.status).to.equal(409);
+          expect(error.response.body).to.have.property('message');
+          expect(error.response.body.message).to.equal('Sorry email has already been taken');
+        }
+        done();
+      });
+  });
   it('should not sign up with non-emails', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
