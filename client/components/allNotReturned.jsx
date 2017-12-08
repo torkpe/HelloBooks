@@ -8,7 +8,7 @@ import Books from './Books.jsx';
 
 class notReturned extends Component {
   componentWillMount() {
-    this.props.allNotReturned(this.props.auth.user.user);
+    this.props.allNotReturned(this.props.auth.user.id);
   }
   componentWillUnmount() {
     this.props.clearBooks();
@@ -25,16 +25,15 @@ class notReturned extends Component {
           <div className="contents">
             <span className="ask">
               <h2>Books yet to be returned</h2>
-            </span>View all Borrowed books <Link to="/all_borrowed_books">here</Link>
+            </span>View all Borrowed books <Link to="/all-borrowed-books">here</Link>
             <hr />
           </div>
-          <div className="ask">{this.props.loading ? 'Loading...' : ''}</div>
+          <div className="ask">{this.props.message ? 'this.props.message' : '' }</div>
           <div className="mdl-grid">
             {books.map(book => (<Books
               {...this.props}
                 key={book.Book.id}
                 book={book.Book}
-                userId={this.props.userId}
                 borrowBook={this.props.borrowBook}
                 returnBook={this.props.returnBook}
                 borrowedBook={this.props.borrowed}
@@ -52,7 +51,7 @@ class notReturned extends Component {
 
 const mapStateToProps = state => ({
   notReturned: state.allNotReturned,
-  loading: state.allNotReturned.isLoading,
+  message: state.allNotReturned.notReturned.message,
 });
 export default connect(mapStateToProps, {
   allNotReturned,

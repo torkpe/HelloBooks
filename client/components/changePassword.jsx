@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setPassword } from '../actions/changePassword';
+import { toastr } from 'react-redux-toastr';
+import { setPassword, clearSetPasswordState } from '../actions/changePassword';
 
 class Password extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      oldPassword: '',
       password: '',
-      password1: '',
-      password2: '',
+      confirmPassword: '',
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.passwordChange.response.message) {
+      toastr.success(nextProps.passwordChange.response.message);
+    }
+    if (nextProps.passwordChange.errors.message) {
+      toastr.error(nextProps.passwordChange.errors.message);
+    }
+  }
+  componentWillUnmount() {
+    this.props.clearSetPasswordState();
   }
   onChange(e) {
     this.setState({
@@ -20,7 +32,8 @@ class Password extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    this.props.setPassword(this.props.auth.user.user, this.state);
+    this.props.clearSetPasswordState();
+    this.props.setPassword(this.props.auth.user.id, this.state);
   }
   render() {
     return (
@@ -32,7 +45,7 @@ class Password extends Component {
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="password" onChange={this.onChange}
-                  className="mdl-textfield__input" name="password" />
+                  className="mdl-textfield__input" name="oldPassword" />
                 <label htmlFor="password" className="mdl-textfield__label">Old Password</label>
                 <span className="error" />
               </div>
@@ -40,7 +53,7 @@ class Password extends Component {
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="password" onChange={this.onChange}
-                  className="mdl-textfield__input" name="password1" />
+                  className="mdl-textfield__input" name="password" />
                 <label htmlFor="password" className="mdl-textfield__label">New Password</label>
                 <span className="error" />
               </div>
@@ -48,7 +61,7 @@ class Password extends Component {
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="password" onChange={this.onChange}
-                  className="mdl-textfield__input" name="password2" />
+                  className="mdl-textfield__input" name="confirmPassword" />
                 <label htmlFor="password" className="mdl-textfield__label">Confirm Password</label>
                 <span className="error" />
               </div>
@@ -67,6 +80,10 @@ class Password extends Component {
 }
 const mapStateToProps = state => ({
   auth: state.auth,
+  passwordChange: state.changePassword
 });
-export default connect(null, { setPassword })(Password);
+export default connect(mapStateToProps, {
+  setPassword,
+  clearSetPasswordState
+})(Password);
 

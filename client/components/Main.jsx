@@ -7,12 +7,10 @@ import './mdl/material.min.css';
 import { logout } from '../actions/user';
 import { notifications,
   home,
-  adminHome,
-  log,
+  uploadBook,
   allBooks,
   settings,
   history,
-  requests,
 } from '../actions/routes';
 
 class Main extends Component {
@@ -24,17 +22,9 @@ class Main extends Component {
     e.preventDefault();
     this.props.notifications();
   }
-  adminHome(e) {
+  uploadBook(e) {
     e.preventDefault();
-    this.props.adminHome();
-  }
-  log(e) {
-    e.preventDefault();
-    this.props.log();
-  }
-  requests(e) {
-    e.preventDefault();
-    this.props.requests();
+    this.props.uploadBook();
   }
   allBooks(e) {
     e.preventDefault();
@@ -54,20 +44,18 @@ class Main extends Component {
   }
   render() {
     const { isAuthenticated } = this.props.auth;
-    const { category } = this.props.auth.user;
-    const determineNav = (category) => {
-      if (category === true) {
+    const { isAdmin } = this.props.auth.user;
+    const determineNav = (isAdmin) => {
+      if (isAdmin === true) {
         return (
           <nav className="mdl-navigation">
-                    <a className="mdl-navigation__link" onClick={this.adminHome.bind(this)} href="">Home</a>
-                    <a className="mdl-navigation__link" onClick={this.requests.bind(this)} href="">Requests</a>
+                    <a className="mdl-navigation__link" onClick={this.uploadBook.bind(this)} href="">Upload Book</a>
                     <a className="mdl-navigation__link" onClick={this.notifications.bind(this)} href="">Notifications</a>
-                    <a className="mdl-navigation__link" onClick={this.log.bind(this)} href="">Logs</a>
                     <a className="mdl-navigation__link" onClick={this.allBooks.bind(this)} href="">All Books</a>
                     <a className="mdl-navigation__link" onClick={this.logout.bind(this)} href="">Signout</a>
                   </nav>
         );
-      } else if (category === false) {
+      } else if (isAdmin === false) {
         return (
           <nav className="mdl-navigation navLink">
                 <a className="mdl-navigation__link" onClick={this.home.bind(this)} href="">Home</a>
@@ -104,35 +92,35 @@ className="mdl-textfield__input" type="text" name="sample"
     );
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <header className="mdl-layout__header">
-                <div className="mdl-layout__header-row">
-                    <Link to={category ? '/admin_home' : '/'} className="mdl-layout-title">hello-books</Link>
-                    <div className="mdl-layout-spacer" />
-                    <nav className="mdl-layout--large-screen-only">
-                        { isAuthenticated ? userLinks : guestLinks}
-                      </nav>
-                  </div>                    
-              </header>
-            <div className="mdl-layout__drawer">
-                <Link to={category ? '/admin_home' : '/'} className="mdl-layout-title">hello-books</Link>
-                {determineNav(category)}
-              </div>
-            <main className="mdl-layout__content">
-                {React.cloneElement(this.props.children, this.props)}
-              </main>
-            <footer className="mdl-mini-footer">
-                <span className="mdl-mini-footer--left-section">
-                    <span className="mdl-logo">Hello-Books</span>
-                    <ul className="mdl-mini-footer--link-list" />
-                  </span>
-                <span className="mdl-mini-footer--right-section">
-                    <ul className="mdl-mini-footer--link-list">
-                    <li><a href="">Help</a></li>
-                    <li><a href="">About</a></li>
-                  </ul>
-                  </span>
-              </footer>
-          </div>          
+        <header className="mdl-layout__header">
+            <div className="mdl-layout__header-row">
+                <Link to={isAdmin ? '/admin_home' : '/'} className="mdl-layout-title">hello-books</Link>
+                <div className="mdl-layout-spacer" />
+                <nav className="mdl-layout--large-screen-only">
+                    { isAuthenticated ? userLinks : guestLinks}
+                  </nav>
+              </div>                    
+          </header>
+        <div className="mdl-layout__drawer">
+            <Link to={isAdmin ? '/admin_home' : '/'} className="mdl-layout-title">hello-books</Link>
+            {determineNav(isAdmin)}
+          </div>
+        <main className="mdl-layout__content">
+            {React.cloneElement(this.props.children, this.props)}
+          </main>
+        <footer className="mdl-mini-footer">
+            <span className="mdl-mini-footer--left-section">
+                <span className="mdl-logo">Hello-Books</span>
+                <ul className="mdl-mini-footer--link-list" />
+              </span>
+            <span className="mdl-mini-footer--right-section">
+                <ul className="mdl-mini-footer--link-list">
+                <li><a href="">Help</a></li>
+                <li><a href="">About</a></li>
+              </ul>
+              </span>
+        </footer>
+      </div>
     );
   }
 }
@@ -149,11 +137,9 @@ export default connect(
     logout,
     notifications,
     home,
-    adminHome,
-    log,
+    uploadBook,
     allBooks,
     settings,
     history,
-    requests, 
-  },
+  }
 )(Main);

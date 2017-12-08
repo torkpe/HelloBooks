@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import getUser from '../actions/getUser';
-import updateUser from '../actions/updateUser';
+import { toastr } from 'react-redux-toastr';
 
-class Profile extends Component {
+import getUser from '../actions/getUser';
+import {
+  updateUser,
+  clearUpdateUserState
+} from '../actions/updateUser';
+
+class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +20,25 @@ class Profile extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentDidMount() {
-    this.props.getUser(this.props.auth.user.user);
+    this.props.getUser(this.props.auth.user.id);
+  }
+  componentWillReceiveProps(nextProps) {
+    const { user, updatedOrNot } = nextProps;
+    if (user) {
+      this.setState({
+        email: user.email,
+        name: user.name,
+      });
+    }
+    if (updatedOrNot.response.message) {
+      toastr.error(updatedOrNot.response.message);
+    }
+    if (updatedOrNot.errors.message) {
+      toastr.error(updatedOrNot.errors.message);
+    }
+  }
+  componentWillUnmount() {
+    this.props.clearUpdateUserState();
   }
   onChange(e) {
     e.preventDefault();
@@ -25,7 +48,8 @@ class Profile extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    this.props.updateUser(this.props.auth.user.user, this.state);
+    this.props.clearUpdateUserState();
+    this.props.updateUser(this.props.auth.user.id, this.state);
   }
   render() {
     return (
@@ -39,7 +63,7 @@ class Profile extends Component {
                 <input
                   type="email" onChange={this.onChange}
                   className="mdl-textfield__input"
-                  disabled value={this.props.user.email} name="email" />
+                  disabled value={this.state.email} name="email" />
                 <span className="error" />
               </div>
               <div
@@ -47,7 +71,7 @@ class Profile extends Component {
                 <input
                   type="text" onChange={this.onChange}
                   className="mdl-textfield__input" defaultValue={
-                    this.props.user.name
+                    this.state.name
                   } name="name" />
                 <span className="error" />
               </div>
@@ -57,7 +81,7 @@ class Profile extends Component {
                   update
               </button>
             </form>
-            <div>
+            <div className="mdl-card__supporting-text ask">
               <Link to="/set-password">Set Password </Link>
             </div>
           </div>
@@ -70,5 +94,10 @@ class Profile extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   user: state.getUser.user,
+  updatedOrNot: state.updateUser
 });
-export default connect(mapStateToProps, { getUser, updateUser })(Profile);
+export default connect(mapStateToProps, {
+  getUser,
+  updateUser,
+  clearUpdateUserState
+})(Settings);

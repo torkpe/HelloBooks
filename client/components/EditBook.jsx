@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toastr } from 'react-redux-toastr';
 import { getABook, editBook } from '../actions/books';
 import uploader from '../actions/upload';
 
-let checker = true;
 class updateBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
+      isImageAndPdf: false,
+      isImageSet: false,
+      isPdfSet: false,
     };
     this.coverChange = this.coverChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.pdfChange = this.pdfChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onPostCover = this.onPostCover.bind(this);
+    this.onPostPdf = this.onPostPdf.bind(this);
   }
   componentWillMount() {
     this.props.getABook(this.props.params.id);
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.book && checker) {
-      const { book } = nextProps;
+    const { book, cover, pdf } = nextProps;
+    if (book) {
       this.setState({
         cover: book.cover,
         pdf: book.pdf,
@@ -33,43 +38,76 @@ class updateBook extends Component {
         loading: false,
       });
     }
-    if (nextProps.pdf) {
+    if (pdf) {
       this.setState({
         pdf: nextProps.pdf,
-        loading: false,
+        isPdfSet: false
       });
     }
-    if (nextProps.cover) {
+    if (cover) {
       this.setState({
         cover: nextProps.cover,
+        isImageSet: false
+      });
+    }
+    if (cover && pdf) {
+      this.setState({
         loading: false,
+        isImageAndPdf: false
       });
     }
   }
-  coverChange(e) {
-    checker = false;
-    const cover = e.target.files[0];
-    this.props.uploader(cover, 'cover');
+  componentDidUpdate(prevProps, prevState) {
+    const { book, error } = this.props.updatedDetail;
+    if (prevProps.updatedDetail.book.updatedBook !== book.updatedBook) {
+      return toastr.success('The title', 'Book updated');
+    }
+    if (prevProps.updatedDetail.error !== error) {
+      return toastr.error('The title', error.message);
+    }
   }
-  onChange(e) {
-    checker = false;
-    e.preventDefault();
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
-  pdfChange(e) {
-    checker = false;
-    e.preventDefault();
-    const pdf = e.target.files[0];
-    this.props.uploader(pdf, 'pdf');
-    this.setState({
-      loading: true,
-    });
-  }
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     this.props.editBook(this.state, this.props.params.id);
+    this.setState({
+      loading: false
+    });
+  }
+  onChange(event) {
+    event.preventDefault();
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+  onPostCover(event) {
+    event.preventDefault();
+    this.props.uploader(this.state.cover, 'cover');
+    this.setState({
+      loading: true
+    });
+  }
+  onPostPdf(event) {
+    event.preventDefault();
+    this.props.uploader(this.state.pdf, 'pdf');
+    this.setState({
+      loading: true
+    });
+  }
+  coverChange(event) {
+    event.preventDefault();
+    const cover = event.target.files[0];
+    this.setState({
+      cover,
+      isImageSet: true,
+    });
+  }
+  pdfChange(event) {
+    event.preventDefault();
+    const pdf = event.target.files[0];
+    this.setState({
+      pdf,
+      isPdfSet: true,
+    });
   }
   render() {
     const { book } = this.props;
@@ -79,13 +117,14 @@ class updateBook extends Component {
           <div
             className="card-enlarge mdl-card mdl-shadow--3dp">
             {Object.keys(book).length > 0 ?
-              <form ref="bookForm" onSubmit={this.onSubmit}>
+              <form ref="bookForm">
                 <div
                 className="mdl-textfield mdl-js-textfield  card-content">
                   <input
-                  type="text"
-                  className="mdl-textfield__input" onChange={this.onChange}
-                  name="title" id="title" defaultValue={this.state.title} required />
+                    type="text"
+                    className="mdl-textfield__input" onChange={this.onChange}
+                    name="title" id="title" defaultValue={this.state.title} required />
+                  {this.state.title ? '' : <label htmlFor="title" className="mdl-textfield__label">Title</label>}
                 </div>
                 <div
                 className="mdl-textfield mdl-js-textfield  card-content">
@@ -125,7 +164,7 @@ class updateBook extends Component {
                 className="card-content upload file-upload">
                   <label
                   htmlFor="file-upload"
-                  className="mdl-button mdl-js-button mdl-button--raised file-upload btn1">
+                  className="mdl-button mdl-js-button mdl-button--accent file-upload btn1">
                 Upload cover
                   </label>
                   <input
@@ -136,7 +175,7 @@ class updateBook extends Component {
                   name="cover" id="file-upload" />
                   <label
                   htmlFor="file-upload2"
-                  className="mdl-button mdl-js-button mdl-button--raised file-upload btn2">
+                  className="mdl-button mdl-js-button mdl-button--accent file-upload btn2">
                 Upload Pdf
                   </label>
                   <input
@@ -145,8 +184,25 @@ class updateBook extends Component {
                   onChange={this.pdfChange}
                   name="pdf" id="file-upload2" />
                 </div>
+                {this.state.isImageSet ?
+                  <button
+                  disabled={this.state.isLoading} onClick={this.onPostCover}
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  id="button">
+                    Upload Cover
+                  </button> : ''
+                }
+                {this.state.isPdfSet ?
+                  <button
+                  disabled={this.state.isLoading} onClick={this.onPostPdf}
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  id="button">
+                    Upload Pdf
+                  </button> : ''
+                }
                 <button
-                disabled={this.props.updatedDetail.isLoading}
+                disabled={this.state.loading}
+                onClick={this.onSubmit}
                 className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
                 id="button">
                 Update book

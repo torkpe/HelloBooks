@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import propTypes from 'prop-types';
+import { toastr } from 'react-redux-toastr';
 
 import { connect } from 'react-redux';
-import { userSignin } from '../actions/user';
+import { userSignin, clearSigninState } from '../actions/user';
 
 class Signin extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      error: ''
+    }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     const { myToken } = nextProps.signin.successfullySignedin;
-    if (myToken && myToken !== 'undefined') {
+    if (myToken && myToken !== undefined) {
       // Get token from response and decode it
       localStorage.setItem('jwt', myToken);
       browserHistory.push('/home');
+    }
+    if (nextProps.signin.errors.message) {
+      toastr.error(nextProps.signin.errors.message);
     }
   }
   onChange(e) {
@@ -24,6 +31,7 @@ class Signin extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
+    this.props.clearSigninState()
     this.props.userSignin(this.state);
   }
   render() {
@@ -78,4 +86,4 @@ Signin.propTypes = {
 const mapStateToProps = state => ({
   signin: state.userSignin,
 });
-export default connect(mapStateToProps, { userSignin })(Signin);
+export default connect(mapStateToProps, { userSignin, clearSigninState })(Signin);

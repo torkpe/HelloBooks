@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toastr } from 'react-redux-toastr';
 import { browserHistory } from 'react-router';
-import { postBook } from '../actions/books';
+import { postBook, clearCreatedBook } from '../actions/books';
 import uploader from '../actions/upload';
 
 // Set initial state
@@ -33,31 +34,63 @@ class Admin extends Component {
     this.onPostPdf = this.onPostPdf.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.cover) {
+    const {
+      cover, pdf, createBook, error
+    } = nextProps;
+    if (cover) {
       this.setState({
-        cover: nextProps.cover,
+        cover,
       });
     }
     if (nextProps.pdf) {
       this.setState({
-        pdf: nextProps.pdf,
+        pdf,
       });
     }
-    if (nextProps.cover && nextProps.pdf) {
+    if (cover && pdf) {
       this.setState({
         isImageAndPdf: false
       });
     }
-    if (nextProps.createBook) {
+    if (createBook) {
       this.setState({
         isLoading: false,
         isImageSet: false,
         isPdfSet: false,
       });
-      if (Object.keys(nextProps.createBook).length > 6) {
+      if (Object.keys(createBook).length > 6) {
+        this.props.clearCreatedBook();
         browserHistory.push('/home');
       }
+      if (error) {
+        this.setState({
+          error
+        });
+      }
     }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      createBook, error, pdf, cover
+    } = this.props;
+    if (prevProps.createBook !== createBook) {
+      toastr.success('Book created');
+    }
+    if (prevProps.error !== error) {
+      toastr.error(error);
+    }
+    if (prevProps.cover !== cover) {
+      toastr.success('Cover Uploaded');
+    }
+    if (prevProps.pdf !== pdf) {
+      toastr.success('Pdf uploaded');
+    }
+  }
+  componentWillUnmount() {
+    this.props.clearCreatedBook();
+    this.setState({
+      initialState
+    });
   }
   onSubmit(event) {
     event.preventDefault();
@@ -96,9 +129,11 @@ class Admin extends Component {
     });
   }
   render() {
+    const { error } = this.state;
     return (
       <div className="mdl-grid">
         <div className="contents">
+          {error && <div className="errors"> {error} </div>}
           <div className="card-enlarge mdl-card mdl-shadow--3dp">
             <form ref="bookForm">
               <div
@@ -123,7 +158,9 @@ class Admin extends Component {
               </div>
               <div className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                  type="text" className="mdl-textfield__input" onChange={this.onChange}
+                  type="text"
+                  className="mdl-textfield__input"
+                  onChange={this.onChange}
                   name="genre" id="genre" />
                 <label htmlFor="genre" className="mdl-textfield__label">Genre</label>
               </div>
@@ -152,7 +189,10 @@ class Admin extends Component {
                   Upload Pdf
                 </label>
                 <input
-                  type="file" className="mdl-textfield__input" onChange={this.pdfChange}
+                  type="file"
+                  accept=".pdf"
+                  className="mdl-textfield__input"
+                  onChange={this.pdfChange}
                   name="pdf" id="file-upload2" />
               </div>
               {this.state.isImageSet ?
@@ -191,7 +231,9 @@ const mapStateToProps = state => ({
   admin: state.createBook,
   cover: state.uploadCover.uploaded,
   pdf: state.uploadPdf.uploaded,
-  createBook: state.createBook.resp,
+  createBook: state.createBook.book,
+  message: state.createBook.message,
+  error: state.createBook.errors.message
 });
 
-export default connect(mapStateToProps, { postBook, uploader })(Admin);
+export default connect(mapStateToProps, { postBook, uploader, clearCreatedBook })(Admin);

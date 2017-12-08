@@ -9,12 +9,16 @@ const Admin = {
   password: 'silver',
 };
 const hash = bcrypt.hashSync(Admin.password, salt);
-User.create({
-  email: Admin.email,
-  password: hash,
-  isAdmin: true,
-  star: 'admin',
-  confirmed: true,
-  key: 'admin',
-  name: 'admin'
-});
+const seeder = () => {
+  User.create({
+    email: Admin.email,
+    password: hash,
+    isAdmin: true,
+    star: 'admin',
+    confirmed: true,
+    key: 'admin',
+    name: 'admin'
+  });
+};
+seeder();
+export default seeder;

@@ -21,6 +21,10 @@ body{
 table {
     width: 100%
 }
+.errors {
+    color: red;
+    margin: 10px;
+}
 .right {
   position: absolute;
   right: 0px;

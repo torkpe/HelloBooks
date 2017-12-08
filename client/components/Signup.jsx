@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toastr } from 'react-redux-toastr';
 
-import { userSignup } from '../actions/user';
+import { userSignup, clearSignupState } from '../actions/user';
 
 class Signup extends Component {
   constructor(props) {
@@ -12,9 +13,12 @@ class Signup extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    const { successfullySignedup } = nextProps.signup;
-    if (successfullySignedup.message.length > 0) {
+    const { successfullySignedup } = nextProps;
+    if (successfullySignedup && successfullySignedup.length > 0) {
       browserHistory.push('/redirect');
+    }
+    if (nextProps.signup.errors.message) {
+      toastr.error(nextProps.signup.errors.message);
     }
   }
   onChange(e) {
@@ -22,10 +26,11 @@ class Signup extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
+    this.props.clearSignupState();
     this.props.userSignup(this.state);
   }
   render() {
-    const { errors, isLoading } = this.props.signup;
+    const { isLoading } = this.props.signup;
     const span = <span />;
     return (
       <div className="mdl-grid">
@@ -38,7 +43,6 @@ class Signup extends Component {
                   type="email" onChange={this.onChange}
                   className="mdl-textfield__input" name="email" />
                 <label htmlFor="email" className="mdl-textfield__label">Email</label>
-                <span className="error">{ errors && errors.message }</span>
               </div>
               <button
                 disabled={isLoading}
@@ -66,6 +70,9 @@ Signup.propTypes = {
 };
 const mapStateToProps = state => ({
   signup: state.userSignup,
+  successfullySignedup: state.userSignup.successfullySignedup.message
 });
-export default connect(mapStateToProps,
-  { userSignup })(Signup);
+export default connect(
+  mapStateToProps,
+  { userSignup, clearSignupState }
+)(Signup);

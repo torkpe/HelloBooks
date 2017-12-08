@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getBooks, borrowBook, returnBook } from '../actions/books';
-import { notify } from '../actions/notification';
+import { getBooks } from '../actions/books';
+import { getAllBorrowed } from '../actions/history';
 import Books from './Books.jsx';
 
 class Home extends Component {
   componentDidMount() {
     this.props.getBooks();
+    this.props.getAllBorrowed(this.props.auth.user.id);
   }
   render() {
-    const { books } = this.props;
+    const { books, borrowedBooks, auth } = this.props;
     return (
       <div className="mdl-grid ">
         <div className="mdl-cell mdl-cell--1-col" />
@@ -26,14 +27,6 @@ class Home extends Component {
               key={book.id}
               book={book}
               userId={this.props.userId}
-              name={this.props.name}
-              borrowBook={this.props.borrowBook}
-              returnBook={this.props.returnBook}
-              successfullyBorrowed={this.props.successfullyBorrowed}
-              successfullyReturned={this.props.successfullyReturned}
-              borrowedBook={this.props.borrowed}
-              notify={this.props.notify}
-              category={this.props.auth.user.category}
             />))}
           </div>
           <div className="mdl-grid ">
@@ -51,12 +44,10 @@ Home.propTypes = {
 const mapStateToProps = state => ({
   books: state.getBooks.books,
   fetching: state.getBooks.fetching,
-  borrowed: state.getBorrows.books,
-  userId: state.auth.user.user,
-  name: state.auth.user.name,
-  successfullyBorrowed: state.borrowBook.successfullyBorrowed,
-  successfullyReturned: state.returnBook.successfullyReturned,
+  userId: state.auth.user.id,
+  borrowedBooks: state.getAllBorrowed
 });
 export default connect(mapStateToProps, {
-  getBooks, borrowBook, returnBook, notify,
+  getBooks,
+  getAllBorrowed
 })(Home);

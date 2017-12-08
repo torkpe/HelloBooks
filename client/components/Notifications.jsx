@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import SingleNotification from './Notification.jsx';
 import { getNotification } from '../actions/notification';
-import payBack from '../actions/payback';
 import { getAllBorrowed } from '../actions/history';
 
 class Notifications extends Component {
@@ -14,10 +13,10 @@ class Notifications extends Component {
     };
   }
   componentWillMount() {
-    const { user, star } = this.props.auth.user;
+    const { id, star } = this.props.auth.user;
     this.props.getNotification(
       star,
-      user
+      id
     );
   }
   componentWillReceiveProps(nextProps) {
@@ -36,9 +35,8 @@ class Notifications extends Component {
             {notifications.map(notification => (<SingleNotification
               key={notification.id}
               notification={notification}
-              payBack={this.props.payBack}
               userId={this.props.auth.user.user}
-              category={this.props.auth.user.category}
+              isAdmin={this.props.auth.user.isAdmin}
             />))
             }
           </table>
@@ -54,6 +52,5 @@ const mapStateToProps = state => ({
 });
 export default connect(mapStateToProps, {
   getNotification,
-  payBack,
   getAllBorrowed,
 })(Notifications);

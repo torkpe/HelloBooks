@@ -25,6 +25,14 @@ export default (state = setPasswordState, action = {}) => {
         errors: action.payload,
       };
     }
+    case 'CLEAR_SET_PASSWORD_STATE': {
+      return {
+        ...state,
+        isLoading: false,
+        errors: {},
+        response: {},
+      };
+    }
     default: return state;
   }
 };

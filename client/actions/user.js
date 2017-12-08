@@ -22,25 +22,43 @@ export const userSignup = userData =>
         }
       }).catch((error) => {
         if (error) {
-          if (error) {
-            dispatch({
-              type: 'SIGNUP_FAILED',
-              payload: error.response.data,
-            });
-          }
+          dispatch({
+            type: 'SIGNUP_FAILED',
+            payload: error.response.data,
+          });
         }
       });
   };
 
-export const userConfirmRequest = userData =>
-  dispatch =>
+export const userConfirmationRequest = userData =>
+  (dispatch) => {
+    dispatch({ type: 'CONFIRMING' });
     axios.put(`${url}/confirmation/${userData.key}`, userData)
       .then((response) => {
-        const token = response.data.myToken;
-        localStorage.setItem('jwt', token);
-        setAuthToken(token);
-        dispatch(setCurrentUser(jwt.decode(token)));
+        if (response) {
+          dispatch({
+            type: 'CONFIRMATION_SUCCESSFUL',
+            payload: response.data,
+          });
+          const token = response.data.myToken;
+          localStorage.setItem('jwt', token);
+          setAuthToken(token);
+          dispatch(setCurrentUser(jwt.decode(token)));
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          dispatch({
+            type: 'CONFIRMATION_FAILED',
+            payload: error.response.data
+          });
+        }
       });
+  };
+export const clearUserConfirmationState = () => dispatch => dispatch({
+  type: 'CLEAR_CLEAR_USER_CONFIRMATION_STATE'
+})
+
 export const userSignin = data =>
   (dispatch) => {
     dispatch({ type: 'SIGNING_IN' });
@@ -62,6 +80,12 @@ export const userSignin = data =>
         });
       });
   };
+export const clearSignupState = () => dispatch => dispatch({
+  type: 'CLEAR_SIGNUP_STATE'
+})
+export const clearSigninState = () => dispatch => dispatch({
+  type: 'CLEAR_SIGNIN_STATE'
+})
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('jwt');

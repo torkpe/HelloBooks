@@ -5,33 +5,42 @@ import validator from 'validator';
 
 import model from '../models';
 import app from '../server';
-import { sendEmail, generateToken } from '../utils/index';
+import { sendEmail,
+  generateToken,
+  categories
+} from '../utils/index';
 import notification from './notifications';
-import userRequest from './requests';
 
 const notify = notification.createNotification;
 const salt = bcrypt.genSaltSync(10);
 const User = model.Users;
+const borrowBook = model.BorrowBook;
 
 export default {
   create(request, response) {
-    if (validator.isEmail(request.body.email)) {
+    const { email } = request.body;
+    if (!email) {
+      return response.status(400).send({
+        message: 'Email is required'
+      });
+    }
+    if (validator.isEmail(email)) {
       return User
         .findOne({
           where: {
-            email: request.body.email,
+            email,
           }
         }).then((user) => {
           if (user) {
-            return response.status(400).send({
+            return response.status(409).send({
               message: 'Sorry email has already been taken'
             });
           }
           User
             .create({ // Create a new user
-              email: request.body.email,
+              email,
               isAdmin: false,
-              star: 'bronze',
+              star: categories.bronze,
               confirmed: false,
               key: random.generate(50),
             })
@@ -43,7 +52,8 @@ Please click on the click below to confirm your email addresponses
                          ${link}`;
               sendEmail(message, 'user', createdUser.id);
               return response.status(201).send({
-                message: 'A mail has been sent to your email'
+                message: 'A mail has been sent to your email',
+                key: createdUser.key
               });
             })
             .catch(() => response.status(500).send({
@@ -54,7 +64,7 @@ Please click on the click below to confirm your email addresponses
           message: 'Something went wrong'
         }));
     }
-    return response.status(406).send({ message: 'Invalid email' });
+    return response.status(400).send({ message: 'This is not an email' });
   },
   // Sign user in
   signin(request, response) {
@@ -62,7 +72,7 @@ Please click on the click below to confirm your email addresponses
     if (validator.isEmail(email)) {
       if (!password) {
         return response.status(400).send({
-          message: 'Password field is requestuired'
+          message: 'Password field is required'
         });
       }
       return User
@@ -79,13 +89,14 @@ Please click on the click below to confirm your email addresponses
           }
           // Check if passwords do not match
           if (!bcrypt.compareSync(request.body.password, user.password)) {
-            return response.status(406).send({
+            return response.status(403).send({
               message: 'Incorrect credentials'
             });
           }
           const myToken = generateToken(user);
           return response.status(200).send({
             myToken,
+            userId: user.id
           });
         })
         .catch(() => response.status(500).send({
@@ -98,21 +109,21 @@ Please click on the click below to confirm your email addresponses
   },
   // Update user after email confirmation
   updateUser(request, response) {
-    const { name, password1, password2 } = request.body;
+    const { name, password, confirmPassword } = request.body;
     // A little validation
-    if (name && password1 && password2) {
+    if (name && password && confirmPassword) {
       if (name.length > 3) {
-        if (password1.length < 5) {
+        if (password.length < 5) {
           return response.status(400).send({
             message: 'password is too short'
           });
         }
-        if (!validator.equals(password1, password2)) {
+        if (!validator.equals(password, confirmPassword)) {
           return response.status(400).send({
             message: 'Passwords do not match'
           });
         }
-        const hash = bcrypt.hashSync(request.body.password1, salt);
+        const hash = bcrypt.hashSync(password, salt);
         return User
           .findOne({
             where: {
@@ -127,13 +138,14 @@ Please click on the click below to confirm your email addresponses
             }
             // Update user info
             user.update({
-              name: request.body.name,
+              name,
               password: hash,
             }).then((updatedUser) => {
               const myToken = generateToken(updatedUser); // Generate token for user
               return response.status(200).send({
                 myToken,
-                message: 'Successfully updated'
+                message: 'Successfully updated',
+                userId: updatedUser.id
               });
             }).catch(() => response.status(500).send({
               message: 'Something went wrong'
@@ -148,29 +160,30 @@ Please click on the click below to confirm your email addresponses
       });
     }
     return response.status(400).send({
-      message: 'All fields are requestuired'
+      message: 'All fields are required'
     });
   },
   setPassword(request, response) {
-    const { password1, password2 } = request.body;
+    const { password, confirmPassword, oldPassword } = request.body;
     // validate
-    if (password1 && password2) {
-      if (password2.length > 5 && password1.length > 5) {
-        if (validator.equals(password1, password2)) {
-          const hash = bcrypt.hashSync(request.body.password1, salt);
+    if (password && confirmPassword) {
+      if (confirmPassword.length > 5 && password.length > 5) {
+        if (validator.equals(password, confirmPassword)) {
+          const hash = bcrypt.hashSync(password, salt);
           return User
             .find({
               where: {
-                id: request.params.id
+                id: request.decoded.id
               }
             }).then((user) => {
-              if (!bcrypt.comparesponseync(request.body.password, user.password)) {
-                return response.status(406).send({ message: 'Incorrect Password' });
+              if (!bcrypt.compareSync(oldPassword, user.password)) {
+                return response.status(403).send({
+                  message: 'Incorrect Password'
+                });
               }
               user.update({
                 password: hash
               }).then(updated => response.status(200).send({
-                updated,
                 message: 'Password successfully changed'
               }))
                 .catch(() => response.status(500).send({
@@ -195,32 +208,40 @@ Please click on the click below to confirm your email addresponses
   },
   updateName(request, response) {
     const { name } = request.body;
-    if (name && name.length > 4) {
-      return User.find({
-        where: {
-          id: request.params.id
-        }
-      }).then((user) => {
-        user.update({
-          name: request.body.name
-        }).then(updated => response.status(200).send({
-          name: updated.name,
-          message: 'Successfully updated Name'
-        }))
+    if (name) {
+      if (name.length >= 4) {
+        return User.find({
+          where: {
+            id: request.decoded.id
+          }
+        }).then((user) => {
+          user.update({
+            name: request.body.name
+          }).then(updated => response.status(200).send({
+            name: updated.name,
+            message: 'Successfully updated Name'
+          }))
+            .catch(() => response.status(500).send({
+              message: 'Something went wrong'
+            }));
+        })
           .catch(() => response.status(500).send({
             message: 'Something went wrong'
           }));
-      })
-        .catch(() => response.status(500).send({
-          message: 'Something went wrong'
-        }));
+      }
+      return response.status(400).send({
+        message: 'Name is too short'
+      });
     }
+    return response.status(400).send({
+      message: 'Name is required'
+    });
   },
   getUser(request, response) {
     return User
       .find({
         where: {
-          id: request.params.userId
+          id: request.decoded.id
         }
       }).then((user) => {
         if (user) {
@@ -229,44 +250,13 @@ Please click on the click below to confirm your email addresponses
             email: user.email
           });
         }
-        return response.status(404).send({ message: 'User not found' });
-      })
-      .catch(() => response.status(500).send({ message: 'Something went wrong' }));
-  },
-  upgradeUser(request, response) {
-    const { userId } = request.params;
-    return User.findOne({
-      where: {
-        id: userId
-      }
-    }).then((user) => {
-      if (!user) {
         return response.status(404).send({
-          message: 'This user cannot be found'
+          message: 'User not found'
         });
-      }
-      if (user.star === 'bronze') {
-        return user.update({
-          star: 'silver'
-        }).then((upgradedUser) => {
-          const message = `Congratulations! You have just been upgraded to ${upgradedUser.star} level`;
-          notify(message, 'user', userId);
-          userRequest.updateRequests(userId);
-          return response.status({
-            message: 'successfully upgraded user'
-          });
-        })
-          .catch(() => response.status(500).send({ message: 'Something went wrong' }));
-      }
-      if (user.star === 'silver') {
-        return user.update({
-          star: 'gold'
-        }).then(upgradedUser => response.status({
-          message: 'successfully upgraded user'
-        }))
-          .catch(() => response.status(500).send({ message: 'Something went wrong' }));
-      }
-    });
-  }
+      })
+      .catch(() => response.status(500).send({
+        message: 'Something went wrong'
+      }));
+  },
 };
 

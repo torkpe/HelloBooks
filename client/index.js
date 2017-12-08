@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
+import ReduxToastr from 'react-redux-toastr';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import jwt from 'jsonwebtoken';
@@ -17,20 +18,17 @@ import setAuth from './utils/setAuthToken';
 import rootReducer from './reducers/index';
 import { setCurrentUser } from './actions/user';
 import { Authenticate, isAlreadySignedin, isUser, isAdmin } from './utils/requireAuth.jsx';
-import adminSignin from './components/adminSignin.jsx';
-import adminSignup from './components/adminSignup.jsx';
-import adminHome from './components/adminHome.jsx';
+import uploadBook from './components/UploadBook.jsx';
 import Restrict from './components/Restrict.jsx';
-import Profile from './components/Profile.jsx';
-import userHistory from './components/userHistory.jsx';
-import allBorrowed from './components/allBorrowed.jsx';
-import allNotReturned from './components/allNotReturned.jsx';
+import Settings from './components/Settings.jsx';
+import userHistory from './components/UserHistory.jsx';
+import AllBorrowed from './components/AllBorrowed.jsx';
+import AllNotReturned from './components/AllNotReturned.jsx';
 import notification from './components/Notifications.jsx';
 import SingleBook from './components/SingleBook.jsx';
-import Log from './components/Log.jsx';
 import Pdf from './components/Pdf.jsx';
-import setPassword from './components/changePassword.jsx';
-import updateBook from './components/bookForm.jsx';
+import SetPassword from './components/changePassword.jsx';
+import UpdateBook from './components/EditBook.jsx';
 
 const store = createStore(
   rootReducer,
@@ -47,30 +45,39 @@ if (localStorage.jwt) {
 
 const router = (
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={Main}>
-        <IndexRoute component={isAlreadySignedin(Landing)} />
-        <Route path="/signup" component={isAlreadySignedin(Signup)} />
-        <Route path="/signin" component={isAlreadySignedin(Signin)} />
-        <Route path="/redirect" component={Redirect} />
-        <Route path="/confirmation/:key" component={Confirm} />
-        <Route path="/home" component={Authenticate(Home)} />
-        <Route path="/admin_signin" component={adminSignin} />
-        <Route path="/admin_signup" component={adminSignup} />
-        <Route path="/admin_home" component={Authenticate(isAdmin(adminHome))} />
-        <Route path="/book/:id" component={Authenticate(SingleBook)} />
-        <Route path="/settings" component={Authenticate(isUser(Profile))} />
-        <Route path="/all_borrowed_books" component={Authenticate(isUser(allBorrowed))} />
-        <Route path="/history" component={Authenticate(isUser(allNotReturned))} />
-        <Route path="/notifications" component={Authenticate(notification)} />
-        <Route path="/single/:id" component={Authenticate(SingleBook)} />
-        <Route path="/read-book/:key" component={Authenticate((Pdf))} />
-        <Route path="/log" component={Authenticate(Log)} />
-        <Route path="/restrict/:key" component={Authenticate((Restrict))} />
-        <Route path="/set-password" component={Authenticate((setPassword))} />
-        <Route path="/edit-book/:id" component={Authenticate((updateBook))} />
-      </Route>
-    </Router>
+    <div>
+      <Router history={browserHistory}>
+        <Route path="/" component={Main}>
+          <IndexRoute component={isAlreadySignedin(Landing)} />
+          <Route path="/signup" component={isAlreadySignedin(Signup)} />
+          <Route path="/signin" component={isAlreadySignedin(Signin)} />
+          <Route path="/redirect" component={Redirect} />
+          <Route path="/confirmation/:key" component={Confirm} />
+          <Route path="/home" component={Authenticate(Home)} />
+          <Route path="/upload-book" component={Authenticate(isAdmin(uploadBook))} />
+          <Route path="/book/:id" component={Authenticate(SingleBook)} />
+          <Route path="/settings" component={Authenticate(isUser(Settings))} />
+          <Route path="/all-borrowed-books" component={Authenticate(isUser(AllBorrowed))} />
+          <Route path="/history" component={Authenticate(isUser(AllNotReturned))} />
+          <Route path="/notifications" component={Authenticate(notification)} />
+          <Route path="/single/:id" component={Authenticate(SingleBook)} />
+          <Route path="/read-book/:key" component={Authenticate((Pdf))} />
+          <Route path="/restrict" component={Authenticate((Restrict))} />
+          <Route path="/set-password" component={Authenticate((SetPassword))} />
+          <Route path="/edit-book/:id" component={Authenticate((UpdateBook))} />
+        </Route>
+      </Router>
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates
+        preventOpenDuplicates
+        position="top-left"
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        progressBar
+      />
+    </div>
   </Provider>
 );
 ReactDOM.render(router, document.getElementById('root'));

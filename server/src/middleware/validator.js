@@ -3,34 +3,34 @@ export default {
     const {
       cover, pdf, title, author, description, quantity, genre
     } = request.body;
-    if ((String(cover).trim()).length < 30) {
+    if ((String(cover).trim()).length < 10) {
       return response.status(400).send({
-        message: 'You seem to have input an invalid url to your cover photo'
+        message: 'Invalid photo!. Please try uploading another photo'
       });
     }
-    if ((String(pdf).trim()).length < 30) {
+    if ((String(pdf).trim()).length < 10) {
       return response.status(400).send({
-        message: 'You seem to have input an invalid url to your cover pdf'
+        message: 'Invalid pdf!. Please try uploading another pdf'
       });
     }
     if ((String(title).trim()).length < 10) {
       return response.status(400).send({
-        message: 'Title is too short'
+        message: 'Title is too short!'
       });
     }
     if ((String(author).trim()).length < 5) {
       return response.status(400).send({
-        message: 'Author\'s name is too short'
+        message: 'Author\'s name is too short!'
       });
     }
-    if ((String(description).trim()).length < 15) {
+    if ((String(description).trim()).length < 10) {
       return response.status(400).send({
-        message: 'Your description for this book seems to be too short'
+        message: 'Your description for this book seems to be too short!'
       });
     }
     if (!(/^[0-9]{1,10}$/.test(quantity))) {
       return response.status(400).send({
-        message: 'Quantity of book should a nubmer'
+        message: 'Quantity of book should a number!'
       });
     }
     if (quantity <= 0) {

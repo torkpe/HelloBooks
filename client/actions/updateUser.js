@@ -6,7 +6,7 @@ const updateUser = (userId, body) => (dispatch) => {
   dispatch({
     type: 'UPDATE_USER',
   });
-  return axios.put(`${url}/users/updateUser/${userId}`, body)
+  return axios.put(`${url}/users/update-user/${userId}`, body)
     .then((response) => {
       if (response) {
         return dispatch({
@@ -25,4 +25,9 @@ const updateUser = (userId, body) => (dispatch) => {
       return null;
     });
 };
-export default updateUser;
+const clearUpdateUserState = () => dispatch => dispatch({
+  type: 'CLEAR_UPDATE_USER_STATE'
+});
+export {
+  updateUser, clearUpdateUserState
+};
