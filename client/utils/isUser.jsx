@@ -18,11 +18,11 @@ const isUser = (ComposedComponent) => {
     }
   }
   isAUser.propTypes = {
-    category: Proptypes.bool.isRequired,
+    isAdmin: Proptypes.bool.isRequired,
   };
 
   const mapStateToProps = state => ({
-    category: state.auth.user.category,
+    isAdmin: state.auth.user.isAdmin,
   });
   return connect(mapStateToProps)(isAUser);
 };

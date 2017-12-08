@@ -25,6 +25,14 @@ export const userSignup = (state = signupInitialState, action = {}) => {
         errors: action.payload,
       };
     }
+    case 'CLEAR_SIGNUP_STATE': {
+      return {
+        ...state,
+        isLoading: false,
+        errors: {},
+        successfullySignedup: {},
+      };
+    }
     default: return state;
   }
 };
@@ -34,7 +42,7 @@ const confirmationInitalState = {
   errors: {},
   confirmationSuccessful: {},
 };
-export const confirmationRequest = (state = confirmationInitalState, action = {}) => {
+export const userConfirmationRequest = (state = confirmationInitalState, action = {}) => {
   switch (action.type) {
     case 'CONFIRMING': {
       return {
@@ -49,11 +57,18 @@ export const confirmationRequest = (state = confirmationInitalState, action = {}
         confirmationSuccessful: action.payload,
       };
     }
-    case 'CONFIRMATION_FAILED ': {
+    case 'CONFIRMATION_FAILED': {
       return {
         ...state,
         isLoading: false,
         errors: action.payload,
+      };
+    }
+    case 'CLEAR_CLEAR_USER_CONFIRMATION_STATE': {
+      return {
+        isLoading: false,
+        errors: {},
+        confirmationSuccessful: {},
       };
     }
     default: return state;
@@ -84,6 +99,14 @@ export const userSignin = (state = signinInitialState, action = {}) => {
         ...state,
         isLoading: false,
         errors: action.payload,
+      };
+    }
+    case 'CLEAR_SIGNIN_STATE': {
+      return {
+        ...state,
+        isLoading: false,
+        errors: {},
+        successfullySignedin: {},
       };
     }
     default: return state;

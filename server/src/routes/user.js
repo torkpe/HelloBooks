@@ -5,9 +5,9 @@ import authBorrow from '../middleware/borrowBook';
 import validator from '../middleware/validator';
 
 const userController = controllers.users;
-const borrowBookControllers = controllers.borrowBook;
+const borrowBookControllers = controllers.borrowedBook;
 const requestsController = controllers.requests;
-const notificationsController = controllers.notification
+const notificationsController = controllers.notification;
 const router = express.Router();
 //  sign up user
 router.post('/users/signup', userController.create);
@@ -28,7 +28,7 @@ router.get(
 // get list borrowed books, both borrowed and returned
 router.get(
   '/users/:userId/books/all-borrowed', authorize.checkAuthentication, authorize.authorizeUser,
-  borrowBookControllers.getAllBorrowedBooks
+  borrowBookControllers.getHistory
 );
 // api route to allow user return a book;
 router.put(
@@ -37,25 +37,17 @@ router.put(
 );
 // Api to set password
 router.put(
-  '/users/setPassword/:id', authorize.checkAuthentication, authorize.authorizeUser,
+  '/users/set-password/:id', authorize.checkAuthentication, authorize.authorizeUser,
   userController.setPassword
 );
-// update usernamne
+// update username
 router.put(
-  '/users/updateUser/:id', authorize.checkAuthentication, authorize.authorizeUser,
+  '/users/update-user/:id', authorize.checkAuthentication, authorize.authorizeUser,
   userController.updateName
-);
-// update user notification
-router.put(
-  '/users/update-notification/:userId', authorize.checkAuthentication, authorize.authorizeUser,
-  notificationsController.updateNotification
 );
 router.get(
   '/users/:userId', authorize.checkAuthentication, authorize.authorizeUser,
   userController.getUser
 );
-router.post(
-  '/users/requests', authorize.checkAuthentication, authorize.authorizeUser,
-  requestsController.createRequest
-);
+
 export default router;

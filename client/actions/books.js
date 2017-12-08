@@ -24,28 +24,13 @@ export const getBooks = () => (dispatch) => {
       return null;
     });
 };
-// Get all books exceeding deadline
-export const exceedDeadlines = () => (dispatch) => {
-  dispatch({ type: 'GET_EXCEEDS' });
-  axios.get(`${url}/admins/exceed-deadlines`)
-    .then((response) => {
-      if (response.data) {
-        return dispatch({
-          type: 'GET_EXCEEDS_SUCCESSFUL',
-          payload: response.data,
-        });
-      }
-      return null;
-    }).catch((error) => {
-      if (error) {
-        return dispatch({
-          type: 'FAILED_TO_GET_EXCEEDS',
-          payload: error.response.data,
-        });
-      }
-      return null;
-    });
-};
+
+
+export const clearBorrowBookState = () => dispatch =>
+  dispatch({
+    type: 'CLEAR_BORROW_BOOK_STATE'
+  });
+
 // Get a book
 export const getABook = id => (dispatch) => {
   dispatch({ type: 'GET_BOOK' });
@@ -68,9 +53,18 @@ export const getABook = id => (dispatch) => {
       return null;
     });
 };
-export const clearSingleBook = () => dispatch => dispatch({ type: 'CLEAR_SINGLE_BOOK' });
-export const clearBooks = () => dispatch => dispatch({ type: 'CLEAR_BOOKS' });
-
+export const clearSingleBook = () => dispatch => dispatch({
+  type: 'CLEAR_SINGLE_BOOK'
+});
+export const clearCreatedBook = () => dispatch => dispatch({
+  type: 'CLEAR_CREATED_BOOK'
+});
+export const clearBooks = () => dispatch => dispatch({
+  type: 'CLEAR_BOOKS'
+});
+export const clearDeleteBookState = () => dispatch => dispatch({
+  type: 'CLEAR_DELETE_BOOK_STATE'
+});
 // Get a book
 export const checkIfBorrowed = (id, userId) => (dispatch) => {
   dispatch({ type: 'CHECK_IF_BORROWED' });
@@ -191,22 +185,21 @@ export const deleteBook = data => (dispatch) => {
       if (response.data) {
         return dispatch({
           type: 'DELETE_BOOK_SUCCESSFUL',
-          poayLoad: response.data,
+          payLoad: response.data,
         });
       }
       return null;
     }).catch((error) => {
       if (error) {
-        if (error) {
-          return dispatch({
-            type: 'DELETE_BOOK_FAILED',
-            poayLoad: error.response.data,
-          });
-        }
+        return dispatch({
+          type: 'DELETE_BOOK_FAILED',
+          payload: error.response.data,
+        });
       }
       return null;
     });
 };
+
 // Edit a book
 export const editBook = (data, bookId) => (dispatch) => {
   dispatch({ type: 'EDIT_BOOK' });

@@ -1,7 +1,6 @@
 import model from '../models';
 
-const { Book } = model;
-
+const { Book, BorrowBook } = model;
 export default {
   create(request, response) {
     const {
@@ -18,11 +17,16 @@ export default {
         genre,
         deleted: false,
       })
-      .then(newBook => response.status(201).send(newBook))
-      .catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      .then(newBook => response.status(201).send({
+        newBook,
+        message: 'Book successfully created'
+      }))
+      .catch(() => response.status(500).send({
+        message: 'Something went wrong'
+      }));
   },
   // find a book
-  findOne(request, response) {
+  findABook(request, response) {
     return Book
       .findOne({
         where: {
@@ -32,14 +36,18 @@ export default {
       })
       .then((book) => {
         if (!book) {
-          response.status(404).send({ message: 'Book not found' });
+          response.status(404).send({
+            message: 'Book not found'
+          });
         } else {
           response.status(200).send(book);
         }
-      }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      }).catch(() => response.status(500).send({
+        message: 'Something went wrong'
+      }));
   },
   // show all books
-  findAll(request, response) {
+  findAllBooks(request, response) {
     return Book
       .findAll({
         where: {
@@ -47,41 +55,73 @@ export default {
         }
       })
       .then((book) => {
-        if (!book) {
-          response.status(400).send('No book not found');
-        } else {
-          response.status(200).send(book);
+        if (book.length < 1) {
+          return response.status(200).send({
+            message: 'No book found'
+          });
         }
-      }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
+        response.status(200).send(book);
+      }).catch(() => response.status(500).send({
+        message: 'Something went wrong'
+      }))
+      .catch(() => response.status(500).send({
+        message: 'Something went wrong'
+      }));
   },
   deleteBook(request, response) {
+    const { id } = request.params;
     return Book
       .findOne({
         where: {
-          id: request.params.id
+          id,
         }
       }).then((book) => {
         if (!book) {
-          return response.status(404).send({ message: 'Book is not found' });
+          return response.status(404).send({
+            message: 'Book is not found'
+          });
         }
-        book.update({
-          deleted: true
-        }).then(deletedBook => response.status(200).send(deletedBook))
-          .catch(() => response.status(500).send({ message: 'Something went wrong' }));
+        BorrowBook.findOne({
+          where: {
+            bookId: book.id,
+            returned: false
+          }
+        }).then((foundBorrowedBook) => {
+          if (foundBorrowedBook) {
+            return response.status(401).send({
+              message: 'This action cannot be completed until all users have returned borrowed books'
+            });
+          }
+          book.update({
+            deleted: true
+          }).then(deletedBook => response.status(200).send({
+            message: 'Book successfully deleted'
+          }))
+            .catch(error => response.status(500).send({
+              message: error.message
+            }));
+        })
+          .catch(error => response.status(500).send({
+            message: error.message
+          }));
       })
-      .catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      .catch(error => response.status(500).send({
+        message: error.message
+      }));
   },
   // update a book's info
   editBook(request, response) {
     return Book
       .findOne({
         where: {
-          id: `${request.params.id}`, // Check if user exists first
+          id: request.params.id, // Check if user exists first
         }
       })
       .then((book) => {
         if (!book) {
-          return response.status(404).send({ message: 'Book not found' });
+          return response.status(404).send({
+            message: 'Book not found'
+          });
         }
         // Update user info
         book.update({
@@ -93,10 +133,15 @@ export default {
           quantity: request.body.quantity,
           genre: request.body.genre,
         }).then(updatedBook => response.status(200).send({
-          updatedBook
+          updatedBook,
+          message: 'Book updated successfully'
         }))
-          .catch(() => response.status(500).send({ message: 'Something went wrong' }));
+          .catch(() => response.status(500).send({
+            message: 'Something went wrong'
+          }));
       })
-      .catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      .catch(() => response.status(500).send({
+        message: 'Something went wrong'
+      }));
   }
 };

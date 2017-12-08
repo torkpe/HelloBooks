@@ -1,26 +1,36 @@
 import chai from 'chai';
-import supertest from 'supertest';
+import chaiHttp from 'chai-http';
 import faker from 'faker';
+import bcrypt from 'bcrypt';
+
+import model from '../models';
 import app from '../server';
 
-const expect = chai.expect;
+chai.use(chaiHttp);
+
+const User = model.Users;
+const salt = bcrypt.genSaltSync(10); // Generate salt for password
+
+const { expect } = chai;
 const userName = `${faker.fake('{{name.lastName}}')}johnDoe`;
 const email = `${faker.fake('{{name.firstName}}')}@email.com`;
 const userName1 = `${faker.fake('{{name.lastName}}')}johnDoee`;
 const email1 = `${faker.fake('{{name.firstName}}')}e@email.com`;
 let token = '';
+let key = '';
 const adminName = `${faker.fake('{{name.lastName}}')}janDoe`;
 const adminEmail = `${faker.fake('{{name.firstName}}')}@email.com`;
 
 let adminToken = '';
+let userId = '';
 const user1 = {
   name: userName,
   email,
   password: 'jonbullish',
+  confirmPassword: 'jonbullish'
 };
 const user2 = {
   name: userName,
-  email,
   password: 'jonbullis',
 };
 const user3 = {
@@ -48,8 +58,8 @@ const book = {
   genre: 'Educational',
 };
 const book2 = {
-  cover: 'sdhdsjcdssnbdsdsbhjsb',
-  pdf: 'bssskskjhdb',
+  cover: 'sdhdsjcdsssjkssjksnbdsdsbhjsb',
+  pdf: 'bssskskjhdkjsnjksb',
   title: 'Ali and Simbi',
   author: 'Joy chinelo',
   description: 'Ali is a boy and Simbi is a girl',
@@ -65,331 +75,625 @@ const book3 = {
   quantity: 0,
   genre: 'Educational',
 };
-describe('Post /api/users/signup', () => {
-  console.log(`${user1.name}==========================${user3.name}`);
-});
-const request = supertest;
 
-describe('Create new user', () => {
-  it('responds with 201 created', (done) => {
-    request(app)
+const Admin = {
+  email: 'admin@hellobooks.com',
+  password: 'silver',
+};
+const hash = bcrypt.hashSync(Admin.password, salt);
+
+
+User.create({
+  email: Admin.email,
+  password: hash,
+  isAdmin: true,
+  star: 'admin',
+  confirmed: true,
+  key: 'admin',
+  name: 'admin'
+}).then(createdUser => createdUser)
+  .catch(error => error.message);
+
+describe('Users', () => {
+  it('should get a message and key on successful signup', (done) => {
+    chai.request(app)
       .post('/api/v1/users/signup')
       .send(user1)
       .set('Accept', 'application/json')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(201, done);
-        if (err) return expect(err.message);
-        return done();
+      .end((error, response) => {
+        const { key: confirmationKey } = response.body;
+        key = confirmationKey;
+        expect(response.status).to.equal(201);
+        expect(response.body.message).to.equal('A mail has been sent to your email');
+        expect(response.body).to.have.property('key');
+        if (error) return done(error);
+        done();
       });
   });
-});
-describe('Create new user', () => {
-  it('responds with 201 created', (done) => {
-    request(app)
-      .post('/api/v1/users/signup')
-      .send(user3)
-      .set('Accept', 'application/json')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(201, done);
-        if (err) return expect(err.message);
-        return done();
-      });
-  });
-});
-// Sign up with already existing details
-describe('Sign up with already existing details', () => {
-  it('responds with 400 Bad Request', (done) => {
-    request(app)
+  it('should not sign up with existing emails', (done) => {
+    chai.request(app)
       .post('/api/v1/users/signup')
       .send(user1)
       .set('Accept', 'application/json')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(400, done);
-        if (err) return done(err.message);
-        return done();
+      .end((error, response) => {
+        if (error) {
+          expect(error.response.status).to.equal(409);
+          expect(error.response.body).to.have.property('message');
+          expect(error.response.body.message).to.equal('Sorry email has already been taken');
+        }
+        done();
       });
   });
-});
-
-// Sign up with invalid details
-describe('Sign up with invalid details', () => {
-  it('responds with 400 bad request error', (done) => {
-    request(app)
+  it('should not sign up with non-emails', (done) => {
+    chai.request(app)
       .post('/api/v1/users/signup')
-      .send(user)
+      .send({ email: 'user1' })
       .set('Accept', 'application/json')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(400, done);
-        if (err) return done(err);
-        return done();
+      .end((error, response) => {
+        if (error) {
+          expect(error.response.status).to.equal(400);
+          expect(error.response.body).to.have.property('message');
+          expect(error.response.body.message).to.equal('This is not an email');
+        }
+        done();
       });
   });
-});
+  it('should have email to signup', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send('')
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        if (error) {
+          expect(error.response.status).to.equal(400);
+          expect(error.response.body).to.have.property('message');
+          expect(error.response.body.message).to.equal('Email is required');
+        }
+        done();
+      });
+  });
 
-// Sign in with invalid details
-describe('Sign in with invalid details', () => {
-  it('responds with 404', (done) => {
-    request(app)
-      .post('/api/v1/users/signin')
-      .send(user)
+  it('should get a message and key on successful signup', (done) => {
+    chai.request(app)
+      .put(`/api/v1/confirmation/${key}`)
+      .send(user1)
       .set('Accept', 'application/json')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(404, done);
-        if (err) return done(err);
-        return done();
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Successfully updated');
+        expect(response.body).to.have.property('myToken');
+        expect(response.body).to.have.property('userId');
+        if (error) return done(error);
+        done();
       });
   });
-});
-// Sign in with incorrect password
-describe('Sign in with incorrect password', () => {
-  it('responds with 406', (done) => {
-    request(app)
-      .post('/api/v1/users/signin')
+  it('should have name, password and confirmPassword for confirmation', (done) => {
+    chai.request(app)
+      .put(`/api/v1/confirmation/${key}`)
       .send(user2)
       .set('Accept', 'application/json')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(406, done);
-        if (err) return done(err);
-        return done();
+      .end((error, response) => {
+        if (error) {
+          expect(error.response.status).to.equal(400);
+          expect(error.response.body).to.have.property('message');
+          expect(error.response.body.message).to.equal('All fields are required');
+        }
+        done();
+      });
+  });
+  it('should have the correct key for confirmation', (done) => {
+    chai.request(app)
+      .put(`/api/v1/confirmation/gsB0dghVs47ngNMLQGd5VXWpHUqF`)
+      .send(user1)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        if (error) {
+          expect(error.response.status).to.equal(404);
+          expect(error.response.body).to.have.property('message');
+          expect(error.response.body.message).to.equal('User not found');
+        }
+        done();
+      });
+  });
+  it('should not update details without required fields', (done) => {
+    chai.request(app)
+      .put(`/api/v1/confirmation/${key}`)
+      .send(user2)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        if (error) {
+          expect(error.response.status).to.equal(400);
+          expect(error.response.body).to.have.property('message');
+          expect(error.response.body.message).to.equal('All fields are required');
+        }
+        done();
       });
   });
 });
-// Sign user in with valid details
-describe('Sign user in with valid details', () => {
-  it('responds with 200', (done) => {
-    request(app)
+// signin user
+describe('User', () => {
+  it('should get a message and key on successful signin', (done) => {
+    chai.request(app)
       .post('/api/v1/users/signin')
       .send(user1)
       .set('Accept', 'application/json')
-      .end((err, res) => {
-        token = res.body.myToken;
-        expect('Content-Type', /json/);
-        expect(200, done);
-        if (err) return done(err);
-        return done();
+      .end((error, response) => {
+        token = response.body.myToken;
+        const { userId: id } = response.body;
+        userId = id;
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('myToken');
+        expect(response.body).to.have.property('userId');
+        if (error) return done(error);
+        done();
       });
   });
-});
-// Sign user2 in with valid details
-describe('Sign user in with valid details', () => {
-  it('responds with 200', (done) => {
-    request(app)
+  // signin admin
+  it('should get a message, id and key on successful signin', (done) => {
+    chai.request(app)
       .post('/api/v1/users/signin')
-      .send(user3)
+      .send(Admin)
       .set('Accept', 'application/json')
-      .end((err, res) => {
-        token2 = res.body.myToken;
-        expect('Content-Type', /json/);
-        expect(200, done);
-        if (err) return done(err);
-        return done();
+      .end((error, response) => {
+        adminToken = response.body.myToken;
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('myToken');
+        expect(response.body).to.have.property('userId');
+        if (error) return done(error);
+        done();
       });
   });
-});
-// Create Admin
-describe('Create Admin', () => {
-  it('responds with 201 created', (done) => {
-    request(app)
-      .post('/api/v1/admin/signup')
-      .send(admin)
-      .set('Accept', 'application/json')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(201, done);
-        if (err) return done(err);
-        return done();
-      });
-  });
-});
-// Sign Admin in with valid details
-describe('Sign Admin in with valid details', () => {
-  it('responds with 200', (done) => {
-    request(app)
-      .post('/api/v1/admin/signin')
-      .send(admin)
-      .set('Accept', 'application/json')
-      .end((err, res) => {
-        adminToken = res.body.token;
-        expect('Content-Type', /json/);
-        expect(200, done);
-        if (err) return done(err);
-        return done();
-      });
-  });
-});
-// Post new book by Admin
-describe('Post new book by Admin', () => {
-  it('responds with 201', (done) => {
-    request(app)
-      .post('/api/v1/books')
+  it('should be able to create a book admin', (done) => {
+    chai.request(app)
+      .post(`/api/v1/books/`)
       .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
       .send(book)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(201, done);
-        if (err) return done(err);
-        return done();
+      .end((error, response) => {
+        expect(response.status).to.equal(201);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Book successfully created');
+        expect(typeof (response.body)).to.equal('object');
+        expect(typeof (response.body.message)).to.equal('string');
+        if (error) return done(error);
+        done();
       });
   });
-});
-// Post another book by Admin
-describe('Post another book by Admin', () => {
-  it('responds with 201', (done) => {
-    request(app)
-      .post('/api/v1/books')
+  it('should be able to create a book admin', (done) => {
+    chai.request(app)
+      .post(`/api/v1/books/`)
       .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .send(book)
+      .end((error, response) => {
+        expect(response.status).to.equal(201);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Book successfully created');
+        expect(typeof (response.body)).to.equal('object');
+        expect(typeof (response.body.message)).to.equal('string');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should get an error when creating a book with 0 quantity', (done) => {
+    chai.request(app)
+      .post(`/api/v1/books/`)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
       .send(book2)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(201, done);
-        if (err) return done(err);
-        return done();
+      .end((error, response) => {
+        expect(error.response.status).to.equal(400);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('This proposed quantity is too small to create a new book');
+        expect(typeof (error.response.body)).to.equal('object');
+        expect(typeof (error.response.body.message)).to.equal('string');
+        done();
       });
   });
-});
-// Post another book by Admin with invalid details
-describe('Post another book by Admin with invalid details', () => {
-  it('responds with 400', (done) => {
-    request(app)
-      .post('/api/v1/books')
+  it('should get an error when creating a book with out cover as admin', (done) => {
+    chai.request(app)
+      .post(`/api/v1/books/`)
       .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
       .send(book3)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(400, done);
-        if (err) return done(err);
-        return done();
+      .end((error, response) => {
+        expect(error.response.status).to.equal(400);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Invalid photo!. Please try uploading another photo');
+        expect(typeof (error.response.body)).to.equal('object');
+        expect(typeof (error.response.body.message)).to.equal('string');
+        done();
       });
   });
-});
-
-// Post new book by user
-describe('Post new book by user', () => {
-  it('responds with 403', (done) => {
-    request(app)
-      .post('/api/v1/books')
+  it('should be able to delete a book as admin', (done) => {
+    chai.request(app)
+      .put(`/api/v1/books/1/delete`)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Book successfully deleted');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should be able to edit a book as an admin', (done) => {
+    chai.request(app)
+      .put(`/api/v1/books/1`)
+      .set('x-access-token', adminToken)
       .send(book)
-      .set('x-access-token', token)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(403, done);
-        if (err) return done(err);
-        return done();
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Book updated successfully');
+        if (error) return done(error);
+        done();
       });
   });
-});
-// Post new book without token
-describe('Post new book without token', () => {
-  it('responds with 403', (done) => {
-    request(app)
-      .post('/api/v1/books')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(403, done);
-        if (err) return done(err);
-        return done();
-      });
-  });
-});
-// Get all books by user
-describe('Post new book by user', () => {
-  it('responds with 200', (done) => {
-    request(app)
-      .get('/api/v1/books')
-      .set('x-access-token', token)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(200, done);
-        if (err) return done(err);
-        return done();
-      });
-  });
-});
-// Get all books by admin
-describe('Get all books by admin', () => {
-  it('responds with 200', (done) => {
-    request(app)
-      .get('/api/v1/books')
+  it('should not be able to edit a book that does not exist', (done) => {
+    chai.request(app)
+      .put(`/api/v1/books/10`)
       .set('x-access-token', adminToken)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(200, done);
-        if (err) return done(err);
-        return done();
+      .send(book)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(error.response.status).to.equal(404);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Book not found');
+        done();
       });
   });
-});
-// Get all books without token
-describe('Get all books without token', () => {
-  it('responds with 403', (done) => {
-    request(app)
-      .get('/api/v1/books')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(403, done);
-        if (err) return done(err);
-        return done();
-      });
-  });
-});
-// Borrow book by user
-describe('Borrow book by user', () => {
-  it('responds with 201', (done) => {
-    request(app)
-      .post('/api/v1/users/1/1/books')
-      .set('x-access-token', token)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(201, done);
-        if (err) return done(err);
-        return done();
-      });
-  });
-});
-// Borrow book by admin
-describe('Borrow book by admin', () => {
-  it('responds with 403', (done) => {
-    request(app)
-      .post('/api/v1/users/1/1/books')
+  it('should be able to get all books', (done) => {
+    chai.request(app)
+      .get(`/api/v1/books`)
       .set('x-access-token', adminToken)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(403, done);
-        if (err) return done(err);
-        return done();
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        if (error) return done(error);
+        done();
       });
   });
-});
-// Borrow book without token
-describe('Borrow book without token', () => {
-  it('responds with 403', (done) => {
-    request(app)
-      .post('/api/v1/users/1/1/books')
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(403, done);
-        if (err) return done(err);
-        return done();
+  it('should get a book', (done) => {
+    chai.request(app)
+      .get(`/api/v1/books/2`)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        done();
       });
   });
-});
-// Borrow book again by user
-describe('Borrow book again by user', () => {
-  it('responds with 400', (done) => {
-    request(app)
-      .post('/api/v1/users/1/1/books')
+  it('should get error for a book that does not exist', (done) => {
+    chai.request(app)
+      .get(`/api/v1/books/1`)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(error.response.status).to.equal(404);
+        expect(typeof (error.response.body)).to.equal('object');
+        expect(error.response.body.message).to.equal('Book not found');
+        done();
+      });
+  });
+  it('should get an error when deleting a book that does not exist', (done) => {
+    chai.request(app)
+      .put(`/api/v1/books/10/delete`)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(error.response.status).to.equal(404);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Book is not found');
+        done();
+      });
+  });
+  it('should be able to create a book as an admin', (done) => {
+    chai.request(app)
+      .post(`/api/v1/books/`)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .send(book)
+      .end((error, response) => {
+        expect(response.status).to.equal(201);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Book successfully created');
+        expect(typeof (response.body)).to.equal('object');
+        expect(typeof (response.body.message)).to.equal('string');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should get an error message on incorrect details', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signin')
+      .send(user)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(error.response.status).to.equal(404);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Looks like you have not registered this account with us');
+        done();
+      });
+  });
+  it('should get an error message on incorrect details', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signin')
+      .send({
+        email,
+        password: 'jonbullishffe',
+      })
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(error.response.status).to.equal(403);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Incorrect credentials');
+        done();
+      });
+  });
+  it('should get message when successfully updated', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/set-password/${userId}`)
       .set('x-access-token', token)
-      .end((err) => {
-        expect('Content-Type', /json/);
-        expect(400, done);
-        if (err) return done(err);
-        return done();
+      .set('Accept', 'application/json')
+      .send({
+        oldPassword: 'jonbullish',
+        password: 'jonbullishffe',
+        confirmPassword: 'jonbullishffe',
+      })
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Password successfully changed');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should get an error message for wrong password', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/set-password/${userId}`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .send({
+        oldPassword: 'jonbullishds',
+        password: 'jonbullishffe',
+        confirmPassword: 'jonbullishffe',
+      })
+      .end((error, response) => {
+        expect(error.response.status).to.equal(403);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Incorrect Password');
+        done();
+      });
+  });
+  it('should get an error message for password mismatch', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/set-password/${userId}`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .send({
+        oldPassword: 'jonbullish',
+        password: 'jonbullishffe',
+        confirmPassword: 'jonbullishffdscse',
+      })
+      .end((error, response) => {
+        expect(error.response.status).to.equal(400);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Passwords do not match');
+        done();
+      });
+  });
+  it('should fill all details', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/set-password/${userId}`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .send({
+        oldPassword: 'jonbullish',
+        password: 'jonbullishffe',
+      })
+      .end((error, response) => {
+        expect(error.response.status).to.equal(400);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Password field missing');
+        done();
+      });
+  });
+  it('should have password greater than 5', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/set-password/${userId}`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .send({
+        oldPassword: 'jonbullish',
+        password: 'jo',
+        confirmPassword: 'jo',
+      })
+      .end((error, response) => {
+        expect(error.response.status).to.equal(400);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Password is too short');
+        done();
+      });
+  });
+  it('should get a message if name is updated', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/update-user/${userId}`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .send({
+        name: 'johnbosco'
+      })
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Successfully updated Name');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should have a name not less than 4', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/update-user/${userId}`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .send({
+        name: 'joh'
+      })
+      .end((error, response) => {
+        expect(error.response.status).to.equal(400);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Name is too short');
+        expect(typeof (error.response.body)).to.equal('object');
+        expect(typeof (error.response.body.message)).to.equal('string');
+        done();
+      });
+  });
+  it('should be able to get his/her details', (done) => {
+    chai.request(app)
+      .get(`/api/v1/users/${userId}`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('name');
+        expect(response.body).to.have.property('email');
+        expect(typeof (response.body)).to.equal('object');
+        expect(typeof (response.body.name)).to.equal('string');
+        expect(typeof (response.body.email)).to.equal('string');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should not be able to create a book', (done) => {
+    chai.request(app)
+      .post(`/api/v1/books/`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(error.response.status).to.equal(403);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('This page is for Admins only');
+        expect(typeof (error.response.body)).to.equal('object');
+        expect(typeof (error.response.body.message)).to.equal('string');
+        done();
+      });
+  });
+  it('should be able to borrow book', (done) => {
+    chai.request(app)
+      .post(`/api/v1/users/2/2/books`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(201);
+        expect(response.body).to.have.property('borrowed');
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Book successfully borrowed');
+        expect(typeof (response.body)).to.equal('object');
+        expect(typeof (response.body.message)).to.equal('string');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should not borrow book when borrowed is not returned', (done) => {
+    chai.request(app)
+      .post(`/api/v1/users/2/2/books`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(error.response.status).to.equal(401);
+        expect(error.response.body).to.have.property('message');
+        expect(error.response.body.message).to.equal('Sorry!!! This action cannot be completed due to your current star level');
+        expect(typeof (error.response.body)).to.equal('object');
+        expect(typeof (error.response.body.message)).to.equal('string');
+        done();
+      });
+  });
+  it('should be able to return borrowed book', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/2/2/books`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        done();
+      });
+  });
+  it('should be able to get all borrowed books', (done) => {
+    chai.request(app)
+      .get(`/api/v1/users/2/books/all-borrowed`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        done();
+      });
+  });
+  it('should be able to get all borrowed but not returned books', (done) => {
+    chai.request(app)
+      .get(`/api/v1/users/2/books`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        done();
+      });
+  });
+  it('should be able to borrow book', (done) => {
+    chai.request(app)
+      .post(`/api/v1/users/2/2/books`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(201);
+        expect(response.body).to.have.property('borrowed');
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Book successfully borrowed');
+        expect(typeof (response.body)).to.equal('object');
+        expect(typeof (response.body.message)).to.equal('string');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should be able to get a borrowed book', (done) => {
+    chai.request(app)
+      .get(`/api/v1/book/2/2`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        done();
+      });
+  });
+  it('should notifications', (done) => {
+    chai.request(app)
+      .get(`/api/v1/notifications/user/2`)
+      .set('x-access-token', token)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        done();
+      });
+  });
+  it('should notifications as an admin', (done) => {
+    chai.request(app)
+      .get(`/api/v1/notifications/admin`)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        done();
       });
   });
 });

@@ -33,37 +33,12 @@ const getExceedsState = {
   exceeds: [],
   errors: '',
 };
-// Get all exceed deadlines
-export const getExceeds = (state = getExceedsState, action = {}) => {
-  switch (action.type) {
-    case 'GET_EXCEEDS': {
-      return {
-        ...state,
-        fetching: true,
-      };
-    }
-    case 'GET_EXCEEDS_SUCCESSFUL': {
-      return {
-        ...state,
-        fetching: false,
-        exceeds: action.payload,
-      };
-    }
-    case 'FAILED_TO_GET_EXCEEDS': {
-      return {
-        ...state,
-        fetching: false,
-        errors: action.payload,
-      };
-    }
-    default: return state;
-  }
-};
+
 // Get a book
 const getABookState = {
   fetching: false,
   book: {},
-  bookQuantity: -1,
+  bookQuantity: 0,
   errors: '',
 };
 export const getABook = (state = getABookState, action = {}) => {
@@ -93,8 +68,9 @@ export const getABook = (state = getABookState, action = {}) => {
       return {
         ...state,
         fetching: false,
-        bookQuantity: -1,
+        bookQuantity: 0,
         book: {},
+        errors: ''
       };
     }
     default: return state;
@@ -162,6 +138,15 @@ export const borrowBook = (state = borrowBookState, action = {}) => {
         errors: action.payload,
       };
     }
+    case 'CLEAR_BORROW_BOOK_STATE': {
+      return {
+        ...state,
+        requesting: false,
+        response: {},
+        errors: {},
+        successfullyBorrowed: false,
+      };
+    }
     default: return state;
   }
 };
@@ -226,7 +211,8 @@ export const getBorrows = (state = initialState, action = {}) => {
 };
 const createBookState = {
   isLoading: false,
-  resp: {},
+  book: {},
+  message: '',
   errors: {},
 };
 // Create book
@@ -242,7 +228,8 @@ export const createBook = (state = createBookState, action = {}) => {
       return {
         ...state,
         isLoading: false,
-        resp: action.payload,
+        book: action.payload.newBook,
+        message: action.payload.message
       };
     }
     case 'POST_BOOK_FAILED': {
@@ -252,14 +239,23 @@ export const createBook = (state = createBookState, action = {}) => {
         errors: action.payload,
       };
     }
+    case 'CLEAR_CREATED_BOOK': {
+      return {
+        ...state,
+        isLoading: false,
+        book: {},
+        message: '',
+        errors: {},
+      };
+    }
     default: return state;
   }
 };
 // Delete book
 const deleteBookState = {
   isLoading: false,
-  resp: {},
-  errors: {},
+  response: {},
+  error: {},
 };
 export const deleteBook = (state = deleteBookState, action = {}) => {
   switch (action.type) {
@@ -273,14 +269,21 @@ export const deleteBook = (state = deleteBookState, action = {}) => {
       return {
         ...state,
         isLoading: false,
-        resp: action.payLoad,
+        response: action.payLoad,
       };
     }
     case 'DELETE_BOOK_FAILED': {
       return {
         ...state,
         isLoading: false,
-        errors: action.payload,
+        error: action.payload,
+      };
+    }
+    case 'CLEAR_DELETE_BOOK_STATE': {
+      return {
+        isLoading: false,
+        response: {},
+        error: {},
       };
     }
     default: return state;

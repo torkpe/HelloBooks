@@ -25,6 +25,13 @@ export default (state = updateUserState, action = {}) => {
         errors: action.payload,
       };
     }
+    case 'CLEAR_UPDATE_USER_STATE': {
+      return {
+        isLoading: false,
+        errors: {},
+        response: {},
+      };
+    }
     default: return state;
   }
 };

@@ -1,5 +1,5 @@
 import model from '../models';
-import { sendEmail } from '../utils/index';
+import { sendEmail, roles } from '../utils/index';
 
 const Notifications = model.Notification;
 const User = model.Users;
@@ -26,59 +26,45 @@ export default {
           }),
           sendEmail(message, type, userId)
         )
-        .catch(() => ({ message: 'Something went wrong' }));
+        .catch(() => ({
+          message: 'Something went wrong'
+        }));
     })
-      .catch(() => ({ message: 'Something went wrong' }));
+      .catch(() => ({
+        message: 'Something went wrong'
+      }));
   },
   getAdminNotifications(request, response) {
     return Notifications.findAll({
       where: {
-        type: 'admin',
+        type: roles.admin,
       }
     }).then((foundNotifications) => {
       if (foundNotifications) {
         return response.status(200).send(foundNotifications);
       }
-      return response.status(200).send({ message: 'No notification at this time' });
-    }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      return response.status(200).send({
+        message: 'No notification at this time'
+      });
+    }).catch(() => response.status(500).send({
+      message: 'Something went wrong'
+    }));
   },
   getUserNotifications(request, response) {
     return Notifications.findAll({
       where: {
-        type: 'user',
-        userId: request.params.id,
-        isTreated: false
+        userId: request.decoded.id,
+        type: roles.user
       },
     }).then((foundNotifications) => {
       if (foundNotifications) {
         return response.status(200).send(foundNotifications);
       }
-      return response.status(200).send({ message: 'No notification at this time' });
-    }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      return response.status(200).send({
+        message: 'No notification at this time'
+      });
+    }).catch(() => response.status(500).send({
+      message: 'Something went wrong'
+    }));
   },
-  updateNotification(request, response) {
-    const { userId } = request.params;
-    return Notifications.findAll({
-      where: {
-        userId,
-        isTreated: true,
-      }
-    }).then((foundNotification) => {
-      foundNotification.map(notification => notification.update({
-        isTreated: true
-      }).then(updated => updated))
-    });
-  },
-  updateAdminNotification(request, response) {
-    const { userId } = request.params;
-    return Notifications.findAll({
-      where: {
-        type: 'admin'
-      }
-    }).then((foundNotification) => {
-      foundNotification.map(notification => notification.update({
-        isTreated: true
-      }).then(updated => updated))
-    });
-  }
 };

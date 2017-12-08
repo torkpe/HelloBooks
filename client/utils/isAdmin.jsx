@@ -7,7 +7,7 @@ import { browserHistory } from 'react-router';
 const isAdmin = (ComposedComponent) => {
   class isAnAdmin extends Component {
     componentWillMount() {
-      if (!this.props.category) {
+      if (!this.props.isAdmin) {
         return browserHistory.push('/restrict/Admin');
       }
       return null;
@@ -19,11 +19,11 @@ const isAdmin = (ComposedComponent) => {
     }
   }
   isAnAdmin.propTypes = {
-    category: Proptypes.bool.isRequired,
+    isAdmin: Proptypes.bool.isRequired,
   };
 
   const mapStateToProps = state => ({
-    category: state.auth.user.category,
+    isAdmin: state.auth.user.isAdmin,
   });
   return connect(mapStateToProps)(isAnAdmin);
 };

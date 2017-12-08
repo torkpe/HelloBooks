@@ -13,7 +13,7 @@ class allBorrowed extends Component {
     };
   }
   componentWillMount() {
-    this.props.getAllBorrowed(this.props.auth.user.user);
+    this.props.getAllBorrowed(this.props.auth.user.id);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.getAllBorrowedBooks) {
@@ -41,11 +41,10 @@ class allBorrowed extends Component {
           <div className="ask">{this.props.loading ? 'Loading...' : ''}</div>
           <div className="mdl-grid">
             {books && books.length > 0 ?
-              books.map(book => (<Books
+              books.map((book, index) => (<Books
                 {...this.props}
-                key={book.Book.id}
+                key={index}
                 book={book.Book}
-                userId={this.props.userId}
                 borrowBook={this.props.borrowBook}
                 returnBook={this.props.returnBook}
                 borrowedBook={this.props.borrowed}

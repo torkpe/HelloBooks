@@ -4,7 +4,7 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: [
-    path.join(__dirname,'client/index.js')
+    path.join(__dirname, 'client/index.jsx'),
   ],
   output: {
     path: '/',

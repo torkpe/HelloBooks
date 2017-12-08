@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 
 import {
   getABook, borrowBook,
   returnBook, deleteBook,
-  checkIfBorrowed, clearSingleBook
+  checkIfBorrowed, clearSingleBook,
+  clearBorrowBookState,
+  clearDeleteBookState
 } from '../actions/books';
 
 class Book extends Component {
@@ -17,13 +20,17 @@ class Book extends Component {
   }
   componentDidMount() {
     this.props.getABook(this.props.params.id);
-    if (!this.props.auth.user.category) {
-      this.props.checkIfBorrowed(this.props.params.id, this.props.auth.user.user);
+    if (!this.props.auth.user.isAdmin) {
+      this.props.checkIfBorrowed(this.props.params.id, this.props.auth.user.id);
     }
   }
   componentWillReceiveProps(nextProps) {
-    if (Object.keys(nextProps.checkForBorrowed).length > 1 &&
-    nextProps.checkForBorrowed.bookId == this.props.params.id) {
+    const {
+      checkForBorrowed, book,
+      borrowBookError, bookDeleted
+    } = nextProps;
+    if (Object.keys(checkForBorrowed).length > 1 &&
+    checkForBorrowed.bookId === parseInt(this.props.params.id, 10)) {
       this.setState({
         isBorrowed: true,
       });
@@ -32,19 +39,34 @@ class Book extends Component {
         isBorrowed: false,
       });
     }
-    if (nextProps.book.bookQuantity > -1) {
+    if (book.bookQuantity > -1) {
       this.setState({
-        quantity: nextProps.book.bookQuantity,
+        quantity: book.bookQuantity,
       });
     }
+    if (borrowBookError) {
+      toastr.error(borrowBookError);
+    }
+    if (Object.keys(bookDeleted.response).length > 0) {
+      toastr.error(bookDeleted.response.message);
+      this.props.clearDeleteBookState();
+      browserHistory.push('/home');
+    }
+    if (Object.keys(bookDeleted.error).length > 0) {
+      toastr.error(bookDeleted.error.message);
+    }
   }
+
   componentWillUnmount() {
     this.props.clearSingleBook();
+    this.props.clearDeleteBookState();
+    this.props.clearBorrowBookState();
   }
   render() {
     const { fetching, book } = this.props.book;
     const { userId } = this.props;
-    const borrow = (e) => {
+    const borrow = () => {
+      this.props.clearBorrowBookState();
       this.props.borrowBook(userId, book.id).then((response) => {
         if (response.type !== "FAILED_TO_BORROW_BOOK") {
           this.setState({
@@ -54,16 +76,23 @@ class Book extends Component {
         }
       });
     };
-    const deleteABook = (e) => {
+    const deleteABook = () => {
       this.props.deleteBook(book.id);
     };
-    const returnBorrowed = (e) => {
+    const returnBorrowed = () => {
       this.props.returnBook(userId, book.id).then(response =>
         this.setState({
           isBorrowed: false,
           quantity: this.state.quantity + 1,
         }));
     };
+    const { isAdmin } = this.props.auth.user;
+    const mdlStyleButton = `
+    mdl-button
+    mdl-button--colored
+    mdl-js-button
+    mdl-js-ripple-effect
+    `;
     return (
       <div className="mdl-grid">
         {Object.keys(book).length > 0 &&
@@ -83,39 +112,39 @@ class Book extends Component {
             </div>
             <div className="mdl-card__actions mdl-card--border">
               {/* Display for users only */}
-              {this.props.auth.user.category ? '' : this.state.isBorrowed ? '' :
+              {isAdmin ? '' : this.state.isBorrowed ? '' :
               <button
                   onClick={borrow}
-                  className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  className="">
                 Borrow
               </button>
               }
-              {this.props.auth.user.category ? '' : this.state.isBorrowed ?
+              {isAdmin ? '' : this.state.isBorrowed ?
                 <button
                   onClick={returnBorrowed}
-                  className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  className={mdlStyleButton}>
                     Return
                 </button> : ''
               }
               {/* Display for admins only */}
-              {this.props.auth.user.category ?
+              {isAdmin ?
                 <Link
                   to={`/edit-book/${book.id}`}
-                  className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  className={mdlStyleButton}>
                   Edit
                 </Link>
                 : ''
               }
               <Link
                 to={`/read-book/${book.id}`}
-                className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                className={mdlStyleButton}>
                   Read online
               </Link>
-              {this.props.auth.user.category ?
+              {isAdmin ?
                 <div>
                   <button
                     onClick={deleteABook}
-                    className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    className={mdlStyleButton}>
                       Delete
                   </button>
                 </div>
@@ -132,8 +161,10 @@ class Book extends Component {
 }
 const mapStateToProps = state => ({
   book: state.getABook,
-  userId: state.auth.user.user,
+  userId: state.auth.user.id,
   checkForBorrowed: state.checkIfBorrowed.book,
+  borrowBookError: state.borrowBook.errors.message,
+  bookDeleted: state.deleteBook
 });
 
 export default connect(mapStateToProps, {
@@ -143,4 +174,6 @@ export default connect(mapStateToProps, {
   deleteBook,
   checkIfBorrowed,
   clearSingleBook,
+  clearBorrowBookState,
+  clearDeleteBookState
 })(Book);

@@ -36,7 +36,7 @@ const notificationState = {
 export const getNotification = (state = notificationState, action = {}) => {
   switch (action.type) {
     case 'GET_NOTIFICATION': {
-      return { 
+      return {
         ...state,
         fetching: true,
       };

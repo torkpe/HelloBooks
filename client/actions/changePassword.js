@@ -6,7 +6,7 @@ export const setPassword = (userId, body) => (dispatch) => {
   dispatch({
     type: 'SET_PASSWORD'
   });
-  return axios.put(`${url}/users/setPassword/${userId}`, body)
+  return axios.put(`${url}/users/set-password/${userId}`, body)
     .then((response) => {
       if (response) {
         return dispatch({
@@ -23,3 +23,6 @@ export const setPassword = (userId, body) => (dispatch) => {
       }
     });
 };
+export const clearSetPasswordState = () => dispatch => dispatch({
+  type: 'CLEAR_SET_PASSWORD_STATE'
+});
