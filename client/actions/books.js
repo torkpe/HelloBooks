@@ -64,7 +64,7 @@ export const clearBooks = () => dispatch => dispatch({
 });
 export const clearDeleteBookState = () => dispatch => dispatch({
   type: 'CLEAR_DELETE_BOOK_STATE'
-})
+});
 // Get a book
 export const checkIfBorrowed = (id, userId) => (dispatch) => {
   dispatch({ type: 'CHECK_IF_BORROWED' });

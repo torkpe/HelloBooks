@@ -20,7 +20,7 @@ const SingleNotification = (props) => {
           {notification.bookId ?
             <Link
             to={`/single/${notification.bookId}`}
-            className={ mdlLink }>
+            className={mdlLink}>
                 View Book
             </Link>
           : ''}
@@ -28,5 +28,5 @@ const SingleNotification = (props) => {
       </tr>
     </tbody>
   );
-}
+};
 export default SingleNotification;
