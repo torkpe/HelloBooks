@@ -22,7 +22,7 @@ const adminName = `${faker.fake('{{name.lastName}}')}janDoe`;
 const adminEmail = `${faker.fake('{{name.firstName}}')}@email.com`;
 
 let adminToken = '';
-let userId='';
+let userId = '';
 const user1 = {
   name: userName,
   email,
@@ -101,7 +101,8 @@ describe('Users', () => {
       .send(user1)
       .set('Accept', 'application/json')
       .end((error, response) => {
-        key = response.body.key
+        const { key: confirmationKey } = response.body;
+        key = confirmationKey;
         expect(response.status).to.equal(201);
         expect(response.body.message).to.equal('A mail has been sent to your email');
         expect(response.body).to.have.property('key');

@@ -44,6 +44,8 @@
         "no-lone-blocks": 0,
         "jsx-quotes": 1,
         "import/prefer-default-export": 0,
+        "import/no-named-as-default": 0,
+        "import/no-named-as-default-member": 0,
         "jsx-a11y/label-has-for": 0,
         "jsx-a11y/anchor-is-valid": 0,
         "react/no-string-refs": 0,
