@@ -7,7 +7,7 @@ import validator from '../middleware/validator';
 const userController = controllers.users;
 const borrowBookControllers = controllers.borrowedBook;
 const requestsController = controllers.requests;
-const notificationsController = controllers.notification
+const notificationsController = controllers.notification;
 const router = express.Router();
 //  sign up user
 router.post('/users/signup', userController.create);

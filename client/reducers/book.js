@@ -284,7 +284,7 @@ export const deleteBook = (state = deleteBookState, action = {}) => {
         isLoading: false,
         response: {},
         error: {},
-      }
+      };
     }
     default: return state;
   }

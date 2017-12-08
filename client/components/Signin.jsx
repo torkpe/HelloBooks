@@ -11,7 +11,7 @@ class Signin extends Component {
     super(props);
     this.state = {
       error: ''
-    }
+    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -39,7 +39,7 @@ class Signin extends Component {
     mdl-button
     mdl-js-button
     mdl-button--raised
-    mdl-button--colored`
+    mdl-button--colored`;
     return (
       <div className="mdl-grid">
         <div className="contents">

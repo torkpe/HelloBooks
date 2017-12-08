@@ -27,5 +27,5 @@ const Books = (props) => {
       </div>
     </div>
   );
-}
+};
 export default Books;

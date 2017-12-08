@@ -31,7 +31,7 @@ export const userSignup = (state = signupInitialState, action = {}) => {
         isLoading: false,
         errors: {},
         successfullySignedup: {},
-      }
+      };
     }
     default: return state;
   }
@@ -69,7 +69,7 @@ export const userConfirmationRequest = (state = confirmationInitalState, action 
         isLoading: false,
         errors: {},
         confirmationSuccessful: {},
-      }
+      };
     }
     default: return state;
   }

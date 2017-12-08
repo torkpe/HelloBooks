@@ -92,7 +92,7 @@ class Book extends Component {
     mdl-button--colored
     mdl-js-button
     mdl-js-ripple-effect
-    `
+    `;
     return (
       <div className="mdl-grid">
         {Object.keys(book).length > 0 &&

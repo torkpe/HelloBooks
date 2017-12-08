@@ -130,7 +130,7 @@ class Admin extends Component {
   }
   render() {
     const { error } = this.state;
-    const mdlStyleButton = `mdl-button mdl-js-button`
+    const mdlStyleButton = `mdl-button mdl-js-button`;
     return (
       <div className="mdl-grid">
         <div className="contents">

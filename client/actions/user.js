@@ -57,7 +57,7 @@ export const userConfirmationRequest = userData =>
   };
 export const clearUserConfirmationState = () => dispatch => dispatch({
   type: 'CLEAR_CLEAR_USER_CONFIRMATION_STATE'
-})
+});
 
 export const userSignin = data =>
   (dispatch) => {
@@ -82,10 +82,10 @@ export const userSignin = data =>
   };
 export const clearSignupState = () => dispatch => dispatch({
   type: 'CLEAR_SIGNUP_STATE'
-})
+});
 export const clearSigninState = () => dispatch => dispatch({
   type: 'CLEAR_SIGNIN_STATE'
-})
+});
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('jwt');
