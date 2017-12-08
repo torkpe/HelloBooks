@@ -45,7 +45,8 @@ export default {
               key: random.generate(50),
             })
             .then((createdUser) => {
-              const link = `https://hellobooks-foodman.herokuapp.com/confirmation/${createdUser.key}`;
+              const link =
+`https://hellobooks-foodman.herokuapp.com/confirmation/${createdUser.key}`;
               const message = `
 Hello there, thank you for registering for helloBooks.
 Please click on the click below to confirm your email addresponses
