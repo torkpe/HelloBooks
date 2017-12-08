@@ -40,6 +40,12 @@ class Confirm extends Component {
     this.props.clearUserConfirmState();
   }
   render() {
+    const mdlSigninButton = `
+    mdl-button
+    mdl-js-button
+    mdl-button--raised
+    mdl-button--colored
+    `
     return (
       <div className="mdl-grid">
         <div className="contents">
@@ -50,18 +56,27 @@ class Confirm extends Component {
                   type="text" className="mdl-textfield__input"
                   onChange={this.onChange}
                   name="name" id="name" />
-                <label htmlFor="name" className="mdl-textfield__label">Full Name</label>
+                <label
+                htmlFor="name"
+                className="mdl-textfield__label">
+                Full Name
+                </label>
               </div>
               <div className="mdl-textfield mdl-js-textfield card-content">
                 <input
                   type="password" className="mdl-textfield__input"
                   onChange={this.onChange} name="password" id="password1" />
-                <label htmlFor="password1" className="mdl-textfield__label">Password</label>
+                <label htmlFor="password1" className="mdl-textfield__label">
+                  Password
+                </label>
               </div>
-              <div className="mdl-textfield mdl-js-textfield card-content">
+              <div className="mdl-textfieldmdl-js-textfield card-content">
                 <input
-                  type="password" className="mdl-textfield__input"
-                  onChange={this.onChange} name="confirmPassword" id="password2" />
+                  type="password"
+                  className="mdl-textfield__input"
+                  onChange={this.onChange}
+                  name="confirmPassword"
+                  id="password2" />
                 <label
                 htmlFor="password2"
                 className="mdl-textfield__label">Confirm Password
@@ -69,7 +84,7 @@ class Confirm extends Component {
               </div>
               <button
                 onClick={this.onSubmit}
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                className={mdlSigninButton}
                 id="button">
                   Sign in
               </button>

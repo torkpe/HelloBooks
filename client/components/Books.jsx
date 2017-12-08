@@ -3,6 +3,12 @@ import { Link } from 'react-router';
 
 const Books = (props) => {
   const { book } = props;
+  const mdlStyle = `
+    mdl-button
+    mdl-button--colored
+    mdl-js-button
+    mdl-js-ripple-effect
+  `
   return (
     <div className="mdl-cell mdl-cell--4-col">
       <div className="demo-card-square mdl-card mdl-shadow--2dp home-card contents">
@@ -14,7 +20,7 @@ const Books = (props) => {
           {book.description}
         </div>
         <div className="mdl-card__actions mdl-card--border">
-          <Link to={`single/${book.id}`} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          <Link to={`single/${book.id}`} className={mdlStyle}>
               Details
           </Link>
         </div>

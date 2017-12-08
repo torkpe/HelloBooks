@@ -52,6 +52,12 @@ class Settings extends Component {
     this.props.updateUser(this.props.auth.user.id, this.state);
   }
   render() {
+    const mdlButtonStyle = `
+    mdl-button
+    mdl-js-button
+    mdl-button--raised
+    mdl-button--colored
+    `
     return (
       <div className="mdl-grid">
         {Object.keys(this.props.user).length > 0 &&
@@ -76,7 +82,7 @@ class Settings extends Component {
                 <span className="error" />
               </div>
               <button
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                className={mdlButtonStyle}
                 id="button">
                   update
               </button>

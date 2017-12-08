@@ -145,7 +145,7 @@ export const borrowBook = (state = borrowBookState, action = {}) => {
         response: {},
         errors: {},
         successfullyBorrowed: false,
-      }
+      };
     }
     default: return state;
   }

@@ -28,10 +28,16 @@ class Notifications extends Component {
   }
   render() {
     const { notifications } = this.props;
+    const mdlTableClass = `
+    mdl-data-table
+    mdl-js-data-table
+    mdl-shadow--2dp
+    notifications
+    `
     return (
       <div className="mdl-grid">
         <div className="contents">
-          <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp notifications">
+          <table className={mdlTableClass}>
             {notifications.map(notification => (<SingleNotification
               key={notification.id}
               notification={notification}

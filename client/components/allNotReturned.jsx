@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import { allNotReturned } from '../actions/history';
-import { getBooks, getBorrows, borrowBook, returnBook, clearBooks } from '../actions/books';
+import { getBooks,
+  getBorrows, borrowBook,
+  returnBook, clearBooks } from '../actions/books';
 import Books from './Books.jsx';
 
 class notReturned extends Component {

@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+const mdlStyle = `
+  mdl-button
+  mdl-js-button
+  mdl-button--raised
+  mdl-button--colored
+`
 const Landing = props => (
   <div>
     <div className="page-content body overlay">
@@ -10,7 +16,8 @@ const Landing = props => (
           <hr />
           <h3 id="green">...read a book today</h3>
           <Link to="/signin">
-            <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            <button
+            className={mdlStyle}>
                 Get Started
             </button>
           </Link>

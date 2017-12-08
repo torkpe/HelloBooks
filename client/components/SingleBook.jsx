@@ -87,6 +87,12 @@ class Book extends Component {
         }));
     };
     const { isAdmin } = this.props.auth.user;
+    const mdlStyleButton = `
+    mdl-button
+    mdl-button--colored
+    mdl-js-button
+    mdl-js-ripple-effect
+    `
     return (
       <div className="mdl-grid">
         {Object.keys(book).length > 0 &&
@@ -109,14 +115,14 @@ class Book extends Component {
               {isAdmin ? '' : this.state.isBorrowed ? '' :
               <button
                   onClick={borrow}
-                  className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  className="">
                 Borrow
               </button>
               }
               {isAdmin ? '' : this.state.isBorrowed ?
                 <button
                   onClick={returnBorrowed}
-                  className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  className={mdlStyleButton}>
                     Return
                 </button> : ''
               }
@@ -124,21 +130,21 @@ class Book extends Component {
               {isAdmin ?
                 <Link
                   to={`/edit-book/${book.id}`}
-                  className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  className={mdlStyleButton}>
                   Edit
                 </Link>
                 : ''
               }
               <Link
                 to={`/read-book/${book.id}`}
-                className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                className={mdlStyleButton}>
                   Read online
               </Link>
               {isAdmin ?
                 <div>
                   <button
                     onClick={deleteABook}
-                    className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    className={mdlStyleButton}>
                       Delete
                   </button>
                 </div>

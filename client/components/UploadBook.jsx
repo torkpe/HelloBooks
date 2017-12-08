@@ -130,6 +130,7 @@ class Admin extends Component {
   }
   render() {
     const { error } = this.state;
+    const mdlStyleButton = `mdl-button mdl-js-button`
     return (
       <div className="mdl-grid">
         <div className="contents">
@@ -139,22 +140,41 @@ class Admin extends Component {
               <div
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                  type="text" className="mdl-textfield__input" onChange={this.onChange}
+                  type="text"
+                  className="mdl-textfield__input"
+                  onChange={this.onChange}
                   name="title" id="title" />
-                <label htmlFor="title" className="mdl-textfield__label">Title</label>
+                <label
+                htmlFor="title"
+                className="mdl-textfield__label">
+                Title
+                </label>
               </div>
               <div
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                  type="text" className="mdl-textfield__input" onChange={this.onChange}
+                  type="text"
+                  className="mdl-textfield__input"
+                  onChange={this.onChange}
                   name="author" id="author" />
-                <label htmlFor="author" className="mdl-textfield__label">Author</label>
+                <label
+                htmlFor="author"
+                className="mdl-textfield__label">
+                Author
+                </label>
               </div>
               <div className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                  type="text" className="mdl-textfield__input" onChange={this.onChange}
-                  name="description" id="description" />
-                <label htmlFor="description" className="mdl-textfield__label">Description</label>
+                  type="text"
+                  className="mdl-textfield__input"
+                  onChange={this.onChange}
+                  name="description"
+                  id="description" />
+                <label
+                htmlFor="description"
+                className="mdl-textfield__label">
+                Description
+                </label>
               </div>
               <div className="mdl-textfield mdl-js-textfield card-content">
                 <input
@@ -162,18 +182,29 @@ class Admin extends Component {
                   className="mdl-textfield__input"
                   onChange={this.onChange}
                   name="genre" id="genre" />
-                <label htmlFor="genre" className="mdl-textfield__label">Genre</label>
+                <label
+                htmlFor="genre"
+                className="mdl-textfield__label">
+                Genre
+                </label>
               </div>
               <div className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                  type="number" className="mdl-textfield__input" onChange={this.onChange}
+                  type="number"
+                  className="mdl-textfield__input"
+                  onChange={this.onChange}
                   name="quantity" id="text" />
-                <label htmlFor="quantity" className="mdl-textfield__label">Quantity</label>
+                <label
+                htmlFor="quantity"
+                className="mdl-textfield__label">
+                Quantity
+                </label>
               </div>
               <div className="card-content upload file-upload">
                 <label
                   htmlFor="file-upload"
-                  className="mdl-button mdl-js-button mdl-button--accent file-upload btn1">
+                  className={`${mdlStyleButton}
+                  mdl-button--accent file-upload btn1`}>
                 Upload cover
                 </label>
                 <input
@@ -185,7 +216,7 @@ class Admin extends Component {
                   required />
                 <label
                   htmlFor="file-upload2"
-                  className="mdl-button mdl-js-button mdl-button--accent file-upload btn2">
+                  className="mdl-button--accent file-upload btn2">
                   Upload Pdf
                 </label>
                 <input
@@ -197,23 +228,26 @@ class Admin extends Component {
               </div>
               {this.state.isImageSet ?
                 <button
-                disabled={this.state.isLoading} onClick={this.onPostCover}
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                disabled={this.state.isLoading}
+                onClick={this.onPostCover}
+                className="mdl-button--raised mdl-button--colored"
                 id="button">
                   Upload Cover
                 </button> : ''
               }
               {this.state.isPdfSet ?
                 <button
-                disabled={this.state.isLoading} onClick={this.onPostPdf}
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                disabled={this.state.isLoading}
+                onClick={this.onPostPdf}
+                className="mdl-button--raised mdl-button--colored"
                 id="button">
                   Upload Pdf
                 </button> : ''
               }
               <button
-                disabled={this.state.isImageAndPdf} onClick={this.onSubmit}
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                disabled={this.state.isImageAndPdf}
+                onClick={this.onSubmit}
+                className="mdl-button--raised mdl-button--colored"
                 id="button">
                   Create Book
               </button>

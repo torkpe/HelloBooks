@@ -32,6 +32,12 @@ class Signup extends Component {
   render() {
     const { isLoading } = this.props.signup;
     const span = <span />;
+    const mdlButtonStyle = `
+    mdl-button
+    mdl-js-button
+    mdl-button--raised
+    mdl-button--colored
+    `
     return (
       <div className="mdl-grid">
         <div className="contents">
@@ -40,13 +46,19 @@ class Signup extends Component {
               <div
                 className="mdl-textfield mdl-js-textfield card-content">
                 <input
-                  type="email" onChange={this.onChange}
-                  className="mdl-textfield__input" name="email" />
-                <label htmlFor="email" className="mdl-textfield__label">Email</label>
+                  type="email"
+                  onChange={this.onChange}
+                  className="mdl-textfield__input"
+                  name="email" />
+                <label
+                htmlFor="email"
+                className="mdl-textfield__label">
+                Email
+                </label>
               </div>
               <button
                 disabled={isLoading}
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                className={mdlButtonStyle}
                 id="button">
                 Sign up
               </button>
@@ -55,7 +67,9 @@ class Signup extends Component {
               Already have an account? Sign in below
             </div>
             <Link to="/signin">
-              <button className="mdl-button mdl-js-button mdl-button--raised" id="button">
+              <button
+              className="mdl-button mdl-js-button mdl-button--raised"
+              id="button">
                 Sign in
               </button>
             </Link>
