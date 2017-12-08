@@ -57,7 +57,7 @@ class Settings extends Component {
     mdl-js-button
     mdl-button--raised
     mdl-button--colored
-    `
+    `;
     return (
       <div className="mdl-grid">
         {Object.keys(this.props.user).length > 0 &&

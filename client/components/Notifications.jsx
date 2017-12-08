@@ -33,7 +33,7 @@ class Notifications extends Component {
     mdl-js-data-table
     mdl-shadow--2dp
     notifications
-    `
+    `;
     return (
       <div className="mdl-grid">
         <div className="contents">

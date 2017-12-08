@@ -11,7 +11,7 @@ const SingleNotification = (props) => {
   mdl-button--colored
   mdl-js-button
   mdl-js-ripple-effect notifyButton
-  `
+  `;
   return (
     <tbody>
       <tr>

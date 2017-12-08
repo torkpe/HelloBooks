@@ -45,7 +45,7 @@ class Confirm extends Component {
     mdl-js-button
     mdl-button--raised
     mdl-button--colored
-    `
+    `;
     return (
       <div className="mdl-grid">
         <div className="contents">

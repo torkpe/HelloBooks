@@ -8,7 +8,7 @@ const Books = (props) => {
     mdl-button--colored
     mdl-js-button
     mdl-js-ripple-effect
-  `
+  `;
   return (
     <div className="mdl-cell mdl-cell--4-col">
       <div className="demo-card-square mdl-card mdl-shadow--2dp home-card contents">

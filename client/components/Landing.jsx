@@ -6,7 +6,7 @@ const mdlStyle = `
   mdl-js-button
   mdl-button--raised
   mdl-button--colored
-`
+`;
 const Landing = props => (
   <div>
     <div className="page-content body overlay">

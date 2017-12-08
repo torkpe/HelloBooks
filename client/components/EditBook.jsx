@@ -113,7 +113,7 @@ class updateBook extends Component {
     const mdlButton = `
     mdl-button
     mdl-js-button
-    `
+    `;
     const { book } = this.props;
     return (
       <div className="mdl-grid">
