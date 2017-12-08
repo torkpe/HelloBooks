@@ -25,4 +25,4 @@ export const upgradeUsers = () => {
     timeZone: 'America/Los_Angeles'
   });
   job1.start();
-}
+};

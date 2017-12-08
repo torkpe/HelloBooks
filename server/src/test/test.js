@@ -220,7 +220,8 @@ describe('User', () => {
       .set('Accept', 'application/json')
       .end((error, response) => {
         token = response.body.myToken;
-        userId = response.body.userId;
+        const { userId: id } = response.body;
+        userId = id;
         expect(response.status).to.equal(200);
         expect(response.body).to.have.property('myToken');
         expect(response.body).to.have.property('userId');

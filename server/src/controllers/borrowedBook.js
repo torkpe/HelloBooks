@@ -188,7 +188,7 @@ export default {
         if (books.length > 0) {
           books.map((book) => {
             const bookId = book.id;
-            return remindUser(book.userId, book.id)
+            return remindUser(book.userId, book.id);
           });
         }
       })

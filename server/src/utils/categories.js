@@ -4,4 +4,4 @@ const gold = 'gold';
 
 export default {
   bronze, silver, gold
-}
+};
