@@ -5,6 +5,14 @@ const Notifications = model.Notification;
 const User = model.Users;
 
 export default {
+  /**
+   * creates notifications
+   * @param {string} message
+   * @param {string} type
+   * @param {number} userId
+   * @param {bookId} bookId
+   * @returns {void}
+   */
   createNotification(message, type, userId, bookId) {
     return User.findOne({
       where: {
@@ -34,6 +42,12 @@ export default {
         message: 'Something went wrong'
       }));
   },
+  /**
+   * get notifications for admin
+   * @param {object} request
+   * @param {*} response
+   * @returns {object} response
+   */
   getAdminNotifications(request, response) {
     return Notifications.findAll({
       where: {
@@ -50,6 +64,12 @@ export default {
       message: 'Something went wrong'
     }));
   },
+  /**
+   * get notifications for user
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   getUserNotifications(request, response) {
     return Notifications.findAll({
       where: {

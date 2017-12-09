@@ -2,6 +2,11 @@ import model from '../models';
 
 const { Book, BorrowBook } = model;
 export default {
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   create(request, response) {
     const {
       cover, pdf, title, author, description, quantity, genre
@@ -26,6 +31,11 @@ export default {
       }));
   },
   // find a book
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   findABook(request, response) {
     return Book
       .findOne({
@@ -47,6 +57,11 @@ export default {
       }));
   },
   // show all books
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   findAllBooks(request, response) {
     return Book
       .findAll({
@@ -68,6 +83,11 @@ export default {
         message: 'Something went wrong'
       }));
   },
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   deleteBook(request, response) {
     const { id } = request.params;
     return Book
@@ -110,6 +130,11 @@ export default {
       }));
   },
   // update a book's info
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   editBook(request, response) {
     return Book
       .findOne({

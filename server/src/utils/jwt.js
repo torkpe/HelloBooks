@@ -1,7 +1,12 @@
 import jwt from 'jsonwebtoken';
 
 import app from '../server';
-// Function to generate token for user
+
+/**
+ * Function to generate token for user
+ * @param {object} user
+ * @returns {string} token
+ */
 const generateToken = user => jwt.sign(
   {
     id: user.id,

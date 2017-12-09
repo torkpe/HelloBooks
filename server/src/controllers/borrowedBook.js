@@ -7,7 +7,12 @@ const notify = notification.createNotification;
 const { updateNotification } = notification;
 const { Book, BorrowBook } = model;
 export default {
-  // Find a book
+  /**
+   * creates a Book
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   borrow(request, response) {
     const { id } = request.decoded;
     return Book
@@ -75,6 +80,11 @@ export default {
       }));
   },
   // Get borrowed books
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   getBorrowedBooks(request, response) {
     return BorrowBook
       .findAll({
@@ -94,6 +104,11 @@ export default {
         return response.status(200).send(books);
       }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   getHistory(request, response) {
     return BorrowBook
       .findAll({
@@ -113,7 +128,13 @@ export default {
         return response.status(200).send(books);
       }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
+
   // Check if book has been borrowed before
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   getABorrowedBook(request, response) {
     return BorrowBook
       .findOne({
@@ -135,6 +156,11 @@ export default {
       }));
   },
   // Return a book and update status
+  /**
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   returnBook(request, response) {
     const { id } = request.decoded;
     return BorrowBook
@@ -175,6 +201,10 @@ export default {
           }));
       });
   },
+  /**
+   * get books exceeding deadline and send a reminder
+   * @returns {function} returns a function
+   */
   getExceededDeadlineAndRemind() {
     const newDate = new Date(new Date().getTime());
     return BorrowBook
