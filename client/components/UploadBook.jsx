@@ -135,7 +135,8 @@ class Admin extends Component {
       <div className="mdl-grid">
         <div className="contents">
           {error && <div className="errors"> {error} </div>}
-          <div className="card-enlarge mdl-card mdl-shadow--3dp">
+          <div
+          className="card-enlarge mdl-card mdl-shadow--3dp">
             <form ref="bookForm">
               <div
                 className="mdl-textfield mdl-js-textfield card-content">
@@ -270,4 +271,8 @@ const mapStateToProps = state => ({
   error: state.createBook.errors.message
 });
 
-export default connect(mapStateToProps, { postBook, uploader, clearCreatedBook })(Admin);
+export default connect(mapStateToProps, {
+  postBook,
+  uploader,
+  clearCreatedBook
+})(Admin);

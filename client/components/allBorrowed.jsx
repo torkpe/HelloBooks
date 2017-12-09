@@ -28,7 +28,7 @@ class allBorrowed extends Component {
   render() {
     const books = this.props.getAllBorrowedBooks.borrowedBooks;
     return (
-      <div className="mdl-grid ">
+      <div className="mdl-grid">
         <div className="mdl-cell mdl-cell--1-col" />
         <div className="mdl-cell mdl-cell--10-col">
           <div className="mdl-grid">
