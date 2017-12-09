@@ -27,7 +27,7 @@ import AllNotReturned from './components/AllNotReturned.jsx';
 import notification from './components/Notifications.jsx';
 import SingleBook from './components/SingleBook.jsx';
 import Pdf from './components/Pdf.jsx';
-import SetPassword from './components/changePassword.jsx';
+import SetPassword from './components/ChangePassword.jsx';
 import UpdateBook from './components/EditBook.jsx';
 
 const store = createStore(
