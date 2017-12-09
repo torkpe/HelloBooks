@@ -17,6 +17,12 @@ const User = model.Users;
 const borrowBook = model.BorrowBook;
 
 export default {
+  /**
+   * creates a new user
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   create(request, response) {
     const { email } = request.body;
     if (!email) {
@@ -67,7 +73,12 @@ Please click on the click below to confirm your email addresponses
     }
     return response.status(400).send({ message: 'This is not an email' });
   },
-  // Sign user in
+  /**
+   * sign in user
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   signin(request, response) {
     const { password, email } = request.body;
     if (validator.isEmail(email)) {
@@ -108,7 +119,12 @@ Please click on the click below to confirm your email addresponses
       message: 'invalid email'
     });
   },
-  // Update user after email confirmation
+  /**
+   * update user's profile
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   updateUser(request, response) {
     const { name, password, confirmPassword } = request.body;
     // A little validation
@@ -164,6 +180,12 @@ Please click on the click below to confirm your email addresponses
       message: 'All fields are required'
     });
   },
+  /**
+   * change user's passoword
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   setPassword(request, response) {
     const { password, confirmPassword, oldPassword } = request.body;
     // validate
@@ -207,6 +229,12 @@ Please click on the click below to confirm your email addresponses
       message: 'Password field missing'
     });
   },
+  /**
+   * update user's name
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   updateName(request, response) {
     const { name } = request.body;
     if (name) {
@@ -238,6 +266,12 @@ Please click on the click below to confirm your email addresponses
       message: 'Name is required'
     });
   },
+  /**
+   * get a user's details
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   getUser(request, response) {
     return User
       .find({

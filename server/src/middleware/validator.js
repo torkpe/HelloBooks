@@ -1,4 +1,12 @@
 export default {
+  /**
+   *
+   * @param {object} request
+   * @param {object} response
+   * @param {function} next
+   * @return {object} response
+   * @return {function} function
+   */
   bookValidator(request, response, next) {
     const {
       cover, pdf, title, author, description, quantity, genre

@@ -3,14 +3,26 @@ import { categories } from '../utils/index';
 
 
 const borrowBook = model.BorrowBook;
-// Function to determine number of times user is allowed to borrow book
+/**
+ * Function to determine number of times user is allowed to borrow book
+ * @param {number} id
+ * @returns {object} array of borrowed books
+ */
 const findBorrows = id => borrowBook.findAll({
   where: {
     userId: id,
     returned: false
   }
 }).then(foundBorrowed => foundBorrowed.map(borrowedBook => borrowedBook.dataValues));
-// Permit user to borrow based on user's level
+
+/**
+ * Permit user to borrow based on user's level
+ * @param {object} request
+ * @param {object} response
+ * @param {function} next
+ * @return {object} response
+ * @return {function} next
+ */
 const checkStar = (request, response, next) => {
   const { id, star } = request.decoded;
   findBorrows(id).then((foundBorrowedBooks) => {
@@ -33,7 +45,15 @@ const checkStar = (request, response, next) => {
     return next();
   });
 };
-// Check if user is owing before borrowing
+
+/**
+ * Check if user is owing before borrowing
+ * @param {object} request
+ * @param {object} response
+ * @param {function} next
+ * @return {object} response
+ * @return {function} next
+ */
 const checkForExceededDeadline = (request, response, next) => {
   const newDate = new Date(new Date().getTime());
   borrowBook.findAll({

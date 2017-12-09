@@ -8,6 +8,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Function to send email to users
+/**
+ *
+ * @param {string} message
+ * @param {string} type
+ * @param {number} userId
+ * @return {void}
+ */
 const sendEmail = (message, type, userId) => {
   if (type === 'user') {
     User.findAll({

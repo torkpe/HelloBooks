@@ -16,7 +16,7 @@ const app = express();
 const logger = morgan;
 dotenv.config();
 app.use(bodyParser.json());
-if (process.env.NODE_ENV !== 'test' || 'travis') {
+if (process.env.NODE_ENV !== 'test' || process.env.NODE_ENV !== 'travis') {
   const compiler = webpack(webpackConfig);
   app.use(webpackMiddleware(compiler, {
     hot: true,
