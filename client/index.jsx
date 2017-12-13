@@ -29,6 +29,7 @@ import SingleBook from './components/SingleBook.jsx';
 import Pdf from './components/Pdf.jsx';
 import SetPassword from './components/ChangePassword.jsx';
 import UpdateBook from './components/EditBook.jsx';
+import ForgotPassword from './components/ForgotPassword.jsx';
 
 const store = createStore(
   rootReducer,
@@ -65,6 +66,7 @@ const router = (
           <Route path="/restrict" component={Authenticate((Restrict))} />
           <Route path="/set-password" component={Authenticate((SetPassword))} />
           <Route path="/edit-book/:id" component={Authenticate((UpdateBook))} />
+          <Route path="/forgot-password" component={(ForgotPassword)} />
         </Route>
       </Router>
       <ReduxToastr
