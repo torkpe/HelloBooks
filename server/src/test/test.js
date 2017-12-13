@@ -104,8 +104,11 @@ describe('Users', () => {
         const { key: confirmationKey } = response.body;
         key = confirmationKey;
         expect(response.status).to.equal(201);
+        expect(response.body).to.have.property('message');
+        expect(typeof (response.body.message)).to.equal('string');
         expect(response.body.message).to.equal('A mail has been sent to your email');
         expect(response.body).to.have.property('key');
+        expect(typeof (response.body.key)).to.equal('string');
         if (error) return done(error);
         done();
       });
@@ -120,6 +123,7 @@ describe('Users', () => {
           expect(error.response.status).to.equal(409);
           expect(error.response.body).to.have.property('message');
           expect(error.response.body.message).to.equal('Sorry email has already been taken');
+          expect(typeof (error.response.body.message)).to.equal('string');
         }
         done();
       });
@@ -134,6 +138,7 @@ describe('Users', () => {
           expect(error.response.status).to.equal(400);
           expect(error.response.body).to.have.property('message');
           expect(error.response.body.message).to.equal('This is not an email');
+          expect(typeof (error.response.body.message)).to.equal('string');
         }
         done();
       });
@@ -147,13 +152,14 @@ describe('Users', () => {
         if (error) {
           expect(error.response.status).to.equal(400);
           expect(error.response.body).to.have.property('message');
+          expect(typeof (error.response.body.message)).to.equal('string');
           expect(error.response.body.message).to.equal('Email is required');
         }
         done();
       });
   });
 
-  it('should get a message and key on successful signup', (done) => {
+  it('should get a token and id on successful confirmation', (done) => {
     chai.request(app)
       .put(`/api/v1/confirmation/${key}`)
       .send(user1)
@@ -162,8 +168,11 @@ describe('Users', () => {
         expect(response.status).to.equal(200);
         expect(response.body).to.have.property('message');
         expect(response.body.message).to.equal('Successfully updated');
+        expect(typeof (response.body.message)).to.equal('string');
         expect(response.body).to.have.property('myToken');
+        expect(typeof (response.body.myToken)).to.equal('string');
         expect(response.body).to.have.property('userId');
+        expect(typeof (response.body.userId)).to.equal('number');
         if (error) return done(error);
         done();
       });
@@ -177,6 +186,7 @@ describe('Users', () => {
         if (error) {
           expect(error.response.status).to.equal(400);
           expect(error.response.body).to.have.property('message');
+          expect(typeof (error.response.body.message)).to.equal('string');
           expect(error.response.body.message).to.equal('All fields are required');
         }
         done();
@@ -191,6 +201,7 @@ describe('Users', () => {
         if (error) {
           expect(error.response.status).to.equal(404);
           expect(error.response.body).to.have.property('message');
+          expect(typeof (error.response.body.message)).to.equal('string');
           expect(error.response.body.message).to.equal('User not found');
         }
         done();
@@ -205,6 +216,7 @@ describe('Users', () => {
         if (error) {
           expect(error.response.status).to.equal(400);
           expect(error.response.body).to.have.property('message');
+          expect(typeof (error.response.body.message)).to.equal('string');
           expect(error.response.body.message).to.equal('All fields are required');
         }
         done();
@@ -224,7 +236,9 @@ describe('User', () => {
         userId = id;
         expect(response.status).to.equal(200);
         expect(response.body).to.have.property('myToken');
+        expect(typeof (response.body.myToken)).to.equal('string');
         expect(response.body).to.have.property('userId');
+        expect(typeof (response.body.userId)).to.equal('number');
         if (error) return done(error);
         done();
       });
@@ -239,7 +253,9 @@ describe('User', () => {
         adminToken = response.body.myToken;
         expect(response.status).to.equal(200);
         expect(response.body).to.have.property('myToken');
+        expect(typeof (response.body.myToken)).to.equal('string');
         expect(response.body).to.have.property('userId');
+        expect(typeof (response.body.userId)).to.equal('number');
         if (error) return done(error);
         done();
       });
@@ -255,6 +271,21 @@ describe('User', () => {
         expect(response.body).to.have.property('message');
         expect(response.body.message).to.equal('Book successfully created');
         expect(typeof (response.body)).to.equal('object');
+        expect(response.body).to.have.property('newBook');
+        expect(response.body.newBook).to.have.property('title');
+        expect(response.body.newBook).to.have.property('description');
+        expect(response.body.newBook).to.have.property('author');
+        expect(response.body.newBook).to.have.property('genre');
+        expect(response.body.newBook).to.have.property('quantity');
+        expect(response.body.newBook).to.have.property('pdf');
+        expect(response.body.newBook).to.have.property('cover');
+        expect(typeof (response.body.newBook.title)).to.equal('string');
+        expect(typeof (response.body.newBook.description)).to.equal('string');
+        expect(typeof (response.body.newBook.author)).to.equal('string');
+        expect(typeof (response.body.newBook.genre)).to.equal('string');
+        expect(typeof (response.body.newBook.quantity)).to.equal('number');
+        expect(typeof (response.body.newBook.pdf)).to.equal('string');
+        expect(typeof (response.body.newBook.cover)).to.equal('string');
         expect(typeof (response.body.message)).to.equal('string');
         if (error) return done(error);
         done();
@@ -271,6 +302,21 @@ describe('User', () => {
         expect(response.body).to.have.property('message');
         expect(response.body.message).to.equal('Book successfully created');
         expect(typeof (response.body)).to.equal('object');
+        expect(response.body).to.have.property('newBook');
+        expect(response.body.newBook).to.have.property('title');
+        expect(response.body.newBook).to.have.property('description');
+        expect(response.body.newBook).to.have.property('author');
+        expect(response.body.newBook).to.have.property('genre');
+        expect(response.body.newBook).to.have.property('quantity');
+        expect(response.body.newBook).to.have.property('pdf');
+        expect(response.body.newBook).to.have.property('cover');
+        expect(typeof (response.body.newBook.title)).to.equal('string');
+        expect(typeof (response.body.newBook.description)).to.equal('string');
+        expect(typeof (response.body.newBook.author)).to.equal('string');
+        expect(typeof (response.body.newBook.genre)).to.equal('string');
+        expect(typeof (response.body.newBook.quantity)).to.equal('number');
+        expect(typeof (response.body.newBook.pdf)).to.equal('string');
+        expect(typeof (response.body.newBook.cover)).to.equal('string');
         expect(typeof (response.body.message)).to.equal('string');
         if (error) return done(error);
         done();
@@ -285,7 +331,8 @@ describe('User', () => {
       .end((error, response) => {
         expect(error.response.status).to.equal(400);
         expect(error.response.body).to.have.property('message');
-        expect(error.response.body.message).to.equal('This proposed quantity is too small to create a new book');
+        expect(error.response.body.message)
+          .to.equal('This proposed quantity is too small to create a new book');
         expect(typeof (error.response.body)).to.equal('object');
         expect(typeof (error.response.body.message)).to.equal('string');
         done();
@@ -354,6 +401,7 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
+        expect(response.body.length).to.equal(1);
         if (error) return done(error);
         done();
       });
@@ -622,6 +670,9 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
+        expect(typeof (response.body.updated)).to.equal('object');
+        expect(typeof (response.body.updated.id)).to.equal('number');
+        expect(typeof (response.body.updated.returned)).to.equal('boolean');
         done();
       });
   });
@@ -633,6 +684,7 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
+        expect(response.body.length).to.above(0);
         done();
       });
   });
@@ -644,6 +696,7 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
+        expect(Object.keys(response.body).length).to.above(0);
         done();
       });
   });
@@ -671,10 +724,11 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
+        expect(Object.keys(response.body).length).to.above(0);
         done();
       });
   });
-  it('should notifications', (done) => {
+  it('should get notifications', (done) => {
     chai.request(app)
       .get(`/api/v1/notifications/user/2`)
       .set('x-access-token', token)
@@ -682,6 +736,7 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
+        expect((response.body.length)).to.equal(0);
         done();
       });
   });
@@ -693,6 +748,7 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
+        expect((response.body.length)).to.above(0);
         done();
       });
   });

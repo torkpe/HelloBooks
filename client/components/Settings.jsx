@@ -88,7 +88,7 @@ class Settings extends Component {
               </button>
             </form>
             <div className="mdl-card__supporting-text ask">
-              <Link to="/set-password">Set Password </Link>
+              <Link to="/set-password">Change Password </Link>
             </div>
           </div>
         </div>

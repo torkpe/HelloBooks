@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import { setPassword,
   clearSetPasswordState
@@ -19,6 +20,7 @@ class Password extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.passwordChange.response.message) {
       toastr.success(nextProps.passwordChange.response.message);
+      browserHistory.push('/home');
     }
     if (nextProps.passwordChange.errors.message) {
       toastr.error(nextProps.passwordChange.errors.message);
