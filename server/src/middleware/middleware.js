@@ -2,6 +2,14 @@ import jwt from 'jsonwebtoken';
 import app from '../server';
 
 export default {
+  /**
+   *
+   * @param {object} request
+   * @param {object} response
+   * @param {function} next
+   * @return {object} response
+   * @return {function} next
+   */
   checkAuthentication(request, response, next) {
     const token = request.body.token || request.headers['x-access-token'];
     if (token) {
@@ -21,6 +29,14 @@ export default {
       });
     }
   },
+  /**
+   *
+   * @param {object} request
+   * @param {object} response
+   * @param {function} next
+   * @return {function} next
+   * @return {object} response
+   */
   authorizeUser(request, response, next) {
     if (request.decoded.isAdmin === false) {
       next();
@@ -30,6 +46,14 @@ export default {
       });
     }
   },
+  /**
+   *
+   * @param {object} request
+   * @param {object} response
+   * @param {function} next
+   * @return {function} next
+   * @return {object} response
+   */
   authorizeAdmin(request, response, next) {
     if (request.decoded.isAdmin === true) {
       next();
