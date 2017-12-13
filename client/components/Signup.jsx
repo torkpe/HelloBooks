@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
 import { userSignup, clearSignupState } from '../actions/user';
+import EmailForm from './EmailForm.jsx';
 
 class Signup extends Component {
   constructor(props) {
@@ -43,19 +44,9 @@ class Signup extends Component {
         <div className="contents">
           <div className="card-enlarge mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
-              <div
-                className="mdl-textfield mdl-js-textfield card-content">
-                <input
-                  type="email"
-                  onChange={this.onChange}
-                  className="mdl-textfield__input"
-                  name="email" />
-                <label
-                htmlFor="email"
-                className="mdl-textfield__label">
-                Email
-                </label>
-              </div>
+              <EmailForm
+                onChange={this.onChange}
+              />
               <button
                 disabled={isLoading}
                 className={mdlButtonStyle}
