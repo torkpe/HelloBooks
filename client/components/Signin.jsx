@@ -91,7 +91,7 @@ class Signin extends Component {
             </Link>
             <div
             className="mdl-card__supporting-text ask">
-              <a href="">forgot password?</a>
+              <Link to="/forgot-password">forgot password?</Link>
             </div>
           </div>
         </div>
