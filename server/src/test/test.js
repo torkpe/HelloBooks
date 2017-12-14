@@ -484,7 +484,7 @@ describe('User', () => {
         done();
       });
   });
-  it('should get message when successfully updated', (done) => {
+  it('should get message when password is successfully updated', (done) => {
     chai.request(app)
       .put(`/api/v1/users/set-password/${userId}`)
       .set('x-access-token', token)
@@ -498,6 +498,44 @@ describe('User', () => {
         expect(response.status).to.equal(200);
         expect(response.body).to.have.property('message');
         expect(response.body.message).to.equal('Password successfully changed');
+        expect(typeof (response.body.message)).to.equal('string');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should get message and key when password reset link is sent to email', (done) => {
+    chai.request(app)
+      .post(`/api/v1/users/send-password-reset-link`)
+      .set('Accept', 'application/json')
+      .send({
+        email: user1.email
+      })
+      .end((error, response) => {
+        const { key: confirmationKey } = response.body;
+        key = confirmationKey;
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('A password reset link has been sent to your email');
+        expect(response.body).to.have.property('key');
+        expect(typeof (response.body.key)).to.equal('string');
+        expect(typeof (response.body.message)).to.equal('string');
+        if (error) return done(error);
+        done();
+      });
+  });
+  it('should get message when password is successfully reset', (done) => {
+    chai.request(app)
+      .put(`/api/v1/users/reset-password/${key}`)
+      .set('Accept', 'application/json')
+      .send({
+        password: 'jhbsjhbdshjbsd',
+        confirmPassword: 'jhbsjhbdshjbsd'
+      })
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.equal('Password successfully changed');
+        expect(typeof (response.body.message)).to.equal('string');
         if (error) return done(error);
         done();
       });
@@ -515,6 +553,7 @@ describe('User', () => {
       .end((error, response) => {
         expect(error.response.status).to.equal(403);
         expect(error.response.body).to.have.property('message');
+        expect(typeof (error.response.body.message)).to.equal('string');
         expect(error.response.body.message).to.equal('Incorrect Password');
         done();
       });
@@ -532,6 +571,7 @@ describe('User', () => {
       .end((error, response) => {
         expect(error.response.status).to.equal(400);
         expect(error.response.body).to.have.property('message');
+        expect(typeof (error.response.body.message)).to.equal('string');
         expect(error.response.body.message).to.equal('Passwords do not match');
         done();
       });

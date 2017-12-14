@@ -49,5 +49,9 @@ router.get(
   '/users/:userId', authorize.checkAuthentication, authorize.authorizeUser,
   userController.getUser
 );
+// reset password
+router.put('/users/reset-password/:key', userController.resetPassword);
+// send password reset link
+router.post('/users/send-password-reset-link', userController.sendResetLink);
 
 export default router;

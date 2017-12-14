@@ -74,6 +74,80 @@ export const userConfirmationRequest = (state = confirmationInitalState, action 
     default: return state;
   }
 };
+const resetPasswordInitialState = {
+  isLoading: false,
+  error: {},
+  successfullySentLink: {},
+};
+export const sendPasswordResetLink = (state = resetPasswordInitialState, action = {}) => {
+  switch (action.type) {
+    case 'SEND_RESET_LINK': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'SEND_RESET_LINK_SUCCESSFUL': {
+      return {
+        ...state,
+        isLoading: false,
+        successfullySentLink: action.payload,
+      };
+    }
+    case 'SEND_RESET_LINK_FAILED': {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+    case 'CLEAR_SEND_PASSWORD_RESET_LINK_STATE': {
+      return {
+        isLoading: false,
+        errors: {},
+        successfullySentLink: {},
+      };
+    }
+    default: return state;
+  }
+};
+const resetUserPassword = {
+  isLoading: false,
+  error: {},
+  successfullyResetPassword: {},
+};
+export const resetPassword = (state = resetUserPassword, action = {}) => {
+  switch (action.type) {
+    case 'RESET_PASSWORD': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'RESET_PASSWORD_SUCCESSFUL': {
+      return {
+        ...state,
+        isLoading: false,
+        successfullyResetPassword: action.payload,
+      };
+    }
+    case 'RESET_PASSWORD_FAILED': {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+    case 'CLEAR_RESET_PASSWORD_STATE': {
+      return {
+        isLoading: false,
+        errors: {},
+        successfullyResetPassword: {},
+      };
+    }
+    default: return state;
+  }
+};
 const signinInitialState = {
   isLoading: false,
   successfullySignedin: {},

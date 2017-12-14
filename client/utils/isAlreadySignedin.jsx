@@ -22,13 +22,11 @@ const isAlreadySignedin = (ComposedComponent) => {
     }
   }
   isUserAlreadySignedin.propTypes = {
-    isAuthenticated: Proptypes.bool.isRequired,
-    isAdmin: Proptypes.bool.isRequired,
+    isAuthenticated: Proptypes.bool.isRequired
   };
 
   const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
-    isAdmin: state.auth.user.isAdmin,
   });
   return connect(mapStateToProps)(isUserAlreadySignedin);
 };

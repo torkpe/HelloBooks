@@ -52,7 +52,7 @@ export default {
             })
             .then((createdUser) => {
               const link =
-`https://hellobooks-foodman.herokuapp.com/confirmation/${createdUser.key}`;
+`http://hellobooks-foodman.herokuapp.com/confirmation/${createdUser.key}`;
               const message = `
 Hello there, thank you for registering for helloBooks.
 Please click on the click below to confirm your email addresponses
@@ -239,7 +239,7 @@ Please click on the click below to confirm your email addresponses
     const { name } = request.body;
     if (name) {
       if (name.length >= 4) {
-        return User.find({
+        return User.findOne({
           where: {
             id: request.decoded.id
           }
@@ -264,6 +264,88 @@ Please click on the click below to confirm your email addresponses
     }
     return response.status(400).send({
       message: 'Name is required'
+    });
+  },
+  sendResetLink(request, response) {
+    const { email } = request.body;
+    if (!email) {
+      return response.status(400).send({
+        message: 'Email is required'
+      });
+    }
+    return User.findOne({
+      where: {
+        email: request.body.email
+      }
+    })
+      .then((user) => {
+        if (!user) {
+          return response.status(404).send({
+            message: 'User not found'
+          });
+        }
+        const message = `
+        hello ${user.name}, you have just attempted to reset your password.
+        Please click on the link below to reset Password
+        http://hellobooks-foodman.herokuapp.com/reset-password/${user.key}
+        `;
+        sendEmail(message, 'user', user.id);
+        return response.status(200).send({
+          message: 'A password reset link has been sent to your email',
+          key: user.key
+        });
+      })
+      .catch(() => response.status(500).send({
+        message: 'Something went wrong'
+      }));
+  },
+  /**
+   * reset user password
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
+  resetPassword(request, response) {
+    const { password, confirmPassword } = request.body;
+    // validate
+    if (password && confirmPassword) {
+      if (confirmPassword.length > 5 && password.length > 5) {
+        if (validator.equals(password, confirmPassword)) {
+          const hash = bcrypt.hashSync(password, salt);
+          return User
+            .findOne({
+              where: {
+                key: request.params.key
+              }
+            }).then((user) => {
+              if (!user) {
+                return response.status(404).send({
+                  message: 'User not found'
+                });
+              }
+              return user.update({
+                password: hash
+              }).then(updated => response.status(200).send({
+                message: 'Password successfully changed'
+              }))
+                .catch(() => response.status(500).send({
+                  message: 'Something went wrong'
+                }));
+            })
+            .catch(() => response.status(500).send({
+              message: 'Something went wrong'
+            }));
+        }
+        return response.status(400).send({
+          message: 'Passwords do not match'
+        });
+      }
+      return response.status(400).send({
+        message: 'Password is too short'
+      });
+    }
+    return response.status(400).send({
+      message: 'Password field missing'
     });
   },
   /**

@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { toastr } from 'react-redux-toastr';
-import { setPassword,
-  clearSetPasswordState
-} from '../actions/changePassword';
+import { resetUserPassword,
+  clearResetPasswordState
+} from '../actions/user';
 import PasswordForm from './PasswordForm.jsx';
 
-class Password extends Component {
+class ResetPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      oldPassword: '',
       password: '',
       confirmPassword: '',
     };
@@ -19,26 +18,27 @@ class Password extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.passwordChange.response.message) {
-      toastr.success(nextProps.passwordChange.response.message);
-      browserHistory.push('/home');
+    const { error, successfullyResetPassword } = nextProps.passwordReset;
+    if (Object.keys(successfullyResetPassword).length > 0) {
+      toastr.success(successfullyResetPassword.message);
+      browserHistory.push('/signin');
     }
-    if (nextProps.passwordChange.errors.message) {
-      toastr.error(nextProps.passwordChange.errors.message);
+    if (error) {
+      toastr.error(error.message);
     }
   }
   componentWillUnmount() {
-    this.props.clearSetPasswordState();
+    this.props.clearResetPasswordState();
   }
-  onChange(e) {
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   }
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.clearSetPasswordState();
-    this.props.setPassword(this.props.auth.user.id, this.state);
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.clearResetPasswordState();
+    this.props.resetUserPassword(this.props.params.key, this.state);
   }
   render() {
     const mdlButtonStyle = `
@@ -52,21 +52,10 @@ class Password extends Component {
         <div className="contents">
           <div className="card-enlarge mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
-              <div
-                className="mdl-textfield mdl-js-textfield card-content">
-                <input
-                  type="password" onChange={this.onChange}
-                  className="mdl-textfield__input" name="oldPassword" />
-                <label htmlFor="password" className="mdl-textfield__label">
-                  Old Password
-                </label>
-                <span className="error" />
-              </div>
               <PasswordForm
                 onChange={this.onChange}
               />
               <button
-                disabled={this.props.setPassword.isLoading}
                 className={mdlButtonStyle}
                 id="button">
                 Reset Password
@@ -80,10 +69,10 @@ class Password extends Component {
 }
 const mapStateToProps = state => ({
   auth: state.auth,
-  passwordChange: state.changePassword
+  passwordReset: state.resetPassword
 });
 export default connect(mapStateToProps, {
-  setPassword,
-  clearSetPasswordState
-})(Password);
+  resetUserPassword,
+  clearResetPasswordState
+})(ResetPassword);
 
