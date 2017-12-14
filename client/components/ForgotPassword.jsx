@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
-import { userSignup, clearSignupState } from '../actions/user';
+import { sendPasswordResetLink, clearSendPasswordResetLinkState } from '../actions/user';
 import EmailForm from './EmailForm.jsx';
 
 class ForgotPassword extends Component {
@@ -14,24 +14,26 @@ class ForgotPassword extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    const { successfullySignedup } = nextProps;
-    if (successfullySignedup && successfullySignedup.length > 0) {
-      browserHistory.push('/redirect');
+    const { successfullySentLink, error } = nextProps.sendLinkSuccessful;
+    if (successfullySentLink && Object.keys(successfullySentLink).length > 0) {
+      toastr.success(successfullySentLink.message);
     }
-    if (nextProps.signup.errors.message) {
-      toastr.error(nextProps.signup.errors.message);
+    if (error) {
+      toastr.error(error.message);
     }
+  }
+  componentWillUnmount() {
+    this.props.clearSendPasswordResetLinkState();
   }
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   onSubmit(event) {
     event.preventDefault();
-    this.props.clearSignupState();
-    this.props.userSignup(this.state);
+    this.props.clearSendPasswordResetLinkState();
+    this.props.sendPasswordResetLink(this.state);
   }
   render() {
-    const { isLoading } = this.props.signup;
     const span = <span />;
     const mdlButtonStyle = `
     mdl-button
@@ -48,12 +50,15 @@ class ForgotPassword extends Component {
                 onChange={this.onChange}
               />
               <button
-                disabled={isLoading}
                 className={mdlButtonStyle}
                 id="button">
                 Submit
               </button>
             </form>
+            <div
+            className="mdl-card__supporting-text ask">
+              Go back to <Link to="/signin"> Sign in</Link> page
+            </div>
           </div>
         </div>
       </div>
@@ -61,13 +66,16 @@ class ForgotPassword extends Component {
   }
 }
 ForgotPassword.propTypes = {
-  userSignup: propTypes.func.isRequired,
+  sendPasswordResetLink: propTypes.func.isRequired,
+  clearSendPasswordResetLinkState: propTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
-  signup: state.userSignup,
-  successfullySignedup: state.userSignup.successfullySignedup.message
+  sendLinkSuccessful: state.sendPasswordResetLink
 });
 export default connect(
   mapStateToProps,
-  { userSignup, clearSignupState }
+  {
+    sendPasswordResetLink,
+    clearSendPasswordResetLinkState
+  }
 )(ForgotPassword);

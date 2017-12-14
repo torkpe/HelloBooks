@@ -14,7 +14,13 @@ import changePassword from './changePassword';
 import updateUser from './updateUser';
 import getUser from './getUser';
 import { uploadCover, uploadPdf } from './upload';
-import { userSignup, userConfirmationRequest, userSignin } from './user';
+import {
+  userSignup,
+  userConfirmationRequest,
+  userSignin,
+  sendPasswordResetLink,
+  resetPassword
+} from './user';
 
 const rootReducer = combineReducers({
   auth,
@@ -41,7 +47,9 @@ const rootReducer = combineReducers({
   getBorrowHistory,
   checkIfBorrowed,
   toastr,
-  userConfirmationRequest
+  userConfirmationRequest,
+  sendPasswordResetLink,
+  resetPassword
 });
 
 export default rootReducer;

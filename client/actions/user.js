@@ -86,7 +86,48 @@ export const clearSignupState = () => dispatch => dispatch({
 export const clearSigninState = () => dispatch => dispatch({
   type: 'CLEAR_SIGNIN_STATE'
 });
-
+export const sendPasswordResetLink = data =>
+  (dispatch) => {
+    dispatch({ type: 'SEND_RESET_LINK' });
+    return axios.post(`${url}/users/send-password-reset-link`, data)
+      .then((response) => {
+        if (response) {
+          dispatch({
+            type: 'SEND_RESET_LINK_SUCCESSFUL',
+            payload: response.data,
+          });
+        }
+      }).catch((error) => {
+        dispatch({
+          type: 'SEND_RESET_LINK_FAILED',
+          payload: error.response.data,
+        });
+      });
+  };
+export const resetUserPassword = (key, userData) =>
+  (dispatch) => {
+    dispatch({ type: 'RESET_PASSWORD' });
+    return axios.put(`${url}/users/reset-password/${key}`, userData)
+      .then((response) => {
+        if (response) {
+          dispatch({
+            type: 'RESET_PASSWORD_SUCCESSFUL',
+            payload: response.data,
+          });
+        }
+      }).catch((error) => {
+        dispatch({
+          type: 'RESET_PASSWORD_FAILED',
+          payload: error.response.data,
+        });
+      });
+  };
+export const clearSendPasswordResetLinkState = () => dispatch => dispatch({
+  type: 'CLEAR_SEND_PASSWORD_RESET_LINK_STATE'
+});
+export const clearResetPasswordState = () => dispatch => dispatch({
+  type: 'CLEAR_RESET_PASSWORD_STATE'
+});
 export const logout = () => (dispatch) => {
   localStorage.removeItem('jwt');
   setAuthToken(false);

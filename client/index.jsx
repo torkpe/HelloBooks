@@ -30,6 +30,7 @@ import Pdf from './components/Pdf.jsx';
 import SetPassword from './components/ChangePassword.jsx';
 import UpdateBook from './components/EditBook.jsx';
 import ForgotPassword from './components/ForgotPassword.jsx';
+import ResetPassword from './components/ResetPassword.jsx';
 
 const store = createStore(
   rootReducer,
@@ -52,8 +53,8 @@ const router = (
           <IndexRoute component={isAlreadySignedin(Landing)} />
           <Route path="/signup" component={isAlreadySignedin(Signup)} />
           <Route path="/signin" component={isAlreadySignedin(Signin)} />
-          <Route path="/redirect" component={Redirect} />
-          <Route path="/confirmation/:key" component={Confirm} />
+          <Route path="/redirect" component={isAlreadySignedin(Redirect)} />
+          <Route path="/confirmation/:key" component={isAlreadySignedin(Confirm)} />
           <Route path="/home" component={Authenticate(Home)} />
           <Route path="/upload-book" component={Authenticate(isAdmin(uploadBook))} />
           <Route path="/book/:id" component={Authenticate(SingleBook)} />
@@ -66,7 +67,8 @@ const router = (
           <Route path="/restrict" component={Authenticate((Restrict))} />
           <Route path="/set-password" component={Authenticate((SetPassword))} />
           <Route path="/edit-book/:id" component={Authenticate((UpdateBook))} />
-          <Route path="/forgot-password" component={(ForgotPassword)} />
+          <Route path="/forgot-password" component={isAlreadySignedin(ForgotPassword)} />
+          <Route path="/reset-password/:key" component={isAlreadySignedin(ResetPassword)} />
         </Route>
       </Router>
       <ReduxToastr
