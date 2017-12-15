@@ -8,13 +8,27 @@ import { getBooks,
   returnBook, clearBooks } from '../actions/books';
 import Books from './Books.jsx';
 
-class notReturned extends Component {
+/**
+ * @class AllNotReturned
+ * @classdesc returns the all borrowed books yet to be returned by the user
+ */
+class AllNotReturned extends Component {
+  /**
+   * @return {undefined}
+   */
   componentWillMount() {
     this.props.allNotReturned(this.props.auth.user.id);
   }
+  /**
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.clearBooks();
   }
+  /**
+   * renders AllNotRendered component
+   *@return {XML} JSX
+   */
   render() {
     const books = this.props.notReturned.notReturned;
     return (
@@ -50,7 +64,11 @@ class notReturned extends Component {
     );
   }
 }
-
+/**
+ *
+ * @param {oject} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   notReturned: state.allNotReturned,
   message: state.allNotReturned.notReturned.message,
@@ -60,4 +78,4 @@ export default connect(mapStateToProps, {
   borrowBook,
   returnBook,
   clearBooks,
-})(notReturned);
+})(AllNotReturned);

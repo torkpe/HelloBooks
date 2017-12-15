@@ -7,12 +7,24 @@ import { toastr } from 'react-redux-toastr';
 import { userSignup, clearSignupState } from '../actions/user';
 import EmailForm from './EmailForm.jsx';
 
+/**
+ * @class Signup
+ * @classdesc returns Signin component
+ */
 class Signup extends Component {
+  /**
+   * @param {object} props
+   * @return {undefined}
+   */
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const { successfullySignedup } = nextProps;
     if (successfullySignedup && successfullySignedup.length > 0) {
@@ -22,14 +34,25 @@ class Signup extends Component {
       toastr.error(nextProps.signup.errors.message);
     }
   }
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
-  onSubmit(e) {
-    e.preventDefault();
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onSubmit(event) {
+    event.preventDefault();
     this.props.clearSignupState();
     this.props.userSignup(this.state);
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
     const { isLoading } = this.props.signup;
     const span = <span />;
@@ -73,6 +96,10 @@ class Signup extends Component {
 Signup.propTypes = {
   userSignup: propTypes.func.isRequired,
 };
+/**
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   signup: state.userSignup,
   successfullySignedup: state.userSignup.successfullySignedup.message

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Select from './Select.jsx';
 
+/**
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const userHistory = props =>
   (
     <div className="mdl-grid ">

@@ -7,7 +7,15 @@ import { setPassword,
 } from '../actions/changePassword';
 import PasswordForm from './PasswordForm.jsx';
 
-class Password extends Component {
+/**
+ * @class ChangePassword
+ * @classdesc returns ChangePassword component
+ */
+class ChangePassword extends Component {
+  /**
+   * @param {object} props
+   * @returns {undefined}
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +26,10 @@ class Password extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefied} undefined
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.passwordChange.response.message) {
       toastr.success(nextProps.passwordChange.response.message);
@@ -27,19 +39,35 @@ class Password extends Component {
       toastr.error(nextProps.passwordChange.errors.message);
     }
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.clearSetPasswordState();
   }
-  onChange(e) {
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   }
-  onSubmit(e) {
-    e.preventDefault();
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onSubmit(event) {
+    event.preventDefault();
     this.props.clearSetPasswordState();
     this.props.setPassword(this.props.auth.user.id, this.state);
   }
+  /**
+   * renders change password
+   * @return {XML} JSX
+   */
   render() {
     const mdlButtonStyle = `
       mdl-button
@@ -78,6 +106,10 @@ class Password extends Component {
     );
   }
 }
+/**
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   auth: state.auth,
   passwordChange: state.changePassword
@@ -85,5 +117,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   setPassword,
   clearSetPasswordState
-})(Password);
+})(ChangePassword);
 

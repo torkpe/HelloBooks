@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+/**
+ *
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const Books = (props) => {
   const { book } = props;
   const mdlStyle = `

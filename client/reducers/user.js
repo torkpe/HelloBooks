@@ -3,6 +3,11 @@ const signupInitialState = {
   errors: {},
   successfullySignedup: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const userSignup = (state = signupInitialState, action = {}) => {
   switch (action.type) {
     case 'SIGNING_UP': {
@@ -42,6 +47,11 @@ const confirmationInitalState = {
   errors: {},
   confirmationSuccessful: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const userConfirmationRequest = (state = confirmationInitalState, action = {}) => {
   switch (action.type) {
     case 'CONFIRMING': {
@@ -79,6 +89,11 @@ const resetPasswordInitialState = {
   error: {},
   successfullySentLink: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const sendPasswordResetLink = (state = resetPasswordInitialState, action = {}) => {
   switch (action.type) {
     case 'SEND_RESET_LINK': {
@@ -116,6 +131,11 @@ const resetUserPassword = {
   error: {},
   successfullyResetPassword: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const resetPassword = (state = resetUserPassword, action = {}) => {
   switch (action.type) {
     case 'RESET_PASSWORD': {
@@ -153,6 +173,11 @@ const signinInitialState = {
   successfullySignedin: {},
   errors: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const userSignin = (state = signinInitialState, action = {}) => {
   switch (action.type) {
     case 'SIGNING_IN': {

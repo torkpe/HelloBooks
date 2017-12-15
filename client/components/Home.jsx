@@ -6,11 +6,22 @@ import { getBooks } from '../actions/books';
 import { getAllBorrowed } from '../actions/history';
 import Books from './Books.jsx';
 
+/**
+ * @class Home
+ * @classdesc returns Home component
+ */
 class Home extends Component {
+  /**
+   * @return {undefined}
+   */
   componentDidMount() {
     this.props.getBooks();
     this.props.getAllBorrowed(this.props.auth.user.id);
   }
+  /**
+   * rendersHome component
+   * @return {XML} JSX
+   */
   render() {
     const { books, borrowedBooks, auth } = this.props;
     return (
@@ -40,7 +51,15 @@ class Home extends Component {
 }
 Home.propTypes = {
   getBooks: propTypes.func.isRequired,
+  getAllBorrowed: propTypes.func.isRequired,
+  borrowedBooks: propTypes.object.isRequired,
+  auth: propTypes.object.isRequired
 };
+/**
+ * return props
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   books: state.getBooks.books,
   fetching: state.getBooks.fetching,

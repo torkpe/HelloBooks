@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getHistory } from '../actions/history';
 
+/**
+ * @class ResetPassword
+ * @classdesc returns Select component
+ */
 class Select extends Component {
+  /**
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -10,9 +17,16 @@ class Select extends Component {
     };
     this.onChange = this.onChange.bind(this);
   }
-  onChange(e) {
-    this.props.getHistory(e.target.value);
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onChange(event) {
+    this.props.getHistory(event.target.value);
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
     return (
       <select name="view" onChange={this.onChange}>

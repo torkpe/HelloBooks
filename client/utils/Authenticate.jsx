@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import { browserHistory } from 'react-router';
 
+/**
+ * @param {object} ComposedComponent
+ * @return {void}
+ */
 export const Authenticate = (ComposedComponent) => {
   class AuthenticateUser extends Component {
     componentWillMount() {
@@ -26,6 +30,11 @@ export const Authenticate = (ComposedComponent) => {
   AuthenticateUser.propTypes = {
     isAuthenticated: Proptypes.bool.isRequired,
   };
+  /**
+   * return props
+   * @param {object} state
+   * @return {object} props
+   */
   const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
   });

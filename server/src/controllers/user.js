@@ -266,6 +266,12 @@ Please click on the click below to confirm your email addresponses
       message: 'Name is required'
     });
   },
+  /**
+   *
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} response
+   */
   sendResetLink(request, response) {
     const { email } = request.body;
     if (!email) {

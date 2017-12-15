@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+/**
+ * @param {props} props
+ * @return {XML} JSX
+ */
 const Restrict = props =>
   (
     <div className="ask">

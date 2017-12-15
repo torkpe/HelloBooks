@@ -11,6 +11,10 @@ import {
   clearDeleteBookState
 } from '../actions/books';
 
+/**
+ * @class Book
+ * @classdesc returns Book component
+ */
 class Book extends Component {
   constructor(props) {
     super(props);
@@ -18,12 +22,19 @@ class Book extends Component {
       isBorrowed: false,
     };
   }
+  /**
+   * @return {undefined}
+   */
   componentDidMount() {
     this.props.getABook(this.props.params.id);
     if (!this.props.auth.user.isAdmin) {
       this.props.checkIfBorrowed(this.props.params.id, this.props.auth.user.id);
     }
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const {
       checkForBorrowed, book,
@@ -56,15 +67,23 @@ class Book extends Component {
       toastr.error(bookDeleted.error.message);
     }
   }
-
+  /**
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.clearSingleBook();
     this.props.clearDeleteBookState();
     this.props.clearBorrowBookState();
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
     const { fetching, book } = this.props.book;
     const { userId } = this.props;
+    /**
+     * @return {undefined}
+     */
     const borrow = () => {
       this.props.clearBorrowBookState();
       this.props.borrowBook(userId, book.id).then((response) => {
@@ -76,9 +95,15 @@ class Book extends Component {
         }
       });
     };
+    /**
+     * @return {undefined}
+     */
     const deleteABook = () => {
       this.props.deleteBook(book.id);
     };
+    /**
+     * @return {undefined}
+     */
     const returnBorrowed = () => {
       this.props.returnBook(userId, book.id).then(response =>
         this.setState({
@@ -159,6 +184,11 @@ class Book extends Component {
     );
   }
 }
+/**
+ * returns props
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   book: state.getABook,
   userId: state.auth.user.id,

@@ -4,6 +4,10 @@ import Proptypes from 'prop-types';
 import { browserHistory } from 'react-router';
 
 // Is not admin
+/**
+ * @param {object} ComposedComponent
+ * @return {void}
+ */
 const isAdmin = (ComposedComponent) => {
   class isAnAdmin extends Component {
     componentWillMount() {
@@ -21,7 +25,10 @@ const isAdmin = (ComposedComponent) => {
   isAnAdmin.propTypes = {
     isAdmin: Proptypes.bool.isRequired,
   };
-
+  /**
+   * @param {object} state
+   * @return {object} props
+   */
   const mapStateToProps = state => ({
     isAdmin: state.auth.user.isAdmin,
   });

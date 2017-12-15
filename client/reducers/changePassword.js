@@ -3,6 +3,11 @@ const setPasswordState = {
   errors: {},
   response: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export default (state = setPasswordState, action = {}) => {
   switch (action.type) {
     case 'SET_PASSWORD': {

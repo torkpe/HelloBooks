@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+/**
+ * @param {object} props
+ * @return {object} prop
+ */
 const EmailForm = props => (
   <div
     className="mdl-textfield mdl-js-textfield card-content">

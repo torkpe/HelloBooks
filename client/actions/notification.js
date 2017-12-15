@@ -2,6 +2,10 @@ import axios from 'axios';
 
 import url from '../utils/url';
 
+/**
+ * @param {object} data
+ * @return {void}
+ */
 export const notify = data => (dispatch) => {
   dispatch({ type: 'POST_NOTIFICATION' });
   axios.post(`${url}/notifications`, data)
@@ -23,6 +27,11 @@ export const notify = data => (dispatch) => {
       return null;
     });
 };
+/**
+ * @param {string} category
+ * @param {number} id
+ * @return {void}
+ */
 export const getNotification = (category, id) => {
   const determineCategory = () => {
     if (category === 'admin') {
