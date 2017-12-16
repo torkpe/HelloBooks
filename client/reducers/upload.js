@@ -3,6 +3,11 @@ const initialState = {
   errors: {},
   uploaded: "",
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const uploadCover = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'UPLOAD_COVER': {
@@ -28,6 +33,11 @@ export const uploadCover = (state = initialState, action = {}) => {
     default: return state;
   }
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const uploadPdf = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'UPLOAD_PDF': {

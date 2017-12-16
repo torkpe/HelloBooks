@@ -3,6 +3,11 @@ const getPdfState = {
   books: {},
   errors: '',
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 const getPdf = (state = getPdfState, action = {}) => {
   switch (action.type) {
     case 'GET_PDF': {

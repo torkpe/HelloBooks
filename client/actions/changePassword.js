@@ -2,6 +2,11 @@ import axios from 'axios';
 
 import url from '../utils/url';
 
+/**
+ * @param {number} userId
+ * @param {object} body
+ * @return {void}
+ */
 export const setPassword = (userId, body) => (dispatch) => {
   dispatch({
     type: 'SET_PASSWORD'

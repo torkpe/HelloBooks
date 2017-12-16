@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+/**
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const Redirect = props => (
   <div className="mdl-grid">
     <div className="contents">

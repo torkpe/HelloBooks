@@ -5,7 +5,14 @@ import { toastr } from 'react-redux-toastr';
 import { getABook, editBook } from '../actions/books';
 import uploader from '../actions/upload';
 
+/**
+ * @class Confirm
+ * @classdesc returns component to edit book
+ */
 class updateBook extends Component {
+  /**
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -21,9 +28,16 @@ class updateBook extends Component {
     this.onPostCover = this.onPostCover.bind(this);
     this.onPostPdf = this.onPostPdf.bind(this);
   }
+  /**
+   * @return {undefined}
+   */
   componentWillMount() {
     this.props.getABook(this.props.params.id);
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const { book, cover, pdf } = nextProps;
     if (book) {
@@ -57,6 +71,11 @@ class updateBook extends Component {
       });
     }
   }
+  /**
+   * @param {object} prevProps
+   * @param {object} prevState
+   * @return {undefined}
+   */
   componentDidUpdate(prevProps, prevState) {
     const { book, error } = this.props.updatedDetail;
     if (prevProps.updatedDetail.book.updatedBook !== book.updatedBook) {
@@ -66,6 +85,10 @@ class updateBook extends Component {
       return toastr.error('The title', error.message);
     }
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.editBook(this.state, this.props.params.id);
@@ -73,12 +96,20 @@ class updateBook extends Component {
       loading: false
     });
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onChange(event) {
     event.preventDefault();
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onPostCover(event) {
     event.preventDefault();
     this.props.uploader(this.state.cover, 'cover');
@@ -86,6 +117,10 @@ class updateBook extends Component {
       loading: true
     });
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onPostPdf(event) {
     event.preventDefault();
     this.props.uploader(this.state.pdf, 'pdf');
@@ -93,6 +128,10 @@ class updateBook extends Component {
       loading: true
     });
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   coverChange(event) {
     event.preventDefault();
     const cover = event.target.files[0];
@@ -101,6 +140,10 @@ class updateBook extends Component {
       isImageSet: true,
     });
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   pdfChange(event) {
     event.preventDefault();
     const pdf = event.target.files[0];
@@ -109,6 +152,9 @@ class updateBook extends Component {
       isPdfSet: true,
     });
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
     const mdlButton = `
     mdl-button
@@ -237,6 +283,11 @@ class updateBook extends Component {
   }
 }
 
+/**
+ * returns props
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   admin: state.createBook,
   book: state.getABook.book,

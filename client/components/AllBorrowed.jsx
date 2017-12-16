@@ -5,16 +5,33 @@ import { getAllBorrowed } from '../actions/history';
 import { clearBooks } from '../actions/books';
 import Books from './Books.jsx';
 
-class allBorrowed extends Component {
+
+/**
+ * @class AllBorrowed
+ * @classdesc returns the all borrowed books of the user
+ */
+class AllBorrowed extends Component {
+  /**
+   * @param {object} props
+   * @return {undefined}
+   */
   constructor(props) {
     super(props);
     this.state = {
       isProperties: true,
     };
   }
+  /**
+   * @return {undefined}
+   */
   componentWillMount() {
     this.props.getAllBorrowed(this.props.auth.user.id);
   }
+  /**
+   *
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.getAllBorrowedBooks) {
       this.setState({
@@ -22,9 +39,16 @@ class allBorrowed extends Component {
       });
     }
   }
+  /**
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.clearBooks();
   }
+  /**
+   * renders ALlBorrowed component
+   * @return {XML} JSX
+   */
   render() {
     const books = this.props.getAllBorrowedBooks.borrowedBooks;
     return (
@@ -63,7 +87,11 @@ class allBorrowed extends Component {
     );
   }
 }
-
+/**
+ *
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   getAllBorrowedBooks: state.getAllBorrowed,
   loading: state.getAllBorrowed.isLoading,
@@ -71,4 +99,4 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getAllBorrowed,
   clearBooks,
-})(allBorrowed);
+})(AllBorrowed);

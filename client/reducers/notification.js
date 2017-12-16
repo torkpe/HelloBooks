@@ -3,6 +3,11 @@ const notifyState = {
   errors: {},
   notification: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const notify = (state = notifyState, action = {}) => {
   switch (action.type) {
     case 'POST_NOTIFICATION': {
@@ -33,6 +38,11 @@ const notificationState = {
   errors: {},
   notifications: [],
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const getNotification = (state = notificationState, action = {}) => {
   switch (action.type) {
     case 'GET_NOTIFICATION': {

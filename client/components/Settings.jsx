@@ -9,7 +9,14 @@ import {
   clearUpdateUserState
 } from '../actions/updateUser';
 
+/**
+ * @class Settings
+ * @classdesc returns Settings component
+ */
 class Settings extends Component {
+  /**
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -19,9 +26,16 @@ class Settings extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+  /**
+   * @returns {undefined}
+   */
   componentDidMount() {
     this.props.getUser(this.props.auth.user.id);
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const { user, updatedOrNot } = nextProps;
     if (user) {
@@ -37,20 +51,34 @@ class Settings extends Component {
       toastr.error(updatedOrNot.errors.message);
     }
   }
+  /**
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.clearUpdateUserState();
   }
-  onChange(e) {
-    e.preventDefault();
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onChange(event) {
+    event.preventDefault();
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   }
-  onSubmit(e) {
-    e.preventDefault();
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onSubmit(event) {
+    event.preventDefault();
     this.props.clearUpdateUserState();
     this.props.updateUser(this.props.auth.user.id, this.state);
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
     const mdlButtonStyle = `
     mdl-button
@@ -97,6 +125,10 @@ class Settings extends Component {
     );
   }
 }
+/**
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   auth: state.auth,
   user: state.getUser.user,

@@ -7,7 +7,14 @@ import { resetUserPassword,
 } from '../actions/user';
 import PasswordForm from './PasswordForm.jsx';
 
+/**
+ * @class ResetPassword
+ * @classdesc returns ResetPassword component
+ */
 class ResetPassword extends Component {
+  /**
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +24,10 @@ class ResetPassword extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const { error, successfullyResetPassword } = nextProps.passwordReset;
     if (Object.keys(successfullyResetPassword).length > 0) {
@@ -27,19 +38,33 @@ class ResetPassword extends Component {
       toastr.error(error.message);
     }
   }
+  /**
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.clearResetPasswordState();
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.clearResetPasswordState();
     this.props.resetUserPassword(this.props.params.key, this.state);
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
     const mdlButtonStyle = `
       mdl-button
@@ -67,6 +92,10 @@ class ResetPassword extends Component {
     );
   }
 }
+/**
+ * @param {object} state
+ * @return {object} prop
+ */
 const mapStateToProps = state => ({
   auth: state.auth,
   passwordReset: state.resetPassword

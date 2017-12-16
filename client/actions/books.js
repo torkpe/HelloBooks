@@ -2,7 +2,10 @@ import axios from 'axios';
 
 import url from '../utils/url';
 
-// Get all books
+/**
+ * Get all books
+ * @return {void}
+ */
 export const getBooks = () => (dispatch) => {
   dispatch({ type: 'GET_BOOKS' });
   return axios.get(`${url}/books`)
@@ -25,13 +28,20 @@ export const getBooks = () => (dispatch) => {
     });
 };
 
-
+/**
+ * clear borrowed books state
+ * @return {void}
+ */
 export const clearBorrowBookState = () => dispatch =>
   dispatch({
     type: 'CLEAR_BORROW_BOOK_STATE'
   });
 
-// Get a book
+/**
+ * Get a book
+ * @param {number} id
+ * @return {void}
+ */
 export const getABook = id => (dispatch) => {
   dispatch({ type: 'GET_BOOK' });
   axios.get(`${url}/books/${id}`)
@@ -53,19 +63,40 @@ export const getABook = id => (dispatch) => {
       return null;
     });
 };
+/**
+ * clear single book state
+ * @return {void}
+ */
 export const clearSingleBook = () => dispatch => dispatch({
   type: 'CLEAR_SINGLE_BOOK'
 });
+/**
+ * clear created books state
+ * @return {void}
+ */
 export const clearCreatedBook = () => dispatch => dispatch({
   type: 'CLEAR_CREATED_BOOK'
 });
+/**
+ * clear all books state
+ * @return {void}
+ */
 export const clearBooks = () => dispatch => dispatch({
   type: 'CLEAR_BOOKS'
 });
+/**
+ * clear deleted book state
+ * @return {void}
+ */
 export const clearDeleteBookState = () => dispatch => dispatch({
   type: 'CLEAR_DELETE_BOOK_STATE'
 });
-// Get a book
+/**
+ * Get a book
+ * @param {number} id
+ * @param {number} userId
+ * @return {void}
+ */
 export const checkIfBorrowed = (id, userId) => (dispatch) => {
   dispatch({ type: 'CHECK_IF_BORROWED' });
   return axios.get(`${url}/book/${id}/${userId}`)
@@ -87,7 +118,11 @@ export const checkIfBorrowed = (id, userId) => (dispatch) => {
       return null;
     });
 };
-// get list of borrowed books
+/**
+ * get list of borrowed books
+ * @param {number} id
+ * @return {void}
+ */
 export const getBorrows = id => (dispatch) => {
   dispatch({ type: 'GET_BORROWS' });
   axios.get(`${url}/users/${id}/books`)
@@ -109,7 +144,13 @@ export const getBorrows = id => (dispatch) => {
       return null;
     });
 };
-// Borrow a book
+/**
+ * Borrow a book
+ * @param {number} id
+ * @param {number} bookId
+ * @param {object} data
+ * @return {void}
+ */
 export const borrowBook = (id, bookId, data) => (dispatch) => {
   dispatch({ type: 'BORROW_BOOK' });
   return axios.post(`${url}/users/${id}/${bookId}/books`, data)
@@ -131,7 +172,14 @@ export const borrowBook = (id, bookId, data) => (dispatch) => {
       return null;
     });
 };
-// Return a book
+
+/**
+ * Return a book
+ * @param {number} id
+ * @param {number} bookId
+ * @param {object} data
+ * @return {void}
+ */
 export const returnBook = (id, bookId, data) => (dispatch) => {
   dispatch({ type: 'RETURN_BOOK' });
   return axios.put(`${url}/users/${id}/${bookId}/books`, data)
@@ -154,7 +202,11 @@ export const returnBook = (id, bookId, data) => (dispatch) => {
     });
 };
 
-// Post a book
+/**
+ * Post a book
+ * @param {object} data
+ * @return {void}
+ */
 export const postBook = data => (dispatch) => {
   dispatch({ type: 'POST_BOOK' });
   return axios.post(`${url}/books`, data)
@@ -177,7 +229,11 @@ export const postBook = data => (dispatch) => {
     });
 };
 
-// Delete a book
+/**
+ * Delete a book
+ * @param {object} data
+ * @return {void}
+ */
 export const deleteBook = data => (dispatch) => {
   dispatch({ type: 'DELETE_BOOK' });
   return axios.put(`${url}/books/${data}/delete`)
@@ -200,7 +256,12 @@ export const deleteBook = data => (dispatch) => {
     });
 };
 
-// Edit a book
+/**
+ * Edit a book
+ * @param {object} data
+ * @param {number} bookId
+ * @return {void}
+ */
 export const editBook = (data, bookId) => (dispatch) => {
   dispatch({ type: 'EDIT_BOOK' });
   return axios.put(`${url}/books/${bookId}`, data)

@@ -2,6 +2,10 @@ import axios from 'axios';
 
 import url from '../utils/url';
 
+/**
+ * @param {number} id
+ * @return {void}
+ */
 const getPdf = id => (dispatch) => {
   dispatch({ type: 'GET_PDF' });
   axios.get(`${url}/books/${id}`)

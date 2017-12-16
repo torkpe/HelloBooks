@@ -3,6 +3,11 @@ const updateUserState = {
   errors: {},
   response: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export default (state = updateUserState, action = {}) => {
   switch (action.type) {
     case 'UPDATE_USER': {

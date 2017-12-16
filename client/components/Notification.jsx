@@ -4,6 +4,10 @@ import { Link } from 'react-router';
 
 import { getNotification } from '../actions/notification';
 
+/**
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const SingleNotification = (props) => {
   const { notification, userId } = props;
   const mdlLink = `
