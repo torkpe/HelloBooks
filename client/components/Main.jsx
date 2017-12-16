@@ -190,12 +190,6 @@ class Main extends Component {
             <span className="mdl-logo">Hello-Books</span>
             <ul className="mdl-mini-footer--link-list" />
           </span>
-          <span className="mdl-mini-footer--right-section">
-            <ul className="mdl-mini-footer--link-list">
-              <li><a href="">Help</a></li>
-              <li><a href="">About</a></li>
-            </ul>
-          </span>
         </footer>
       </div>
     );

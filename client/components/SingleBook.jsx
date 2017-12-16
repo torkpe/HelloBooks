@@ -140,7 +140,7 @@ class Book extends Component {
               {isAdmin ? '' : this.state.isBorrowed ? '' :
               <button
                   onClick={borrow}
-                  className="">
+                  className={mdlStyleButton}>
                 Borrow
               </button>
               }

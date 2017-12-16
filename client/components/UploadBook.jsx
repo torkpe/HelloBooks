@@ -149,6 +149,10 @@ class UploadBook extends Component {
    * @return {XML} JSX
    */
   render() {
+    const mdlButton = `
+    mdl-button
+    mdl-js-button
+    `;
     const { error } = this.state;
     const mdlStyleButton = `mdl-button mdl-js-button`;
     return (
@@ -224,8 +228,7 @@ class UploadBook extends Component {
               <div className="card-content upload file-upload">
                 <label
                   htmlFor="file-upload"
-                  className={`${mdlStyleButton}
-                  mdl-button--accent file-upload btn1`}>
+                  className={`${mdlButton}file-upload mdl-button--accent btn1`}>
                 Upload cover
                 </label>
                 <input
@@ -237,7 +240,7 @@ class UploadBook extends Component {
                   required />
                 <label
                   htmlFor="file-upload2"
-                  className="mdl-button--accent file-upload btn2">
+                  className={`${mdlButton}file-upload mdl-button--accent btn1`}>
                   Upload Pdf
                 </label>
                 <input
@@ -251,7 +254,8 @@ class UploadBook extends Component {
                 <button
                 disabled={this.state.isLoading}
                 onClick={this.onPostCover}
-                className="mdl-button--raised mdl-button--colored"
+                className={`${mdlButton}mdl-button--raised
+                mdl-button--colored`}
                 id="button">
                   Upload Cover
                 </button> : ''
@@ -260,7 +264,8 @@ class UploadBook extends Component {
                 <button
                 disabled={this.state.isLoading}
                 onClick={this.onPostPdf}
-                className="mdl-button--raised mdl-button--colored"
+                className={`${mdlButton}mdl-button--raised
+                mdl-button--colored`}
                 id="button">
                   Upload Pdf
                 </button> : ''
@@ -268,7 +273,8 @@ class UploadBook extends Component {
               <button
                 disabled={this.state.isImageAndPdf}
                 onClick={this.onSubmit}
-                className="mdl-button--raised mdl-button--colored"
+                className={`${mdlButton}mdl-button--raised
+                mdl-button--colored`}
                 id="button">
                   Create Book
               </button>
