@@ -22,7 +22,15 @@ const initialState = {
   error: ''
 };
 
-class Admin extends Component {
+/**
+ * @class UploadBook
+ * @classdesc returns UploadBook component
+ */
+class UploadBook extends Component {
+  /**
+   * @param {object} props
+   * @return {undefined}
+   */
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -33,6 +41,10 @@ class Admin extends Component {
     this.onPostCover = this.onPostCover.bind(this);
     this.onPostPdf = this.onPostPdf.bind(this);
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const {
       cover, pdf, createBook, error
@@ -69,6 +81,11 @@ class Admin extends Component {
       }
     }
   }
+  /**
+   * @param {object} prevProps
+   * @param {object} prevState
+   * @return {undefined}
+   */
   componentDidUpdate(prevProps, prevState) {
     const {
       createBook, error, pdf, cover
@@ -128,7 +145,14 @@ class Admin extends Component {
       isImageAndPdf: true
     });
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
+    const mdlButton = `
+    mdl-button
+    mdl-js-button
+    `;
     const { error } = this.state;
     const mdlStyleButton = `mdl-button mdl-js-button`;
     return (
@@ -204,8 +228,7 @@ class Admin extends Component {
               <div className="card-content upload file-upload">
                 <label
                   htmlFor="file-upload"
-                  className={`${mdlStyleButton}
-                  mdl-button--accent file-upload btn1`}>
+                  className={`${mdlButton}file-upload mdl-button--accent btn1`}>
                 Upload cover
                 </label>
                 <input
@@ -217,7 +240,7 @@ class Admin extends Component {
                   required />
                 <label
                   htmlFor="file-upload2"
-                  className="mdl-button--accent file-upload btn2">
+                  className={`${mdlButton}file-upload mdl-button--accent btn1`}>
                   Upload Pdf
                 </label>
                 <input
@@ -231,7 +254,8 @@ class Admin extends Component {
                 <button
                 disabled={this.state.isLoading}
                 onClick={this.onPostCover}
-                className="mdl-button--raised mdl-button--colored"
+                className={`${mdlButton}mdl-button--raised
+                mdl-button--colored`}
                 id="button">
                   Upload Cover
                 </button> : ''
@@ -240,7 +264,8 @@ class Admin extends Component {
                 <button
                 disabled={this.state.isLoading}
                 onClick={this.onPostPdf}
-                className="mdl-button--raised mdl-button--colored"
+                className={`${mdlButton}mdl-button--raised
+                mdl-button--colored`}
                 id="button">
                   Upload Pdf
                 </button> : ''
@@ -248,7 +273,8 @@ class Admin extends Component {
               <button
                 disabled={this.state.isImageAndPdf}
                 onClick={this.onSubmit}
-                className="mdl-button--raised mdl-button--colored"
+                className={`${mdlButton}mdl-button--raised
+                mdl-button--colored`}
                 id="button">
                   Create Book
               </button>
@@ -259,7 +285,7 @@ class Admin extends Component {
     );
   }
 }
-Admin.propTypes = {
+UploadBook.propTypes = {
   postBook: propTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
@@ -275,4 +301,4 @@ export default connect(mapStateToProps, {
   postBook,
   uploader,
   clearCreatedBook
-})(Admin);
+})(UploadBook);

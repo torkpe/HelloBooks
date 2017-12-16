@@ -2,6 +2,11 @@ const initialState = {
   isLoading: false,
   errors: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const getAllBorrowed = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'GET_ALL_BORROWED_BOOKS': {

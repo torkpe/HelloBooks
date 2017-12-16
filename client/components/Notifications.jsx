@@ -5,6 +5,10 @@ import SingleNotification from './Notification.jsx';
 import { getNotification } from '../actions/notification';
 import { getAllBorrowed } from '../actions/history';
 
+/**
+ * @class Notifications
+ * @classdesc returns Notificarions component
+ */
 class Notifications extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +16,9 @@ class Notifications extends Component {
       borrows: [],
     };
   }
+  /**
+   * @returns {undefined}
+   */
   componentWillMount() {
     const { id, star } = this.props.auth.user;
     this.props.getNotification(
@@ -19,6 +26,10 @@ class Notifications extends Component {
       id
     );
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.borrowedBooks) {
       this.setState({
@@ -26,6 +37,9 @@ class Notifications extends Component {
       });
     }
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
     const { notifications } = this.props;
     const mdlTableClass = `
@@ -51,6 +65,10 @@ class Notifications extends Component {
     );
   }
 }
+/**
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   notifications: state.getNotification.notifications,
   auth: state.auth,

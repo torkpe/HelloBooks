@@ -6,7 +6,14 @@ import { toastr } from 'react-redux-toastr';
 
 import { userConfirmationRequest, clearUserConfirmationState } from '../actions/user';
 
+/**
+ * @class Confirm
+ * @classdesc returns render component
+ */
 class Confirm extends Component {
+  /**
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +26,10 @@ class Confirm extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  /**
+   * @param {object} nextProps
+   * @returns {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const { errors, confirmationSuccessful } = nextProps.confirmationRequest;
     if (Object.keys(nextProps.authenticated.user).length > 0) {
@@ -28,17 +39,33 @@ class Confirm extends Component {
       toastr.error(errors.message);
     }
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.clearUserConfirmationState();
     this.props.userConfirmationRequest(this.state);
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   conmponentWillUnmount() {
     this.props.clearUserConfirmState();
   }
+  /**
+   * renders confirm component
+   * @return {XML} JSX
+   */
   render() {
     const mdlSigninButton = `
     mdl-button
@@ -99,7 +126,12 @@ class Confirm extends Component {
 }
 Confirm.propTypes = {
   userConfirmationRequest: propTypes.func.isRequired,
+  clearUserConfirmationState: propTypes.func.isRequired,
 };
+/**
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   confirmationRequest: state.userConfirmationRequest,
   authenticated: state.auth

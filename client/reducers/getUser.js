@@ -3,6 +3,11 @@ const getUserState = {
   user: {},
   errors: '',
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 const getUser = (state = getUserState, action = {}) => {
   switch (action.type) {
     case 'GET_USER': {

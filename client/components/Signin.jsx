@@ -6,7 +6,14 @@ import { toastr } from 'react-redux-toastr';
 import { connect } from 'react-redux';
 import { userSignin, clearSigninState } from '../actions/user';
 
+/**
+ * @class Signin
+ * @classdesc returns Signin component
+ */
 class Signin extends Component {
+  /**
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +22,10 @@ class Signin extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const { myToken } = nextProps.signin.successfullySignedin;
     if (myToken && myToken !== undefined) {
@@ -26,14 +37,25 @@ class Signin extends Component {
       toastr.error(nextProps.signin.errors.message);
     }
   }
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
-  onSubmit(e) {
-    e.preventDefault();
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
+  onSubmit(event) {
+    event.preventDefault();
     this.props.clearSigninState();
     this.props.userSignin(this.state);
   }
+  /**
+   * @return {XML} JSX
+   */
   render() {
     const mdlButtonStyle = `
     mdl-button
@@ -104,7 +126,12 @@ class Signin extends Component {
 Signin.propTypes = {
   userSignin: propTypes.func.isRequired,
 };
-// Copy signin state props for easy access
+
+/**
+ * Copy signin state props for easy access
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   signin: state.userSignin,
 });

@@ -2,6 +2,11 @@ import axios from 'axios';
 
 import url from '../utils/url';
 
+/**
+ * @param {umber} userId
+ * @param {object} body
+ * @return {void}
+ */
 const updateUser = (userId, body) => (dispatch) => {
   dispatch({
     type: 'UPDATE_USER',
@@ -25,6 +30,9 @@ const updateUser = (userId, body) => (dispatch) => {
       return null;
     });
 };
+/**
+ * @return {undefined}
+ */
 const clearUpdateUserState = () => dispatch => dispatch({
   type: 'CLEAR_UPDATE_USER_STATE'
 });

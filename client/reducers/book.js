@@ -257,6 +257,11 @@ const deleteBookState = {
   response: {},
   error: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const deleteBook = (state = deleteBookState, action = {}) => {
   switch (action.type) {
     case 'DELETE_BOOK': {
@@ -295,6 +300,11 @@ const editBookState = {
   book: {},
   error: {},
 };
+/**
+ * @param {object} state
+ * @param {object} action
+ * @return {object} state
+ */
 export const editBook = (state = editBookState, action = {}) => {
   switch (action.type) {
     case 'EDIT_BOOK': {

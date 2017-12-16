@@ -4,6 +4,10 @@ import Proptypes from 'prop-types';
 import { browserHistory } from 'react-router';
 
 // is already signed in
+/**
+ * @param {object} ComposedComponent
+ * @return {void}
+ */
 const isAlreadySignedin = (ComposedComponent) => {
   class isUserAlreadySignedin extends Component {
     componentWillMount() {
@@ -24,7 +28,10 @@ const isAlreadySignedin = (ComposedComponent) => {
   isUserAlreadySignedin.propTypes = {
     isAuthenticated: Proptypes.bool.isRequired
   };
-
+  /**
+   * @param {object} state
+   * @return {object} props
+   */
   const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
   });

@@ -7,12 +7,23 @@ import { toastr } from 'react-redux-toastr';
 import { sendPasswordResetLink, clearSendPasswordResetLinkState } from '../actions/user';
 import EmailForm from './EmailForm.jsx';
 
+/**
+ * @class ForgotPassword
+ * @classdesc return ForgotPassword component
+ */
 class ForgotPassword extends Component {
+  /**
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  /**
+   * @param {object} nextProps
+   * @return {undefined}
+   */
   componentWillReceiveProps(nextProps) {
     const { successfullySentLink, error } = nextProps.sendLinkSuccessful;
     if (successfullySentLink && Object.keys(successfullySentLink).length > 0) {
@@ -22,17 +33,32 @@ class ForgotPassword extends Component {
       toastr.error(error.message);
     }
   }
+  /**
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.clearSendPasswordResetLinkState();
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+  /**
+   * @param {object} event
+   * @return {undefined}
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.clearSendPasswordResetLinkState();
     this.props.sendPasswordResetLink(this.state);
   }
+  /**
+   * renders ForgotPassword component
+   * @return {XML} JSX
+   */
   render() {
     const span = <span />;
     const mdlButtonStyle = `
@@ -69,6 +95,11 @@ ForgotPassword.propTypes = {
   sendPasswordResetLink: propTypes.func.isRequired,
   clearSendPasswordResetLinkState: propTypes.func.isRequired,
 };
+/**
+ * returns props
+ * @param {object} state
+ * @return {object} props
+ */
 const mapStateToProps = state => ({
   sendLinkSuccessful: state.sendPasswordResetLink
 });

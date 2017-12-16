@@ -3,6 +3,10 @@ import { browserHistory } from 'react-router';
 
 import url from '../utils/url';
 
+/**
+ * @param {sting} value
+ * @return {void}
+ */
 export const getHistory = value => (dispatch) => {
   if (value === 'all') {
     dispatch({ type: 'SWITCH_TO_ALL_BORROWED' });
@@ -13,28 +17,11 @@ export const getHistory = value => (dispatch) => {
   }
   return null;
 };
-export const getBorrowHistory = (star, id) => (dispatch) => {
-  dispatch({ type: 'GET_HISTORY_OF_BORROWS' });
-  axios.get(`${url}/users/${id}/star/all-borrowed`)
-    .then((response) => {
-      if (response.data) {
-        return dispatch({
-          type: 'GET_HISTORY_OF_BORROW_SUCCESSFUL',
-          payload: response.data,
-        });
-      }
-      return null;
-    }).catch((error) => {
-      if (error) {
-        return dispatch({
-          type: 'FAILED_TO_GET_HISTORY_OF_BORROWS',
-          payload: error.response.data,
-        });
-      }
-      return null;
-    });
-};
 
+/**
+ * @param {number} id
+ * @return {void}
+ */
 export const getAllBorrowed = id => (dispatch) => {
   dispatch({ type: 'GET_ALL_BORROWED_BOOKS' });
   axios.get(`${url}/users/${id}/books/all-borrowed`)
@@ -57,6 +44,10 @@ export const getAllBorrowed = id => (dispatch) => {
     });
 };
 
+/**
+ * @param {number} id
+ * @return {void}
+ */
 export const allNotReturned = id => (dispatch) => {
   dispatch({ type: 'GET_NOT_RETURNED_BOOKS' });
   axios.get(`${url}/users/${id}/books`)

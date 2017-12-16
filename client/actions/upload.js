@@ -1,7 +1,11 @@
 import superagent from 'superagent';
 import sha1 from 'sha1';
 
-
+/**
+ * upload file
+ * @param {object} data
+ * @return {object} uploadRequest
+ */
 const upload = (data) => {
   const cloudName = 'hellobooks';
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
@@ -22,6 +26,11 @@ const upload = (data) => {
   });
   return uploadRequest;
 };
+/**
+ * @param {object} data
+ * @param {string} uploadType
+ * @return {void}
+ */
 const uploader = (data, uploadType) => (dispatch) => {
   if (uploadType === 'cover') {
     dispatch({ type: 'UPLOAD_COVER' });

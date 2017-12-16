@@ -2,6 +2,10 @@ import axios from 'axios';
 
 import url from '../utils/url';
 
+/**
+ * @param {number} userId
+ * @return {void}
+ */
 const getUser = userId => (dispatch) => {
   dispatch({
     type: 'GET_USER',
