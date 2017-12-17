@@ -46,12 +46,11 @@ class Notifications extends Component {
     mdl-data-table
     mdl-js-data-table
     mdl-shadow--2dp
-    notifications
     `;
     return (
       <div className="mdl-grid">
         <div className="contents">
-          <table className={mdlTableClass}>
+          <table className="table-bordered">
             {notifications.map(notification => (<SingleNotification
               key={notification.id}
               notification={notification}

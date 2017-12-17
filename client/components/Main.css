@@ -14,9 +14,10 @@ body{
     display:inline-block;
     width:250px;
 }
-.notifyButton{
-    font-size: 1px;
-    
+.notifyLink{
+   text-align: right;
+   margin-left: 10px;
+   color: teal;
 }
 table {
     width: 100%
@@ -45,6 +46,7 @@ table {
 }
 .notifications{
     margin:0 auto;
+    padding: 10px;
 }
 img{
     height: 350px;
