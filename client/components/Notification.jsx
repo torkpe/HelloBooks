@@ -19,14 +19,16 @@ const SingleNotification = (props) => {
   return (
     <tbody>
       <tr>
-        <td className="mdl-data-table__cell--non-numeric notifications">
+        <td className="notifications">
           {notification.message}
           {notification.bookId ?
-            <Link
-            to={`/single/${notification.bookId}`}
-            className={mdlLink}>
-                View Book
-            </Link>
+            <span className="notifyLink">
+              <Link
+              to={`/single/${notification.bookId}`}
+              >
+                  View Book
+              </Link>
+            </span>
           : ''}
         </td>
       </tr>
