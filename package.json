@@ -4,12 +4,12 @@
   "description": "an e-library system",
   "main": "server.js",
   "scripts": {
+    "start:production": "babel-node ./server/src/bin/www",
     "start": "babel-node ./server/src/bin/www",
     "test": "cross-env-shell NODE_ENV=travis && sequelize db:migrate:undo:all && sequelize db:migrate && nyc mocha --compilers js:babel-core/register ./server/src/test/* --timeout 10000ms",
     "seed": "sequelize db:migrate:undo:all && sequelize db:migrate && babel-node ./server/src/seed",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test:local":
-    "cross-env-shell NODE_ENV=test && sequelize db:migrate:undo:all && sequelize db:migrate && nyc --reporter=lcov --reporter=text mocha --compilers js:babel-core/register ./server/src/test/* --timeout 5000ms",
+    "test:local": "cross-env-shell NODE_ENV=test && sequelize db:migrate:undo:all && sequelize db:migrate && nyc --reporter=lcov --reporter=text mocha --compilers js:babel-core/register ./server/src/test/* --timeout 5000ms",
     "heroku-postbuild": "NODE_ENV=production  && NODE_END=production"
   },
   "dependencies": {
@@ -39,6 +39,7 @@
     "express": "^4.15.4",
     "express-mailer": "^0.3.1",
     "express-session": "^1.15.5",
+    "extract-text-webpack-plugin": "^3.0.2",
     "faker": "^4.1.0",
     "file-loader": "^1.1.5",
     "from": "^0.1.7",
@@ -77,6 +78,7 @@
     "react-toastr": "^3.0.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "sass-loader": "^6.0.6",
     "sequelize": "^4.4.2",
     "sequelize-cli": "^2.8.0",
     "sha1": "^1.1.1",
@@ -84,8 +86,9 @@
     "superagent": "^3.6.0",
     "supertest": "^3.0.0",
     "thunk": "0.0.1",
+    "uglifyjs-webpack-plugin": "^1.1.4",
     "validator": "^8.2.0",
-    "webpack": "^1.14.0",
+    "webpack": "^3.10.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^1.16.2",
     "webpack-dotenv-plugin": "^2.0.2",
