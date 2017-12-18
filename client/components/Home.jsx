@@ -16,7 +16,6 @@ class Home extends Component {
    */
   componentDidMount() {
     this.props.getBooks();
-    this.props.getAllBorrowed(this.props.auth.user.id);
   }
   /**
    * rendersHome component
