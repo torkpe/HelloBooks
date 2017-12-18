@@ -7,8 +7,8 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-
 import webpackConfig from '../../webpack.config.production';
+import webpackConfigDevelopment from '../../webpack.config';
 import router from './routes/index';
 import { remindUser, upgradeUsers } from './utils/cronJob';
 
@@ -16,11 +16,11 @@ const app = express();
 const logger = morgan;
 dotenv.config();
 app.use(bodyParser.json());
-if (process.env.NODE_ENV !== 'test' || process.env.NODE_ENV !== 'travis') {
-  const compiler = webpack(webpackConfig);
+if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(webpackConfigDevelopment);
   app.use(webpackMiddleware(compiler, {
     hot: true,
-    publcPath: webpackConfig.output.publicPath,
+    publcPath: webpackConfigDevelopment.output.publicPath,
     noInfo: true
   }));
   app.use(webpackHotMiddleware(compiler));
