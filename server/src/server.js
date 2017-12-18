@@ -26,7 +26,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 if (process.env.NODE_ENV === 'production') {
-  app.use(webpackHotMiddleware());
+  const compiler = webpack(webpackConfigDevelopment);
+  app.use(webpackMiddleware(compiler, {
+    publcPath: webpackConfigDevelopment.output.publicPath,
+  }));
 }
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
