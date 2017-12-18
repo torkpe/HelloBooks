@@ -166,7 +166,7 @@ class Main extends Component {
         <header className="mdl-layout__header">
           <div className="mdl-layout__header-row">
             <Link
-            to={isAdmin ? '/admin_home' : '/'}className="mdl-layout-title">
+            to="/" className="mdl-layout-title">
             hello-books
             </Link>
             <div className="mdl-layout-spacer" />
