@@ -1,3 +1,12 @@
+import types from '../types/types';
+
+const {
+  UPDATE_USER,
+  UPDATE_USER_SUCCESSFUL,
+  FAILED_TO_UPDATE_USER,
+  CLEAR_UPDATE_USER_STATE
+} = types;
+
 const updateUserState = {
   isLoading: false,
   errors: {},
@@ -10,27 +19,27 @@ const updateUserState = {
  */
 export default (state = updateUserState, action = {}) => {
   switch (action.type) {
-    case 'UPDATE_USER': {
+    case UPDATE_USER: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case 'UPDATE_USER_SUCCESSFUL': {
+    case UPDATE_USER_SUCCESSFUL: {
       return {
         ...state,
         isLoading: false,
         response: action.payload,
       };
     }
-    case 'UPDATE_USER_FAILED': {
+    case FAILED_TO_UPDATE_USER: {
       return {
         ...state,
         isLoading: false,
         errors: action.payload,
       };
     }
-    case 'CLEAR_UPDATE_USER_STATE': {
+    case CLEAR_UPDATE_USER_STATE: {
       return {
         isLoading: false,
         errors: {},

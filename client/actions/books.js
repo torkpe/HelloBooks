@@ -1,18 +1,54 @@
 import axios from 'axios';
 
 import url from '../utils/url';
+import types from '../types/types';
 
+const {
+  GET_BOOKS,
+  GET_BOOKS_SUCCESSFUL,
+  FAILED_TO_GET_BOOKS,
+  CLEAR_BOOKS_STATE_STATE,
+  CLEAR_BORROW_BOOK_STATE,
+  GET_BOOK,
+  GET_BOOK_SUCCESSFUL,
+  FAILED_TO_GETBOOK,
+  CLEAR_SINGLE_BOOK_STATE,
+  CLEAR_CREATED_BOOK_STATE,
+  CLEAR_BOOKS_STATE,
+  CLEAR_DELETE_BOOK_STATE,
+  CHECK_IF_BORROWED_SUCCESSFUL,
+  FAILED_TO_CHECK_IF_BORROWED,
+  GET_BORROWS,
+  GET_BORROWS_SUCCESSFUL,
+  FAILED_TO_GET_BORROWS,
+  BORROW_BOOK,
+  BORROW_BOOK_SUCCESSFUL,
+  FAILED_TO_BORROW_BOOK,
+  RETURN_BOOK,
+  RETURN_BOOK_SUCCESSFUL,
+  FAILED_TO_RETURN_BOOK,
+  POST_BOOK,
+  POST_BOOK_SUCCESSFUL,
+  FAILED_TO_POST_BOOK,
+  DELETE_BOOK,
+  DELETE_BOOK_SUCCESSFUL,
+  FAILED_TO_DELETE_BOOK,
+  EDIT_BOOK,
+  EDIT_BOOK_SUCCESSFUL,
+  FAILED_TO_EDIT_BOOK,
+  CHECK_IF_BORROWED
+} = types;
 /**
  * Get all books
  * @return {void}
  */
 export const getBooks = () => (dispatch) => {
-  dispatch({ type: 'GET_BOOKS' });
+  dispatch({ type: GET_BOOKS });
   return axios.get(`${url}/books`)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'GET_BOOKS_SUCCESSFUL',
+          type: GET_BOOKS_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -20,7 +56,7 @@ export const getBooks = () => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'FAILED_TO_GETBOOKS',
+          type: FAILED_TO_GET_BOOKS,
           payload: error.response.data,
         });
       }
@@ -34,7 +70,7 @@ export const getBooks = () => (dispatch) => {
  */
 export const clearBorrowBookState = () => dispatch =>
   dispatch({
-    type: 'CLEAR_BORROW_BOOK_STATE'
+    type: CLEAR_BORROW_BOOK_STATE
   });
 
 /**
@@ -43,12 +79,12 @@ export const clearBorrowBookState = () => dispatch =>
  * @return {void}
  */
 export const getABook = id => (dispatch) => {
-  dispatch({ type: 'GET_BOOK' });
+  dispatch({ type: GET_BOOK });
   axios.get(`${url}/books/${id}`)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'GET_BOOK_SUCCESSFUL',
+          type: GET_BOOK_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -56,7 +92,7 @@ export const getABook = id => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'FAILED_TO_GETBOOK',
+          type: FAILED_TO_GETBOOK,
           payload: error.response.data,
         });
       }
@@ -67,29 +103,29 @@ export const getABook = id => (dispatch) => {
  * clear single book state
  * @return {void}
  */
-export const clearSingleBook = () => dispatch => dispatch({
-  type: 'CLEAR_SINGLE_BOOK'
+export const clearSingleBookState = () => dispatch => dispatch({
+  type: CLEAR_SINGLE_BOOK_STATE
 });
 /**
  * clear created books state
  * @return {void}
  */
-export const clearCreatedBook = () => dispatch => dispatch({
-  type: 'CLEAR_CREATED_BOOK'
+export const clearCreatedBookState = () => dispatch => dispatch({
+  type: CLEAR_CREATED_BOOK_STATE
 });
 /**
  * clear all books state
  * @return {void}
  */
-export const clearBooks = () => dispatch => dispatch({
-  type: 'CLEAR_BOOKS'
+export const clearBooksState = () => dispatch => dispatch({
+  type: CLEAR_BOOKS_STATE
 });
 /**
  * clear deleted book state
  * @return {void}
  */
 export const clearDeleteBookState = () => dispatch => dispatch({
-  type: 'CLEAR_DELETE_BOOK_STATE'
+  type: CLEAR_DELETE_BOOK_STATE
 });
 /**
  * Get a book
@@ -98,12 +134,12 @@ export const clearDeleteBookState = () => dispatch => dispatch({
  * @return {void}
  */
 export const checkIfBorrowed = (id, userId) => (dispatch) => {
-  dispatch({ type: 'CHECK_IF_BORROWED' });
+  dispatch({ type: CHECK_IF_BORROWED });
   return axios.get(`${url}/book/${id}/${userId}`)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'CHECK_IF_BORROWED_SUCCESSFUL',
+          type: CHECK_IF_BORROWED_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -111,7 +147,7 @@ export const checkIfBorrowed = (id, userId) => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'CHECK_IF_BORROWED_FAILED',
+          type: FAILED_TO_CHECK_IF_BORROWED,
           payload: error.response.data,
         });
       }
@@ -124,12 +160,12 @@ export const checkIfBorrowed = (id, userId) => (dispatch) => {
  * @return {void}
  */
 export const getBorrows = id => (dispatch) => {
-  dispatch({ type: 'GET_BORROWS' });
+  dispatch({ type: GET_BORROWS });
   axios.get(`${url}/users/${id}/books`)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'GET_BORROWS_SUCCESSFUL',
+          type: GET_BORROWS_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -137,7 +173,7 @@ export const getBorrows = id => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'FAILED_TO_GET_BORROWS',
+          type: FAILED_TO_GET_BORROWS,
           payload: error.response.data,
         });
       }
@@ -152,12 +188,12 @@ export const getBorrows = id => (dispatch) => {
  * @return {void}
  */
 export const borrowBook = (id, bookId, data) => (dispatch) => {
-  dispatch({ type: 'BORROW_BOOK' });
+  dispatch({ type: BORROW_BOOK });
   return axios.post(`${url}/users/${id}/${bookId}/books`, data)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'BORROW_BOOK_SUCCESSFUL',
+          type: BORROW_BOOK_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -165,7 +201,7 @@ export const borrowBook = (id, bookId, data) => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'FAILED_TO_BORROW_BOOK',
+          type: FAILED_TO_BORROW_BOOK,
           payload: error.response.data,
         });
       }
@@ -181,12 +217,12 @@ export const borrowBook = (id, bookId, data) => (dispatch) => {
  * @return {void}
  */
 export const returnBook = (id, bookId, data) => (dispatch) => {
-  dispatch({ type: 'RETURN_BOOK' });
+  dispatch({ type: RETURN_BOOK });
   return axios.put(`${url}/users/${id}/${bookId}/books`, data)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'RETURN_BOOK_SUCCESSFUL',
+          type: RETURN_BOOK_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -194,7 +230,7 @@ export const returnBook = (id, bookId, data) => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'FAILED_TO_RETURN_BOOK',
+          type: FAILED_TO_RETURN_BOOK,
           payload: error.response.data,
         });
       }
@@ -208,12 +244,12 @@ export const returnBook = (id, bookId, data) => (dispatch) => {
  * @return {void}
  */
 export const postBook = data => (dispatch) => {
-  dispatch({ type: 'POST_BOOK' });
+  dispatch({ type: POST_BOOK });
   return axios.post(`${url}/books`, data)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'POST_BOOK_SUCCESSFUL',
+          type: POST_BOOK_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -221,7 +257,7 @@ export const postBook = data => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'POST_BOOK_FAILED',
+          type: FAILED_TO_POST_BOOK,
           payload: error.response.data,
         });
       }
@@ -235,12 +271,12 @@ export const postBook = data => (dispatch) => {
  * @return {void}
  */
 export const deleteBook = data => (dispatch) => {
-  dispatch({ type: 'DELETE_BOOK' });
+  dispatch({ type: DELETE_BOOK });
   return axios.put(`${url}/books/${data}/delete`)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'DELETE_BOOK_SUCCESSFUL',
+          type: DELETE_BOOK_SUCCESSFUL,
           payLoad: response.data,
         });
       }
@@ -248,7 +284,7 @@ export const deleteBook = data => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'DELETE_BOOK_FAILED',
+          type: FAILED_TO_DELETE_BOOK,
           payload: error.response.data,
         });
       }
@@ -263,12 +299,12 @@ export const deleteBook = data => (dispatch) => {
  * @return {void}
  */
 export const editBook = (data, bookId) => (dispatch) => {
-  dispatch({ type: 'EDIT_BOOK' });
+  dispatch({ type: EDIT_BOOK });
   return axios.put(`${url}/books/${bookId}`, data)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'EDIT_BOOK_SUCCESSFUL',
+          type: EDIT_BOOK_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -277,7 +313,7 @@ export const editBook = (data, bookId) => (dispatch) => {
     .catch((error) => {
       if (error) {
         return dispatch({
-          type: 'EDIT_BOOK_FAILED',
+          type: FAILED_TO_EDIT_BOOK,
           payload: error.response.data,
         });
       }
