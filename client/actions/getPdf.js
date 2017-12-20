@@ -1,18 +1,24 @@
 import axios from 'axios';
 
 import url from '../utils/url';
+import types from '../types/types';
 
+const {
+  GET_PDF,
+  GET_PDF_SUCCESSFUL,
+  FAILED_TO_GET_PDF
+} = types;
 /**
  * @param {number} id
  * @return {void}
  */
 const getPdf = id => (dispatch) => {
-  dispatch({ type: 'GET_PDF' });
+  dispatch({ type: GET_PDF });
   axios.get(`${url}/books/${id}`)
     .then((response) => {
-      if (response.data) {
+      if (response) {
         return dispatch({
-          type: 'GET_PDF_SUCCESSFUL',
+          type: GET_PDF_SUCCESSFUL,
           payload: response.data,
         });
       }
@@ -20,7 +26,7 @@ const getPdf = id => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'FAILED_TO_GET_PDF',
+          type: FAILED_TO_GET_PDF,
           payload: error.response.data,
         });
       }

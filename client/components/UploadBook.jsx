@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 import { browserHistory } from 'react-router';
-import { postBook, clearCreatedBook } from '../actions/books';
+import { postBook, clearCreatedBookState } from '../actions/books';
 import uploader from '../actions/upload';
 
 // Set initial state
@@ -71,7 +71,7 @@ class UploadBook extends Component {
         isPdfSet: false,
       });
       if (Object.keys(createBook).length > 6) {
-        this.props.clearCreatedBook();
+        this.props.clearCreatedBookState();
         browserHistory.push('/home');
       }
       if (error) {
@@ -104,7 +104,7 @@ class UploadBook extends Component {
     }
   }
   componentWillUnmount() {
-    this.props.clearCreatedBook();
+    this.props.clearCreatedBookState();
     this.setState({
       initialState
     });
@@ -300,5 +300,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   postBook,
   uploader,
-  clearCreatedBook
+  clearCreatedBookState
 })(UploadBook);

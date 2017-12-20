@@ -1,8 +1,36 @@
+import types from '../types/types';
+
+const {
+  SET_CURRENT_USER,
+  SIGN_UP_SUCCESFULLY,
+  SIGNING_UP,
+  SIGNUP_FAILED,
+  CONFIRMING,
+  CONFIRMATION_SUCCESSFUL,
+  FAILED_TO_CONFIRM,
+  CLEAR_USER_CONFIRMATION_STATE,
+  SIGNING_IN,
+  SIGNIN_SUCCESFUL,
+  FAILED_TO_SIGNIN,
+  FAILED_TO_SIGNUP,
+  CLEAR_SIGNUP_STATE,
+  CLEAR_SIGNIN_STATE,
+  SEND_RESET_LINK,
+  SEND_RESET_LINK_SUCCESSFUL,
+  FAILED_TO_SEND_RESET_LINK,
+  RESET_PASSWORD,
+  FAILED_TO_RESET_PASSWORD,
+  CLEAR_SEND_PASSWORD_RESET_LINK_STATE,
+  CLEAR_RESET_PASSWORD_STATE,
+  RESET_PASSWORD_SUCCESSFUL
+} = types;
+
 const signupInitialState = {
   isLoading: false,
   errors: {},
   successfullySignedup: {},
 };
+
 /**
  * @param {object} state
  * @param {object} action
@@ -10,27 +38,27 @@ const signupInitialState = {
  */
 export const userSignup = (state = signupInitialState, action = {}) => {
   switch (action.type) {
-    case 'SIGNING_UP': {
+    case SIGNING_UP: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case 'SIGN_UP_SUCCESFULLY': {
+    case SIGN_UP_SUCCESFULLY: {
       return {
         ...state,
         isLoading: false,
         successfullySignedup: action.payload,
       };
     }
-    case 'SIGNUP_FAILED': {
+    case FAILED_TO_SIGNUP: {
       return {
         ...state,
         isLoading: false,
         errors: action.payload,
       };
     }
-    case 'CLEAR_SIGNUP_STATE': {
+    case CLEAR_SIGNUP_STATE: {
       return {
         ...state,
         isLoading: false,
@@ -54,27 +82,27 @@ const confirmationInitalState = {
  */
 export const userConfirmationRequest = (state = confirmationInitalState, action = {}) => {
   switch (action.type) {
-    case 'CONFIRMING': {
+    case CONFIRMING: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case 'CONFIRMATION_SUCCESSFUL': {
+    case CONFIRMATION_SUCCESSFUL: {
       return {
         ...state,
         isLoading: false,
         confirmationSuccessful: action.payload,
       };
     }
-    case 'CONFIRMATION_FAILED': {
+    case FAILED_TO_SIGNUP: {
       return {
         ...state,
         isLoading: false,
         errors: action.payload,
       };
     }
-    case 'CLEAR_CLEAR_USER_CONFIRMATION_STATE': {
+    case CLEAR_USER_CONFIRMATION_STATE: {
       return {
         isLoading: false,
         errors: {},
@@ -96,27 +124,27 @@ const resetPasswordInitialState = {
  */
 export const sendPasswordResetLink = (state = resetPasswordInitialState, action = {}) => {
   switch (action.type) {
-    case 'SEND_RESET_LINK': {
+    case SEND_RESET_LINK: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case 'SEND_RESET_LINK_SUCCESSFUL': {
+    case SEND_RESET_LINK_SUCCESSFUL: {
       return {
         ...state,
         isLoading: false,
         successfullySentLink: action.payload,
       };
     }
-    case 'SEND_RESET_LINK_FAILED': {
+    case FAILED_TO_SEND_RESET_LINK: {
       return {
         ...state,
         isLoading: false,
         error: action.payload,
       };
     }
-    case 'CLEAR_SEND_PASSWORD_RESET_LINK_STATE': {
+    case CLEAR_SEND_PASSWORD_RESET_LINK_STATE: {
       return {
         isLoading: false,
         errors: {},
@@ -138,27 +166,27 @@ const resetUserPassword = {
  */
 export const resetPassword = (state = resetUserPassword, action = {}) => {
   switch (action.type) {
-    case 'RESET_PASSWORD': {
+    case RESET_PASSWORD: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case 'RESET_PASSWORD_SUCCESSFUL': {
+    case RESET_PASSWORD_SUCCESSFUL: {
       return {
         ...state,
         isLoading: false,
         successfullyResetPassword: action.payload,
       };
     }
-    case 'RESET_PASSWORD_FAILED': {
+    case FAILED_TO_RESET_PASSWORD: {
       return {
         ...state,
         isLoading: false,
         error: action.payload,
       };
     }
-    case 'CLEAR_RESET_PASSWORD_STATE': {
+    case CLEAR_RESET_PASSWORD_STATE: {
       return {
         isLoading: false,
         errors: {},
@@ -180,27 +208,27 @@ const signinInitialState = {
  */
 export const userSignin = (state = signinInitialState, action = {}) => {
   switch (action.type) {
-    case 'SIGNING_IN': {
+    case SIGNING_IN: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case 'SIGNIN_SUCCESFUL': {
+    case SIGNIN_SUCCESFUL: {
       return {
         ...state,
         isLoading: false,
         successfullySignedin: action.payload,
       };
     }
-    case 'SIGNIN_FAILED': {
+    case FAILED_TO_SIGNIN: {
       return {
         ...state,
         isLoading: false,
         errors: action.payload,
       };
     }
-    case 'CLEAR_SIGNIN_STATE': {
+    case CLEAR_SIGNIN_STATE: {
       return {
         ...state,
         isLoading: false,

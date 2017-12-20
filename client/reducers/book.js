@@ -1,3 +1,40 @@
+import types from '../types/types';
+
+const {
+  GET_BOOKS,
+  GET_BOOKS_SUCCESSFUL,
+  FAILED_TO_GET_BOOKS,
+  CLEAR_BOOKS_STATE_STATE,
+  CLEAR_BORROW_BOOK_STATE,
+  GET_BOOK,
+  GET_BOOK_SUCCESSFUL,
+  FAILED_TO_GETBOOK,
+  CLEAR_SINGLE_BOOK_STATE,
+  CLEAR_CREATED_BOOK_STATE,
+  CLEAR_BOOKS_STATE,
+  CLEAR_DELETE_BOOK_STATE,
+  CHECK_IF_BORROWED_SUCCESSFUL,
+  FAILED_TO_CHECK_IF_BORROWED,
+  GET_BORROWS,
+  GET_BORROWS_SUCCESSFUL,
+  FAILED_TO_GET_BORROWS,
+  BORROW_BOOK,
+  BORROW_BOOK_SUCCESSFUL,
+  FAILED_TO_BORROW_BOOK,
+  RETURN_BOOK,
+  RETURN_BOOK_SUCCESSFUL,
+  FAILED_TO_RETURN_BOOK,
+  POST_BOOK,
+  POST_BOOK_SUCCESSFUL,
+  FAILED_TO_POST_BOOK,
+  DELETE_BOOK,
+  DELETE_BOOK_SUCCESSFUL,
+  FAILED_TO_DELETE_BOOK,
+  EDIT_BOOK,
+  EDIT_BOOK_SUCCESSFUL,
+  FAILED_TO_EDIT_BOOK,
+  CHECK_IF_BORROWED
+} = types;
 const initialState = {
   fetching: false,
   books: [],
@@ -5,20 +42,20 @@ const initialState = {
 };
 export const getBooks = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'GET_BOOKS': {
+    case GET_BOOKS: {
       return {
         ...state,
         fetching: true,
       };
     }
-    case 'GET_BOOKS_SUCCESSFUL': {
+    case GET_BOOKS_SUCCESSFUL: {
       return {
         ...state,
         fetching: false,
         books: action.payload,
       };
     }
-    case 'FAILED_TO_GETBOOKS': {
+    case FAILED_TO_GET_BOOKS: {
       return {
         ...state,
         fetching: false,
@@ -43,13 +80,13 @@ const getABookState = {
 };
 export const getABook = (state = getABookState, action = {}) => {
   switch (action.type) {
-    case 'GET_BOOK': {
+    case GET_BOOK: {
       return {
         ...state,
         fetching: true,
       };
     }
-    case 'GET_BOOK_SUCCESSFUL': {
+    case GET_BOOK_SUCCESSFUL: {
       return {
         ...state,
         fetching: false,
@@ -57,14 +94,14 @@ export const getABook = (state = getABookState, action = {}) => {
         book: action.payload,
       };
     }
-    case 'FAILED_TO_GETBOOK': {
+    case FAILED_TO_GETBOOK: {
       return {
         ...state,
         fetching: false,
         errors: action.payload,
       };
     }
-    case 'CLEAR_SINGLE_BOOK': {
+    case CLEAR_SINGLE_BOOK_STATE: {
       return {
         ...state,
         fetching: false,
@@ -85,20 +122,20 @@ const checkIfBorrowedState = {
 // Check if Borrowed state
 export const checkIfBorrowed = (state = checkIfBorrowedState, action = {}) => {
   switch (action.type) {
-    case 'CHECK_IF_BORROWED': {
+    case CHECK_IF_BORROWED: {
       return {
         ...state,
         fetching: true,
       };
     }
-    case 'CHECK_IF_BORROWED_SUCCESSFUL': {
+    case CHECK_IF_BORROWED_SUCCESSFUL: {
       return {
         ...state,
         fetching: false,
         book: action.payload,
       };
     }
-    case 'CHECK_IF_BORROWED_FAILED': {
+    case FAILED_TO_CHECK_IF_BORROWED: {
       return {
         ...state,
         fetching: false,
@@ -117,13 +154,13 @@ const borrowBookState = {
 };
 export const borrowBook = (state = borrowBookState, action = {}) => {
   switch (action.type) {
-    case 'BORROW_BOOK': {
+    case BORROW_BOOK: {
       return {
         ...state,
         requesting: true,
       };
     }
-    case 'BORROW_BOOK_SUCCESSFUL': {
+    case BORROW_BOOK_SUCCESSFUL: {
       return {
         ...state,
         requesting: false,
@@ -131,14 +168,14 @@ export const borrowBook = (state = borrowBookState, action = {}) => {
         successfullyBorrowed: true,
       };
     }
-    case 'FAILED_TO_BORROW_BOOK': {
+    case FAILED_TO_BORROW_BOOK: {
       return {
         ...state,
         requesting: false,
         errors: action.payload,
       };
     }
-    case 'CLEAR_BORROW_BOOK_STATE': {
+    case CLEAR_BORROW_BOOK_STATE: {
       return {
         ...state,
         requesting: false,
@@ -159,13 +196,13 @@ const returnBookState = {
 };
 export const returnBook = (state = returnBookState, action = {}) => {
   switch (action.type) {
-    case 'RETURN_BOOK': {
+    case RETURN_BOOK: {
       return {
         ...state,
         requesting: true,
       };
     }
-    case 'RETURN_BOOK_SUCCESSFUL': {
+    case RETURN_BOOK_SUCCESSFUL: {
       return {
         ...state,
         requesting: false,
@@ -173,7 +210,7 @@ export const returnBook = (state = returnBookState, action = {}) => {
         successfullyReturned: true,
       };
     }
-    case 'FAILED_TO_RETURN_BOOK': {
+    case FAILED_TO_RETURN_BOOK: {
       return {
         ...state,
         requesting: false,
@@ -186,20 +223,20 @@ export const returnBook = (state = returnBookState, action = {}) => {
 // Get borrowed books
 export const getBorrows = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'GET_BORROWS': {
+    case GET_BORROWS: {
       return {
         ...state,
         fetching: true,
       };
     }
-    case 'GET_BORROWS_SUCCESSFUL': {
+    case GET_BORROWS_SUCCESSFUL: {
       return {
         ...state,
         fetching: false,
         books: action.payload,
       };
     }
-    case 'FAILED_TO_GET_BORROWS': {
+    case FAILED_TO_GET_BORROWS: {
       return {
         ...state,
         fetching: false,
@@ -218,13 +255,13 @@ const createBookState = {
 // Create book
 export const createBook = (state = createBookState, action = {}) => {
   switch (action.type) {
-    case 'POST_BOOK': {
+    case POST_BOOK: {
       return {
         ...state,
         isLoading: false,
       };
     }
-    case 'POST_BOOK_SUCCESSFUL': {
+    case POST_BOOK_SUCCESSFUL: {
       return {
         ...state,
         isLoading: false,
@@ -232,14 +269,14 @@ export const createBook = (state = createBookState, action = {}) => {
         message: action.payload.message
       };
     }
-    case 'POST_BOOK_FAILED': {
+    case FAILED_TO_POST_BOOK: {
       return {
         ...state,
         isLoading: false,
         errors: action.payload,
       };
     }
-    case 'CLEAR_CREATED_BOOK': {
+    case CLEAR_CREATED_BOOK_STATE: {
       return {
         ...state,
         isLoading: false,
@@ -264,27 +301,27 @@ const deleteBookState = {
  */
 export const deleteBook = (state = deleteBookState, action = {}) => {
   switch (action.type) {
-    case 'DELETE_BOOK': {
+    case DELETE_BOOK: {
       return {
         ...state,
         isLoading: false,
       };
     }
-    case 'DELETE_BOOK_SUCCESSFUL': {
+    case DELETE_BOOK_SUCCESSFUL: {
       return {
         ...state,
         isLoading: false,
         response: action.payLoad,
       };
     }
-    case 'DELETE_BOOK_FAILED': {
+    case FAILED_TO_DELETE_BOOK: {
       return {
         ...state,
         isLoading: false,
         error: action.payload,
       };
     }
-    case 'CLEAR_DELETE_BOOK_STATE': {
+    case CLEAR_DELETE_BOOK_STATE: {
       return {
         isLoading: false,
         response: {},
@@ -307,20 +344,20 @@ const editBookState = {
  */
 export const editBook = (state = editBookState, action = {}) => {
   switch (action.type) {
-    case 'EDIT_BOOK': {
+    case EDIT_BOOK: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case 'EDIT_BOOK_SUCCESSFUL': {
+    case EDIT_BOOK_SUCCESSFUL: {
       return {
         ...state,
         isLoading: false,
         book: action.payload,
       };
     }
-    case 'EDIT_BOOK_FAILED': {
+    case FAILED_TO_EDIT_BOOK: {
       return {
         ...state,
         isLoading: false,
