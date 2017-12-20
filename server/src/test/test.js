@@ -734,7 +734,7 @@ describe('User', () => {
       .set('x-access-token', token)
       .set('Accept', 'application/json')
       .end((error, response) => {
-        expect(response.status).to.equal(200);
+        expect(response.status).to.equal(404);
         expect(typeof (response.body)).to.equal('object');
         expect(Object.keys(response.body).length).to.above(0);
         done();

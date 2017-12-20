@@ -96,8 +96,8 @@ export default {
           userId: request.decoded.id,
         },
       }).then((books) => {
-        if (books.length < 1) {
-          return response.status(200).send({
+        if (!books.length) {
+          return response.status(404).send({
             message: 'You have no book pending to be returned'
           });
         }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getAllBorrowed } from '../actions/history';
-import { clearBooks } from '../actions/books';
+import { clearBooksState } from '../actions/books';
 import Books from './Books.jsx';
 
 
@@ -43,7 +43,7 @@ class AllBorrowed extends Component {
    * @return {undefined}
    */
   componentWillUnmount() {
-    this.props.clearBooks();
+    this.props.clearBooksState();
   }
   /**
    * renders ALlBorrowed component
@@ -98,5 +98,5 @@ const mapStateToProps = state => ({
 });
 export default connect(mapStateToProps, {
   getAllBorrowed,
-  clearBooks,
+  clearBooksState,
 })(AllBorrowed);
