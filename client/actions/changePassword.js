@@ -1,7 +1,14 @@
 import axios from 'axios';
 
 import url from '../utils/url';
+import types from '../types/types';
 
+const {
+  SET_PASSWORD,
+  PASSWORD_SUCCESSFULLY_SET,
+  FAILED_TO_SET_PASSWORD,
+  CLEAR_SET_PASSWORD_STATE
+} = types;
 /**
  * @param {number} userId
  * @param {object} body
@@ -9,25 +16,25 @@ import url from '../utils/url';
  */
 export const setPassword = (userId, body) => (dispatch) => {
   dispatch({
-    type: 'SET_PASSWORD'
+    type: SET_PASSWORD
   });
   return axios.put(`${url}/users/set-password/${userId}`, body)
     .then((response) => {
       if (response) {
         return dispatch({
-          type: 'PASSWORD_SUCCESSFULLY_SET',
+          type: PASSWORD_SUCCESSFULLY_SET,
           payload: response.data
         });
       }
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: 'PASSWORD_SET_FAILED',
+          type: FAILED_TO_SET_PASSWORD,
           payload: error.response.data
         });
       }
     });
 };
 export const clearSetPasswordState = () => dispatch => dispatch({
-  type: 'CLEAR_SET_PASSWORD_STATE'
+  type: CLEAR_SET_PASSWORD_STATE
 });

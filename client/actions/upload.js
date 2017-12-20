@@ -1,6 +1,16 @@
 import superagent from 'superagent';
 import sha1 from 'sha1';
 
+import types from '../types/types';
+
+const {
+  UPLOAD_COVER,
+  UPLOAD_PDF,
+  FAILED_TO_UPLOAD_COVER,
+  FAILED_TO_UPLOAD_PDF,
+  UPLOAD_COVER_SUCCESSFUL,
+  UPLOAD_PDF_SUCCESSFUL
+} = types;
 /**
  * upload file
  * @param {object} data
@@ -33,31 +43,31 @@ const upload = (data) => {
  */
 const uploader = (data, uploadType) => (dispatch) => {
   if (uploadType === 'cover') {
-    dispatch({ type: 'UPLOAD_COVER' });
+    dispatch({ type: UPLOAD_COVER });
   } else {
-    dispatch({ type: 'UPLOAD_PDF' });
+    dispatch({ type: UPLOAD_PDF });
   }
   upload(data).end((error, response) => {
     if (error) {
       if (uploadType === 'cover') {
         return dispatch({
-          type: 'UPLOAD_COVER_FAILED',
+          type: FAILED_TO_UPLOAD_COVER,
           payLoad: error.response.data,
         });
       }
       return dispatch({
-        type: 'UPLOAD_PDF_FAILED',
+        type: FAILED_TO_UPLOAD_PDF,
         payLoad: error.response.data,
       });
     }
     if (uploadType === 'cover') {
       return dispatch({
-        type: 'UPLOAD_COVER_SUCCESSFUL',
+        type: UPLOAD_COVER_SUCCESSFUL,
         payLoad: response.body.url,
       });
     }
     return dispatch({
-      type: 'UPLOAD_PDF_SUCCESSFUL',
+      type: UPLOAD_PDF_SUCCESSFUL,
       payLoad: response.body.url,
     });
   });

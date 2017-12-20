@@ -45,7 +45,7 @@ class Settings extends Component {
       });
     }
     if (updatedOrNot.response.message) {
-      toastr.error(updatedOrNot.response.message);
+      toastr.success(updatedOrNot.response.message);
     }
     if (updatedOrNot.errors.message) {
       toastr.error(updatedOrNot.errors.message);

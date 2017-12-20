@@ -15,7 +15,9 @@ class Home extends Component {
    * @return {undefined}
    */
   componentDidMount() {
-    this.props.getBooks();
+    if (this.props.userId) {
+      this.props.getBooks();
+    }
   }
   /**
    * rendersHome component

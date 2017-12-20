@@ -4,13 +4,39 @@ import { browserHistory } from 'react-router';
 
 import setAuthToken from '../utils/setAuthToken';
 import url from '../utils/url';
+import types from '../types/types';
+
+const {
+  SET_CURRENT_USER,
+  SIGN_UP_SUCCESFULLY,
+  SIGNING_UP,
+  SIGNUP_FAILED,
+  CONFIRMING,
+  CONFIRMATION_SUCCESSFUL,
+  FAILED_TO_CONFIRM,
+  CLEAR_USER_CONFIRMATION_STATE,
+  SIGNING_IN,
+  SIGNIN_SUCCESFUL,
+  FAILED_TO_SIGNIN,
+  FAILED_TO_SIGNUP,
+  CLEAR_SIGNUP_STATE,
+  CLEAR_SIGNIN_STATE,
+  SEND_RESET_LINK,
+  SEND_RESET_LINK_SUCCESSFUL,
+  FAILED_TO_SEND_RESET_LINK,
+  RESET_PASSWORD,
+  FAILED_TO_RESET_PASSWORD,
+  CLEAR_SEND_PASSWORD_RESET_LINK_STATE,
+  CLEAR_RESET_PASSWORD_STATE,
+  RESET_PASSWORD_SUCCESSFUL
+} = types;
 
 /**
  * @param {object} user
  * @return {void}
  */
 export const setCurrentUser = user => ({
-  type: "SET_CURRENT_USER",
+  type: SET_CURRENT_USER,
   user,
 });
 /**
@@ -19,19 +45,19 @@ export const setCurrentUser = user => ({
  */
 export const userSignup = userData =>
   (dispatch) => {
-    dispatch({ type: 'SIGNING_UP' });
+    dispatch({ type: SIGNING_UP });
     return axios.post(`${url}/users/signup`, userData)
       .then((response) => {
         if (response) {
           dispatch({
-            type: 'SIGN_UP_SUCCESFULLY',
+            type: SIGN_UP_SUCCESFULLY,
             payload: response.data,
           });
         }
       }).catch((error) => {
         if (error) {
           dispatch({
-            type: 'SIGNUP_FAILED',
+            type: FAILED_TO_SIGNUP,
             payload: error.response.data,
           });
         }
@@ -43,12 +69,12 @@ export const userSignup = userData =>
  */
 export const userConfirmationRequest = userData =>
   (dispatch) => {
-    dispatch({ type: 'CONFIRMING' });
+    dispatch({ type: CONFIRMING });
     axios.put(`${url}/confirmation/${userData.key}`, userData)
       .then((response) => {
         if (response) {
           dispatch({
-            type: 'CONFIRMATION_SUCCESSFUL',
+            type: CONFIRMATION_SUCCESSFUL,
             payload: response.data,
           });
           const token = response.data.myToken;
@@ -60,7 +86,7 @@ export const userConfirmationRequest = userData =>
       .catch((error) => {
         if (error) {
           dispatch({
-            type: 'CONFIRMATION_FAILED',
+            type: FAILED_TO_CONFIRM,
             payload: error.response.data
           });
         }
@@ -70,7 +96,7 @@ export const userConfirmationRequest = userData =>
  * @return {void}
  */
 export const clearUserConfirmationState = () => dispatch => dispatch({
-  type: 'CLEAR_CLEAR_USER_CONFIRMATION_STATE'
+  type: CLEAR_USER_CONFIRMATION_STATE
 });
 /**
  * @param {object} data
@@ -78,12 +104,12 @@ export const clearUserConfirmationState = () => dispatch => dispatch({
  */
 export const userSignin = data =>
   (dispatch) => {
-    dispatch({ type: 'SIGNING_IN' });
+    dispatch({ type: SIGNING_IN });
     return axios.post(`${url}/users/signin`, data)
       .then((response) => {
         if (response) {
           dispatch({
-            type: 'SIGNIN_SUCCESFUL',
+            type: SIGNIN_SUCCESFUL,
             payload: response.data,
           });
           const token = response.data.myToken;
@@ -91,10 +117,12 @@ export const userSignin = data =>
           dispatch(setCurrentUser(jwt.decode(token)));
         }
       }).catch((error) => {
-        dispatch({
-          type: 'SIGNIN_FAILED',
-          payload: error.response.data,
-        });
+        if (error) {
+          dispatch({
+            type: FAILED_TO_SIGNIN,
+            payload: error.response.data,
+          });
+        }
       });
   };
 /**
@@ -102,14 +130,14 @@ export const userSignin = data =>
  * @return {void}
  */
 export const clearSignupState = () => dispatch => dispatch({
-  type: 'CLEAR_SIGNUP_STATE'
+  type: CLEAR_SIGNUP_STATE
 });
 /**
  * @param {object} data
  * @return {void}
  */
 export const clearSigninState = () => dispatch => dispatch({
-  type: 'CLEAR_SIGNIN_STATE'
+  type: CLEAR_SIGNUP_STATE
 });
 /**
  * @param {object} data
@@ -117,20 +145,22 @@ export const clearSigninState = () => dispatch => dispatch({
  */
 export const sendPasswordResetLink = data =>
   (dispatch) => {
-    dispatch({ type: 'SEND_RESET_LINK' });
+    dispatch({ type: SEND_RESET_LINK });
     return axios.post(`${url}/users/send-password-reset-link`, data)
       .then((response) => {
         if (response) {
           dispatch({
-            type: 'SEND_RESET_LINK_SUCCESSFUL',
+            type: SEND_RESET_LINK_SUCCESSFUL,
             payload: response.data,
           });
         }
       }).catch((error) => {
-        dispatch({
-          type: 'SEND_RESET_LINK_FAILED',
-          payload: error.response.data,
-        });
+        if (error) {
+          dispatch({
+            type: FAILED_TO_SEND_RESET_LINK,
+            payload: error.response.data,
+          });
+        }
       });
   };
   /**
@@ -140,33 +170,35 @@ export const sendPasswordResetLink = data =>
    */
 export const resetUserPassword = (key, userData) =>
   (dispatch) => {
-    dispatch({ type: 'RESET_PASSWORD' });
+    dispatch({ type: RESET_PASSWORD });
     return axios.put(`${url}/users/reset-password/${key}`, userData)
       .then((response) => {
         if (response) {
           dispatch({
-            type: 'RESET_PASSWORD_SUCCESSFUL',
+            type: RESET_PASSWORD_SUCCESSFUL,
             payload: response.data,
           });
         }
       }).catch((error) => {
-        dispatch({
-          type: 'RESET_PASSWORD_FAILED',
-          payload: error.response.data,
-        });
+        if (error) {
+          dispatch({
+            type: FAILED_TO_RESET_PASSWORD,
+            payload: error.response.data,
+          });
+        }
       });
   };
   /**
  * @return {void}
  */
 export const clearSendPasswordResetLinkState = () => dispatch => dispatch({
-  type: 'CLEAR_SEND_PASSWORD_RESET_LINK_STATE'
+  type: CLEAR_SEND_PASSWORD_RESET_LINK_STATE
 });
   /**
  * @return {void}
  */
 export const clearResetPasswordState = () => dispatch => dispatch({
-  type: 'CLEAR_RESET_PASSWORD_STATE'
+  type: CLEAR_RESET_PASSWORD_STATE
 });
   /**
  * @return {void}

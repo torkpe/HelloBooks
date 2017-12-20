@@ -6,7 +6,7 @@ import { toastr } from 'react-redux-toastr';
 import {
   getABook, borrowBook,
   returnBook, deleteBook,
-  checkIfBorrowed, clearSingleBook,
+  checkIfBorrowed, clearSingleBookState,
   clearBorrowBookState,
   clearDeleteBookState
 } from '../actions/books';
@@ -71,7 +71,7 @@ class Book extends Component {
    * @return {undefined}
    */
   componentWillUnmount() {
-    this.props.clearSingleBook();
+    this.props.clearSingleBookState();
     this.props.clearDeleteBookState();
     this.props.clearBorrowBookState();
   }
@@ -203,7 +203,7 @@ export default connect(mapStateToProps, {
   returnBook,
   deleteBook,
   checkIfBorrowed,
-  clearSingleBook,
+  clearSingleBookState,
   clearBorrowBookState,
   clearDeleteBookState
 })(Book);
