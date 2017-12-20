@@ -11,12 +11,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/'
   },
-  devtool: 'source-map',
   plugins: [
-    new Dotenv({
-      path: './.env',
-      safe: false
-    }),
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify('production')
     }),

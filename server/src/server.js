@@ -25,13 +25,7 @@ if (process.env.NODE_ENV === 'development') {
   }));
   app.use(webpackHotMiddleware(compiler));
 }
-if (process.env.NODE_ENV === 'production') {
-  const compiler = webpack(webpackConfig);
-  app.use(webpackMiddleware(compiler, {
-    publcPath: webpackConfig.output.publicPath,
-  }));
-  app.use(webpackHotMiddleware());
-}
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
