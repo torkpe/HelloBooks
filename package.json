@@ -10,7 +10,7 @@
     "seed": "sequelize db:migrate:undo:all && sequelize db:migrate && babel-node ./server/src/seed",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test:local": "cross-env-shell NODE_ENV=test && sequelize db:migrate:undo:all && sequelize db:migrate && nyc --reporter=lcov --reporter=text mocha --compilers js:babel-core/register ./server/src/test/* --timeout 5000ms",
-    "heroku-postbuild": "NODE_ENV=production  && NODE_END=production"
+    "heroku-postbuild": "NODE_ENV=production  && NODE_END=production && npm run build"
   },
   "dependencies": {
     "axios": "^0.16.2",
