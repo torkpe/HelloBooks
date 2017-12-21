@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
+import ejs from 'ejs';
 import dotenv from 'dotenv';
 import path from 'path';
 import webpack from 'webpack';
@@ -16,15 +17,6 @@ const app = express();
 const logger = morgan;
 dotenv.config();
 app.use(bodyParser.json());
-if (process.env.NODE_ENV === 'development') {
-  const compiler = webpack(webpackConfigDevelopment);
-  app.use(webpackMiddleware(compiler, {
-    hot: true,
-    publcPath: webpackConfigDevelopment.output.publicPath,
-    noInfo: true
-  }));
-  app.use(webpackHotMiddleware(compiler));
-}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -32,7 +24,6 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(logger('dev'));
 app.set('secret', process.env.SECRET);
 app.use(cors());
-
 
 // Require express routes from route
 const userRoute = router.user;
@@ -51,11 +42,22 @@ app.use('/api/v1/', landingRoute);
 // Notifications route
 app.use('/api/v1/', notificationsRoute);
 
-app.route('*')
-  .get((request, response) => {
-    response.sendFile(path.join(__dirname, '../public/index.html'));
-  });
+if (process.env.NODE_ENV === 'production') {
+  const buildPath = path.join(__dirname, '../../build');
+  const htmlPath = path.join(buildPath, 'index.html');
+  app.use(express.static(buildPath));
+  app.get('*', (req, res) => res.sendFile(htmlPath));
+}
 
+if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(webpackConfigDevelopment);
+  app.use(webpackMiddleware(compiler, {
+    hot: true,
+    publcPath: webpackConfigDevelopment.output.publicPath,
+    noInfo: true
+  }));
+  app.use(webpackHotMiddleware(compiler));
+}
 remindUser();
 upgradeUsers();
 export default app;

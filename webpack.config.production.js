@@ -1,21 +1,35 @@
 const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
     path.join(__dirname, 'client/index.jsx'),
   ],
   output: {
-    path: '/',
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/'
   },
   plugins: [
     new webpack.DefinePlugin({
-      NODE_ENV: JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      comments: false,
+      // Compression specific options
+      compress: {
+        // remove warnings
+        warnings: false,
+        // Drop console statements
+        drop_console: true
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'server/public/index.html'),
+      filename: 'index.html'
+    })
   ],
   module: {
     loaders: [
