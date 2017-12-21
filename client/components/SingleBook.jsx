@@ -59,7 +59,7 @@ class Book extends Component {
       toastr.error(borrowBookError);
     }
     if (Object.keys(bookDeleted.response).length > 0) {
-      toastr.error(bookDeleted.response.message);
+      toastr.success(bookDeleted.response.message);
       this.props.clearDeleteBookState();
       browserHistory.push('/home');
     }

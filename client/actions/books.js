@@ -47,10 +47,12 @@ export const getBooks = () => (dispatch) => {
   return axios.get(`${url}/books`)
     .then((response) => {
       if (response) {
-        return dispatch({
-          type: GET_BOOKS_SUCCESSFUL,
-          payload: response.data,
-        });
+        if (response.data) {
+          return dispatch({
+            type: GET_BOOKS_SUCCESSFUL,
+            payload: response.data,
+          });
+        }
       }
       return null;
     }).catch((error) => {
