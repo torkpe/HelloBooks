@@ -14,7 +14,7 @@ const {
  */
 const getPdf = id => (dispatch) => {
   dispatch({ type: GET_PDF });
-  axios.get(`${url}/books/${id}`)
+  return axios.get(`${url}/books/${id}`)
     .then((response) => {
       if (response) {
         return dispatch({
