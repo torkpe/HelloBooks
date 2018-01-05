@@ -116,8 +116,8 @@ Please click on the click below to confirm your email addresponses
             userId: user.id
           });
         })
-        .catch(() => response.status(500).send({
-          message: 'Something went wrong'
+        .catch(error => response.status(500).send({
+          message: error.message
         }));
     }
     return response.status(400).send({
