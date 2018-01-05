@@ -23,7 +23,7 @@ const config = {
     use_env_variable: 'DB_TEST_URL',
   },
   production: {
-    use_env_variable: 'DATABASE_URL',
+    use_env_variable: 'PRODUCTION_DATABASE_URL',
   },
 };
 module.exports = config;
