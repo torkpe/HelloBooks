@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import { browserHistory } from 'react-router';
+import jwt from 'jsonwebtoken';
 
 // is already signed in
 /**

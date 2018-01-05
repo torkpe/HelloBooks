@@ -16,7 +16,7 @@ class AllNotReturned extends Component {
   /**
    * @return {undefined}
    */
-  componentWillMount() {
+  componentDidMount() {
     this.props.allNotReturned(this.props.auth.user.id);
   }
   /**
