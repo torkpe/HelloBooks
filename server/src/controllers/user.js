@@ -30,11 +30,6 @@ export default {
         message: 'Email is required'
       });
     }
-    if (email.length > 50) {
-      return response.status(400).send({
-        message: 'Invalid email'
-      });
-    }
     if (validator.isEmail(email)) {
       return User
         .findOne({
@@ -116,8 +111,8 @@ Please click on the click below to confirm your email addresponses
             userId: user.id
           });
         })
-        .catch(error => response.status(500).send({
-          message: error.message
+        .catch(() => response.status(500).send({
+          message: 'Something went wrong'
         }));
     }
     return response.status(400).send({
@@ -138,11 +133,6 @@ Please click on the click below to confirm your email addresponses
         if (password.length < 5) {
           return response.status(400).send({
             message: 'password is too short'
-          });
-        }
-        if (password.length > 20) {
-          return response.status(400).send({
-            message: 'Password length exceeds maximum number of characters'
           });
         }
         if (!validator.equals(password, confirmPassword)) {
@@ -201,11 +191,6 @@ Please click on the click below to confirm your email addresponses
     // validate
     if (password && confirmPassword) {
       if (confirmPassword.length > 5 && password.length > 5) {
-        if (password.length > 20) {
-          return response.status(400).send({
-            message: 'Password length exceeds maximum number of characters'
-          });
-        }
         if (validator.equals(password, confirmPassword)) {
           const hash = bcrypt.hashSync(password, salt);
           return User
