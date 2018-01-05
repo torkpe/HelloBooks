@@ -18,7 +18,7 @@ const notifyState = {
  */
 
 const notificationState = {
-  isLoading: false,
+  fetching: false,
   errors: {},
   notifications: [],
 };

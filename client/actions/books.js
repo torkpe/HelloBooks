@@ -82,7 +82,7 @@ export const clearBorrowBookState = () => dispatch =>
  */
 export const getABook = id => (dispatch) => {
   dispatch({ type: GET_BOOK });
-  axios.get(`${url}/books/${id}`)
+  return axios.get(`${url}/books/${id}`)
     .then((response) => {
       if (response) {
         return dispatch({
@@ -163,7 +163,7 @@ export const checkIfBorrowed = (id, userId) => (dispatch) => {
  */
 export const getBorrows = id => (dispatch) => {
   dispatch({ type: GET_BORROWS });
-  axios.get(`${url}/users/${id}/books`)
+  return axios.get(`${url}/users/${id}/books`)
     .then((response) => {
       if (response) {
         return dispatch({
@@ -189,9 +189,9 @@ export const getBorrows = id => (dispatch) => {
  * @param {object} data
  * @return {void}
  */
-export const borrowBook = (id, bookId, data) => (dispatch) => {
+export const borrowBook = (id, bookId) => (dispatch) => {
   dispatch({ type: BORROW_BOOK });
-  return axios.post(`${url}/users/${id}/${bookId}/books`, data)
+  return axios.post(`${url}/users/${id}/${bookId}/books`)
     .then((response) => {
       if (response) {
         return dispatch({
@@ -218,9 +218,9 @@ export const borrowBook = (id, bookId, data) => (dispatch) => {
  * @param {object} data
  * @return {void}
  */
-export const returnBook = (id, bookId, data) => (dispatch) => {
+export const returnBook = (id, bookId) => (dispatch) => {
   dispatch({ type: RETURN_BOOK });
-  return axios.put(`${url}/users/${id}/${bookId}/books`, data)
+  return axios.put(`${url}/users/${id}/${bookId}/books`)
     .then((response) => {
       if (response) {
         return dispatch({
