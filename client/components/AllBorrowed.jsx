@@ -24,7 +24,7 @@ class AllBorrowed extends Component {
   /**
    * @return {undefined}
    */
-  componentWillMount() {
+  componentDidMount() {
     this.props.getAllBorrowed(this.props.auth.user.id);
   }
   /**

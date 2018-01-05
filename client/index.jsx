@@ -69,6 +69,7 @@ const router = (
           <Route path="/edit-book/:id" component={Authenticate((UpdateBook))} />
           <Route path="/forgot-password" component={isAlreadySignedin(ForgotPassword)} />
           <Route path="/reset-password/:key" component={isAlreadySignedin(ResetPassword)} />
+          <Route path="/tope" component={Authenticate} />
         </Route>
       </Router>
       <ReduxToastr
