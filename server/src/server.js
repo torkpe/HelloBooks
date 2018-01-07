@@ -8,7 +8,6 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../../webpack.config.production';
 import webpackConfigDevelopment from '../../webpack.config';
 import router from './routes/index';
 import { remindUser, upgradeUsers } from './utils/cronJob';
@@ -48,16 +47,21 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(buildPath));
   app.get('*', (req, res) => res.sendFile(htmlPath));
 }
-
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfigDevelopment);
   app.use(webpackMiddleware(compiler, {
     hot: true,
     publcPath: webpackConfigDevelopment.output.publicPath,
-    noInfo: true
   }));
   app.use(webpackHotMiddleware(compiler));
+  app.route('*')
+    .get((request, response) => {
+      response.sendFile(path.join(__dirname, '../public/index.html'));
+    });
 }
+/**
+ * Run cron jobs
+ */
 remindUser();
 upgradeUsers();
 export default app;
