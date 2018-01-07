@@ -11,7 +11,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/'
   },
-  devtool: 'source-map',
+  devtool: 'cheap-eval-source-map',
   plugins: [
     new Dotenv({
       path: './.env',

@@ -23,7 +23,7 @@ export const getNotification = (category, id) => {
   };
   return (dispatch) => {
     dispatch({ type: GET_NOTIFICATION });
-    determineCategory(category)
+    return determineCategory(category)
       .then((response) => {
         if (response.data) {
           return dispatch({
