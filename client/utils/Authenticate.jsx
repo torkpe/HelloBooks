@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import { browserHistory } from 'react-router';
-
+import jwt from 'jsonwebtoken';
+import { logout } from '../actions/user';
 /**
  * @param {object} ComposedComponent
  * @return {void}
@@ -10,10 +11,13 @@ import { browserHistory } from 'react-router';
 export const Authenticate = (ComposedComponent) => {
   class AuthenticateUser extends Component {
     componentWillMount() {
-      if (!this.props.isAuthenticated) {
-        return browserHistory.push('/signin');
-      }
-      return null;
+      jwt.verify(window.localStorage.getItem('jwt'), 'khdbhkdwbfjkwenbfkwjenfkwebfhjwebfuerkwbfkwefnjkw', (error, decoded) => {
+        if (error || !this.props.isAuthenticated) {
+          this.props.logout();
+          return browserHistory.push('/signin');
+        }
+        return null;
+      });
     }
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
@@ -38,6 +42,6 @@ export const Authenticate = (ComposedComponent) => {
   const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
   });
-  return connect(mapStateToProps)(AuthenticateUser);
+  return connect(mapStateToProps, { logout })(AuthenticateUser);
 };
 export default Authenticate;
