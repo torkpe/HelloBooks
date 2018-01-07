@@ -18,7 +18,7 @@ const {
  */
 export const getAllBorrowed = id => (dispatch) => {
   dispatch({ type: GET_ALL_BORROWED_BOOKS });
-  axios.get(`${url}/users/${id}/books/all-borrowed`)
+  return axios.get(`${url}/users/${id}/books/all-borrowed`)
     .then((response) => {
       if (response) {
         return dispatch({
@@ -44,7 +44,7 @@ export const getAllBorrowed = id => (dispatch) => {
  */
 export const allNotReturned = id => (dispatch) => {
   dispatch({ type: GET_NOT_RETURNED_BOOKS });
-  axios.get(`${url}/users/${id}/books`)
+  return axios.get(`${url}/users/${id}/books`)
     .then((response) => {
       if (response) {
         return dispatch({

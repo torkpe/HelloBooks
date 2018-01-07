@@ -70,7 +70,7 @@ export const userSignup = userData =>
 export const userConfirmationRequest = userData =>
   (dispatch) => {
     dispatch({ type: CONFIRMING });
-    axios.put(`${url}/confirmation/${userData.key}`, userData)
+    return axios.put(`${url}/confirmation/${userData.key}`, userData)
       .then((response) => {
         if (response) {
           dispatch({
