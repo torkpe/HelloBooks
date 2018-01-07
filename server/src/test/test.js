@@ -402,6 +402,12 @@ describe('User', () => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
         expect(response.body.length).to.equal(1);
+        expect(response.body[0]).to.have.property('title');
+        expect(response.body[0]).to.have.property('pdf');
+        expect(response.body[0]).to.have.property('cover');
+        expect(response.body[0]).to.have.property('description');
+        expect(response.body[0]).to.have.property('quantity');
+        expect(response.body[0]).to.have.property('genre');
         if (error) return done(error);
         done();
       });
@@ -414,6 +420,13 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
+        expect(response.body).to.have.property('title');
+        expect(response.body).to.have.property('pdf');
+        expect(response.body).to.have.property('cover');
+        expect(response.body).to.have.property('description');
+        expect(response.body).to.have.property('quantity');
+        expect(response.body).to.have.property('genre');
+        expect(response.body.title).to.equal('Eze go to school');
         done();
       });
   });
@@ -449,6 +462,11 @@ describe('User', () => {
       .send(book)
       .end((error, response) => {
         expect(response.status).to.equal(201);
+        expect(response.body.newBook).to.have.property('id');
+        expect(response.body.newBook).to.have.property('cover');
+        expect(response.body.newBook).to.have.property('pdf');
+        expect(response.body.newBook).to.have.property('author');
+        expect(response.body.newBook).to.have.property('quantity');
         expect(response.body).to.have.property('message');
         expect(response.body.message).to.equal('Book successfully created');
         expect(typeof (response.body)).to.equal('object');

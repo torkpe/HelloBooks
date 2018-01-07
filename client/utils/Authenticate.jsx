@@ -12,7 +12,7 @@ export const Authenticate = (ComposedComponent) => {
   class AuthenticateUser extends Component {
     componentWillMount() {
       jwt.verify(window.localStorage.getItem('jwt'), 'khdbhkdwbfjkwenbfkwjenfkwebfhjwebfuerkwbfkwefnjkw', (error, decoded) => {
-        if (error) {
+        if (error || !this.props.isAuthenticated) {
           this.props.logout();
           return browserHistory.push('/signin');
         }
