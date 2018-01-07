@@ -96,6 +96,7 @@ Please click on the click below to confirm your email addresponses
         .findOne({
           where: {
             email, // Check if user exists first
+            confirmed: true,
           }
         })
         .then((user) => {
@@ -167,6 +168,7 @@ Please click on the click below to confirm your email addresponses
             user.update({
               name,
               password: hash,
+              confirmed: true,
             }).then((updatedUser) => {
               const myToken = generateToken(updatedUser); // Generate token for user
               return response.status(200).send({
@@ -296,7 +298,8 @@ Please click on the click below to confirm your email addresponses
     }
     return User.findOne({
       where: {
-        email: request.body.email
+        email: request.body.email,
+        confirmed: true,
       }
     })
       .then((user) => {
