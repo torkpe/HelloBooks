@@ -44,10 +44,8 @@ const sendEmail = (message, type, userId) => {
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            console.log(error)
             return (false);
           }
-          console.log(info)
           return (true);
         });
       }
