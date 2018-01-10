@@ -81,8 +81,8 @@ class Settings extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.setState({
-        isLoading: true
-      });
+      isLoading: true
+    });
     this.props.clearUpdateUserState();
     this.props.updateUser(this.props.auth.user.id, this.state);
   }
