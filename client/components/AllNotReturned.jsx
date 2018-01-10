@@ -40,20 +40,24 @@ class AllNotReturned extends Component {
           </div>
           <div className="contents">
             <span className="ask">
-              <h2>Books yet to be returned</h2>
+              <h5>Books yet to be returned</h5>
             </span>View all Borrowed books <Link to="/all-borrowed-books">here</Link>
             <hr />
           </div>
           <div className="ask">{this.props.message ? 'this.props.message' : '' }</div>
           <div className="mdl-grid">
-            {books.map(book => (<Books
+            { books && books.length > 0 ? books.map(book => (<Books
               {...this.props}
                 key={book.Book.id}
                 book={book.Book}
                 borrowBook={this.props.borrowBook}
                 returnBook={this.props.returnBook}
                 borrowedBook={this.props.borrowed}
-            />))}
+            />)) :
+            <div className="contents">
+              <h5>You have not borrowed any book at this point in time</h5>
+            </div>
+              }
           </div>
           <div className="mdl-grid ">
             <div className="mdl-cell mdl-cell--2-col" />

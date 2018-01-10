@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
+import PasswordForm from './PasswordForm.jsx';
 import { userConfirmationRequest, clearUserConfirmationState } from '../actions/user';
 
 /**
@@ -76,46 +77,27 @@ class Confirm extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-          <div className="card-enlarge mdl-card mdl-shadow--3dp">
+          <div className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
             <form action="">
-              <div className="mdl-textfield mdl-js-textfield card-content">
-                <input
-                  type="text"
-                  className="mdl-textfield__input"
-                  onChange={this.onChange}
-                  name="name" id="name" />
-                <label
-                htmlFor="name"
-                className="mdl-textfield__label">
-                Full Name
-                </label>
-              </div>
+              <h5>Complete Registration</h5>
               <div
-              className="mdl-textfield mdl-js-textfield card-content">
+                className="card-content card-wrapper input-wrapper">
                 <input
-                  type="password" className="mdl-textfield__input"
-                  onChange={this.onChange} name="password" id="password1" />
-                <label
-                htmlFor="password1"
-                className="mdl-textfield__label">
-                Password
-                </label>
+                type="text"
+                onChange={this.onChange}
+                name="name" id="name"
+                placeholder="Full Name"
+                />
               </div>
-              <div className="mdl-textfield mdl-js-textfield card-content">
-                <input
-                  type="password" className="mdl-textfield__input"
-                  onChange={this.onChange} name="confirmPassword" id="password2" />
-                <label
-                    htmlFor="password2"
-                    className="mdl-textfield__label">Confirm Password
-                </label>
-              </div>
+              <PasswordForm
+                onChange={this.onChange}
+              />
               <button
-                  disabled={this.state.isLoading}
-                  onClick={this.onSubmit}
-                  className={mdlSigninButton}
-                  id="button">
-                    Sign in
+                disabled={this.state.isLoading}
+                onClick={this.onSubmit}
+                className={mdlSigninButton}
+                id="button">
+                  Sign in
               </button>
             </form>
           </div>
