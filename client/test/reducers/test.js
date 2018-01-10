@@ -20,16 +20,6 @@ import * as user from '../../reducers/user';
 import {
   getNotification
 } from '../../reducers/notification';
-// import deletedBookReducer from '../reducers/deleteBooks';
-// import getABookReducer from '../reducers/getABook';
-// import getAllBooksReducer from '../reducers/getAllBooks';
-// import getAllBorrowedBooksReducer from '../reducers/getAllBorrowedBooks';
-// import getCategoryReducer from '../reducers/getCategory';
-// import getUserReducer from '../reducers/getUser';
-// import getUserBorrowedBooksReducer from '../reducers/getUserBorrowedBooks';
-// import modifyBookReducer from '../reducers/modifyBooks';
-// import returnBookReducer from '../reducers/returnBook';
-// import yetToReturnReducer from '../reducers/yetToReturn';
 import * as mockData from '../mockData';
 import types from '../../types/types';
 

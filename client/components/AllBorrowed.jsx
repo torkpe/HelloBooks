@@ -59,7 +59,7 @@ class AllBorrowed extends Component {
             <div className="mdl-cell mdl-cell--2-col" />
           </div>
           <div className="ask">
-            <h1> All Borrowed Books </h1>
+            <h5> All Borrowed Books </h5>
             <hr />
           </div>
           <div className="ask">{this.props.loading ? 'Loading...' : ''}</div>
@@ -72,11 +72,11 @@ class AllBorrowed extends Component {
                 borrowBook={this.props.borrowBook}
                 returnBook={this.props.returnBook}
                 borrowedBook={this.props.borrowed}
-              />)) : this.state.isProperties ?
+              />)) :
                 <div className="contents">
-                You have not borrowed any book at this point in time
-                </div> :
-                ''}
+                <h5>You have no record of borrowed books</h5>
+                </div>
+                }
           </div>
           <div className="mdl-grid ">
             <div className="mdl-cell mdl-cell--2-col" />
