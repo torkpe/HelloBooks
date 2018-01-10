@@ -17,6 +17,9 @@ class ForgotPassword extends Component {
    */
   constructor(props) {
     super(props);
+    this.state = {
+      isLoading: false
+    }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -28,9 +31,15 @@ class ForgotPassword extends Component {
     const { successfullySentLink, error } = nextProps.sendLinkSuccessful;
     if (successfullySentLink && Object.keys(successfullySentLink).length > 0) {
       toastr.success(successfullySentLink.message);
+      this.setState({
+        isLoading: false
+      })
     }
     if (error) {
       toastr.error(error.message);
+      this.setState({
+        isLoading: false
+      })
     }
   }
   /**
@@ -52,6 +61,9 @@ class ForgotPassword extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
+    this.setState({
+        isLoading: true
+      })
     this.props.clearSendPasswordResetLinkState();
     this.props.sendPasswordResetLink(this.state);
   }
@@ -70,19 +82,22 @@ class ForgotPassword extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-          <div className="card-enlarge mdl-card mdl-shadow--3dp">
+          {this.state.isLoading ? <h5>Please wait...</h5> : '' }
+          <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
+              <h5>Forgot Passwod</h5>
               <EmailForm
                 onChange={this.onChange}
               />
               <button
+                disabled={this.state.isLoading}
                 className={mdlButtonStyle}
                 id="button">
                 Submit
               </button>
             </form>
             <div
-            className="mdl-card__supporting-text ask">
+            className="mdl-card__supporting-text">
               Go back to <Link to="/signin"> Sign in</Link> page
             </div>
           </div>

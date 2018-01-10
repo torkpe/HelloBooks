@@ -16,10 +16,12 @@ const initialState = {
   quantity: '',
   genre: '',
   isLoading: false,
-  isImageAndPdf: false,
-  isImageSet: false,
+  isCoverAndPdf: false,
+  isCoverSet: false,
   isPdfSet: false,
-  error: ''
+  error: '',
+  isPostCover: false,
+  isPostPdf: false
 };
 
 /**
@@ -52,22 +54,24 @@ class UploadBook extends Component {
     if (cover) {
       this.setState({
         cover,
+        isPostCover: false
       });
     }
     if (nextProps.pdf) {
       this.setState({
         pdf,
+        isPostPdf: false
       });
     }
     if (cover && pdf) {
       this.setState({
-        isImageAndPdf: false
+        isCoverAndPdf: false
       });
     }
     if (createBook) {
       this.setState({
         isLoading: false,
-        isImageSet: false,
+        isCoverSet: false,
         isPdfSet: false,
       });
       if (Object.keys(createBook).length > 6) {
@@ -122,18 +126,24 @@ class UploadBook extends Component {
   onPostCover(event) {
     event.preventDefault();
     this.props.uploader(this.state.cover, 'cover');
+    this.setState({
+      isPostCover: true
+    })
   }
   onPostPdf(event) {
     event.preventDefault();
     this.props.uploader(this.state.pdf, 'pdf');
+    this.setState({
+      isPostPdf: true
+    })
   }
   coverChange(event) {
     event.preventDefault();
     const cover = event.target.files[0];
     this.setState({
       cover,
-      isImageSet: true,
-      isImageAndPdf: true
+      isCoverSet: true,
+      isCoverAndPdf: true
     });
   }
   pdfChange(event) {
@@ -142,7 +152,7 @@ class UploadBook extends Component {
     this.setState({
       pdf,
       isPdfSet: true,
-      isImageAndPdf: true
+      isCoverAndPdf: true
     });
   }
   /**
@@ -153,83 +163,69 @@ class UploadBook extends Component {
     mdl-button
     mdl-js-button
     `;
-    const { error } = this.state;
+    const { error, isPostCover, isPostPdf } = this.state;
     const mdlStyleButton = `mdl-button mdl-js-button`;
     return (
       <div className="mdl-grid">
         <div className="contents">
           {error && <div className="errors"> {error} </div>}
+          {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div>:''}
+          {isPostPdf ?<div className="contents"> <h5>Uploading Pdf...</h5> </div> :''}
           <div
-          className="card-enlarge mdl-card mdl-shadow--3dp">
+          className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
             <form ref="bookForm">
+              <h5>Book Details</h5>
               <div
-                className="mdl-textfield mdl-js-textfield card-content">
+                className="card-content input-wrapper">
                 <input
                   type="text"
-                  className="mdl-textfield__input"
+                  className=""
                   onChange={this.onChange}
-                  name="title" id="title" />
-                <label
-                htmlFor="title"
-                className="mdl-textfield__label">
-                Title
-                </label>
+                  name="title" id="title"
+                  placeholder="Title" />
               </div>
               <div
-                className="mdl-textfield mdl-js-textfield card-content">
-                <input
-                  type="text"
-                  className="mdl-textfield__input"
-                  onChange={this.onChange}
-                  name="author" id="author" />
-                <label
-                htmlFor="author"
-                className="mdl-textfield__label">
-                Author
-                </label>
+              className="card-content input-wrapper">
+              <input
+                type="text"
+                className=""
+                onChange={this.onChange}
+                name="author" id="author"
+                placeholder="Author" />
               </div>
-              <div className="mdl-textfield mdl-js-textfield card-content">
-                <input
-                  type="text"
-                  className="mdl-textfield__input"
-                  onChange={this.onChange}
-                  name="description"
-                  id="description" />
-                <label
-                htmlFor="description"
-                className="mdl-textfield__label">
-                Description
-                </label>
+              <div
+              className="card-content input-wrapper">
+              <input
+                type="text"
+                className=""
+                onChange={this.onChange}
+                name="description" id="description"
+                placeholder="Description" />
               </div>
-              <div className="mdl-textfield mdl-js-textfield card-content">
-                <input
-                  type="text"
-                  className="mdl-textfield__input"
-                  onChange={this.onChange}
-                  name="genre" id="genre" />
-                <label
-                htmlFor="genre"
-                className="mdl-textfield__label">
-                Genre
-                </label>
+              <div
+              className="card-content input-wrapper">
+              <input
+                type="text"
+                className=""
+                onChange={this.onChange}
+                name="genre" id="genre"
+                placeholder="Genre" />
               </div>
-              <div className="mdl-textfield mdl-js-textfield card-content">
-                <input
-                  type="number"
-                  className="mdl-textfield__input"
-                  onChange={this.onChange}
-                  name="quantity" id="text" />
-                <label
-                htmlFor="quantity"
-                className="mdl-textfield__label">
-                Quantity
-                </label>
+              <div
+              className="card-content input-wrapper">
+              <input
+                type="number"
+                className=""
+                onChange={this.onChange}
+                name="quantity" id="quantity"
+                placeholder="Quantity" />
               </div>
               <div className="card-content upload file-upload">
                 <label
                   htmlFor="file-upload"
-                  className={`${mdlButton}file-upload mdl-button--accent btn1`}>
-                Upload cover
+                  name="cover"
+                  className="btn btn-default">
+                  Upload cover
                 </label>
                 <input
                   type="file" accept="image/*"
@@ -240,7 +236,8 @@ class UploadBook extends Component {
                   required />
                 <label
                   htmlFor="file-upload2"
-                  className={`${mdlButton}file-upload mdl-button--accent btn1`}>
+                  name="pdf"
+                  className="btn btn-default">
                   Upload Pdf
                 </label>
                 <input
@@ -250,9 +247,9 @@ class UploadBook extends Component {
                   onChange={this.pdfChange}
                   name="pdf" id="file-upload2" />
               </div>
-              {this.state.isImageSet ?
+              {this.state.isCoverSet ?
                 <button
-                disabled={this.state.isLoading}
+                disabled={this.state.isPostCover}
                 onClick={this.onPostCover}
                 className={`${mdlButton}mdl-button--raised
                 mdl-button--colored`}
@@ -262,7 +259,7 @@ class UploadBook extends Component {
               }
               {this.state.isPdfSet ?
                 <button
-                disabled={this.state.isLoading}
+                disabled={this.state.isPostPdf}
                 onClick={this.onPostPdf}
                 className={`${mdlButton}mdl-button--raised
                 mdl-button--colored`}
@@ -271,7 +268,7 @@ class UploadBook extends Component {
                 </button> : ''
               }
               <button
-                disabled={this.state.isImageAndPdf}
+                disabled={this.state.isCoverAndPdf}
                 onClick={this.onSubmit}
                 className={`${mdlButton}mdl-button--raised
                 mdl-button--colored`}

@@ -90,21 +90,25 @@ class Main extends Component {
           <nav className="mdl-navigation">
             <a
             className="mdl-navigation__link"
+            name="uploadBook"
             onClick={this.uploadBook.bind(this)}
             href="">Upload Book
             </a>
             <a
             className="mdl-navigation__link"
+            name="notifications"
             onClick={this.notifications.bind(this)}
             href="">Notifications
             </a>
             <a
             className="mdl-navigation__link"
+            name="allBooks"
             onClick={this.allBooks.bind(this)}
             href="">All Books
             </a>
             <a
-            className="mdl-navigation__link"
+            className="mdl-navigation__link signout"
+            name="signout"
             onClick={this.logout.bind(this)} href="">
             Signout
             </a>
@@ -115,27 +119,33 @@ class Main extends Component {
           <nav className="mdl-navigation navLink">
             <a
             className="mdl-navigation__link"
+            name="home"
             onClick={this.home.bind(this)} href="">
             Home
             </a>
             <a
             className="mdl-navigation__link"
+            name="history"
             onClick={this.history.bind(this)}
             href="">History
             </a>
             <a
             className="mdl-navigation__link"
+            name="settings"
             onClick={this.settings.bind(this)}
             href="">Settings
             </a>
             <a
             className="mdl-navigation__link"
+            name="notifications"
             onClick={this.notifications.bind(this)}
             href="">Notifications
             </a>
             <a
-            className="mdl-navigation__link"
+            className="mdl-navigation__link signout"
+            name="signout"
             onClick={this.logout.bind(this)}
+            name="signout"
             href="">Signout
             </a>
           </nav>
@@ -150,6 +160,7 @@ class Main extends Component {
       <nav className="mdl-navigation">
         <a
         className="mdl-navigation__link"
+        name="signout"
         onClick={this.logout.bind(this)} href="">
         Signout
         </a>
@@ -167,7 +178,7 @@ class Main extends Component {
           <div className="mdl-layout__header-row">
             <Link
             to="/" className="mdl-layout-title">
-            hello-books
+            HelloBooks
             </Link>
             <div className="mdl-layout-spacer" />
             <nav className="mdl-layout--large-screen-only">
@@ -178,7 +189,7 @@ class Main extends Component {
         <div className="mdl-layout__drawer">
           <Link
           to={isAdmin ? '/admin_home' : '/'} className="mdl-layout-title">
-          hello-books
+          HelloBooks
           </Link>
           {determineNav(isAdmin)}
         </div>

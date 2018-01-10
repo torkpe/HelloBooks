@@ -5,19 +5,15 @@ import React, { Component } from 'react';
  * @return {object} prop
  */
 const EmailForm = props => (
-  <div
-    className="mdl-textfield mdl-js-textfield card-content">
-    <input
-      type="email"
-      onChange={props.onChange}
-      className="mdl-textfield__input"
-      name="email" />
-    <label
-      htmlFor="email"
-      className="mdl-textfield__label">
-      Email
-    </label>
-  </div>
+<div
+className="card-content card-wrapper input-wrapper">
+  <input
+  type="email"
+  onChange={props.onChange}
+  name="email" id="email"
+  placeholder="Email"
+  />
+</div>
 );
 
 export default EmailForm;
