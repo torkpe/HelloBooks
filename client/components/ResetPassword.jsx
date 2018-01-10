@@ -20,6 +20,7 @@ class ResetPassword extends Component {
     this.state = {
       password: '',
       confirmPassword: '',
+      isLoading: false
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -33,9 +34,15 @@ class ResetPassword extends Component {
     if (Object.keys(successfullyResetPassword).length > 0) {
       toastr.success(successfullyResetPassword.message);
       browserHistory.push('/signin');
+      this.setState({
+        isLoading: false
+      });
     }
     if (error) {
       toastr.error(error.message);
+      this.setState({
+        isLoading: false
+      });
     }
   }
   /**
@@ -61,6 +68,9 @@ class ResetPassword extends Component {
     event.preventDefault();
     this.props.clearResetPasswordState();
     this.props.resetUserPassword(this.props.params.key, this.state);
+    this.setState({
+      isLoading: true
+    });
   }
   /**
    * @return {XML} JSX
@@ -75,12 +85,14 @@ class ResetPassword extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
+          {this.state.isLoading ? <h5>Please wait...</h5> : '' }
           <div className="card-enlarge mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
               <PasswordForm
                 onChange={this.onChange}
               />
               <button
+                disabled={this.state.isLoading}
                 className={mdlButtonStyle}
                 id="button">
                 Reset Password

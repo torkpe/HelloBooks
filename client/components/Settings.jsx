@@ -22,6 +22,7 @@ class Settings extends Component {
     this.state = {
       email: '',
       name: '',
+      isLoading: false
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -29,7 +30,7 @@ class Settings extends Component {
   /**
    * @returns {undefined}
    */
-  componentDidMount() {
+  componentWillMount() {
     this.props.getUser(this.props.auth.user.id);
   }
   /**
@@ -46,9 +47,15 @@ class Settings extends Component {
     }
     if (updatedOrNot.response.message) {
       toastr.success(updatedOrNot.response.message);
+      this.setState({
+        isLoading: false
+      });
     }
     if (updatedOrNot.errors.message) {
       toastr.error(updatedOrNot.errors.message);
+      this.setState({
+        isLoading: false
+      });
     }
   }
   /**
@@ -73,6 +80,9 @@ class Settings extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
+    this.setState({
+      isLoading: true
+    });
     this.props.clearUpdateUserState();
     this.props.updateUser(this.props.auth.user.id, this.state);
   }
@@ -90,32 +100,36 @@ class Settings extends Component {
       <div className="mdl-grid">
         {Object.keys(this.props.user).length > 0 &&
         <div className="contents">
-          <div className="card-enlarge mdl-card mdl-shadow--3dp">
+          {this.state.isLoading ? <h5>Please wait...</h5> : '' }
+          <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
+              <h5> Update User Details</h5>
               <div
-                className="mdl-textfield mdl-js-textfield card-content">
+                className="card-content card-wrapper input-wrapper">
                 <input
-                  type="email" onChange={this.onChange}
-                  className="mdl-textfield__input"
-                  disabled value={this.state.email} name="email" />
-                <span className="error" />
+                type="email"
+                name="email" id="email"
+                value={this.state.email}
+                disabled
+                />
               </div>
               <div
-                className="mdl-textfield mdl-js-textfield card-content">
+                className="card-content card-wrapper input-wrapper">
                 <input
-                  type="text" onChange={this.onChange}
-                  className="mdl-textfield__input" defaultValue={
-                    this.state.name
-                  } name="name" />
-                <span className="error" />
+                type="name"
+                onChange={this.onChange}
+                name="name" id="name"
+                defaultValue={this.props.user.name}
+                />
               </div>
               <button
+                disabled={this.state.isLoading}
                 className={mdlButtonStyle}
                 id="button">
                   update
               </button>
             </form>
-            <div className="mdl-card__supporting-text ask">
+            <div className="mdl-card__supporting-text">
               <Link to="/set-password">Change Password </Link>
             </div>
           </div>

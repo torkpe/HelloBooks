@@ -6,17 +6,13 @@ import React, { Component } from 'react';
  */
 const EmailForm = props => (
   <div
-    className="mdl-textfield mdl-js-textfield card-content">
+  className="card-content card-wrapper input-wrapper">
     <input
       type="email"
       onChange={props.onChange}
-      className="mdl-textfield__input"
-      name="email" />
-    <label
-      htmlFor="email"
-      className="mdl-textfield__label">
-      Email
-    </label>
+      name="email" id="email"
+      placeholder="Email"
+    />
   </div>
 );
 

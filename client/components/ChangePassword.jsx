@@ -22,6 +22,7 @@ class ChangePassword extends Component {
       oldPassword: '',
       password: '',
       confirmPassword: '',
+      isLoading: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -33,10 +34,16 @@ class ChangePassword extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.passwordChange.response.message) {
       toastr.success(nextProps.passwordChange.response.message);
+      this.setState({
+        isLoading: false
+      })
       browserHistory.push('/home');
     }
     if (nextProps.passwordChange.errors.message) {
       toastr.error(nextProps.passwordChange.errors.message);
+      this.setState({
+        isLoading: false
+      })
     }
   }
   /**
@@ -61,6 +68,9 @@ class ChangePassword extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
+    this.setState({
+      isLoading: true
+    })
     this.props.clearSetPasswordState();
     this.props.setPassword(this.props.auth.user.id, this.state);
   }
@@ -78,23 +88,24 @@ class ChangePassword extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-          <div className="card-enlarge mdl-card mdl-shadow--3dp">
+        {this.state.isLoading ? <h5>Please wait...</h5> : '' }
+          <div className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
+              <h5>Change Password</h5>
               <div
-                className="mdl-textfield mdl-js-textfield card-content">
+                className="card-content card-wrapper input-wrapper">
                 <input
-                  type="password" onChange={this.onChange}
-                  className="mdl-textfield__input" name="oldPassword" />
-                <label htmlFor="password" className="mdl-textfield__label">
-                  Old Password
-                </label>
-                <span className="error" />
+                type="password"
+                onChange={this.onChange}
+                name="oldPassword" id="password5"
+                placeholder="Old Password"
+              />
               </div>
               <PasswordForm
                 onChange={this.onChange}
               />
               <button
-                disabled={this.props.setPassword.isLoading}
+                disabled={this.state.isLoading}
                 className={mdlButtonStyle}
                 id="button">
                 Reset Password
