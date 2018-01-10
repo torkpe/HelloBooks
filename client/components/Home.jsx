@@ -32,14 +32,22 @@ class Home extends Component {
           <div className="mdl-grid ">
             <div className="mdl-cell mdl-cell--2-col" />
           </div>
+          <div className="contents">
+              <h5>All Books</h5>
+            <hr />
+          </div>
           <div className="ask">{this.props.fetching ? 'Loading' : ''}</div>
           <div className="mdl-grid">
-            {books.map(book => (<Books
+            {books.length > 0 ? books.map(book => (<Books
               {...this.props}
               key={book.id}
               book={book}
               userId={this.props.userId}
-            />))}
+            />)) :
+            <div className="contents">
+              <h5>No books at this point in time</h5>
+            </div>
+            }
           </div>
           <div className="mdl-grid ">
             <div className="mdl-cell mdl-cell--2-col" />
