@@ -169,8 +169,8 @@ class UploadBook extends Component {
       <div className="mdl-grid">
         <div className="contents">
           {error && <div className="errors"> {error} </div>}
-          {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div>:''}
-          {isPostPdf ?<div className="contents"> <h5>Uploading Pdf...</h5> </div> :''}
+          {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
+          {isPostPdf ? <div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
           <div
           className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
             <form ref="bookForm">
@@ -185,40 +185,40 @@ class UploadBook extends Component {
                   placeholder="Title" />
               </div>
               <div
-              className="card-content input-wrapper">
-              <input
-                type="text"
-                className=""
-                onChange={this.onChange}
-                name="author" id="author"
-                placeholder="Author" />
+                className="card-content input-wrapper">
+                <input
+                  type="text"
+                  className=""
+                  onChange={this.onChange}
+                  name="author" id="author"
+                  placeholder="Author" />
+              </div>
+              <div
+                className="card-content input-wrapper">
+                <input
+                  type="text"
+                  className=""
+                  onChange={this.onChange}
+                  name="description" id="description"
+                  placeholder="Description" />
               </div>
               <div
               className="card-content input-wrapper">
-              <input
-                type="text"
-                className=""
-                onChange={this.onChange}
-                name="description" id="description"
-                placeholder="Description" />
+                <input
+                  type="text"
+                  className=""
+                  onChange={this.onChange}
+                  name="genre" id="genre"
+                  placeholder="Genre" />
               </div>
               <div
               className="card-content input-wrapper">
-              <input
-                type="text"
-                className=""
-                onChange={this.onChange}
-                name="genre" id="genre"
-                placeholder="Genre" />
-              </div>
-              <div
-              className="card-content input-wrapper">
-              <input
-                type="number"
-                className=""
-                onChange={this.onChange}
-                name="quantity" id="quantity"
-                placeholder="Quantity" />
+                <input
+                  type="number"
+                  className=""
+                  onChange={this.onChange}
+                  name="quantity" id="quantity"
+                  placeholder="Quantity" />
               </div>
               <div className="card-content upload file-upload">
                 <label

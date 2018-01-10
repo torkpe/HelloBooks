@@ -49,13 +49,13 @@ class Settings extends Component {
       toastr.success(updatedOrNot.response.message);
       this.setState({
         isLoading: false
-      })
+      });
     }
     if (updatedOrNot.errors.message) {
       toastr.error(updatedOrNot.errors.message);
       this.setState({
         isLoading: false
-      })
+      });
     }
   }
   /**
@@ -82,7 +82,7 @@ class Settings extends Component {
     event.preventDefault();
     this.setState({
         isLoading: true
-      })
+      });
     this.props.clearUpdateUserState();
     this.props.updateUser(this.props.auth.user.id, this.state);
   }
@@ -100,7 +100,7 @@ class Settings extends Component {
       <div className="mdl-grid">
         {Object.keys(this.props.user).length > 0 &&
         <div className="contents">
-        {this.state.isLoading ? <h5>Please wait...</h5> : '' }
+          {this.state.isLoading ? <h5>Please wait...</h5> : '' }
           <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
               <h5> Update User Details</h5>
