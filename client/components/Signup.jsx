@@ -65,8 +65,9 @@ class Signup extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-          <div className="card-enlarge mdl-card mdl-shadow--3dp">
+          <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
+              <h5>Signup</h5>
               <EmailForm
                 onChange={this.onChange}
               />
@@ -77,7 +78,7 @@ class Signup extends Component {
                 Sign up
               </button>
             </form>
-            <div className="mdl-card__supporting-text ask">
+            <div className="mdl-card__supporting-text">
               Already have an account? Sign in below
             </div>
             <Link to="/signin">
