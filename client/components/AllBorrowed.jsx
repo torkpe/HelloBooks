@@ -74,7 +74,7 @@ class AllBorrowed extends Component {
                 borrowedBook={this.props.borrowed}
               />)) :
                 <div className="contents">
-                <h5>You have no record of borrowed books</h5>
+                  <h5>You have no record of borrowed books</h5>
                 </div>
                 }
           </div>

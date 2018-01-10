@@ -53,9 +53,10 @@ class AllNotReturned extends Component {
                 borrowBook={this.props.borrowBook}
                 returnBook={this.props.returnBook}
                 borrowedBook={this.props.borrowed}
-            />)) : <div className="contents">
-                <h5>You have not borrowed any book at this point in time</h5>
-              </div>
+            />)) :
+            <div className="contents">
+              <h5>You have not borrowed any book at this point in time</h5>
+            </div>
               }
           </div>
           <div className="mdl-grid ">

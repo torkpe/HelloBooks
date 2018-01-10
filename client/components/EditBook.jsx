@@ -171,23 +171,23 @@ class updateBook extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-        {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div>:''}
-          {isPostPdf ?<div className="contents"> <h5>Uploading Pdf...</h5> </div> :''}
-        {Object.keys(book).length > 0 ?
-          <div
-            className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
+          {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
+          {isPostPdf ? <div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
+          {Object.keys(book).length > 0 ?
+            <div
+              className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
               <form ref="bookForm">
-              <h5>Book Details</h5>
-              <div
-              className="card-content input-wrapper">
-              <input
-                type="text"
-                className=""
-                onChange={this.onChange}
-                name="title" id="title"
-                value={this.state.title}
-                placeholder="Title" />
-              </div>
+                <h5>Book Details</h5>
+                <div
+                  className="card-content input-wrapper">
+                  <input
+                    type="text"
+                    className=""
+                    onChange={this.onChange}
+                    name="title" id="title"
+                    value={this.state.title}
+                    placeholder="Title" />
+                </div>
                 <div
                 className="card-content input-wrapper">
                   <input
@@ -255,34 +255,34 @@ class updateBook extends Component {
                 </div>
                 {this.state.isCoverSet ?
                   <button
-                  disabled={this.state.isPostCover}
-                  onClick={this.onPostCover}
-                  className={`${mdlButton}mdl-button--raised
-                  mdl-button--colored`}
-                  id="button">
+                    disabled={this.state.isPostCover}
+                    onClick={this.onPostCover}
+                    className={`${mdlButton}mdl-button--raised
+                    mdl-button--colored`}
+                    id="button">
                     Upload Cover
                   </button> : ''
                 }
                 {this.state.isPdfSet ?
                   <button
-                  disabled={this.state.isPostPdf} onClick={this.onPostPdf}
-                  className={`${mdlButton}mdl-button--raised
-                  mdl-button--colored`}
-                  id="button">
+                    disabled={this.state.isPostPdf} onClick={this.onPostPdf}
+                    className={`${mdlButton}mdl-button--raised
+                    mdl-button--colored`}
+                    id="button">
                     Upload Pdf
                   </button> : ''
                 }
                 <button
-                disabled={this.state.loading}
-                onClick={this.onSubmit}
-                name="updateBook"
-                className={`${mdlButton}mdl-button--raised
-                mdl-button--colored`}
-                id="button">
-                Update book
+                  disabled={this.state.loading}
+                  onClick={this.onSubmit}
+                  name="updateBook"
+                  className={`${mdlButton}mdl-button--raised
+                  mdl-button--colored`}
+                  id="button">
+                  Update book
                 </button>
               </form>
-          </div>
+            </div>
           : ''}
         </div>
       </div>

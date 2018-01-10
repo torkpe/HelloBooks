@@ -67,7 +67,7 @@ class Signup extends Component {
         <div className="contents">
           <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
-            <h5>Signup</h5>
+              <h5>Signup</h5>
               <EmailForm
                 onChange={this.onChange}
               />

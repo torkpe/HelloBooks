@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  'Demo test Admin' : function (browser) {
+  'Demo test Admin': function (browser) {
     browser
       .url('http://localhost:8081')
       .waitForElementVisible('body', 1000)
@@ -32,8 +32,6 @@ module.exports = {
       .setValue('input[name=genre]', 'scifi')
       .waitForElementVisible('input[name=quantity]', 1000)
       .setValue('input[name=quantity]', '5')
-      // .waitForElementVisible('label[name=cover]', 1000)
-      // .click('label[name=cover]')
       .pause(1000)
       .waitForElementVisible('label[name=pdf]', 1000)
       .pause(5000)
