@@ -64,8 +64,8 @@ class Notifications extends Component {
           </table>
           : <div className="contents">
               <h5>You have no notification at this point in time</h5>
-            </div>  
-              }
+            </div>
+            }
         </div>
       </div>
     );
