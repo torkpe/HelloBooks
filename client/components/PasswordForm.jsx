@@ -7,26 +7,22 @@ import React, { Component } from 'react';
 const PasswordForm = props => (
   <div>
     <div
-    className="mdl-textfield mdl-js-textfield card-content">
+      className="card-content card-wrapper input-wrapper">
       <input
-      type="password" onChange={props.onChange}
-      className="mdl-textfield__input" name="password" />
-      <label htmlFor="password" className="mdl-textfield__label">
-        New Password
-      </label>
-      <span className="error" />
+      type="password"
+      onChange={props.onChange}
+      name="password" id="password1"
+      placeholder="Password"
+      />
     </div>
     <div
-      className="mdl-textfield mdl-js-textfield card-content">
+      className="card-content card-wrapper input-wrapper">
       <input
-      type="password" onChange={props.onChange}
-      className="mdl-textfield__input" name="confirmPassword" />
-      <label
-        htmlFor="password"
-        className="mdl-textfield__label">
-        Confirm Password
-      </label>
-      <span className="error" />
+      type="password"
+      onChange={props.onChange}
+      name="confirmPassword" id="password"
+      placeholder="Confirm Password"
+      />
     </div>
   </div>
 );
