@@ -50,10 +50,11 @@ class Notifications extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-        <div className="ask">
-          <h5>Notifications</h5>
-        </div>
-          {notifications && notifications.length > 0 ? <table className="table-bordered">
+          <div className="ask">
+            <h5>Notifications</h5>
+          </div>
+          {notifications && notifications.length > 0 ?
+          <table className="table-bordered">
             {notifications.map(notification => (<SingleNotification
               key={notification.id}
               notification={notification}
@@ -61,10 +62,11 @@ class Notifications extends Component {
               isAdmin={this.props.auth.user.isAdmin}
             />))}
           </table>
-          : <div className="contents">
-                <h5>You have no notification at this point in time</h5>
-              </div>
-              }
+          :
+          <div className="contents">
+            <h5>You have no notification at this point in time</h5>
+          </div>
+          }
         </div>
       </div>
     );

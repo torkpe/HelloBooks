@@ -80,24 +80,24 @@ class Confirm extends Component {
           <div className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
             <form action="">
               <h5>Complete Registration</h5>
-            <div
-            className="card-content card-wrapper input-wrapper">
-              <input
-              type="text"
-              onChange={this.onChange}
-              name="name" id="name"
-              placeholder="Full Name"
-              />
-            </div>
+              <div
+                className="card-content card-wrapper input-wrapper">
+                <input
+                type="text"
+                onChange={this.onChange}
+                name="name" id="name"
+                placeholder="Full Name"
+                />
+              </div>
               <PasswordForm
                 onChange={this.onChange}
               />
               <button
-                  disabled={this.state.isLoading}
-                  onClick={this.onSubmit}
-                  className={mdlSigninButton}
-                  id="button">
-                    Sign in
+                disabled={this.state.isLoading}
+                onClick={this.onSubmit}
+                className={mdlSigninButton}
+                id="button">
+                  Sign in
               </button>
             </form>
           </div>

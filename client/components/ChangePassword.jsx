@@ -36,14 +36,14 @@ class ChangePassword extends Component {
       toastr.success(nextProps.passwordChange.response.message);
       this.setState({
         isLoading: false
-      })
+      });
       browserHistory.push('/home');
     }
     if (nextProps.passwordChange.errors.message) {
       toastr.error(nextProps.passwordChange.errors.message);
       this.setState({
         isLoading: false
-      })
+      });
     }
   }
   /**
@@ -70,7 +70,7 @@ class ChangePassword extends Component {
     event.preventDefault();
     this.setState({
       isLoading: true
-    })
+    });
     this.props.clearSetPasswordState();
     this.props.setPassword(this.props.auth.user.id, this.state);
   }
@@ -88,7 +88,7 @@ class ChangePassword extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-        {this.state.isLoading ? <h5>Please wait...</h5> : '' }
+          {this.state.isLoading ? <h5>Please wait...</h5> : '' }
           <div className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
               <h5>Change Password</h5>

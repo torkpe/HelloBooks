@@ -168,11 +168,10 @@ class Book extends Component {
                 className="glyphicon glyphicon-eye-open">
               </Link>
               {isAdmin ?
-                  <span
-                    onClick={deleteABook}
-                    name="deleteBook"
-                    className="glyphicon glyphicon-trash">
-                  </span>
+                <span
+                  onClick={deleteABook}
+                  name="deleteBook"
+                  className="glyphicon glyphicon-trash" />
                 :
                 ''
               }
