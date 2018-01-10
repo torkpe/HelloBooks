@@ -19,7 +19,7 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {
       isLoading: false
-    }
+    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -33,13 +33,13 @@ class ForgotPassword extends Component {
       toastr.success(successfullySentLink.message);
       this.setState({
         isLoading: false
-      })
+      });
     }
     if (error) {
       toastr.error(error.message);
       this.setState({
         isLoading: false
-      })
+      });
     }
   }
   /**
@@ -62,8 +62,8 @@ class ForgotPassword extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.setState({
-        isLoading: true
-      })
+      isLoading: true
+    });
     this.props.clearSendPasswordResetLinkState();
     this.props.sendPasswordResetLink(this.state);
   }

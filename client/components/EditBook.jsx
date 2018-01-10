@@ -171,118 +171,118 @@ class updateBook extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-        {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div>:''}
-          {isPostPdf ?<div className="contents"> <h5>Uploading Pdf...</h5> </div> :''}
-        {Object.keys(book).length > 0 ?
-          <div
-            className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
-              <form ref="bookForm">
-              <h5>Book Details</h5>
-              <div
-              className="card-content input-wrapper">
-              <input
-                type="text"
-                className=""
-                onChange={this.onChange}
-                name="title" id="title"
-                value={this.state.title}
-                placeholder="Title" />
-              </div>
-                <div
-                className="card-content input-wrapper">
+          {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
+          {isPostPdf ?<div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
+          {Object.keys(book).length > 0 ?
+            <div
+              className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
+                <form ref="bookForm">
+                  <h5>Book Details</h5>
+                  <div
+                  className="card-content input-wrapper">
                   <input
-                  type="text"
-                  className=""
-                  defaultValue={this.state.author}
-                  onChange={this.onChange}
-                  name="author" id="author"required />
-                </div>
-                <div
-                className="card-content input-wrapper">
-                  <input
-                  type="text"
-                  className=""
-                  onChange={this.onChange}
-                  name="description"
-                  defaultValue={this.state.description}
-                  id="description"required />
-                </div>
-                <div
-                className="card-content input-wrapper">
-                  <input
-                  type="text"
-                  className=""
-                  defaultValue={this.state.genre}
-                  onChange={this.onChange}
-                  name="genre" id="genre"required />
-                </div>
-                <div
-                className="card-content input-wrapper">
-                  <input
-                  type="number"
-                  className=""
-                  onChange={this.onChange}
-                  name="quantity"
-                  defaultValue={this.state.quantity}
-                  id="text"required />
-                </div>
-                <div
-                className="card-content upload file-upload">
-                  <label
-                  htmlFor="file-upload"
-                  name="cover"
-                  className="btn btn-default">
-                  Upload cover
-                  </label>
-                  <input
-                  type="file"
-                  accept="image/*"
-                  className="mdl-textfield__input"
-                  onChange={this.coverChange}
-                  name="cover" id="file-upload" />
-                  <label
-                  htmlFor="file-upload2"
-                  name="pdf"
-                  className="btn btn-default">
-                  Upload Pdf
-                  </label>
-                  <input
-                  type="file"
-                  accept=".pdf"
-                  className="mdl-textfield__input"
-                  onChange={this.pdfChange}
-                  name="pdf" id="file-upload2" />
-                </div>
-                {this.state.isCoverSet ?
-                  <button
-                  disabled={this.state.isPostCover}
-                  onClick={this.onPostCover}
-                  className={`${mdlButton}mdl-button--raised
-                  mdl-button--colored`}
-                  id="button">
-                    Upload Cover
-                  </button> : ''
-                }
-                {this.state.isPdfSet ?
-                  <button
-                  disabled={this.state.isPostPdf} onClick={this.onPostPdf}
-                  className={`${mdlButton}mdl-button--raised
-                  mdl-button--colored`}
-                  id="button">
+                    type="text"
+                    className=""
+                    onChange={this.onChange}
+                    name="title" id="title"
+                    value={this.state.title}
+                    placeholder="Title" />
+                  </div>
+                  <div
+                  className="card-content input-wrapper">
+                    <input
+                    type="text"
+                    className=""
+                    defaultValue={this.state.author}
+                    onChange={this.onChange}
+                    name="author" id="author"required />
+                  </div>
+                  <div
+                  className="card-content input-wrapper">
+                    <input
+                    type="text"
+                    className=""
+                    onChange={this.onChange}
+                    name="description"
+                    defaultValue={this.state.description}
+                    id="description"required />
+                  </div>
+                  <div
+                  className="card-content input-wrapper">
+                    <input
+                    type="text"
+                    className=""
+                    defaultValue={this.state.genre}
+                    onChange={this.onChange}
+                    name="genre" id="genre"required />
+                  </div>
+                  <div
+                  className="card-content input-wrapper">
+                    <input
+                    type="number"
+                    className=""
+                    onChange={this.onChange}
+                    name="quantity"
+                    defaultValue={this.state.quantity}
+                    id="text"required />
+                  </div>
+                  <div
+                  className="card-content upload file-upload">
+                    <label
+                    htmlFor="file-upload"
+                    name="cover"
+                    className="btn btn-default">
+                    Upload cover
+                    </label>
+                    <input
+                    type="file"
+                    accept="image/*"
+                    className="mdl-textfield__input"
+                    onChange={this.coverChange}
+                    name="cover" id="file-upload" />
+                    <label
+                    htmlFor="file-upload2"
+                    name="pdf"
+                    className="btn btn-default">
                     Upload Pdf
-                  </button> : ''
-                }
-                <button
-                disabled={this.state.loading}
-                onClick={this.onSubmit}
-                name="updateBook"
-                className={`${mdlButton}mdl-button--raised
-                mdl-button--colored`}
-                id="button">
-                Update book
-                </button>
-              </form>
-          </div>
+                    </label>
+                    <input
+                    type="file"
+                    accept=".pdf"
+                    className="mdl-textfield__input"
+                    onChange={this.pdfChange}
+                    name="pdf" id="file-upload2" />
+                  </div>
+                  {this.state.isCoverSet ?
+                    <button
+                      disabled={this.state.isPostCover}
+                      onClick={this.onPostCover}
+                      className={`${mdlButton}mdl-button--raised
+                      mdl-button--colored`}
+                      id="button">
+                      Upload Cover
+                    </button> : ''
+                  }
+                  {this.state.isPdfSet ?
+                    <button
+                      disabled={this.state.isPostPdf} onClick={this.onPostPdf}
+                      className={`${mdlButton}mdl-button--raised
+                      mdl-button--colored`}
+                      id="button">
+                      Upload Pdf
+                    </button> : ''
+                  }
+                  <button
+                    disabled={this.state.loading}
+                    onClick={this.onSubmit}
+                    name="updateBook"
+                    className={`${mdlButton}mdl-button--raised
+                    mdl-button--colored`}
+                    id="button">
+                    Update book
+                  </button>
+                </form>
+            </div>
           : ''}
         </div>
       </div>

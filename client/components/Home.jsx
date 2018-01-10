@@ -33,7 +33,7 @@ class Home extends Component {
             <div className="mdl-cell mdl-cell--2-col" />
           </div>
           <div className="contents">
-              <h5>All Books</h5>
+            <h5>All Books</h5>
             <hr />
           </div>
           <div className="ask">{this.props.fetching ? 'Loading' : ''}</div>
