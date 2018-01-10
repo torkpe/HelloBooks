@@ -36,13 +36,13 @@ class ResetPassword extends Component {
       browserHistory.push('/signin');
       this.setState({
         isLoading: false
-      })
+      });
     }
     if (error) {
       toastr.error(error.message);
       this.setState({
         isLoading: false
-      })
+      });
     }
   }
   /**
@@ -70,7 +70,7 @@ class ResetPassword extends Component {
     this.props.resetUserPassword(this.props.params.key, this.state);
     this.setState({
       isLoading: true
-    })
+    });
   }
   /**
    * @return {XML} JSX
@@ -85,7 +85,7 @@ class ResetPassword extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-        {this.state.isLoading ? <h5>Please wait...</h5> : '' }
+          {this.state.isLoading ? <h5>Please wait...</h5> : '' }
           <div className="card-enlarge mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
               <PasswordForm

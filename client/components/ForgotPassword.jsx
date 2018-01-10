@@ -62,8 +62,8 @@ class ForgotPassword extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.setState({
-        isLoading: true
-      })
+      isLoading: true
+    });
     this.props.clearSendPasswordResetLinkState();
     this.props.sendPasswordResetLink(this.state);
   }

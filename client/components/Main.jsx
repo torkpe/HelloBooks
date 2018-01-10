@@ -145,7 +145,6 @@ class Main extends Component {
             className="mdl-navigation__link signout"
             name="signout"
             onClick={this.logout.bind(this)}
-            name="signout"
             href="">Signout
             </a>
           </nav>

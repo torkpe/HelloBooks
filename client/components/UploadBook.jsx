@@ -128,14 +128,14 @@ class UploadBook extends Component {
     this.props.uploader(this.state.cover, 'cover');
     this.setState({
       isPostCover: true
-    })
+    });
   }
   onPostPdf(event) {
     event.preventDefault();
     this.props.uploader(this.state.pdf, 'pdf');
     this.setState({
       isPostPdf: true
-    })
+    });
   }
   coverChange(event) {
     event.preventDefault();
