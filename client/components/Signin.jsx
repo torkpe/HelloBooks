@@ -65,43 +65,36 @@ class Signin extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-          <div className="card-enlarge mdl-card mdl-shadow--3dp">
+          <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
-              <div className="mdl-textfield mdl-js-textfield card-content">
+              <h5> Sign in</h5>
+              <div
+              className="card-content card-wrapper input-wrapper">
                 <input
-                  type="email"
-                  className="mdl-textfield__input"
-                  onChange={this.onChange}
-                  name="email" id="email" />
-                <label
-                htmlFor="email"
-                className="mdl-textfield__label">
-                Email
-                </label>
+                type="email"
+                onChange={this.onChange}
+                name="email" id="email"
+                placeholder="Email"
+                />
               </div>
               <div
-                className="mdl-textfield mdl-js-textfield card-content">
+              className="card-content card-wrapper input-wrapper">
                 <input
-                  type="password"
-                  className="mdl-textfield__input"
-                  onChange={this.onChange}
-                  name="password"
-                  id="password"
-                  />
-                <label
-                htmlFor="password"
-                className="mdl-textfield__label">
-                Password
-                </label>
+                type="password"
+                onChange={this.onChange}
+                name="password" id="password"
+                placeholder="Password"
+                />
               </div>
               <button
                 disabled={this.props.signin.isLoading}
                 className={mdlButtonStyle}
+                name="signin"
                 id="button">
                     Sign in
               </button>
             </form>
-            <div className="mdl-card__supporting-text ask">
+            <div className="mdl-card__supporting-text">
                 Don't Have an Account yet? Create one Below
             </div>
             <Link to="/signup">
@@ -112,7 +105,7 @@ class Signin extends Component {
               </button>
             </Link>
             <div
-            className="mdl-card__supporting-text ask">
+            className="mdl-card__supporting-text">
               <Link to="/forgot-password">forgot password?</Link>
             </div>
           </div>
