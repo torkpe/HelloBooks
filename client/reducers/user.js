@@ -95,7 +95,7 @@ export const userConfirmationRequest = (state = confirmationInitalState, action 
         confirmationSuccessful: action.payload,
       };
     }
-    case FAILED_TO_SIGNUP: {
+    case FAILED_TO_CONFIRM: {
       return {
         ...state,
         isLoading: false,

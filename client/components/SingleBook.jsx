@@ -140,14 +140,16 @@ class Book extends Component {
               {isAdmin ? '' : this.state.isBorrowed ? '' :
               <button
                   onClick={borrow}
-                  className={mdlStyleButton}>
+                  name="borrow"
+                  className="btn btn-default">
                 Borrow
               </button>
               }
               {isAdmin ? '' : this.state.isBorrowed ?
                 <button
                   onClick={returnBorrowed}
-                  className={mdlStyleButton}>
+                  name="return"
+                  className="btn btn-success">
                     Return
                 </button> : ''
               }
@@ -155,24 +157,21 @@ class Book extends Component {
               {isAdmin ?
                 <Link
                   to={`/edit-book/${book.id}`}
-                  className={mdlStyleButton}>
-                  Edit
+                  name="edit"
+                  className="glyphicon glyphicon-edit">
                 </Link>
                 : ''
               }
               <Link
                 to={`/read-book/${book.id}`}
-                className={mdlStyleButton}>
-                  Read online
+                name="read"
+                className="glyphicon glyphicon-eye-open">
               </Link>
               {isAdmin ?
-                <div>
-                  <button
-                    onClick={deleteABook}
-                    className={mdlStyleButton}>
-                      Delete
-                  </button>
-                </div>
+                <span
+                  onClick={deleteABook}
+                  name="deleteBook"
+                  className="glyphicon glyphicon-trash" />
                 :
                 ''
               }
