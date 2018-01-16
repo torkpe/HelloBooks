@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="1">
 
   <testsuite name="admin"
-    errors="0" failures="0" hostname="" id="" package="admin" skipped="0"
-    tests="1" time="37.63" timestamp="Wed, 10 Jan 2018 09:40:15 GMT">
+    errors="0" failures="1" hostname="" id="" package="admin" skipped="0"
+    tests="1" time="25.27" timestamp="Thu, 11 Jan 2018 10:17:53 GMT">
   
-    <testcase name="Demo test Admin" classname="admin" time="37.63" assertions="19">
+    <testcase name="Demo test Admin" classname="admin" time="25.27" assertions="11">
 
     
 
@@ -27,23 +27,8 @@
 
     
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+      <failure message="Timed out while waiting for element &lt;a[href=&#34;/edit-book/1&#34;]&gt; to be present for 1000 milliseconds.">    at Object.Demo test Admin (/Users/andeladeveloper/Desktop/hellobooks-fix/HelloBooks/e2eTest/admin.js:46:8)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)</failure>
 
     
     </testcase>
