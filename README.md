@@ -66,7 +66,7 @@ Authenticated Admin Users to the hello books library can perform the folllowing:
 * Delete book
 * Sign out of the application
 
-#$ To Contribute
+## To Contribute
 
 Contributions are welcome. Code should (as much as possible) conform to the Airbnb javascript style guide.
 
