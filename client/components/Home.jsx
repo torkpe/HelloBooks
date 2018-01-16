@@ -10,7 +10,7 @@ import Books from './Books.jsx';
  * @class Home
  * @classdesc returns Home component
  */
-class Home extends Component {
+export class Home extends Component {
   /**
    * @return {undefined}
    */
@@ -60,9 +60,6 @@ class Home extends Component {
 }
 Home.propTypes = {
   getBooks: propTypes.func.isRequired,
-  getAllBorrowed: propTypes.func.isRequired,
-  borrowedBooks: propTypes.object.isRequired,
-  auth: propTypes.object.isRequired
 };
 /**
  * return props
