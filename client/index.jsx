@@ -31,14 +31,12 @@ import SetPassword from './components/ChangePassword.jsx';
 import UpdateBook from './components/EditBook.jsx';
 import ForgotPassword from './components/ForgotPassword.jsx';
 import ResetPassword from './components/ResetPassword.jsx';
+import configureStore from './store/store';
 
-const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
-);
+/**
+ * configure store
+ */
+const store = configureStore();
 
 if (localStorage.jwt) {
   setAuth(localStorage.jwt);

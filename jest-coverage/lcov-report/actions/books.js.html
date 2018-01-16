@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for actions/books.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">actions</a> books.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">81.31% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>87/107</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>19/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">95.65% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>44/46</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">78.65% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>70/89</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import axios from 'axios';
+&nbsp;
+import url from '../utils/url';
+import types from '../types/types';
+&nbsp;
+const {
+  GET_BOOKS,
+  GET_BOOKS_SUCCESSFUL,
+  FAILED_TO_GET_BOOKS,
+  CLEAR_BOOKS_STATE_STATE,
+  CLEAR_BORROW_BOOK_STATE,
+  GET_BOOK,
+  GET_BOOK_SUCCESSFUL,
+  FAILED_TO_GET_BOOK,
+  CLEAR_SINGLE_BOOK_STATE,
+  CLEAR_CREATED_BOOK_STATE,
+  CLEAR_BOOKS_STATE,
+  CLEAR_DELETE_BOOK_STATE,
+  CHECK_IF_BORROWED_SUCCESSFUL,
+  FAILED_TO_CHECK_IF_BORROWED,
+  GET_BORROWS,
+  GET_BORROWS_SUCCESSFUL,
+  FAILED_TO_GET_BORROWS,
+  BORROW_BOOK,
+  BORROW_BOOK_SUCCESSFUL,
+  FAILED_TO_BORROW_BOOK,
+  RETURN_BOOK,
+  RETURN_BOOK_SUCCESSFUL,
+  FAILED_TO_RETURN_BOOK,
+  POST_BOOK,
+  POST_BOOK_SUCCESSFUL,
+  FAILED_TO_POST_BOOK,
+  DELETE_BOOK,
+  DELETE_BOOK_SUCCESSFUL,
+  FAILED_TO_DELETE_BOOK,
+  EDIT_BOOK,
+  EDIT_BOOK_SUCCESSFUL,
+  FAILED_TO_EDIT_BOOK,
+  CHECK_IF_BORROWED
+} = types;
+/**
+ * Get all books
+ * @return {void}
+ */
+export const getBooks = () =&gt; (dispatch) =&gt; {
+  dispatch({ type: GET_BOOKS });
+  return axios.get(`${url}/books`)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (response.data) {
+          return dispatch({
+            type: GET_BOOKS_SUCCESSFUL,
+            payload: response.data,
+          });
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }).catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_GET_BOOKS,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+&nbsp;
+/**
+ * clear borrowed books state
+ * @return {void}
+ */
+export const clearBorrowBookState = <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >di</span>spatch =&gt;</span>
+<span class="cstat-no" title="statement not covered" >  dispatch({</span>
+    type: CLEAR_BORROW_BOOK_STATE
+  });
+&nbsp;
+/**
+ * Get a book
+ * @param {number} id
+ * @return {void}
+ */
+export const getABook = id =&gt; (dispatch) =&gt; {
+  dispatch({ type: GET_BOOK });
+  return axios.get(`${url}/books/${id}`)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        return dispatch({
+          type: GET_BOOK_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }).catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_GET_BOOK,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+/**
+ * clear single book state
+ * @return {void}
+ */
+export const clearSingleBookState = () =&gt; dispatch =&gt; dispatch({
+  type: CLEAR_SINGLE_BOOK_STATE
+});
+/**
+ * clear created books state
+ * @return {void}
+ */
+export const clearCreatedBookState = () =&gt; dispatch =&gt; dispatch({
+  type: CLEAR_CREATED_BOOK_STATE
+});
+/**
+ * clear all books state
+ * @return {void}
+ */
+export const clearBooksState = () =&gt; dispatch =&gt; dispatch({
+  type: CLEAR_BOOKS_STATE
+});
+/**
+ * clear deleted book state
+ * @return {void}
+ */
+export const clearDeleteBookState = () =&gt; dispatch =&gt; dispatch({
+  type: CLEAR_DELETE_BOOK_STATE
+});
+/**
+ * Get a book
+ * @param {number} id
+ * @param {number} userId
+ * @return {void}
+ */
+export const checkIfBorrowed = (id, userId) =&gt; (dispatch) =&gt; {
+  dispatch({ type: CHECK_IF_BORROWED });
+  return axios.get(`${url}/book/${id}/${userId}`)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        return dispatch({
+          type: CHECK_IF_BORROWED_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }).catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_CHECK_IF_BORROWED,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+/**
+ * get list of borrowed books
+ * @param {number} id
+ * @return {void}
+ */
+export const getBorrows = id =&gt; (dispatch) =&gt; {
+  dispatch({ type: GET_BORROWS });
+  return axios.get(`${url}/users/${id}/books`)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        return dispatch({
+          type: GET_BORROWS_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }).catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_GET_BORROWS,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+/**
+ * Borrow a book
+ * @param {number} id
+ * @param {number} bookId
+ * @param {object} data
+ * @return {void}
+ */
+export const borrowBook = (id, bookId) =&gt; (dispatch) =&gt; {
+  dispatch({ type: BORROW_BOOK });
+  return axios.post(`${url}/users/${id}/${bookId}/books`)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        return dispatch({
+          type: BORROW_BOOK_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }).catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_BORROW_BOOK,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+&nbsp;
+/**
+ * Return a book
+ * @param {number} id
+ * @param {number} bookId
+ * @param {object} data
+ * @return {void}
+ */
+export const returnBook = (id, bookId) =&gt; (dispatch) =&gt; {
+  dispatch({ type: RETURN_BOOK });
+  return axios.put(`${url}/users/${id}/${bookId}/books`)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        return dispatch({
+          type: RETURN_BOOK_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }).catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_RETURN_BOOK,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+&nbsp;
+/**
+ * Post a book
+ * @param {object} data
+ * @return {void}
+ */
+export const postBook = data =&gt; (dispatch) =&gt; {
+  dispatch({ type: POST_BOOK });
+  return axios.post(`${url}/books`, data)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        return dispatch({
+          type: POST_BOOK_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }).catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_POST_BOOK,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+&nbsp;
+/**
+ * Delete a book
+ * @param {object} data
+ * @return {void}
+ */
+export const deleteBook = data =&gt; (dispatch) =&gt; {
+  dispatch({ type: DELETE_BOOK });
+  return axios.put(`${url}/books/${data}/delete`)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        return dispatch({
+          type: DELETE_BOOK_SUCCESSFUL,
+          payLoad: response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }).catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_DELETE_BOOK,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+&nbsp;
+/**
+ * Edit a book
+ * @param {object} data
+ * @param {number} bookId
+ * @return {void}
+ */
+export const editBook = (data, bookId) =&gt; (dispatch) =&gt; {
+  dispatch({ type: EDIT_BOOK });
+  return axios.put(`${url}/books/${bookId}`, data)
+    .then((response) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (response) {
+        return dispatch({
+          type: EDIT_BOOK_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    })
+    .catch((error) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (error) {
+        return dispatch({
+          type: FAILED_TO_EDIT_BOOK,
+          payload: error.response.data,
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    });
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jan 16 2018 15:36:41 GMT+0100 (WAT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

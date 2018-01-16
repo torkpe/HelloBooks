@@ -10,34 +10,12 @@ import Books from './Books.jsx';
  * @class AllBorrowed
  * @classdesc returns the all borrowed books of the user
  */
-class AllBorrowed extends Component {
-  /**
-   * @param {object} props
-   * @return {undefined}
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      isProperties: true,
-    };
-  }
+export class AllBorrowed extends Component {
   /**
    * @return {undefined}
    */
   componentWillMount() {
     this.props.getAllBorrowed(this.props.auth.user.id);
-  }
-  /**
-   *
-   * @param {object} nextProps
-   * @return {undefined}
-   */
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.getAllBorrowedBooks) {
-      this.setState({
-        isProperties: false,
-      });
-    }
   }
   /**
    * @return {undefined}
