@@ -23,6 +23,7 @@ const Landing = props => (
           <Link to="/signin">
             <button
             name="getStarted"
+            id="getStarted"
             className={mdlStyle}>
                 Get Started
             </button>
