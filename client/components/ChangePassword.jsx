@@ -11,7 +11,7 @@ import PasswordForm from './PasswordForm.jsx';
  * @class ChangePassword
  * @classdesc returns ChangePassword component
  */
-class ChangePassword extends Component {
+export class ChangePassword extends Component {
   /**
    * @param {object} props
    * @returns {undefined}
@@ -97,7 +97,7 @@ class ChangePassword extends Component {
                 <input
                 type="password"
                 onChange={this.onChange}
-                name="oldPassword" id="password5"
+                name="oldPassword" id="oldPassword"
                 placeholder="Old Password"
               />
               </div>

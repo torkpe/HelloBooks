@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AllBorrowed /> renders <AllBorrowed /> component 1`] = `
+<div
+  className="mdl-grid"
+>
+  <div
+    className="mdl-cell mdl-cell--1-col"
+  />
+  <div
+    className="mdl-cell mdl-cell--10-col"
+  >
+    <div
+      className="mdl-grid"
+    >
+      <div
+        className="mdl-cell mdl-cell--2-col"
+      />
+    </div>
+    <div
+      className="ask"
+    >
+      <h5>
+         All Borrowed Books 
+      </h5>
+      <hr />
+    </div>
+    <div
+      className="ask"
+    />
+    <div
+      className="mdl-grid"
+    >
+      <div
+        className="contents"
+      >
+        <h5>
+          You have no record of borrowed books
+        </h5>
+      </div>
+    </div>
+    <div
+      className="mdl-grid "
+    >
+      <div
+        className="mdl-cell mdl-cell--2-col"
+      />
+    </div>
+  </div>
+  <div
+    className="mdl-cell mdl-cell--1-col"
+  />
+</div>
+`;

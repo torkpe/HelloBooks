@@ -11,7 +11,7 @@ const PasswordForm = props => (
       <input
       type="password"
       onChange={props.onChange}
-      name="password" id="password1"
+      name="password" id="newPassword"
       placeholder="Password"
       />
     </div>
@@ -20,7 +20,7 @@ const PasswordForm = props => (
       <input
       type="password"
       onChange={props.onChange}
-      name="confirmPassword" id="password"
+      name="confirmPassword" id="confirmPassword"
       placeholder="Confirm Password"
       />
     </div>
