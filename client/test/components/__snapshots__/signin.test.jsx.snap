@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Signin /> renders <Signin /> component 1`] = `
+<Signin
+  clearSigninState={[MockFunction]}
+  signin={
+    Object {
+      "errors": Object {
+        "message": "mbnmn m,mm",
+      },
+      "isLoading": false,
+      "successfullySignedin": Object {
+        "myToken": "yggjbhbjbhbjbhjbhjbhjvbhjvvhjvh",
+      },
+    }
+  }
+  userSignin={[MockFunction]}
+>
+  <div
+    className="mdl-grid"
+  >
+    <div
+      className="contents"
+    >
+      <div
+        className="card-enlarge form-card mdl-card mdl-shadow--3dp"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <h5>
+             Sign in
+          </h5>
+          <EmailForm
+            onChange={[Function]}
+          >
+            <div
+              className="card-content card-wrapper input-wrapper"
+            >
+              <input
+                id="email"
+                name="email"
+                onChange={[Function]}
+                placeholder="Email"
+                type="email"
+              />
+            </div>
+          </EmailForm>
+          <div
+            className="card-content card-wrapper input-wrapper"
+          >
+            <input
+              id="password"
+              name="password"
+              onChange={[Function]}
+              placeholder="Password"
+              type="password"
+            />
+          </div>
+          <button
+            className="
+    mdl-button
+    mdl-js-button
+    mdl-button--raised
+    mdl-button--colored"
+            disabled={false}
+            id="button"
+            name="signin"
+          >
+            Sign in
+          </button>
+        </form>
+        <div
+          className="mdl-card__supporting-text"
+        >
+          Don't Have an Account yet? Create one Below
+        </div>
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/signup"
+        />
+        <div
+          className="mdl-card__supporting-text"
+        >
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/forgot-password"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</Signin>
+`;

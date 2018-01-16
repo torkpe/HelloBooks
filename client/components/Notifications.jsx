@@ -3,19 +3,12 @@ import { connect } from 'react-redux';
 
 import SingleNotification from './Notification.jsx';
 import { getNotification } from '../actions/notification';
-import { getAllBorrowed } from '../actions/history';
 
 /**
  * @class Notifications
  * @classdesc returns Notificarions component
  */
-class Notifications extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      borrows: [],
-    };
-  }
+export class Notifications extends Component {
   /**
    * @returns {undefined}
    */
@@ -25,17 +18,6 @@ class Notifications extends Component {
       star,
       id
     );
-  }
-  /**
-   * @param {object} nextProps
-   * @return {undefined}
-   */
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.borrowedBooks) {
-      this.setState({
-        borrows: nextProps.borrowedBooks,
-      });
-    }
   }
   /**
    * @return {XML} JSX
@@ -55,8 +37,8 @@ class Notifications extends Component {
           </div>
           {notifications && notifications.length > 0 ?
           <table className="table-bordered">
-            {notifications.map(notification => (<SingleNotification
-              key={notification.id}
+            {notifications.map((notification, index) => (<SingleNotification
+              key={index}
               notification={notification}
               userId={this.props.auth.user.user}
               isAdmin={this.props.auth.user.isAdmin}
@@ -79,9 +61,7 @@ class Notifications extends Component {
 const mapStateToProps = state => ({
   notifications: state.getNotification.notifications,
   auth: state.auth,
-  borrowedBooks: state.getAllBorrowed.borrowedBooks,
 });
 export default connect(mapStateToProps, {
   getNotification,
-  getAllBorrowed,
 })(Notifications);

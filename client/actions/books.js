@@ -11,7 +11,7 @@ const {
   CLEAR_BORROW_BOOK_STATE,
   GET_BOOK,
   GET_BOOK_SUCCESSFUL,
-  FAILED_TO_GETBOOK,
+  FAILED_TO_GET_BOOK,
   CLEAR_SINGLE_BOOK_STATE,
   CLEAR_CREATED_BOOK_STATE,
   CLEAR_BOOKS_STATE,
@@ -94,7 +94,7 @@ export const getABook = id => (dispatch) => {
     }).catch((error) => {
       if (error) {
         return dispatch({
-          type: FAILED_TO_GETBOOK,
+          type: FAILED_TO_GET_BOOK,
           payload: error.response.data,
         });
       }

@@ -11,7 +11,7 @@ import EmailForm from './EmailForm.jsx';
  * @class Signup
  * @classdesc returns Signin component
  */
-class Signup extends Component {
+export class Signup extends Component {
   /**
    * @param {object} props
    * @return {undefined}
@@ -55,7 +55,6 @@ class Signup extends Component {
    */
   render() {
     const { isLoading } = this.props.signup;
-    const span = <span />;
     const mdlButtonStyle = `
     mdl-button
     mdl-js-button
@@ -73,8 +72,9 @@ class Signup extends Component {
               />
               <button
                 disabled={isLoading}
+                name="signup"
                 className={mdlButtonStyle}
-                id="button">
+                id="button1">
                 Sign up
               </button>
             </form>
@@ -83,6 +83,7 @@ class Signup extends Component {
             </div>
             <Link to="/signin">
               <button
+              name="signin"
               className="mdl-button mdl-js-button mdl-button--raised"
               id="button">
                 Sign in
