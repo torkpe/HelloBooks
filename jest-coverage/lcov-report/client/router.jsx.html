@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for client/router.jsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">client</a> router.jsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/2</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import ReduxToastr from 'react-redux-toastr';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
+&nbsp;
+import Main from './components/Main.jsx';
+import Landing from './components/Landing.jsx';
+import Signin from './components/Signin.jsx';
+import Signup from './components/Signup.jsx';
+import Redirect from './components/Redirect.jsx';
+import Confirm from './components/Confirm.jsx';
+import Home from './components/Home.jsx';
+import setAuth from './utils/setAuthToken';
+import rootReducer from './reducers/index';
+import { setCurrentUser } from './actions/user';
+import { Authenticate, isAlreadySignedin, isUser, isAdmin } from './utils/requireAuth.jsx';
+import uploadBook from './components/UploadBook.jsx';
+import Restrict from './components/Restrict.jsx';
+import Settings from './components/Settings.jsx';
+import userHistory from './components/UserHistory.jsx';
+import AllBorrowed from './components/AllBorrowed.jsx';
+import AllNotReturned from './components/AllNotReturned.jsx';
+import notification from './components/Notifications.jsx';
+import SingleBook from './components/SingleBook.jsx';
+import Pdf from './components/Pdf.jsx';
+import SetPassword from './components/ChangePassword.jsx';
+import UpdateBook from './components/EditBook.jsx';
+import ForgotPassword from './components/ForgotPassword.jsx';
+import ResetPassword from './components/ResetPassword.jsx';
+import configureStore from './store/store';
+&nbsp;
+const store = configureStore();
+&nbsp;
+const router = (
+  &lt;Provider store={store}&gt;
+    &lt;div&gt;
+      &lt;Router history={browserHistory}&gt;
+        &lt;Route path="/" component={Main}&gt;
+          &lt;IndexRoute component={isAlreadySignedin(Landing)} /&gt;
+          &lt;Route path="/signup" component={isAlreadySignedin(Signup)} /&gt;
+          &lt;Route path="/signin" component={isAlreadySignedin(Signin)} /&gt;
+          &lt;Route path="/redirect" component={isAlreadySignedin(Redirect)} /&gt;
+          &lt;Route path="/confirmation/:key" component={isAlreadySignedin(Confirm)} /&gt;
+          &lt;Route path="/home" component={Authenticate(Home)} /&gt;
+          &lt;Route path="/upload-book" component={Authenticate(isAdmin(uploadBook))} /&gt;
+          &lt;Route path="/book/:id" component={Authenticate(SingleBook)} /&gt;
+          &lt;Route path="/settings" component={Authenticate(isUser(Settings))} /&gt;
+          &lt;Route path="/all-borrowed-books" component={Authenticate(isUser(AllBorrowed))} /&gt;
+          &lt;Route path="/history" component={Authenticate(isUser(AllNotReturned))} /&gt;
+          &lt;Route path="/notifications" component={Authenticate(notification)} /&gt;
+          &lt;Route path="/single/:id" component={Authenticate(SingleBook)} /&gt;
+          &lt;Route path="/read-book/:key" component={Authenticate((Pdf))} /&gt;
+          &lt;Route path="/restrict" component={Authenticate((Restrict))} /&gt;
+          &lt;Route path="/set-password" component={Authenticate((SetPassword))} /&gt;
+          &lt;Route path="/edit-book/:id" component={Authenticate((UpdateBook))} /&gt;
+          &lt;Route path="/forgot-password" component={isAlreadySignedin(ForgotPassword)} /&gt;
+          &lt;Route path="/reset-password/:key" component={isAlreadySignedin(ResetPassword)} /&gt;
+        &lt;/Route&gt;
+      &lt;/Router&gt;
+      &lt;ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates
+        preventOpenDuplicates
+        position="top-left"
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        progressBar
+      /&gt;
+    &lt;/div&gt;
+  &lt;/Provider&gt;
+);
+export default router;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jan 15 2018 16:59:36 GMT+0100 (WAT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

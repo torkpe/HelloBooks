@@ -3,6 +3,7 @@ import { Link, browserHistory } from 'react-router';
 import propTypes from 'prop-types';
 import { toastr } from 'react-redux-toastr';
 
+import EmailForm from './EmailForm.jsx';
 import { connect } from 'react-redux';
 import { userSignin, clearSigninState } from '../actions/user';
 
@@ -10,7 +11,7 @@ import { userSignin, clearSigninState } from '../actions/user';
  * @class Signin
  * @classdesc returns Signin component
  */
-class Signin extends Component {
+export class Signin extends Component {
   /**
    * @param {object} props
    */
@@ -68,15 +69,9 @@ class Signin extends Component {
           <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
               <h5> Sign in</h5>
-              <div
-              className="card-content card-wrapper input-wrapper">
-                <input
-                type="email"
-                onChange={this.onChange}
-                name="email" id="email"
-                placeholder="Email"
-                />
-              </div>
+              <EmailForm
+                onChange = {this.onChange}
+              />
               <div
               className="card-content card-wrapper input-wrapper">
                 <input
