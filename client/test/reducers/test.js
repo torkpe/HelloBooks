@@ -212,6 +212,17 @@ describe('Books', () => {
       response: deleteBookResponse
     });
   });
+  it('should return an object for unsuccessful book delete', () => {
+    expect(deleteBook(deleteBookState, {
+      type: types.FAILED_TO_DELETE_BOOK,
+      payload: deleteBookResponse,
+      isLoading: false,
+    })).toEqual({
+      error: deleteBookResponse,
+      isLoading: false,
+      response: {}
+    });
+  });
   it('should return an object for successful book update', () => {
     expect(editBook(editBookState, {
       type: types.EDIT_BOOK_SUCCESSFUL,
@@ -277,7 +288,7 @@ describe('Get pdf', () => {
       errors: ''
     });
   });
-  it('update state with failure response if password set is unsuccessful', () => {
+  it('update state with failure response if get pdf is unsuccessful', () => {
     expect(getPdf(getPdfState, {
       type: types.FAILED_TO_GET_PDF,
       payload: errorMessage,

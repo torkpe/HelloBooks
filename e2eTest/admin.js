@@ -59,7 +59,7 @@ module.exports = {
       .waitForElementVisible('button[name=updateBook]', 1000)
       .click('button[name=updateBook]')
       .pause(3000)
-      .url('http://localhost:8081/single/1')
+      .url('http://localhost:8081/single/3')
       .pause(1000)
       .waitForElementVisible('span[name=deleteBook]', 1000)
       .click('span[name=deleteBook]')

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Notifications /> renders <Notifications /> component 1`] = `
+<div
+  className="mdl-grid"
+>
+  <div
+    className="contents"
+  >
+    <div
+      className="ask"
+    >
+      <h5>
+        Notifications
+      </h5>
+    </div>
+    <table
+      className="table-bordered"
+    >
+      <SingleNotification
+        key="0"
+        notification={
+          Object {
+            "bookId": 2,
+            "message": "fcjhkjhgcnbvnm,",
+          }
+        }
+      />
+      <SingleNotification
+        key="1"
+        notification={
+          Object {
+            "bookId": 3,
+            "message": "fcjhkjhgcnbvnm,",
+          }
+        }
+      />
+      <SingleNotification
+        key="2"
+        notification={
+          Object {
+            "bookId": 4,
+            "message": "fcjhkjhgcnbvnm,",
+          }
+        }
+      />
+    </table>
+  </div>
+</div>
+`;
