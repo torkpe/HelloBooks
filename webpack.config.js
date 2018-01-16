@@ -1,46 +1,34 @@
 const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: [
     path.join(__dirname, 'client/index.jsx'),
   ],
   output: {
-    path: '/',
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/'
   },
-  devtool: 'cheap-eval-source-map',
   plugins: [
-    new Dotenv({
-      path: './.env',
-      safe: false
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'server/public/index.html'),
+      filename: 'index.html'
     })
   ],
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: [/node_modules/]
-      },
-      {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        loaders: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/i,
-        loader: 'file-loader'
-      },
+      { test: /\.js$/, loader: 'babel-loader', exclude: [/node_modules/] },
+      { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
+      { test: /\.scss$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.(png|jpg|gif|svg)$/i, loader: 'file-loader' },
     ],
   },
   node: {
