@@ -12,7 +12,7 @@ import Books from './Books.jsx';
  * @class AllNotReturned
  * @classdesc returns the all borrowed books yet to be returned by the user
  */
-class AllNotReturned extends Component {
+export class AllNotReturned extends Component {
   /**
    * @return {undefined}
    */
