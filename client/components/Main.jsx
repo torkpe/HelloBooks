@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
-import './Main.css';
-import './mdl/material.min.css';
+import '../styles/Main.scss';
+import '../styles/mdl/material.min.css';
 import { logout } from '../actions/user';
 import { notifications,
   home,
@@ -16,7 +16,7 @@ import { notifications,
  * @class Main
  * @classdesc rreturns wrapper for other components
  */
-class Main extends Component {
+export class Main extends Component {
   /**
    * @param {object} event
    * @return {undefined}
@@ -195,12 +195,6 @@ class Main extends Component {
         <main className="mdl-layout__content">
           {React.cloneElement(this.props.children, this.props)}
         </main>
-        <footer className="mdl-mini-footer">
-          <span className="mdl-mini-footer--left-section">
-            <span className="mdl-logo">Hello-Books</span>
-            <ul className="mdl-mini-footer--link-list" />
-          </span>
-        </footer>
       </div>
     );
   }
