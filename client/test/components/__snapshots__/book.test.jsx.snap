@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> renders <Home /> component 1`] = `
+<div
+  className="mdl-cell mdl-cell--4-col"
+>
+  <div
+    className="demo-card-square mdl-card mdl-shadow--2dp home-card contents"
+  >
+    <div
+      className="mdl-card__title mdl-card--expand"
+    >
+      <h2
+        className="mdl-card__title-text"
+      >
+        eze goes to school
+      </h2>
+    </div>
+    <img
+      alt="Book cover"
+      src="xcgvhjkhcvbkjhgcvbjhcv"
+    />
+    <div
+      className="mdl-card__supporting-text"
+    >
+      a boy from the village who finally went to school
+    </div>
+    <div
+      className="mdl-card__actions mdl-card--border"
+    >
+      <Link
+        className="
+    mdl-button
+    mdl-button--colored
+    mdl-js-button
+    mdl-js-ripple-effect
+  "
+        onlyActiveOnIndex={false}
+        style={Object {}}
+        to="single/1"
+      >
+        Details
+      </Link>
+    </div>
+  </div>
+</div>
+`;

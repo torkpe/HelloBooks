@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import { getABook, editBook } from '../actions/books';
 import uploader from '../actions/upload';
@@ -9,7 +10,7 @@ import uploader from '../actions/upload';
  * @class Confirm
  * @classdesc returns component to edit book
  */
-class updateBook extends Component {
+export class UpdateBook extends Component {
   /**
    * @param {object} props
    */
@@ -60,6 +61,7 @@ class updateBook extends Component {
         isPdfSet: false,
         isPostPdf: false
       });
+      toastr.success('The title', 'Pdf updated');
     }
     if (cover) {
       this.setState({
@@ -67,6 +69,7 @@ class updateBook extends Component {
         isCoverSet: false,
         isPostCover: false
       });
+      toastr.success('The title', 'Cover updated');
     }
     if (cover && pdf) {
       this.setState({
@@ -83,7 +86,8 @@ class updateBook extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { book, error } = this.props.updatedDetail;
     if (prevProps.updatedDetail.book.updatedBook !== book.updatedBook) {
-      return toastr.success('The title', 'Book updated');
+      toastr.success('The title', 'Book updated');
+      return browserHistory.push('/home')
     }
     if (prevProps.updatedDetail.error !== error) {
       return toastr.error('The title', error.message);
@@ -303,4 +307,4 @@ const mapStateToProps = state => ({
   updatedDetail: state.editBook,
 });
 
-export default connect(mapStateToProps, { getABook, uploader, editBook })(updateBook);
+export default connect(mapStateToProps, { getABook, uploader, editBook })(UpdateBook);
