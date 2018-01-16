@@ -12,7 +12,8 @@
         "browser": true,
         "node": true,
         "jquery": true,
-        "mocha": true
+        "mocha": true,
+        "jest": true
     },
     "rules": {
         "one-var": 0,

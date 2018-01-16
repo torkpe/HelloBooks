@@ -28,7 +28,7 @@ const initialState = {
  * @class UploadBook
  * @classdesc returns UploadBook component
  */
-class UploadBook extends Component {
+export class UploadBook extends Component {
   /**
    * @param {object} props
    * @return {undefined}
