@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SingleNotification /> renders <SingleNotification /> component 1`] = `
+<tbody>
+  <tr>
+    <td
+      className="notifications"
+    >
+      eze goes to school
+      <span
+        className="notifyLink"
+      >
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/single/1"
+        >
+          View Book
+        </Link>
+      </span>
+    </td>
+  </tr>
+</tbody>
+`;

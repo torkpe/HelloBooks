@@ -11,7 +11,7 @@ import { userConfirmationRequest, clearUserConfirmationState } from '../actions/
  * @class Confirm
  * @classdesc returns render component
  */
-class Confirm extends Component {
+export class Confirm extends Component {
   /**
    * @param {object} props
    */
@@ -60,8 +60,8 @@ class Confirm extends Component {
    * @param {object} event
    * @return {undefined}
    */
-  conmponentWillUnmount() {
-    this.props.clearUserConfirmState();
+  componentWillUnmount() {
+    this.props.clearUserConfirmationState();
   }
   /**
    * renders confirm component

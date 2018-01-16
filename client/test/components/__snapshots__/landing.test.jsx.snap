@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Landing /> renders <Landing /> component 1`] = `
+<div>
+  <div
+    className="page-content body overlay"
+  >
+    <div
+      className="mdl-grid"
+    >
+      <div
+        className="content landing-title"
+      >
+        <h1>
+           HelloBooks
+        </h1>
+        <hr />
+        <h3
+          id="green"
+        >
+          ...read a book today
+        </h3>
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/signin"
+        >
+          <button
+            className="
+  mdl-button
+  mdl-js-button
+  mdl-button--raised
+  mdl-button--colored
+"
+            id="getStarted"
+            name="getStarted"
+          >
+            Get Started
+          </button>
+        </Link>
+      </div>
+    </div>
+  </div>
+</div>
+`;

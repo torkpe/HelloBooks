@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignUp /> renders <SignUp /> component 1`] = `
+<Signup
+  clearSignupState={[MockFunction]}
+  signup={
+    Object {
+      "errors": Object {
+        "message": "fdghjk",
+      },
+      "isLoading": false,
+      "successfullySignedup": Object {
+        "message": "mvhbvhjbbbb",
+      },
+    }
+  }
+  successfullySignedup={
+    Object {
+      "message": "mvhbvhjbbbb",
+    }
+  }
+  userSignup={[MockFunction]}
+>
+  <div
+    className="mdl-grid"
+  >
+    <div
+      className="contents"
+    >
+      <div
+        className="card-enlarge form-card mdl-card mdl-shadow--3dp"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <h5>
+            Signup
+          </h5>
+          <EmailForm
+            onChange={[Function]}
+          >
+            <div
+              className="card-content card-wrapper input-wrapper"
+            >
+              <input
+                id="email"
+                name="email"
+                onChange={[Function]}
+                placeholder="Email"
+                type="email"
+              />
+            </div>
+          </EmailForm>
+          <button
+            className="
+    mdl-button
+    mdl-js-button
+    mdl-button--raised
+    mdl-button--colored
+    "
+            disabled={false}
+            id="button1"
+            name="signup"
+          >
+            Sign up
+          </button>
+        </form>
+        <div
+          className="mdl-card__supporting-text"
+        >
+          Already have an account? Sign in below
+        </div>
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/signin"
+        />
+      </div>
+    </div>
+  </div>
+</Signup>
+`;
