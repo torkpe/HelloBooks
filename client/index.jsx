@@ -21,7 +21,6 @@ import { Authenticate, isAlreadySignedin, isUser, isAdmin } from './utils/requir
 import uploadBook from './components/UploadBook.jsx';
 import Restrict from './components/Restrict.jsx';
 import Settings from './components/Settings.jsx';
-import userHistory from './components/UserHistory.jsx';
 import AllBorrowed from './components/AllBorrowed.jsx';
 import AllNotReturned from './components/AllNotReturned.jsx';
 import notification from './components/Notifications.jsx';
