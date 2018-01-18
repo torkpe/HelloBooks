@@ -9,25 +9,29 @@ import { getBooks,
 import Books from './Books.jsx';
 
 /**
- * @class AllNotReturned
- * @classdesc returns the all borrowed books yet to be returned by the user
+ * @classdesc Returns the all borrowed books yet to be returned by the user
  */
 export class AllNotReturned extends Component {
   /**
+   * @description React life cycle
+   * 
    * @return {undefined}
    */
   componentWillMount() {
     this.props.allNotReturned(this.props.auth.user.id);
   }
   /**
+   * @description React life cycle
+   * 
    * @return {undefined}
    */
   componentWillUnmount() {
     this.props.clearBooksState();
   }
   /**
-   * renders AllNotRendered component
-   *@return {XML} JSX
+   * @description Renders AllNotRendered component
+   * 
+   * @return {XML} JSX
    */
   render() {
     const books = this.props.notReturned.notReturned;
@@ -68,10 +72,14 @@ export class AllNotReturned extends Component {
     );
   }
 }
+
 /**
+ * @description Get state from store
  *
- * @param {oject} state
- * @return {object} props
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   notReturned: state.allNotReturned,

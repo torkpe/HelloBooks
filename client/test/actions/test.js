@@ -24,7 +24,7 @@ import {
   clearSingleBookState,
 } from '../../actions/books';
 import {
-  setPassword
+  changePassword
 } from '../../actions/changePassword';
 import uploader from '../../actions/upload';
 import getPdf from '../../actions/getPdf';
@@ -711,7 +711,7 @@ describe('THUNK FUNCTIONS', () => {
     });
   it('should create PASSWORD_SUCCESSFULLY_SET when user changes password', async (done) => {
     const changePasswordResponse = mockData.resetPasswordResponse
-    moxios.stubRequest(apiEndPoints.setPassword, {
+    moxios.stubRequest(apiEndPoints.changePassword, {
       status: 200,
       response: changePasswordResponse
     });
@@ -724,7 +724,7 @@ describe('THUNK FUNCTIONS', () => {
       confirmPassword: 'silver'
     };
     // Dispatch
-    await store.dispatch(setPassword(2,password))
+    await store.dispatch(changePassword(2,password))
       .then(() => {
         const actions = store.getActions();
         expect(actions[61].type).to.equal(expectedAction.type);
@@ -733,7 +733,7 @@ describe('THUNK FUNCTIONS', () => {
     });
   it('should create FAILED_TO_SET_PASSWORD change password fails', async (done) => {
     const changePasswordResponse = mockData.resetPasswordResponse
-    moxios.stubRequest(apiEndPoints.setPassword, {
+    moxios.stubRequest(apiEndPoints.changePassword, {
       status: 400,
       response: changePasswordResponse
     });
@@ -746,7 +746,7 @@ describe('THUNK FUNCTIONS', () => {
       confirmPassword: 'silver'
     };
     // Dispatch
-    await store.dispatch(setPassword(2,password))
+    await store.dispatch(changePassword(2,password))
       .then(() => {
         const actions = store.getActions();
         expect(actions[63].type).to.equal(expectedAction.type);

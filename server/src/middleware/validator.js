@@ -1,9 +1,11 @@
 export default {
   /**
-   *
+   * @description Validate book
+   * 
    * @param {object} request
    * @param {object} response
    * @param {function} next
+   * 
    * @return {object} response
    * @return {function} function
    */

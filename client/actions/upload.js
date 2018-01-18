@@ -12,9 +12,11 @@ const {
   UPLOAD_PDF_SUCCESSFUL
 } = types;
 /**
- * upload file
+ * @description Upload file to cloudinary
+ * 
  * @param {object} data
- * @return {object} uploadRequest
+ * 
+ * @return {object} UploadRequest
  */
 const upload = (data) => {
   const cloudName = 'hellobooks';
@@ -37,9 +39,13 @@ const upload = (data) => {
   return uploadRequest;
 };
 /**
+ * @description Handle file upload
+ * 
  * @param {object} data
+ * 
  * @param {string} uploadType
- * @return {void}
+ * 
+ * @return {object} Dispatch
  */
 const uploader = (data, uploadType) => (dispatch) => {
   if (uploadType === 'cover') {

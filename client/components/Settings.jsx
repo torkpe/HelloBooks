@@ -10,12 +10,15 @@ import {
 } from '../actions/updateUser';
 
 /**
- * @class Settings
  * @classdesc returns Settings component
  */
 class Settings extends Component {
   /**
+   * @description Created an instance of Settings
+   * 
    * @param {object} props
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -28,13 +31,18 @@ class Settings extends Component {
     this.onChange = this.onChange.bind(this);
   }
   /**
-   * @returns {undefined}
+   * @description React life cycle
+   * 
+   * @return {undefined}
    */
   componentWillMount() {
     this.props.getUser(this.props.auth.user.id);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
+   * 
    * @return {undefined}
    */
   componentWillReceiveProps(nextProps) {
@@ -59,13 +67,18 @@ class Settings extends Component {
     }
   }
   /**
+   * @description React life cycle
+   * 
    * @return {undefined}
    */
   componentWillUnmount() {
     this.props.clearUpdateUserState();
   }
   /**
+   * @description Read input form
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
@@ -75,7 +88,10 @@ class Settings extends Component {
     });
   }
   /**
+   * @description Handles form submission
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -140,8 +156,12 @@ class Settings extends Component {
   }
 }
 /**
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   auth: state.auth,

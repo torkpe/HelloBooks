@@ -37,8 +37,8 @@ router.put(
 );
 // Api to set password
 router.put(
-  '/users/set-password/:id', authorize.checkAuthentication, authorize.authorizeUser,
-  userController.setPassword
+  '/users/change-password/:id', authorize.checkAuthentication, authorize.authorizeUser,
+  userController.changePassword
 );
 // update username
 router.put(

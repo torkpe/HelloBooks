@@ -10,9 +10,12 @@ const {
   CLEAR_UPDATE_USER_STATE
 } = types;
 /**
+ * @description Update user details
+ * 
  * @param {umber} userId
  * @param {object} body
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 const updateUser = (userId, body) => (dispatch) => {
   dispatch({
@@ -38,6 +41,8 @@ const updateUser = (userId, body) => (dispatch) => {
     });
 };
 /**
+ * @description Clear update user stated
+ * 
  * @return {undefined}
  */
 const clearUpdateUserState = () => dispatch => dispatch({

@@ -3,10 +3,12 @@ import app from '../server';
 
 export default {
   /**
-   *
+   * @description Check if user is authenticated
+   * 
    * @param {object} request
    * @param {object} response
    * @param {function} next
+   * 
    * @return {object} response
    * @return {function} next
    */
@@ -30,10 +32,12 @@ export default {
     }
   },
   /**
-   *
+   * @description Check if user is authorized to carry out an action
+   * 
    * @param {object} request
    * @param {object} response
    * @param {function} next
+   * 
    * @return {function} next
    * @return {object} response
    */
@@ -47,10 +51,12 @@ export default {
     }
   },
   /**
-   *
+   * @description Check if admin is authorized to carry out an action
+   * 
    * @param {object} request
    * @param {object} response
    * @param {function} next
+   * 
    * @return {function} next
    * @return {object} response
    */

@@ -8,8 +8,10 @@ const mdlStyle = `
   mdl-button--colored
 `;
 /**
- * returns the Landing page
+ * @description returns the Landing page
+ * 
  * @param {object} props
+ * 
  * @return {XML} jsx
  */
 const Landing = props => (

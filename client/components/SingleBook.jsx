@@ -12,10 +12,16 @@ import {
 } from '../actions/books';
 
 /**
- * @class Book
  * @classdesc returns Book component
  */
 class Book extends Component {
+  /**
+   * @description Created an instance of Settings
+   * 
+   * @param {object} props
+   * 
+   * @returns {undefined}
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +29,8 @@ class Book extends Component {
     };
   }
   /**
+   * @description React life cycle
+   * 
    * @return {undefined}
    */
   componentDidMount() {
@@ -32,7 +40,10 @@ class Book extends Component {
     }
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
+   * 
    * @return {undefined}
    */
   componentWillReceiveProps(nextProps) {
@@ -68,6 +79,8 @@ class Book extends Component {
     }
   }
   /**
+   * @description React life cycle
+   * 
    * @return {undefined}
    */
   componentWillUnmount() {
@@ -76,12 +89,15 @@ class Book extends Component {
     this.props.clearBorrowBookState();
   }
   /**
+   * @description Renders component
    * @return {XML} JSX
    */
   render() {
     const { fetching, book } = this.props.book;
     const { userId } = this.props;
     /**
+     * @description Handles borrow book action
+     * 
      * @return {undefined}
      */
     const borrow = () => {
@@ -96,12 +112,16 @@ class Book extends Component {
       });
     };
     /**
+     * @description Handles delete book action
+     * 
      * @return {undefined}
      */
     const deleteABook = () => {
       this.props.deleteBook(book.id);
     };
     /**
+     * @description Handles return book action
+     * 
      * @return {undefined}
      */
     const returnBorrowed = () => {
@@ -184,9 +204,12 @@ class Book extends Component {
   }
 }
 /**
- * returns props
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   book: state.getABook,

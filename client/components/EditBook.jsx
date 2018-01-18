@@ -7,12 +7,15 @@ import { getABook, editBook } from '../actions/books';
 import uploader from '../actions/upload';
 
 /**
- * @class Confirm
  * @classdesc returns component to edit book
  */
 export class UpdateBook extends Component {
   /**
+   * @description Created an instance of UpdateBook
+   * 
    * @param {object} props
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -32,14 +35,19 @@ export class UpdateBook extends Component {
     this.onPostPdf = this.onPostPdf.bind(this);
   }
   /**
-   * @return {undefined}
+   * @description React life cycle
+   * 
+   * @returns {undefined}
    */
   componentWillMount() {
     this.props.getABook(this.props.params.id);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
-   * @return {undefined}
+   * 
+   * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
     const { book, cover, pdf } = nextProps;
@@ -79,8 +87,12 @@ export class UpdateBook extends Component {
     }
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} prevProps
+   * 
    * @param {object} prevState
+   * 
    * @return {undefined}
    */
   componentDidUpdate(prevProps, prevState) {
@@ -94,7 +106,10 @@ export class UpdateBook extends Component {
     }
   }
   /**
+   * @description Handle form submission
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -105,7 +120,10 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Read input from form
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
@@ -115,7 +133,10 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Handle posting of cover
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onPostCover(event) {
@@ -127,7 +148,10 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Handle posting of cover
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onPostPdf(event) {
@@ -139,7 +163,10 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Handle file selection for cover
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   coverChange(event) {
@@ -151,6 +178,7 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Handle file selection for pdf
    * @param {object} event
    * @return {undefined}
    */
@@ -295,9 +323,12 @@ export class UpdateBook extends Component {
 }
 
 /**
- * returns props
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   admin: state.createBook,

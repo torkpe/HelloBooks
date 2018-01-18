@@ -8,13 +8,15 @@ import { userSignup, clearSignupState } from '../actions/user';
 import EmailForm from './EmailForm.jsx';
 
 /**
- * @class Signup
  * @classdesc returns Signin component
  */
 export class Signup extends Component {
   /**
+   * @description Created an instance of Settings
+   * 
    * @param {object} props
-   * @return {undefined}
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -22,7 +24,10 @@ export class Signup extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
+   * 
    * @return {undefined}
    */
   componentWillReceiveProps(nextProps) {
@@ -35,14 +40,20 @@ export class Signup extends Component {
     }
   }
   /**
+   * @description Read form input
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
+   * @description Handle form submission
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -51,6 +62,8 @@ export class Signup extends Component {
     this.props.userSignup(this.state);
   }
   /**
+   * @description Render component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -99,8 +112,12 @@ Signup.propTypes = {
   userSignup: propTypes.func.isRequired,
 };
 /**
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   signup: state.userSignup,

@@ -13,9 +13,12 @@ const updateUserState = {
   response: {},
 };
 /**
+ * @description Update user function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export default (state = updateUserState, action = {}) => {
   switch (action.type) {

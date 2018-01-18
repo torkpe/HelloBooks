@@ -15,9 +15,12 @@ const initialState = {
   uploaded: "",
 };
 /**
+ * @description Upload cover function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const uploadCover = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -45,8 +48,11 @@ export const uploadCover = (state = initialState, action = {}) => {
   }
 };
 /**
+ * @description Upload pdf function for state
+ * 
  * @param {object} state
  * @param {object} action
+ * 
  * @return {object} state
  */
 export const uploadPdf = (state = initialState, action = {}) => {

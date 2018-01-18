@@ -7,17 +7,20 @@ const {
   CLEAR_SET_PASSWORD_STATE
 } = types;
 
-const setPasswordState = {
+const changePasswordState = {
   isLoading: false,
   errors: {},
   response: {},
 };
 /**
+ * @description Change password function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
-export default (state = setPasswordState, action = {}) => {
+export default (state = changePasswordState, action = {}) => {
   switch (action.type) {
     case SET_PASSWORD: {
       return {

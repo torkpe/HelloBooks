@@ -8,12 +8,15 @@ import { resetUserPassword,
 import PasswordForm from './PasswordForm.jsx';
 
 /**
- * @class ResetPassword
  * @classdesc returns ResetPassword component
  */
 class ResetPassword extends Component {
   /**
+   * @description Created an instance of ResetPassword
+   * 
    * @param {object} props
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -26,8 +29,11 @@ class ResetPassword extends Component {
     this.onChange = this.onChange.bind(this);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
-   * @return {undefined}
+   * 
+   * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
     const { error, successfullyResetPassword } = nextProps.passwordReset;
@@ -46,13 +52,18 @@ class ResetPassword extends Component {
     }
   }
   /**
-   * @return {undefined}
+   * @description React life cycle
+   * 
+   * @returns {undefined}
    */
   componentWillUnmount() {
     this.props.clearResetPasswordState();
   }
   /**
+   * @description Read input from form
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
@@ -61,7 +72,10 @@ class ResetPassword extends Component {
     });
   }
   /**
+   * @description Handle form submit
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -105,8 +119,12 @@ class ResetPassword extends Component {
   }
 }
 /**
- * @param {object} state
- * @return {object} prop
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   auth: state.auth,
