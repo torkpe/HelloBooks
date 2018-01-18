@@ -504,7 +504,7 @@ describe('User', () => {
   });
   it('should get message when password is successfully updated', (done) => {
     chai.request(app)
-      .put(`/api/v1/users/set-password/${userId}`)
+      .put(`/api/v1/users/change-password/${userId}`)
       .set('x-access-token', token)
       .set('Accept', 'application/json')
       .send({
@@ -560,7 +560,7 @@ describe('User', () => {
   });
   it('should get an error message for wrong password', (done) => {
     chai.request(app)
-      .put(`/api/v1/users/set-password/${userId}`)
+      .put(`/api/v1/users/change-password/${userId}`)
       .set('x-access-token', token)
       .set('Accept', 'application/json')
       .send({
@@ -578,7 +578,7 @@ describe('User', () => {
   });
   it('should get an error message for password mismatch', (done) => {
     chai.request(app)
-      .put(`/api/v1/users/set-password/${userId}`)
+      .put(`/api/v1/users/change-password/${userId}`)
       .set('x-access-token', token)
       .set('Accept', 'application/json')
       .send({
@@ -596,7 +596,7 @@ describe('User', () => {
   });
   it('should fill all details', (done) => {
     chai.request(app)
-      .put(`/api/v1/users/set-password/${userId}`)
+      .put(`/api/v1/users/change-password/${userId}`)
       .set('x-access-token', token)
       .set('Accept', 'application/json')
       .send({
@@ -612,7 +612,7 @@ describe('User', () => {
   });
   it('should have password greater than 5', (done) => {
     chai.request(app)
-      .put(`/api/v1/users/set-password/${userId}`)
+      .put(`/api/v1/users/change-password/${userId}`)
       .set('x-access-token', token)
       .set('Accept', 'application/json')
       .send({

@@ -12,9 +12,12 @@ const getUserState = {
   errors: '',
 };
 /**
+ * @description Get user function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 const getUser = (state = getUserState, action = {}) => {
   switch (action.type) {

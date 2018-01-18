@@ -6,11 +6,13 @@ const User = model.Users;
 
 export default {
   /**
-   * creates notifications
+   * @description Creates notifications
+   * 
    * @param {string} message
    * @param {string} type
    * @param {number} userId
    * @param {bookId} bookId
+   * 
    * @returns {void}
    */
   createNotification(message, type, userId, bookId) {
@@ -43,9 +45,11 @@ export default {
       }));
   },
   /**
-   * get notifications for admin
+   * @description Get notifications for admin
+   * 
    * @param {object} request
    * @param {*} response
+   * 
    * @returns {object} response
    */
   getAdminNotifications(request, response) {
@@ -65,9 +69,11 @@ export default {
     }));
   },
   /**
-   * get notifications for user
+   * @description Get notifications for user
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   getUserNotifications(request, response) {

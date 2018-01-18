@@ -9,8 +9,11 @@ const {
   FAILED_TO_GET_USER
 } = types;
 /**
+ * @description Get user
+ * 
  * @param {number} userId
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 const getUser = userId => (dispatch) => {
   dispatch({

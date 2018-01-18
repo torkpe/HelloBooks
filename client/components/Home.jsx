@@ -7,12 +7,13 @@ import { getAllBorrowed } from '../actions/history';
 import Books from './Books.jsx';
 
 /**
- * @class Home
  * @classdesc returns Home component
  */
 export class Home extends Component {
   /**
-   * @return {undefined}
+   * @description React life cycle
+   * 
+   * @returns {undefined}
    */
   componentDidMount() {
     if (this.props.userId) {
@@ -20,7 +21,8 @@ export class Home extends Component {
     }
   }
   /**
-   * rendersHome component
+   * @description renders Home component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -62,9 +64,12 @@ Home.propTypes = {
   getBooks: propTypes.func.isRequired,
 };
 /**
- * return props
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   books: state.getBooks.books,

@@ -5,11 +5,12 @@ import SingleNotification from './Notification.jsx';
 import { getNotification } from '../actions/notification';
 
 /**
- * @class Notifications
  * @classdesc returns Notificarions component
  */
 export class Notifications extends Component {
   /**
+   * @description React life cycle
+   * 
    * @returns {undefined}
    */
   componentWillMount() {
@@ -55,8 +56,12 @@ export class Notifications extends Component {
   }
 }
 /**
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   notifications: state.getNotification.notifications,

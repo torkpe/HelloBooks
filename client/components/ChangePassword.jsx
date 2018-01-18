@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { toastr } from 'react-redux-toastr';
-import { setPassword,
+import { changePassword,
   clearSetPasswordState
 } from '../actions/changePassword';
 import PasswordForm from './PasswordForm.jsx';
 
 /**
- * @class ChangePassword
  * @classdesc returns ChangePassword component
  */
 export class ChangePassword extends Component {
   /**
+   * @description Created an instance of ChangePassword
+   * 
    * @param {object} props
+   * 
    * @returns {undefined}
    */
   constructor(props) {
@@ -28,7 +30,10 @@ export class ChangePassword extends Component {
     this.onChange = this.onChange.bind(this);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
+   * 
    * @return {undefied} undefined
    */
   componentWillReceiveProps(nextProps) {
@@ -47,14 +52,18 @@ export class ChangePassword extends Component {
     }
   }
   /**
-   * @param {object} nextProps
+   * @description React life cycle
+   * 
    * @return {undefined}
    */
   componentWillUnmount() {
     this.props.clearSetPasswordState();
   }
   /**
+   * @description Read form input
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
@@ -63,7 +72,10 @@ export class ChangePassword extends Component {
     });
   }
   /**
+   * @description Handle on submit event
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -72,10 +84,11 @@ export class ChangePassword extends Component {
       isLoading: true
     });
     this.props.clearSetPasswordState();
-    this.props.setPassword(this.props.auth.user.id, this.state);
+    this.props.changePassword(this.props.auth.user.id, this.state);
   }
   /**
-   * renders change password
+   * @description renders change password
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -118,15 +131,19 @@ export class ChangePassword extends Component {
   }
 }
 /**
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   auth: state.auth,
   passwordChange: state.changePassword
 });
 export default connect(mapStateToProps, {
-  setPassword,
+  changePassword,
   clearSetPasswordState
 })(ChangePassword);
 

@@ -4,8 +4,10 @@ import { categories } from '../utils/index';
 
 const borrowBook = model.BorrowBook;
 /**
- * Function to determine number of times user is allowed to borrow book
+ * @description Function to determine number of times user is allowed to borrow book
+ * 
  * @param {number} id
+ * 
  * @returns {object} array of borrowed books
  */
 const findBorrows = id => borrowBook.findAll({
@@ -16,10 +18,12 @@ const findBorrows = id => borrowBook.findAll({
 }).then(foundBorrowed => foundBorrowed.map(borrowedBook => borrowedBook.dataValues));
 
 /**
- * Permit user to borrow based on user's level
+ * @description Permit user to borrow based on user's level
+ * 
  * @param {object} request
  * @param {object} response
  * @param {function} next
+ * 
  * @return {object} response
  * @return {function} next
  */
@@ -47,10 +51,12 @@ const checkStar = (request, response, next) => {
 };
 
 /**
- * Check if user is owing before borrowing
+ * @description Check if user is owing before borrowing
+ * 
  * @param {object} request
  * @param {object} response
  * @param {function} next
+ * 
  * @return {object} response
  * @return {function} next
  */

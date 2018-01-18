@@ -13,8 +13,11 @@ const {
   FAILED_TO_GET_NOT_RETURNED_BOOKS,
 } = types;
 /**
+ * @description Get all borrowed books
+ * 
  * @param {number} id
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const getAllBorrowed = id => (dispatch) => {
   dispatch({ type: GET_ALL_BORROWED_BOOKS });
@@ -39,8 +42,11 @@ export const getAllBorrowed = id => (dispatch) => {
 };
 
 /**
+ * @description Get all not returned books
+ * 
  * @param {number} id
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const allNotReturned = id => (dispatch) => {
   dispatch({ type: GET_NOT_RETURNED_BOOKS });

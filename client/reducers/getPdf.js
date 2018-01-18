@@ -12,9 +12,12 @@ const getPdfState = {
   errors: '',
 };
 /**
+ * @description Get Pdf function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 const getPdf = (state = getPdfState, action = {}) => {
   switch (action.type) {

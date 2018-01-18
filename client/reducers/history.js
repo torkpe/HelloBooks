@@ -15,9 +15,12 @@ const initialState = {
   errors: {},
 };
 /**
+ * @description Get all borrowed function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const getAllBorrowed = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -56,6 +59,14 @@ const notReturnedState = {
   notReturned: [],
   errors: {},
 };
+/**
+ * @description Get all not returned function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
 export const allNotReturned = (state = notReturnedState, action = {}) => {
   switch (action.type) {
     case GET_NOT_RETURNED_BOOKS: {

@@ -32,7 +32,10 @@ const {
 } = types;
 
 /**
+ * @description Set current user
+ * 
  * @param {object} user
+ * 
  * @return {void}
  */
 export const setCurrentUser = user => ({
@@ -40,8 +43,11 @@ export const setCurrentUser = user => ({
   user,
 });
 /**
+ * @description Handle user signup
+ * 
  * @param {object} userData
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const userSignup = userData =>
   (dispatch) => {
@@ -64,8 +70,11 @@ export const userSignup = userData =>
       });
   };
 /**
+ * @description Handle user confirmation request
+ * 
  * @param {object} userData
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const userConfirmationRequest = userData =>
   (dispatch) => {
@@ -93,14 +102,19 @@ export const userConfirmationRequest = userData =>
       });
   };
 /**
+ * @description Clear user confirmation state
+ * 
  * @return {void}
  */
 export const clearUserConfirmationState = () => dispatch => dispatch({
   type: CLEAR_USER_CONFIRMATION_STATE
 });
 /**
+ * @description Handle user sign in
+ * 
  * @param {object} data
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const userSignin = data =>
   (dispatch) => {
@@ -126,22 +140,31 @@ export const userSignin = data =>
       });
   };
 /**
+ * @description Clear signup state
+ * 
  * @param {object} data
+ * 
  * @return {void}
  */
 export const clearSignupState = () => dispatch => dispatch({
   type: CLEAR_SIGNUP_STATE
 });
 /**
+ * @description Clear signin state
+ * 
  * @param {object} data
+ * 
  * @return {void}
  */
 export const clearSigninState = () => dispatch => dispatch({
   type: CLEAR_SIGNUP_STATE
 });
 /**
+ * @description Send password reset link
+ * 
  * @param {object} data
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const sendPasswordResetLink = data =>
   (dispatch) => {
@@ -164,9 +187,12 @@ export const sendPasswordResetLink = data =>
       });
   };
   /**
+   * @description Reset user password
+   * 
    * @param {string} key
    * @param {object} userData
-   * @return {void}
+   * 
+   * @return {object} Axios promise
    */
 export const resetUserPassword = (key, userData) =>
   (dispatch) => {
@@ -188,20 +214,26 @@ export const resetUserPassword = (key, userData) =>
         }
       });
   };
-  /**
+/**
+ * @description Clear send password reset link state
+ * 
  * @return {void}
  */
 export const clearSendPasswordResetLinkState = () => dispatch => dispatch({
   type: CLEAR_SEND_PASSWORD_RESET_LINK_STATE
 });
-  /**
+/**
+ * @description Clear reset password state
+ * 
  * @return {void}
  */
 export const clearResetPasswordState = () => dispatch => dispatch({
   type: CLEAR_RESET_PASSWORD_STATE
 });
-  /**
- * @return {void}
+/**
+ * @description Log user out
+ * 
+ * @return {undefined}
  */
 export const logout = () => (dispatch) => {
   localStorage.removeItem('jwt');

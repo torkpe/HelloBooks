@@ -10,15 +10,18 @@ const {
   CLEAR_SET_PASSWORD_STATE
 } = types;
 /**
+ * @description Change user password
+ * 
  * @param {number} userId
  * @param {object} body
- * @return {void}
+ * 
+ * @return {object} Axios response
  */
-export const setPassword = (userId, body) => (dispatch) => {
+export const changePassword = (userId, body) => (dispatch) => {
   dispatch({
     type: SET_PASSWORD
   });
-  return axios.put(`${url}/users/set-password/${userId}`, body)
+  return axios.put(`${url}/users/change-password/${userId}`, body)
     .then((response) => {
       if (response) {
         return dispatch({
@@ -35,6 +38,13 @@ export const setPassword = (userId, body) => (dispatch) => {
       }
     });
 };
+/**
+ * @description Clear set password state
+ * 
+ * @param {void}
+ * 
+ * @return {object} Dispatch
+ */
 export const clearSetPasswordState = () => dispatch => dispatch({
   type: CLEAR_SET_PASSWORD_STATE
 });
