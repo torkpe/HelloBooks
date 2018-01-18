@@ -20,7 +20,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'server/public/index.html'),
       filename: 'index.html'
-    })
+    }),
+    new webpack.EnvironmentPlugin([
+      'PARAM_STRING',
+      'CLOUD_NAME',
+      'SECRET',
+      'UPLOAD_PRESET',
+      'API_KEY'
+    ]),
   ],
   module: {
     loaders: [

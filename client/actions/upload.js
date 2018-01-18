@@ -19,16 +19,15 @@ const {
  * @return {object} UploadRequest
  */
 const upload = (data) => {
-  const cloudName = 'hellobooks';
+  const cloudName = process.env.CLOUD_NAME;
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const timestamp = Date.now() / 1000;
-  const uploadPreset = 'wad3pvmg';
-  const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset}8c060McBdeyZClXXNfNgpG8QqXU`;
+  const paramsStr = `timestamp=${timestamp}&upload_preset=${process.env.UPLOAD_PRESET+process.env.PARAM_STRING}`;
   const signature = sha1(paramsStr);
   const params = {
-    api_key: '521381859673832',
+    api_key: process.env.API_KEY,
     timestamp,
-    upload_preset: uploadPreset,
+    upload_preset: process.env.UPLOAD_PRESET,
     signature,
   };
   const uploadRequest = superagent.post(url);
