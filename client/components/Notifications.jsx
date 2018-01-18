@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SingleNotification from './Notification.jsx';
+import SingleNotification from './SingleNotification.jsx';
 import { getNotification } from '../actions/notification';
 
 /**

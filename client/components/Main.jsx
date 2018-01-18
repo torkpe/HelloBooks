@@ -211,10 +211,6 @@ export class Main extends Component {
           </div>
         </header>
         <div className="mdl-layout__drawer">
-          <Link
-          to={isAdmin ? '/admin_home' : '/'} className="mdl-layout-title">
-          HelloBooks
-          </Link>
           {determineNav(isAdmin)}
         </div>
         <main className="mdl-layout__content">
