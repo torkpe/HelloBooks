@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 /**
- *
+ * @description Component for a book
+ * 
  * @param {object} props
+ * 
  * @return {XML} JSX
  */
 const Books = (props) => {

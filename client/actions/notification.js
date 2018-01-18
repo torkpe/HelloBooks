@@ -10,9 +10,12 @@ const {
 } = types;
 
 /**
+ * @description Get notification
+ * 
  * @param {string} category
  * @param {number} id
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const getNotification = (category, id) => {
   const determineCategory = () => {

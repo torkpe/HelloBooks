@@ -9,8 +9,11 @@ const {
   FAILED_TO_GET_PDF
 } = types;
 /**
+ * @description Get Pdf
+ * 
  * @param {number} id
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 const getPdf = id => (dispatch) => {
   dispatch({ type: GET_PDF });

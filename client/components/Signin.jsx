@@ -8,12 +8,15 @@ import { connect } from 'react-redux';
 import { userSignin, clearSigninState } from '../actions/user';
 
 /**
- * @class Signin
  * @classdesc returns Signin component
  */
 export class Signin extends Component {
   /**
+   * @description Created an instance of Settings
+   * 
    * @param {object} props
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -24,7 +27,10 @@ export class Signin extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
+   * 
    * @return {undefined}
    */
   componentWillReceiveProps(nextProps) {
@@ -39,14 +45,20 @@ export class Signin extends Component {
     }
   }
   /**
+   * @description Read input from form
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
+   * @description Handle submit event
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -116,9 +128,12 @@ Signin.propTypes = {
 };
 
 /**
- * Copy signin state props for easy access
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   signin: state.userSignin,

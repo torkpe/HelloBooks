@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 /**
+ * @description Renders redirect page
+ * 
  * @param {object} props
+ * 
  * @return {XML} JSX
  */
 const Redirect = props => (

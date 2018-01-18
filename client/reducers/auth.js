@@ -11,8 +11,11 @@ const initialState = {
   user: {},
 };
 /**
+ * @description Auth function for state
+ * 
  * @param {object} state
  * @param {object} action
+ * 
  * @return {object} state
  */
 export default (state = initialState, action = {}) => {

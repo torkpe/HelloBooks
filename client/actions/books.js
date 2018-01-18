@@ -39,8 +39,11 @@ const {
   CHECK_IF_BORROWED
 } = types;
 /**
- * Get all books
- * @return {void}
+ * @description Get all books
+ * 
+ * @param {void}
+ * 
+ * @return {object} Axios promise
  */
 export const getBooks = () => (dispatch) => {
   dispatch({ type: GET_BOOKS });
@@ -65,10 +68,12 @@ export const getBooks = () => (dispatch) => {
       return null;
     });
 };
-
 /**
- * clear borrowed books state
- * @return {void}
+ * @description Clear borrowed books state
+ * 
+ * @param {void}
+ * 
+ * @return {object} Dispatch
  */
 export const clearBorrowBookState = () => dispatch =>
   dispatch({
@@ -76,9 +81,11 @@ export const clearBorrowBookState = () => dispatch =>
   });
 
 /**
- * Get a book
+ * @description Get a book
+ * 
  * @param {number} id
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const getABook = id => (dispatch) => {
   dispatch({ type: GET_BOOK });
@@ -102,38 +109,45 @@ export const getABook = id => (dispatch) => {
     });
 };
 /**
- * clear single book state
- * @return {void}
+ * @description Clear single book state
+ * 
+ * @return {object} Dispatch
  */
 export const clearSingleBookState = () => dispatch => dispatch({
   type: CLEAR_SINGLE_BOOK_STATE
 });
 /**
- * clear created books state
- * @return {void}
+ * @description Clear created books state
+ * 
+ * @return {object} Dispatch
  */
 export const clearCreatedBookState = () => dispatch => dispatch({
   type: CLEAR_CREATED_BOOK_STATE
 });
 /**
- * clear all books state
- * @return {void}
+ * @description Clear all books state
+ * 
+ * @return {object} Dispatch
  */
 export const clearBooksState = () => dispatch => dispatch({
   type: CLEAR_BOOKS_STATE
 });
 /**
- * clear deleted book state
- * @return {void}
+ * @description Clear deleted book state
+ * 
+ * @return {object} Dispatch
  */
 export const clearDeleteBookState = () => dispatch => dispatch({
   type: CLEAR_DELETE_BOOK_STATE
 });
 /**
- * Get a book
+ * @description Get a book
+ * 
  * @param {number} id
+ * 
  * @param {number} userId
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const checkIfBorrowed = (id, userId) => (dispatch) => {
   dispatch({ type: CHECK_IF_BORROWED });
@@ -157,9 +171,11 @@ export const checkIfBorrowed = (id, userId) => (dispatch) => {
     });
 };
 /**
- * get list of borrowed books
+ * @description Get list of borrowed books
+ * 
  * @param {number} id
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const getBorrows = id => (dispatch) => {
   dispatch({ type: GET_BORROWS });
@@ -183,11 +199,14 @@ export const getBorrows = id => (dispatch) => {
     });
 };
 /**
- * Borrow a book
+ * @description Borrow a book
+ * 
  * @param {number} id
+ * 
  * @param {number} bookId
  * @param {object} data
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const borrowBook = (id, bookId) => (dispatch) => {
   dispatch({ type: BORROW_BOOK });
@@ -212,11 +231,12 @@ export const borrowBook = (id, bookId) => (dispatch) => {
 };
 
 /**
- * Return a book
- * @param {number} id
+ * @description Return a book
+ *
  * @param {number} bookId
  * @param {object} data
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const returnBook = (id, bookId) => (dispatch) => {
   dispatch({ type: RETURN_BOOK });
@@ -241,9 +261,11 @@ export const returnBook = (id, bookId) => (dispatch) => {
 };
 
 /**
- * Post a book
+ * @description Post a book
+ * 
  * @param {object} data
- * @return {void}
+ * 
+ * @return {object} Axios promise 
  */
 export const postBook = data => (dispatch) => {
   dispatch({ type: POST_BOOK });
@@ -268,9 +290,11 @@ export const postBook = data => (dispatch) => {
 };
 
 /**
- * Delete a book
+ * @description Delete a book
+ * 
  * @param {object} data
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const deleteBook = data => (dispatch) => {
   dispatch({ type: DELETE_BOOK });
@@ -295,10 +319,13 @@ export const deleteBook = data => (dispatch) => {
 };
 
 /**
- * Edit a book
+ * @description Edit a book
+ * 
  * @param {object} data
+ * 
  * @param {number} bookId
- * @return {void}
+ * 
+ * @return {object} Axios promise
  */
 export const editBook = (data, bookId) => (dispatch) => {
   dispatch({ type: EDIT_BOOK });

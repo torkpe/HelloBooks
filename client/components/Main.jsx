@@ -12,13 +12,16 @@ import { notifications,
   settings,
   history,
 } from '../actions/routes';
+
 /**
- * @class Main
- * @classdesc rreturns wrapper for other components
+ * @classdesc returns wrapper for other components
  */
 export class Main extends Component {
   /**
+   * @description Calls settings action
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   settings(event) {
@@ -26,7 +29,10 @@ export class Main extends Component {
     this.props.settings();
   }
   /**
+   * @description Calls allBooks action
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   allBooks(event) {
@@ -34,7 +40,10 @@ export class Main extends Component {
     this.props.allBooks();
   }
   /**
+   * @description Calls home action
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   home(event) {
@@ -42,7 +51,10 @@ export class Main extends Component {
     this.props.home();
   }
   /**
+   * @description Calls history action
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   history(event) {
@@ -50,7 +62,10 @@ export class Main extends Component {
     this.props.history();
   }
   /**
+   * @description Calls logout action
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   logout(event) {
@@ -58,7 +73,10 @@ export class Main extends Component {
     this.props.logout();
   }
   /**
+   * @description Calls notifications action
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   notifications(event) {
@@ -66,7 +84,10 @@ export class Main extends Component {
     this.props.notifications();
   }
   /**
+   * @description Calls uploadBook action
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   uploadBook(event) {
@@ -74,14 +95,18 @@ export class Main extends Component {
     this.props.uploadBook();
   }
   /**
-   * renders Main component
+   * @description Renders Main component
+   * 
    * @return {XML} JSX
    */
   render() {
     const { isAuthenticated } = this.props.auth;
     const { isAdmin } = this.props.auth.user;
     /**
+     * @description Checks if user is admin or regular user
+     * 
      * @param {boolean} isanAdmin
+     * 
      * @return {XML} JSX
      */
     const determineNav = (isanAdmin) => {
@@ -204,8 +229,12 @@ Main.prototypes = {
   logout: Proptypes.func.isRequired,
 };
 /**
- * @param {object} state
- * @return {undefined}
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   auth: state.auth,

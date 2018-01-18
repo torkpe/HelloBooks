@@ -18,9 +18,11 @@ const borrowBook = model.BorrowBook;
 
 export default {
   /**
-   * creates a new user
+   * @description Creates a new user
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   create(request, response) {
@@ -77,9 +79,11 @@ ${link}`;
     return response.status(400).send({ message: 'This is not an email' });
   },
   /**
-   * sign in user
+   * @description Sign in user
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   signin(request, response) {
@@ -124,9 +128,11 @@ ${link}`;
     });
   },
   /**
-   * update user's profile
+   * @description Update user's profile
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   updateUser(request, response) {
@@ -191,12 +197,14 @@ ${link}`;
     });
   },
   /**
-   * change user's passoword
+   * @description Change user's passoword
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
-   */
-  setPassword(request, response) {
+   */ 
+  changePassword(request, response) {
     const { password, confirmPassword, oldPassword } = request.body;
     // validate
     if (password && confirmPassword) {
@@ -245,9 +253,11 @@ ${link}`;
     });
   },
   /**
-   * update user's name
+   * @description Update user's name
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   updateName(request, response) {
@@ -282,9 +292,11 @@ ${link}`;
     });
   },
   /**
-   *
+   * @description Send password reset link
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   sendResetLink(request, response) {
@@ -322,9 +334,11 @@ ${link}`;
       }));
   },
   /**
-   * reset user password
+   * @description Reset user password
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   resetPassword(request, response) {
@@ -371,9 +385,11 @@ ${link}`;
     });
   },
   /**
-   * get a user's details
+   * @description Get a user's details
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   getUser(request, response) {

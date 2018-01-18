@@ -7,8 +7,7 @@ import Books from './Books.jsx';
 
 
 /**
- * @class AllBorrowed
- * @classdesc returns the all borrowed books of the user
+ * @classdesc Returns the all borrowed books of the user
  */
 export class AllBorrowed extends Component {
   /**
@@ -24,7 +23,8 @@ export class AllBorrowed extends Component {
     this.props.clearBooksState();
   }
   /**
-   * renders ALlBorrowed component
+   * @description renders ALlBorrowed component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -66,8 +66,10 @@ export class AllBorrowed extends Component {
   }
 }
 /**
- *
+ * @description Get state from store
+ * 
  * @param {object} state
+ * 
  * @return {object} props
  */
 const mapStateToProps = state => ({

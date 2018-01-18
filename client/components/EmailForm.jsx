@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 /**
+ * @description Form for email
+ * 
  * @param {object} props
+ * 
  * @return {object} prop
  */
 const EmailForm = props => (

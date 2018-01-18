@@ -32,9 +32,12 @@ const signupInitialState = {
 };
 
 /**
+ * @description User function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const userSignup = (state = signupInitialState, action = {}) => {
   switch (action.type) {
@@ -76,9 +79,12 @@ const confirmationInitalState = {
   confirmationSuccessful: {},
 };
 /**
+ * @description User confirmation request function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const userConfirmationRequest = (state = confirmationInitalState, action = {}) => {
   switch (action.type) {
@@ -118,9 +124,12 @@ const resetPasswordInitialState = {
   successfullySentLink: {},
 };
 /**
+ * @description Send password reset link function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const sendPasswordResetLink = (state = resetPasswordInitialState, action = {}) => {
   switch (action.type) {
@@ -160,9 +169,12 @@ const resetUserPassword = {
   successfullyResetPassword: {},
 };
 /**
+ * @description Reset password function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const resetPassword = (state = resetUserPassword, action = {}) => {
   switch (action.type) {
@@ -202,9 +214,12 @@ const signinInitialState = {
   errors: {},
 };
 /**
+ * @description User signin function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const userSignin = (state = signinInitialState, action = {}) => {
   switch (action.type) {

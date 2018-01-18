@@ -14,7 +14,7 @@ configure({ adapter: new Adapter() });
 
 describe('<ChangePassword />', () => {
   const props = {
-    setPassword: jest.fn(),
+    changePassword: jest.fn(),
     clearSetPasswordState: jest.fn(),
     auth: {
       user: {

@@ -40,6 +40,14 @@ const initialState = {
   books: [],
   errors: '',
 };
+/**
+ * @description Get books function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
 export const getBooks = (state = initialState, action = {}) => {
   switch (action.type) {
     case GET_BOOKS: {
@@ -78,6 +86,14 @@ const getABookState = {
   bookQuantity: 0,
   errors: '',
 };
+/**
+ * @description Get a book function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
 export const getABook = (state = getABookState, action = {}) => {
   switch (action.type) {
     case GET_BOOK: {
@@ -119,7 +135,14 @@ const checkIfBorrowedState = {
   bookQuantity: -1,
   errors: '',
 };
-// Check if Borrowed state
+/**
+ * @description Check if borrowed function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
 export const checkIfBorrowed = (state = checkIfBorrowedState, action = {}) => {
   switch (action.type) {
     case CHECK_IF_BORROWED: {
@@ -152,6 +175,14 @@ const borrowBookState = {
   errors: {},
   successfullyBorrowed: false,
 };
+/**
+ * @description Borrow book function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
 export const borrowBook = (state = borrowBookState, action = {}) => {
   switch (action.type) {
     case BORROW_BOOK: {
@@ -194,6 +225,14 @@ const returnBookState = {
   errors: {},
   successfullyReturned: false,
 };
+/**
+ * @description Return book function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
 export const returnBook = (state = returnBookState, action = {}) => {
   switch (action.type) {
     case RETURN_BOOK: {
@@ -220,7 +259,14 @@ export const returnBook = (state = returnBookState, action = {}) => {
     default: return state;
   }
 };
-// Get borrowed books
+/**
+ * @description Get borrows function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
 export const getBorrows = (state = initialState, action = {}) => {
   switch (action.type) {
     case GET_BORROWS: {
@@ -252,7 +298,14 @@ const createBookState = {
   message: '',
   errors: {},
 };
-// Create book
+/**
+ * @description Create book function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
 export const createBook = (state = createBookState, action = {}) => {
   switch (action.type) {
     case POST_BOOK: {
@@ -295,9 +348,12 @@ const deleteBookState = {
   error: {},
 };
 /**
+ * @description Delete book function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const deleteBook = (state = deleteBookState, action = {}) => {
   switch (action.type) {
@@ -338,9 +394,12 @@ const editBookState = {
   error: {},
 };
 /**
+ * @description Edit book function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const editBook = (state = editBookState, action = {}) => {
   switch (action.type) {

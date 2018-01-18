@@ -5,7 +5,10 @@ import { Link } from 'react-router';
 import { getNotification } from '../actions/notification';
 
 /**
+ * @description Renders each notification
+ * 
  * @param {object} props
+ * 
  * @return {XML} JSX
  */
 const SingleNotification = (props) => {

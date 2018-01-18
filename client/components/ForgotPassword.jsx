@@ -8,12 +8,15 @@ import { sendPasswordResetLink, clearSendPasswordResetLinkState } from '../actio
 import EmailForm from './EmailForm.jsx';
 
 /**
- * @class ForgotPassword
  * @classdesc return ForgotPassword component
  */
 class ForgotPassword extends Component {
   /**
+   * @description Created an instance of ForgotPassword
+   * 
    * @param {object} props
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -24,8 +27,11 @@ class ForgotPassword extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
-   * @return {undefined}
+   * 
+   * @return {undefied} undefined
    */
   componentWillReceiveProps(nextProps) {
     const { successfullySentLink, error } = nextProps.sendLinkSuccessful;
@@ -43,20 +49,28 @@ class ForgotPassword extends Component {
     }
   }
   /**
-   * @return {undefined}
+   * @description React life cycle
+   * 
+   * @return {undefied} undefined
    */
   componentWillUnmount() {
     this.props.clearSendPasswordResetLinkState();
   }
   /**
+   * @description Read input from form
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
+   * @description  Handle form submission
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -68,7 +82,8 @@ class ForgotPassword extends Component {
     this.props.sendPasswordResetLink(this.state);
   }
   /**
-   * renders ForgotPassword component
+   * @description renders ForgotPassword component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -111,9 +126,12 @@ ForgotPassword.propTypes = {
   clearSendPasswordResetLinkState: propTypes.func.isRequired,
 };
 /**
- * returns props
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   sendLinkSuccessful: state.sendPasswordResetLink

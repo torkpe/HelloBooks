@@ -25,13 +25,15 @@ const initialState = {
 };
 
 /**
- * @class UploadBook
  * @classdesc returns UploadBook component
  */
 export class UploadBook extends Component {
   /**
+   * @description Created an instance of Settings
+   * 
    * @param {object} props
-   * @return {undefined}
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -44,7 +46,10 @@ export class UploadBook extends Component {
     this.onPostPdf = this.onPostPdf.bind(this);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
+   * 
    * @return {undefined}
    */
   componentWillReceiveProps(nextProps) {
@@ -86,8 +91,12 @@ export class UploadBook extends Component {
     }
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} prevProps
+   * 
    * @param {object} prevState
+   * 
    * @return {undefined}
    */
   componentDidUpdate(prevProps, prevState) {
@@ -107,22 +116,48 @@ export class UploadBook extends Component {
       toastr.success('Pdf uploaded');
     }
   }
+  /**
+   * @description React life cycle
+   * 
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.clearCreatedBookState();
     this.setState({
       initialState
     });
   }
+  /**
+   * @description Handles form submission
+   * 
+   * @param {object} event
+   * 
+   * @return {undefined}
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.postBook(this.state);
   }
+  /**
+   * @description Reads form input
+   * 
+   * @param {object} event
+   * 
+   * @returns {undefined}
+   */
   onChange(event) {
     event.preventDefault();
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
+  /**
+   * @description Handles cover posting
+   * 
+   * @param {object} event
+   * 
+   * @return {undefined}
+   */
   onPostCover(event) {
     event.preventDefault();
     this.props.uploader(this.state.cover, 'cover');
@@ -130,6 +165,13 @@ export class UploadBook extends Component {
       isPostCover: true
     });
   }
+  /**
+   * @description Handles pdf posting
+   * 
+   * @param {object} event
+   * 
+   * @return {undefined}
+   */
   onPostPdf(event) {
     event.preventDefault();
     this.props.uploader(this.state.pdf, 'pdf');
@@ -137,6 +179,13 @@ export class UploadBook extends Component {
       isPostPdf: true
     });
   }
+  /**
+   * @description Reads cover file input
+   * 
+   * @param {object} event
+   * 
+   * @return {undefined}
+   */
   coverChange(event) {
     event.preventDefault();
     const cover = event.target.files[0];
@@ -146,6 +195,13 @@ export class UploadBook extends Component {
       isCoverAndPdf: true
     });
   }
+  /**
+   * @description Reads cover file input
+   * 
+   * @param {object} event
+   * 
+   * @return {undefined}
+   */
   pdfChange(event) {
     event.preventDefault();
     const pdf = event.target.files[0];
@@ -156,6 +212,8 @@ export class UploadBook extends Component {
     });
   }
   /**
+   * @description Renders component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -285,6 +343,14 @@ export class UploadBook extends Component {
 UploadBook.propTypes = {
   postBook: propTypes.func.isRequired,
 };
+/**
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = state => ({
   admin: state.createBook,
   cover: state.uploadCover.uploaded,

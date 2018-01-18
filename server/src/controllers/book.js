@@ -3,8 +3,11 @@ import model from '../models';
 const { Book, BorrowBook } = model;
 export default {
   /**
+   * @description Create a new book
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   create(request, response) {
@@ -30,10 +33,12 @@ export default {
         message: 'Something went wrong'
       }));
   },
-  // find a book
   /**
+   * @description Find a book
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   findABook(request, response) {
@@ -56,10 +61,12 @@ export default {
         message: 'Something went wrong'
       }));
   },
-  // show all books
   /**
+   * @description Find all books
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   findAllBooks(request, response) {
@@ -84,8 +91,11 @@ export default {
       }));
   },
   /**
+   * @description Delete a book
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   deleteBook(request, response) {
@@ -129,10 +139,12 @@ export default {
         message: error.message
       }));
   },
-  // update a book's info
   /**
+   * @description Update a book's info
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   editBook(request, response) {

@@ -8,17 +8,20 @@ import "react-pdf-reader/dist/PdfReader.css";
 import { getABook } from '../actions/books';
 
 /**
- * @class Notifications
  * @classdesc returns Notificarions component
  */
 class MyPdfViewer extends Component {
   /**
+   * @description React life cycle
+   * 
    * @return {undefined}
    */
   componentWillMount() {
     this.props.getABook(this.props.params.key);
   }
   /**
+   * @description renders Pdf content
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -36,8 +39,12 @@ class MyPdfViewer extends Component {
   }
 }
 /**
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   book: state.getABook.book,

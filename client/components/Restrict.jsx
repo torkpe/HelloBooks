@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 /**
+ * @description Render restrict page
+ * 
  * @param {props} props
+ * 
  * @return {XML} JSX
  */
 const Restrict = props =>

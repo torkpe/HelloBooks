@@ -11,21 +11,18 @@ const notifyState = {
   errors: {},
   notification: {},
 };
-/**
- * @param {object} state
- * @param {object} action
- * @return {object} state
- */
-
 const notificationState = {
   isLoading: false,
   errors: {},
   notifications: [],
 };
 /**
+ * @description Get notification function for state
+ * 
  * @param {object} state
  * @param {object} action
- * @return {object} state
+ * 
+ * @returns {object} state
  */
 export const getNotification = (state = notificationState, action = {}) => {
   switch (action.type) {

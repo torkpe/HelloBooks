@@ -8,9 +8,11 @@ const { updateNotification } = notification;
 const { Book, BorrowBook } = model;
 export default {
   /**
-   * creates a Book
+   * @description Borrow a book
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   borrow(request, response) {
@@ -79,10 +81,12 @@ export default {
         message: 'Something went wrong'
       }));
   },
-  // Get borrowed books
   /**
+   * @description Get borrowed books
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   getBorrowedBooks(request, response) {
@@ -105,8 +109,11 @@ export default {
       }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
   /**
+   * @description Get user history of all borrowed books
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   getHistory(request, response) {
@@ -128,11 +135,12 @@ export default {
         return response.status(200).send(books);
       }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
   },
-
-  // Check if book has been borrowed before
   /**
+   * @description Check if book has been borrowed before
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   getABorrowedBook(request, response) {
@@ -155,10 +163,12 @@ export default {
         message: 'Something went wrong'
       }));
   },
-  // Return a book and update status
   /**
+   * @description Return a book and update status
+   * 
    * @param {object} request
    * @param {object} response
+   * 
    * @returns {object} response
    */
   returnBook(request, response) {
@@ -202,7 +212,8 @@ export default {
       });
   },
   /**
-   * get books exceeding deadline and send a reminder
+   * @description Get books exceeding deadline and send a reminder
+   * 
    * @returns {function} returns a function
    */
   getExceededDeadlineAndRemind() {

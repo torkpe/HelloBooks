@@ -155,7 +155,26 @@
 110
 111
 112
-113</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,6 +196,9 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -196,16 +218,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,6 +283,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -277,13 +311,15 @@ import { userSignup, clearSignupState } from '../actions/user';
 import EmailForm from './EmailForm.jsx';
 &nbsp;
 /**
- * @class Signup
  * @classdesc returns Signin component
  */
 export class Signup extends Component {
   /**
+   * @description Created an instance of Settings
+   * 
    * @param {object} props
-   * @return {undefined}
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -291,7 +327,10 @@ export class Signup extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
+   * 
    * @return {undefined}
    */
   componentWillReceiveProps(nextProps) {
@@ -304,14 +343,20 @@ export class Signup extends Component {
     }
   }
   /**
+   * @description Read form input
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
+   * @description Handle form submission
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -320,6 +365,8 @@ export class Signup extends Component {
     this.props.userSignup(this.state);
   }
   /**
+   * @description Render component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -368,8 +415,12 @@ Signup.propTypes = {
   userSignup: propTypes.func.isRequired,
 };
 /**
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = <span class="fstat-no" title="function not covered" >st</span>ate =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
   signup: state.userSignup,
@@ -385,7 +436,7 @@ export default connect(
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jan 16 2018 15:49:12 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jan 17 2018 17:11:02 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../prettify.js"></script>

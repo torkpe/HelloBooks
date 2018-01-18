@@ -8,12 +8,15 @@ import PasswordForm from './PasswordForm.jsx';
 import { userConfirmationRequest, clearUserConfirmationState } from '../actions/user';
 
 /**
- * @class Confirm
  * @classdesc returns render component
  */
 export class Confirm extends Component {
   /**
+   * @description Created an instance of Confirm
+   * 
    * @param {object} props
+   * 
+   * @returns {undefined}
    */
   constructor(props) {
     super(props);
@@ -28,7 +31,10 @@ export class Confirm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} nextProps
+   * 
    * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
@@ -41,14 +47,20 @@ export class Confirm extends Component {
     }
   }
   /**
+   * @description Read input from form
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
+   * @description Handle form submission
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   onSubmit(event) {
@@ -57,14 +69,17 @@ export class Confirm extends Component {
     this.props.userConfirmationRequest(this.state);
   }
   /**
+   * @description React life cycle
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   componentWillUnmount() {
     this.props.clearUserConfirmationState();
   }
   /**
-   * renders confirm component
+   * @description Renders confirm component
    * @return {XML} JSX
    */
   render() {
@@ -111,8 +126,12 @@ Confirm.propTypes = {
   clearUserConfirmationState: propTypes.func.isRequired,
 };
 /**
- * @param {object} state
- * @return {object} props
+ * @description Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
  */
 const mapStateToProps = state => ({
   confirmationRequest: state.userConfirmationRequest,
