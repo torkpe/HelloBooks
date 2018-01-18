@@ -29,6 +29,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'server/public/index.html'),
       filename: 'index.html'
+    }),
+    new Dotenv({
+      path: './env',
+      systemvars: true
     })
   ],
   module: {
