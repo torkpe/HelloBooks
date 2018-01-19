@@ -8,7 +8,7 @@ import configureMockStore from 'redux-mock-store';
 import sinon from 'sinon';
 
 import storeConfiguration from '../../store/store';
-import connectedUpdateBook, { UpdateBook } from '../../components/EditBook.jsx';
+import connectedUpdateBook, { UpdateBook } from '../../components/UpdateBook.jsx';
 
 configure({ adapter: new Adapter() });
 

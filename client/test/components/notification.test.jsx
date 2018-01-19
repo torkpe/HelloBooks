@@ -6,7 +6,7 @@ import render from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
-import SingleNotification from '../../components/Notification.jsx';
+import SingleNotification from '../../components/SingleNotification.jsx';
 import storeConfiguration from '../../store/store';
 
 configure({ adapter: new Adapter() });
