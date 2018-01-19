@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for reducers/getUser.js</title>
+    <title>Code coverage report for components/SingleNotification.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,18 +16,18 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">reducers</a> getUser.js
+      <a href="../index.html">All files</a> / <a href="index.html">components</a> SingleNotification.jsx
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.5% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/8</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.5% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/8</span>
+        <span class='fraction'>4/4</span>
       </div>
     </div>
   </div>
@@ -84,21 +84,7 @@
 39
 40
 41
-42
-43
-44
-45
-46
-47
-48</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
+42</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -111,10 +97,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">103x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,63 +112,60 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">101x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import types from '../types/types';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 &nbsp;
-const {
-  GET_USER,
-  GET_USER_SUCCESSFUL,
-  FAILED_TO_GET_USER
-} = types;
+import { getNotification } from '../actions/notification';
 &nbsp;
-const getUserState = {
-  fetching: false,
-  user: {},
-  errors: '',
-};
 /**
- * @description Get user function for state
+ * @description Renders each notification
  * 
- * @param {object} state
- * @param {object} action
+ * @param {object} props
  * 
- * @returns {object} state
+ * @return {XML} JSX
  */
-const getUser = (state = getUserState, action = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> =&gt; {
-  switch (action.type) {
-<span class="branch-0 cbranch-no" title="branch not covered" >    case GET_USER: {</span>
-<span class="cstat-no" title="statement not covered" >      return {</span>
-        ...state,
-        fetching: true,
-      };
-    }
-    case GET_USER_SUCCESSFUL: {
-      return {
-        ...state,
-        fetching: false,
-        user: action.payload,
-      };
-    }
-    case FAILED_TO_GET_USER: {
-      return {
-        ...state,
-        fetching: false,
-        errors: action.payload,
-      };
-    }
-    default: return state;
-  }
+const SingleNotification = (props) =&gt; {
+  const { notification, userId } = props;
+  const mdlLink = `
+  mdl-button
+  mdl-button--colored
+  mdl-js-button
+  mdl-js-ripple-effect notifyButton
+  `;
+  return (
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td className="notifications"&gt;
+          {notification.message}
+          {notification.bookId ?
+            &lt;span className="notifyLink"&gt;
+              &lt;Link
+              to={`/single/${notification.bookId}`}
+              &gt;
+                  View Book
+              &lt;/Link&gt;
+            &lt;/span&gt;
+          : <span class="branch-1 cbranch-no" title="branch not covered" >''}</span>
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  );
 };
-export default getUser;
+export default SingleNotification;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

@@ -5,7 +5,7 @@ import moxios from 'moxios';
 import configureMockStore from 'redux-mock-store';
 import Adapter from 'enzyme-adapter-react-15';
 import chai from 'chai';
-import * as mockData from '../mockdata';
+import * as mockData from '../mockData';
 import * as apiEndPoints from '../apiEndPoints.js';
 import actionTypes from '../../types/types';
 import {
