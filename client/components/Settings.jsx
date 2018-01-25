@@ -46,15 +46,15 @@ class Settings extends Component {
    * @return {undefined}
    */
   componentWillReceiveProps(nextProps) {
+   
     const { user, updatedOrNot } = nextProps;
-    if (user) {
       this.setState({
-        email: user.email,
-        name: user.name,
+        email: user.user.email,
+        name: updatedOrNot.response.name,
       });
-    }
-    if (updatedOrNot.response.message) {
-      toastr.success(updatedOrNot.response.message);
+    const { name, message } = updatedOrNot.response
+    if (message) {
+      toastr.success(message);
       this.setState({
         isLoading: false
       });
@@ -73,6 +73,7 @@ class Settings extends Component {
    */
   componentWillUnmount() {
     this.props.clearUpdateUserState();
+    const { user } = this.props.user
   }
   /**
    * @description Read input form
@@ -106,6 +107,8 @@ class Settings extends Component {
    * @return {XML} JSX
    */
   render() {
+    const { user } = this.props.user;
+    const { name } = this.props.updatedOrNot.response;
     const mdlButtonStyle = `
     mdl-button
     mdl-js-button
@@ -114,7 +117,7 @@ class Settings extends Component {
     `;
     return (
       <div className="mdl-grid">
-        {Object.keys(this.props.user).length > 0 &&
+        {user.name &&
         <div className="contents">
           {this.state.isLoading ? <h5>Please wait...</h5> : '' }
           <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
@@ -132,10 +135,11 @@ class Settings extends Component {
               <div
                 className="card-content card-wrapper input-wrapper">
                 <input
-                type="name"
+                type="text"
+                className=""
                 onChange={this.onChange}
                 name="name" id="name"
-                defaultValue={this.props.user.name}
+                value={this.state.name}
                 />
               </div>
               <button
@@ -165,7 +169,7 @@ class Settings extends Component {
  */
 const mapStateToProps = state => ({
   auth: state.auth,
-  user: state.getUser.user,
+  user: state.getUser,
   updatedOrNot: state.updateUser
 });
 export default connect(mapStateToProps, {
