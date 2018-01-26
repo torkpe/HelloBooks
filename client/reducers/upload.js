@@ -90,7 +90,7 @@ export const uploadPdf = (state = initialState, action = {}) => {
         isLoading: false,
         errors: {},
         uploaded: "",
-      }
+      };
     }
     default: return state;
   }
