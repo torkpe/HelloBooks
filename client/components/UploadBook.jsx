@@ -10,7 +10,7 @@ import {
   addBookGenre, getAllGenre,
   clearAddGenreState
 } from '../actions/books';
-import uploader, { clearUploadState }from '../actions/upload';
+import uploader, { clearUploadState } from '../actions/upload';
 
 // Set initial state
 const initialState = {
@@ -27,13 +27,13 @@ const initialState = {
   isCoverSet: false,
   isPdfSet: false,
   error: '',
-  genre:'',
+  genre: '',
   isPostCover: false,
   isPostPdf: false
 };
 
 /**
- * @classdesc returns UploadBook component
+ * @classdesc Returns UploadBook component
  */
 export class UploadBook extends Component {
   /**
@@ -62,9 +62,6 @@ export class UploadBook extends Component {
    * @return {undefined}
    */
   componentDidMount() {
-    this.setState({
-      initialState
-    });
     this.props.getAllGenre();
   }
   /**
@@ -116,9 +113,9 @@ export class UploadBook extends Component {
       if (genre.length > 0) {
         this.setState({
           allGenre: genre
-        })
+        });
       }
-      const { message, createdGenre } = addedGenre
+      const { message, createdGenre } = addedGenre;
       if (createdGenre) {
         if (!this.state.genre.includes(createdGenre)) {
           this.state.allGenre.push(createdGenre);
@@ -136,7 +133,6 @@ export class UploadBook extends Component {
    * @description React life cycle
    * 
    * @param {object} prevProps
-   * 
    * @param {object} prevState
    * 
    * @return {undefined}
@@ -264,7 +260,7 @@ export class UploadBook extends Component {
     event.target.reset();
   }
   /**
-   * @description Renders component
+   * @description Renders UploadBook component
    * 
    * @return {XML} JSX
    */
@@ -336,7 +332,7 @@ export class UploadBook extends Component {
                     Select Genre
                   </option>
                   {this.state.allGenre && this.state.allGenre.map((aGenre, index) =>
-                  <option key={index} value={aGenre}>{aGenre}</option>)}
+                    <option key={index} value={aGenre}>{aGenre}</option>)}
                 </select>
               </div>
               <div
@@ -435,7 +431,10 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   postBook,
-  uploader, getAllGenre,
-  clearCreatedBookState, addBookGenre,
-  clearAddGenreState, clearUploadState
+  uploader,
+  getAllGenre,
+  clearCreatedBookState,
+  addBookGenre,
+  clearAddGenreState,
+  clearUploadState
 })(UploadBook);
