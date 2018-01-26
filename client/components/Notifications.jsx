@@ -5,7 +5,7 @@ import SingleNotification from './SingleNotification.jsx';
 import { getNotification } from '../actions/notification';
 
 /**
- * @classdesc returns Notificarions component
+ * @classdesc Returns Notificarions component
  */
 export class Notifications extends Component {
   /**
@@ -21,6 +21,8 @@ export class Notifications extends Component {
     );
   }
   /**
+   * @description Renders Notifications component
+   * 
    * @return {XML} JSX
    */
   render() {

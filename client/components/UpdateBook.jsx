@@ -10,7 +10,7 @@ import {
 import uploader from '../actions/upload';
 
 /**
- * @classdesc returns component to edit book
+ * @classdesc Returns component to edit book
  */
 export class UpdateBook extends Component {
   /**
@@ -56,7 +56,12 @@ export class UpdateBook extends Component {
    * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
-    const { book, cover, pdf, genre } = nextProps;
+    const {
+      book,
+      cover,
+      pdf,
+      genre
+    } = nextProps;
     if (book && !this.state.isStateSet) {
       this.setState({
         cover: book.cover,
@@ -193,7 +198,9 @@ export class UpdateBook extends Component {
   }
   /**
    * @description Handle file selection for pdf
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   pdfChange(event) {
@@ -205,6 +212,8 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Renders UpdateBook component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -219,7 +228,9 @@ export class UpdateBook extends Component {
         <div className="contents">
           {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
           {isPostPdf ? <div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
-          {genre && genre.length > 0 && book && Object.keys(book).length > 0 ?
+          {
+          genre && genre.length > 0 &&
+          this.state.author && book && Object.keys(book).length > 0 ?
             <div
               className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
               <form>
@@ -255,15 +266,25 @@ export class UpdateBook extends Component {
                 </div>
                 <div
                 className="card-content input-wrapper">
-                <select name="genre"
-                onChange={this.onChange}>
-                  <option className="default" value="...">
-                  {this.state.genre}
-                  </option>
-                  {this.state.allGenre && this.state.allGenre.map((aGenre, index) =>
-                  <option key={index}
-                  value={aGenre}>{aGenre}</option>)}
-                </select>
+                  <select
+                  name="genre"
+                  onChange={this.onChange}>
+                    <option
+                    className="default"
+                    value="..."
+                    >
+                      {this.state.genre}
+                    </option>
+                    {
+                      this.state.allGenre
+                      && this.state.allGenre.map((aGenre, index) =>
+                      <option key={index}
+                      value={aGenre
+                      }>
+                        {aGenre}
+                      </option>)
+                    }
+                  </select>
                 </div>
                 <div
                 className="card-content input-wrapper">
@@ -361,4 +382,4 @@ export default connect(mapStateToProps, {
   uploader,
   editBook,
   getAllGenre
- })(UpdateBook);
+})(UpdateBook);

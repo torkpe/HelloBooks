@@ -21,7 +21,7 @@ export class Home extends Component {
     }
   }
   /**
-   * @description renders Home component
+   * @description Renders Home component
    * 
    * @return {XML} JSX
    */
