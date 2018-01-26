@@ -23,12 +23,12 @@ export default {
         message: 'Invalid pdf!. Please try uploading another pdf'
       });
     }
-    if ((String(title).trim()).length < 10) {
+    if ((String(title).trim()).length < 5) {
       return response.status(400).send({
         message: 'Title is too short!'
       });
     }
-    if ((String(author).trim()).length < 5) {
+    if ((String(author).trim()).length < 3) {
       return response.status(400).send({
         message: 'Author\'s name is too short!'
       });

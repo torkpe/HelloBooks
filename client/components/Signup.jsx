@@ -8,7 +8,7 @@ import { userSignup, clearSignupState } from '../actions/user';
 import EmailForm from './EmailForm.jsx';
 
 /**
- * @classdesc returns Signin component
+ * @classdesc Returns Signin component
  */
 export class Signup extends Component {
   /**
@@ -62,7 +62,7 @@ export class Signup extends Component {
     this.props.userSignup(this.state);
   }
   /**
-   * @description Render component
+   * @description Render Signup component
    * 
    * @return {XML} JSX
    */
