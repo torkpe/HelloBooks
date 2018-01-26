@@ -72,6 +72,11 @@ export class Main extends Component {
     event.preventDefault();
     this.props.logout();
   }
+  /**
+   * @description Toggle nav bar
+   * 
+   * @param {object} event 
+   */
   toggleNavBar(event) {
     event.preventDefault();
     $('#navbar-vertical').removeClass('is-visible');
@@ -208,9 +213,11 @@ export class Main extends Component {
             </nav>
           </div>
         </header>
-        <div id="navbar-vertical"
+        <div
+        id="navbar-vertical"
         onClick={this.toggleNavBar.bind(this)}
-        className="mdl-layout__drawer">
+        className="mdl-layout__drawer"
+        >
           {determineNav(isAdmin)}
         </div>
         <main className="mdl-layout__content">
