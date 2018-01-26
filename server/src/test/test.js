@@ -275,6 +275,14 @@ describe('User', () => {
         expect(typeof (response.body)).to.equal('object');
         expect(response.body).to.have.property('newBook');
         expect(response.body.newBook).to.have.property('title');
+        expect(response.body.newBook.cover).to.equal('sdhdsjcdssnbdsdsbhjsb');
+        expect(response.body.newBook.pdf).to.equal('bssskskjhdb');
+        expect(response.body.newBook.title).to.equal('Eze go to school');
+        expect(response.body.newBook.author).to.equal('Chinua Achebe');
+        expect(response.body.newBook.genre).to.equal('Educational');
+        expect(response.body.newBook.description).to
+        .equal('A young boy from the village who finally goes to school');
+        expect(response.body.newBook.quantity).to.equal(5);
         expect(response.body.newBook).to.have.property('description');
         expect(response.body.newBook).to.have.property('author');
         expect(response.body.newBook).to.have.property('genre');
@@ -306,6 +314,14 @@ describe('User', () => {
         expect(typeof (response.body)).to.equal('object');
         expect(response.body).to.have.property('newBook');
         expect(response.body.newBook).to.have.property('title');
+        expect(response.body.newBook.cover).to.equal('sdhdsjcdssnbdsdsbhjsb');
+        expect(response.body.newBook.pdf).to.equal('bssskskjhdb');
+        expect(response.body.newBook.title).to.equal('Eze go to school');
+        expect(response.body.newBook.author).to.equal('Chinua Achebe');
+        expect(response.body.newBook.genre).to.equal('Educational');
+        expect(response.body.newBook.description).to
+        .equal('A young boy from the village who finally goes to school');
+        expect(response.body.newBook.quantity).to.equal(5);
         expect(response.body.newBook).to.have.property('description');
         expect(response.body.newBook).to.have.property('author');
         expect(response.body.newBook).to.have.property('genre');
@@ -410,6 +426,14 @@ describe('User', () => {
         expect(response.body[0]).to.have.property('description');
         expect(response.body[0]).to.have.property('quantity');
         expect(response.body[0]).to.have.property('genre');
+        expect(response.body[0].cover).to.equal('sdhdsjcdssnbdsdsbhjsb');
+        expect(response.body[0].pdf).to.equal('bssskskjhdb');
+        expect(response.body[0].title).to.equal('Eze go to school');
+        expect(response.body[0].author).to.equal('Chinua Achebe');
+        expect(response.body[0].description)
+        .to.equal('A young boy from the village who finally goes to school');
+        expect(response.body[0].quantity).to.equal(5);
+        expect(response.body[0].genre).to.equal('Educational');
         if (error) return done(error);
         done();
       });
@@ -428,7 +452,14 @@ describe('User', () => {
         expect(response.body).to.have.property('description');
         expect(response.body).to.have.property('quantity');
         expect(response.body).to.have.property('genre');
+        expect(response.body.cover).to.equal('sdhdsjcdssnbdsdsbhjsb');
+        expect(response.body.pdf).to.equal('bssskskjhdb');
         expect(response.body.title).to.equal('Eze go to school');
+        expect(response.body.author).to.equal('Chinua Achebe');
+        expect(response.body.description)
+        .to.equal('A young boy from the village who finally goes to school');
+        expect(response.body.quantity).to.equal(5);
+        expect(response.body.genre).to.equal('Educational');
         done();
       });
   });
@@ -470,7 +501,14 @@ describe('User', () => {
         expect(response.body.newBook).to.have.property('author');
         expect(response.body.newBook).to.have.property('quantity');
         expect(response.body).to.have.property('message');
-        expect(response.body.message).to.equal('Book successfully created');
+        expect(response.body.newBook.cover).to.equal('sdhdsjcdssnbdsdsbhjsb');
+        expect(response.body.newBook.pdf).to.equal('bssskskjhdb');
+        expect(response.body.newBook.title).to.equal('Eze go to school');
+        expect(response.body.newBook.author).to.equal('Chinua Achebe');
+        expect(response.body.newBook.description)
+        .to.equal('A young boy from the village who finally goes to school');
+        expect(response.body.newBook.quantity).to.equal(5);
+        expect(response.body.newBook.genre).to.equal('Educational');
         expect(typeof (response.body)).to.equal('object');
         expect(typeof (response.body.message)).to.equal('string');
         if (error) return done(error);
@@ -485,7 +523,8 @@ describe('User', () => {
       .end((error, response) => {
         expect(error.response.status).to.equal(404);
         expect(error.response.body).to.have.property('message');
-        expect(error.response.body.message).to.equal('Looks like you have not registered this account with us');
+        expect(error.response.body.message).
+        to.equal('Looks like you have not registered this account with us');
         done();
       });
   });
@@ -535,7 +574,8 @@ describe('User', () => {
         key = confirmationKey;
         expect(response.status).to.equal(200);
         expect(response.body).to.have.property('message');
-        expect(response.body.message).to.equal('A password reset link has been sent to your email');
+        expect(response.body.message)
+        .to.equal('A password reset link has been sent to your email');
         expect(response.body).to.have.property('key');
         expect(typeof (response.body.key)).to.equal('string');
         expect(typeof (response.body.message)).to.equal('string');
@@ -716,7 +756,9 @@ describe('User', () => {
       .end((error, response) => {
         expect(error.response.status).to.equal(401);
         expect(error.response.body).to.have.property('message');
-        expect(error.response.body.message).to.equal('Sorry!!! This action cannot be completed due to your current star level');
+        expect(error.response.body.message)
+        .to
+        .equal('Sorry!!! This action cannot be completed due to your current star level');
         expect(typeof (error.response.body)).to.equal('object');
         expect(typeof (error.response.body.message)).to.equal('string');
         done();
@@ -756,6 +798,7 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(404);
         expect(typeof (response.body)).to.equal('object');
+        expect(response.body.message).to.equal('You have no book pending to be returned');
         expect(Object.keys(response.body).length).to.above(0);
         done();
       });
@@ -783,6 +826,10 @@ describe('User', () => {
       .set('Accept', 'application/json')
       .end((error, response) => {
         expect(response.status).to.equal(200);
+        expect(response.body.bookId).to.equal(2);
+        expect(response.body.userId).to.equal(2);
+        expect(response.body.returned).to.equal(false);
+        expect(response.body.owing).to.equal(false);
         expect(typeof (response.body)).to.equal('object');
         expect(Object.keys(response.body).length).to.above(0);
         done();
@@ -807,12 +854,18 @@ describe('User', () => {
       .set('Accept', 'application/json')
       .end((error, response) => {
         expect(response.status).to.equal(200);
+        expect(response.body[0].message)
+        .to.equal('johnbosco, just borrowed the book \'Eze go to school\'');
+        expect(response.body[0].type).to.equal('admin');
+        expect(response.body[0].from).to.equal('johnbosco');
+        expect(response.body[0].userId).to.equal(2);
+        expect(response.body[0].bookId).to.equal(2);
         expect(typeof (response.body)).to.equal('object');
         expect((response.body.length)).to.above(0);
         done();
       });
   });
-  it('should add new genre', (done) => {
+  it('should add new genre as Admin', (done) => {
     chai.request(app)
       .post(`/api/v1/books/genre`)
       .send(genre)
@@ -824,6 +877,7 @@ describe('User', () => {
         expect((response.body)).to.have.property('message');
         expect((response.body)).to.have.property('createdGenre');
         expect((response.body.message)).to.equal('Genre created');
+        expect((response.body.createdGenre)).to.equal('ENDGHCVDSHGJ');
         done();
       });
   });
@@ -853,8 +907,8 @@ describe('User', () => {
       .end((error, response) => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
-        expect((response.body.genre[0])).to.have.property('genre');
-        expect((response.body.genre[0].genre)).to.equal('ENDGHCVDSHGJ');
+        expect((response.body)).to.have.property('genre');
+        expect((response.body.genre[0])).to.equal('ENDGHCVDSHGJ');
         done();
       });
   });
