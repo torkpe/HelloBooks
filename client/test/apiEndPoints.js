@@ -23,3 +23,4 @@ export const getNotification = `${url}/notifications/user/2`;
 export const getAdminNotification = `${url}/notifications/admin`;
 export const updateUser = `${url}/users/update-user/2`;
 export const upload = `https://api.cloudinary.com/v1_1/hellobooks/auto/upload`;
+export const addGenre = `${url}/books/genre`;
