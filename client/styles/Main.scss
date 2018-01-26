@@ -13,84 +13,85 @@ body {
   background-size: cover;
   height: 100%;
 }
-html, body, h1, h2, h3, h4, h5, p, .mdl-button--raised{
+html, body, h1, h2, h3, h4, h5, p, .mdl-button--raised {
   font-family: Nunito !important;
 }
 .star {
+  font-weight: bolder;
   text-transform: capitalize;
-  font-weight: bolder
 }
-#button{
+#button {
   display:inline-block;
   width:250px;
 }
-#button1{
+#button1 {
   display:inline-block;
   width:250px;
-}#button2{
+}
+#button2 {
   display:inline-block;
   width:250px;
 }
 .material-icons {
+  display: inline-block;
   font-family: 'Material Icons';
   font-weight: 400;
   font-style: normal;
   font-size: 24px;
   line-height: 1;
+  margin-top: 12px;
   letter-spacing: normal;
   text-transform: none;
-  margin-top: 12px;
-  display: inline-block;
   word-wrap: normal;
   -moz-font-feature-settings: 'liga';
   font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
-.notifyLink{
+.notifyLink {
+  color: #008080;
   text-align: right;
   margin-left: 10px;
-  color: teal;
 }
-.btn-genre{
+.btn-genre {
   background-color: teal;
-  color: white;
+  color: #FFFFFF;
 }
 table {
   width: 100%
 }
 .errors {
-  color: red;
+  color: #FF0000;
   margin: 10px;
 }
 .right {
+  border: 3px solid #73AD21;
+  padding: 10px;
   position: absolute;
   right: 0px;
   width: 300px;
-  border: 3px solid #73AD21;
-  padding: 10px;
 }
-.content{
-  margin: 0 auto;
-	text-align: center;
+.content {
   color:white; 
-  padding-bottom: 20%; 
+  margin: 0 auto;
+  padding-bottom: 20%;
+	text-align: center;
 }
-.contents{
+.contents {
   margin: 0 auto;
   text-align: center;
   padding-top: 10px;
 }
-.notifications{
+.notifications {
   margin:0 auto;
   padding: 10px;
 }
-img{
+img {
   height: 350px;
   width:300px;
-  margin: 0px auto;
+  margin: 0 auto;
 }
-.contentss{
+.contentss {
   margin: 0 auto;
   text-align: center;
   text-decoration: none;
@@ -98,29 +99,29 @@ img{
 .mdl-layout__tab {
   color: rgba(0,0,0,.6) !important;
 }
-.loading{
+.loading {
   color:n rgba(0,0,0,.6);
 }
-.card-content{
+.card-content {
+  height:auto;  
   margin: 0 auto;
   text-align: center;
-  max-width:auto;
-  height:auto;    
+  max-width:auto;  
 }
 #overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background-color: rgba(0,0,0,0.5);
+  bottom: 0;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
   z-index: 2;
   cursor: pointer;
 }
-#green{
+#green {
   color:#57e4e4;
 }
 .redirect-card {
@@ -131,93 +132,91 @@ img{
   font-family: 'Encode Sans Expanded';
   font-size: 20;
 }
-.content h1{
+.content h1 {
   text-shadow: 0px 4px 3px rgba(0,1,0,0.9);
 }
-.mdl-button--raised.mdl-button--colored{
+.mdl-button--raised.mdl-button--colored {
   background: #57e4e4;
   color: rgb(255,255,255);
 }
-.content button{
+.content button {
   margin:10px;
 }
-.contents button{
+.contents button {
   margin:10px;
 }
 input[type="file"] {
   display: none;
 }
-.upload{
+.upload {
   display: inline;
 }
-.file-upload{
-  margin:20px;
+.file-upload {
+  margin: 20px;
 }
-.btn1{
+.btn1 {
   margin: 10px;
 }
-.btn2{
+.btn2 {
   margin: 10px;
 }
 .card-wrapper {
   padding: 5%;
 }
-.category input{
-  padding: 4%;
-  width: 50%;
-  height: 1%;
-  border: 0px;
+.category input {
   border: 1px solid #c0c0c0 !important;
   border-radius: 4px;
+  height: 1%;
+  padding: 4%;
+  width: 50%;
 }
-.input-wrapper{
+.input-wrapper {
   margin-top: 12px;
 }
-.card-wrapper input{
-  width: 100%;
-  border: 0px;
+.card-wrapper input {
   border: 1px solid #c0c0c0 !important;
   border-radius: 4px;
   padding: 7px;
+  width: 100%;
 }
 
-.landing-title, .auth-box{
+.landing-title, .auth-box {
   margin-top: 8%;
 }
-.landing-title h1, .mdl-layout-title{
+.landing-title h1, .mdl-layout-title {
+  color: #fff;
   font-family: 'Sedgwick Ave Display' !important;
-  color: #fff;
 }
-.mdl-layout__header-row a:hover, .mdl-layout__header-row a:active, .mdl-layout__header-row a:focus{
+.mdl-layout__header-row a:hover, .mdl-layout__header-row a:active, .mdl-layout__header-row a:focus {
+  color: #fff;
   text-decoration: none;
-  color: #fff;
 }
-.mdl-card__title-text, .mdl-card__supporting-text{
-  text-transform: capitalize;
+.mdl-card__title-text, .mdl-card__supporting-text {
   text-align: left;
+  text-transform: capitalize;
 }
-.btn{
+.btn {
   margin:5px;
 }
-.glyphicon-trash{
-  color: red;
+.glyphicon-trash {
+  color: #FF0000;
 }
-.glyphicon-edit{
-  color: grey;
+.glyphicon-edit {
+  color: #808080;
 }
-.glyphicon-eye-open{
-  color: rgb(0,150,136);
+.glyphicon-eye-open {
+  color: #009688;
 }
-.glyphicon{
+.glyphicon {
   margin: 10px;
 }
 .form-card {
-  padding: 20px;
-  padding-top:0px;
   margin-top: 50px;
+  padding: 20px;
+  padding-top: 0;
 }
-.ask{
-  color:black;
-  font-weight: bold;   
+.ask {
+  color: #000000;
+  font-weight: bold;
   text-align: center;
 }
