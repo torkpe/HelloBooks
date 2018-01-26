@@ -2,6 +2,7 @@ import { getExceededDeadlineAndRemind } from './remindUser';
 import upgradeUser from './upgradeUser';
 
 const cron = require('cron');
+// Cron Job to remind users exceeding deadline
 
 export const remindUser = () => {
   const job1 = new cron.CronJob({
@@ -14,6 +15,8 @@ export const remindUser = () => {
   });
   job1.start();
 };
+
+// Cron job to upgrade users due for upgrade
 
 export const upgradeUsers = () => {
   const job1 = new cron.CronJob({
