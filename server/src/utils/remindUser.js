@@ -4,6 +4,8 @@ import notification from '../controllers/notifications';
 const { createNotification } = notification;
 const { Book, BorrowBook } = model;
 
+// Get all users exceeding deadline and send notification to them
+
 export const getExceededDeadlineAndRemind = () => {
   const newDate = new Date(new Date().getTime());
   return BorrowBook
