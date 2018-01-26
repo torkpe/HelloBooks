@@ -8,7 +8,7 @@ import "react-pdf-reader/dist/PdfReader.css";
 import { getABook } from '../actions/books';
 
 /**
- * @classdesc returns Notificarions component
+ * @classdesc Returns Notificarions component
  */
 class MyPdfViewer extends Component {
   /**
@@ -20,7 +20,7 @@ class MyPdfViewer extends Component {
     this.props.getABook(this.props.params.key);
   }
   /**
-   * @description renders Pdf content
+   * @description Renders Pdf content
    * 
    * @return {XML} JSX
    */

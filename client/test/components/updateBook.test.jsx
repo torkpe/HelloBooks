@@ -17,9 +17,11 @@ describe('<UpdateBook />', () => {
     getABook: jest.fn(),
     uploader: jest.fn(),
     editBook: jest.fn(),
+    getAllGenre: jest.fn(),
     params: {
       key: 34567
     },
+    genre: ['hjk', 'ghjk', 'gvhbjnk'],
     updatedDetail: {
       book: {
         cover: 'book.cover',

@@ -1,78 +1,88 @@
 export const getAllBooks = [
   {
     id: 1,
-    title: "Eze goes to school",
-    author: "Arinze Akere",
-    cover: "http://res.cloudinary.com/hellobooks/image/upload/v1512745103/ury1qmurfpwkvw070pjl.jpg",
-    pdf: "http://res.cloudinary.com/hellobooks/image/upload/v1512745110/bxuglrkxstugk40qeuif.pdf",
+    title: 'Eze goes to school',
+    author: 'Arinze Akere',
+    cover: 'http://res.cloudinary.com/hellobooks/ima',
+    pdf: 'http://res.cloudinary.com/hellobooks/image',
     quantity: 4,
-    genre: "romance",
-    description: "A boy from the village who finally went to school",
+    genre: 'romance',
+    description: 'A boy from the village who finally went to school',
     deleted: false,
-    createdAt: "2017-12-08T14:58:33.891Z",
-    updatedAt: "2017-12-08T14:58:33.891Z"
+    createdAt: '2017-12-08T14:58:33.891Z',
+    updatedAt: '2017-12-08T14:58:33.891Z'
   },
   {
-    id: 2,
-    title: "Eze goes to school",
-    author: "Arinze Akere",
-    cover: "http://res.cloudinary.com/hellobooks/image/upload/v1512823633/zh9ebf0tm6j9l4alplnz.jpg",
-    pdf: "http://res.cloudinary.com/hellobooks/image/upload/v1512823650/pdoxjpbmt5ookzzhzbky.pdf",
-    quantity: 2,
-    genre: "romance",
-    description: "A boy from the village who finally went to school",
+    id: 1,
+    title: 'Eze goes to school',
+    author: 'Arinze Akere',
+    cover: 'http://res.cloudinary.com/hellobooks/ima',
+    pdf: 'http://res.cloudinary.com/hellobooks/image',
+    quantity: 4,
+    genre: 'romance',
+    description: 'A boy from the village who finally went to school',
     deleted: false,
-    createdAt: "2017-12-09T12:47:33.259Z",
-    updatedAt: "2017-12-09T12:47:33.259Z"
+    createdAt: '2017-12-08T14:58:33.891Z',
+    updatedAt: '2017-12-08T14:58:33.891Z'
   },
   {
-    id: 3,
-    title: "Eze goes to school",
-    author: "Arinze Akere",
-    cover: "http://res.cloudinary.com/hellobooks/image/upload/v1512823633/zh9ebf0tm6j9l4alplnz.jpg",
-    pdf: "http://res.cloudinary.com/hellobooks/image/upload/v1512823650/pdoxjpbmt5ookzzhzbky.pdf",
-    quantity: 2,
-    genre: "romance",
-    description: "A boy from the village who finally went to school",
+    id: 1,
+    title: 'Eze goes to school',
+    author: 'Arinze Akere',
+    cover: 'http://res.cloudinary.com/hellobooks/ima',
+    pdf: 'http://res.cloudinary.com/hellobooks/image',
+    quantity: 4,
+    genre: 'romance',
+    description: 'A boy from the village who finally went to school',
     deleted: false,
-    createdAt: "2017-12-09T12:47:33.259Z",
-    updatedAt: "2017-12-09T12:47:33.259Z"
+    createdAt: '2017-12-08T14:58:33.891Z',
+    updatedAt: '2017-12-08T14:58:33.891Z'
   }
 ];
-
+export const addGenreState = {
+  requesting: false,
+  response: {},
+  errors: {},
+};
 export const userSignup = {
-  message: "A mail has been sent to your email",
-  key: "B7uqPzx9PbOoEW9mCB1z61vAXA7eAscoKTDuzGuRWHnSXbnviE"
+  message: 'A mail has been sent to your email',
+  key: 'B7uqPzx9PbOoEW9mCB1z61vAXA7eAscoKTDuzGuRWHnSXbnviE'
 };
 export const userConfirmationResponse = {
-  myToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwic3RhciI6ImJyb256ZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1MTMwMDQwNjcsImV4cCI6MTUxMzA5MDQ2N30.wSnWHLLse7hq-ZIQOcuFNvaGwO8UAjiimYJzxjRmFPc",
-  message: "Successfully updated",
+  myToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.\
+eyJpZCI6Niwic3RhciI6ImJyb256ZSIsImlzQWRtaW4iOmZhbHN\
+lLCJpYXQiOjE1MTMwMDQwNjcsImV4cCI6MTUxMzA5MDQ2N30.\
+wSnWHLLse7hq-ZIQOcuFNvaGwO8UAjiimYJzxjRmFPc',
+  message: 'Successfully updated',
   userId: 2
 };
 
 export const userSigninResponse = {
-  myToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwic3RhciI6ImdvbGQiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTEzMDA1MzAxLCJleHAiOjE1MTMwOTE3MDF9.SKKA5RHY0cMUqCNuFYbFNgi6CIa-fOIoOyGslFkwW0g",
+  myToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.\
+eyJpZCI6Miwic3RhciI6ImdvbGQiLCJpc0FkbWluIjpmYWxz\
+ZSwiaWF0IjoxNTEzMDA1MzAxLCJleHAiOjE1MTMwOTE3MDF9.\
+SKKA5RHY0cMUqCNuFYbFNgi6CIa-fOIoOyGslFkwW0g',
   userId: 2
 };
 export const userResetLinkResponse = {
-  message: "A password reset link has been sent to your email",
-  key: "TqKwKi2V3som0fxlbcC9vwCIzT9XyGEdqsTG03nKCWlfbc66qf"
+  message: 'A password reset link has been sent to your email',
+  key: 'TqKwKi2V3som0fxlbcC9vwCIzT9XyGEdqsTG03nKCWlfbc66qf'
 };
 export const resetPasswordResponse = {
-  message: "Password reset successful",
+  message: 'Password reset successful',
 };
 export const errorMessage = {
-  message: "Something went wrong",
+  message: 'Something went wrong',
 };
 export const aBook = {
-  id: 3,
-  title: "Eze goes to school",
-  author: "Arinze Akere",
-  cover: "http://res.cloudinary.com/hellobooks/image/upload/v1512823633/zh9ebf0tm6j9l4alplnz.jpg",
-  pdf: "http://res.cloudinary.com/hellobooks/image/upload/v1512823650/pdoxjpbmt5ookzzhzbky.pdf",
-  quantity: 2,
-  genre: "romance",
-  description: "A boy from the village who finally went to school",
+  id: 1,
+  title: 'Eze goes to school',
+  author: 'Arinze Akere',
+  cover: 'http://res.cloudinary.com/hellobooks/ima',
+  pdf: 'http://res.cloudinary.com/hellobooks/image',
+  quantity: 4,
+  genre: 'romance',
+  description: 'A boy from the village who finally went to school',
 };
 export const checkIfBorrowedMessage = {
   message: 'No book found'
@@ -80,49 +90,49 @@ export const checkIfBorrowedMessage = {
 export const getBorrows = [
   {
     id: 1,
-    title: "Eze goes to school",
-    author: "Arinze Akere",
-    cover: "http://res.cloudinary.com/hellobooks/image/upload/v1512745103/ury1qmurfpwkvw070pjl.jpg",
-    pdf: "http://res.cloudinary.com/hellobooks/image/upload/v1512745110/bxuglrkxstugk40qeuif.pdf",
+    title: 'Eze goes to school',
+    author: 'Arinze Akere',
+    cover: 'http://res.cloudinary.com/hellobooks/ima',
+    pdf: 'http://res.cloudinary.com/hellobooks/image',
     quantity: 4,
-    genre: "romance",
-    description: "A boy from the village who finally went to school"
+    genre: 'romance',
+    description: 'A boy from the village who finally went to school',
   },
 ];
 export const deleteBook = {
   message: 'Book deleted successfully'
 };
 export const userDetail = {
-  name: "foo bar",
-  email: "jane@doe.com"
+  name: 'foo bar',
+  email: 'jane@doe.com'
 };
 export const notification = [
   {
     id: 2,
-    message: "temitope, Gentle reminder concerning the book 'the mysterious boy'.\n          Please return as you have exceeded the deadline in order to continue using this service",
-    type: "user",
+    message: 'temitope, Gentle reminder concerning the book',
+    type: 'user',
     isTreated: false,
-    from: "temitope",
+    from: 'temitope',
     userId: 2,
     bookId: 1,
-    createdAt: "2017-12-02T20:21:00.391Z",
-    updatedAt: "2017-12-02T20:21:00.391Z"
+    createdAt: '2017-12-02T20:21:00.391Z',
+    updatedAt: '2017-12-02T20:21:00.391Z'
   },
   {
-    id: 7,
-    message: "temitope, Gentle reminder concerning the book 'the mysterious boy'.\n          Please return as you have exceeded the deadline in order to continue using this service",
-    type: "user",
+    id: 2,
+    message: 'temitope, Gentle reminder concerning the book',
+    type: 'user',
     isTreated: false,
-    from: "temitope",
+    from: 'temitope',
     userId: 2,
     bookId: 1,
-    createdAt: "2017-12-02T20:38:00.373Z",
-    updatedAt: "2017-12-02T20:38:00.373Z"
+    createdAt: '2017-12-02T20:21:00.391Z',
+    updatedAt: '2017-12-02T20:21:00.391Z'
   },
 ];
 export const updatedUser = {
-  name: "foo bar",
-  message: "Successfully updated Name"
+  name: 'foo bar',
+  message: 'Successfully updated Name'
 };
 export const userDetailsDecoded = {
   id: 2,
@@ -151,10 +161,10 @@ export const borrowBookMessage = {
     bookId: 1,
     userId: 2,
     returned: false,
-    returnDate: "2017-12-14T16:05:39.065Z",
+    returnDate: '2017-12-14T16:05:39.065Z',
     owing: false,
   },
-  message: "Book successfully borrowed"
+  message: 'Book successfully borrowed'
 };
 export const borrowBookState = {
   requesting: false,
@@ -168,10 +178,10 @@ export const returnBookMessage = {
     userId: 2,
     bookId: 10,
     returned: true,
-    returnDate: "2017-12-14T16:05:39.065Z",
+    returnDate: '2017-12-14T16:05:39.065Z',
     owing: false,
-    createdAt: "2017-12-11T16:05:39.067Z",
-    updatedAt: "2017-12-11T16:20:46.910Z"
+    createdAt: '2017-12-11T16:05:39.067Z',
+    updatedAt: '2017-12-11T16:20:46.910Z'
   }
 };
 export const returnBookState = {
@@ -183,18 +193,18 @@ export const returnBookState = {
 export const createdBook = {
   newBook: {
     id: 1,
-    title: "Eze goes to school",
-    author: "Arinze Akere",
-    cover: "http://res.cloudinary.com/hellobooks/image/upload/v1512745103/ury1qmurfpwkvw070pjl.jpg",
-    pdf: "http://res.cloudinary.com/hellobooks/image/upload/v1512745110/bxuglrkxstugk40qeuif.pdf",
+    title: 'Eze goes to school',
+    author: 'Arinze Akere',
+    cover: 'http://res.cloudinary.com/hellobooks/ima',
+    pdf: 'http://res.cloudinary.com/hellobooks/image',
     quantity: 4,
-    genre: "romance",
-    description: "A boy from the village who finally went to school",
+    genre: 'romance',
+    description: 'A boy from the village who finally went to school',
     deleted: false,
-    createdAt: "2017-12-08T14:58:33.891Z",
-    updatedAt: "2017-12-08T14:58:33.891Z"
+    createdAt: '2017-12-08T14:58:33.891Z',
+    updatedAt: '2017-12-08T14:58:33.891Z'
   },
-  message: "Book successfully created"
+  message: 'Book successfully created'
 };
 export const createBookState = {
   isLoading: false,
@@ -203,7 +213,7 @@ export const createBookState = {
   errors: {},
 };
 export const deleteBookResponse = {
-  message: "Book successfully deleted"
+  message: 'Book successfully deleted'
 };
 export const deleteBookState = {
   isLoading: false,
@@ -212,19 +222,19 @@ export const deleteBookState = {
 };
 export const editBookResponse = {
   updatedBook: {
-    id: 3,
-    title: "Eze goes to school",
-    author: "Arinze Akere",
-    cover: "http://res.cloudinary.com/hellobooks/image/upload/v1512823633/zh9ebf0tm6j9l4alplnz.jpg",
-    pdf: "http://res.cloudinary.com/hellobooks/image/upload/v1512823650/pdoxjpbmt5ookzzhzbky.pdf",
-    quantity: 2,
-    genre: "romance",
-    description: "A boy from the village who finally went to school",
+    id: 1,
+    title: 'Eze goes to school',
+    author: 'Arinze Akere',
+    cover: 'http://res.cloudinary.com/hellobooks/ima',
+    pdf: 'http://res.cloudinary.com/hellobooks/image',
+    quantity: 4,
+    genre: 'romance',
+    description: 'A boy from the village who finally went to school',
     deleted: false,
-    createdAt: "2017-12-09T12:47:33.259Z",
-    updatedAt: "2017-12-09T12:47:33.259Z"
+    createdAt: '2017-12-08T14:58:33.891Z',
+    updatedAt: '2017-12-08T14:58:33.891Z'
   },
-  message: "Book updated successfully"
+  message: 'Book updated successfully'
 };
 export const editBookState = {
   isLoading: false,
@@ -237,7 +247,7 @@ export const setPasswordState = {
   response: {},
 };
 export const setPasswordResponse = {
-  message: "Password successfully changed"
+  message: 'Password successfully changed'
 };
 export const getPdfState = {
   fetching: false,
@@ -272,10 +282,10 @@ export const updateUserState = {
 export const uploadFileInitialState = {
   isLoading: false,
   errors: {},
-  uploaded: "",
+  uploaded: '',
 };
-export const cover = "http://res.cloudinary.com/hellobooks/image/upload/v1512823633/zh9ebf0tm6j9l4alplnz.jpg";
-export const pdf = "http://res.cloudinary.com/hellobooks/image/upload/v1512823650/pdoxjpbmt5ookzzhzbky.pdf";
+export const cover = 'http://res.cloudinary.com/hellobooks/image/upload/v1512';
+export const pdf = 'http://res.cloudinary.com/hellobooks/image/upload/';
 export const signupInitialState = {
   isLoading: false,
   errors: {},

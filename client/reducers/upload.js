@@ -6,7 +6,8 @@ const {
   FAILED_TO_UPLOAD_COVER,
   FAILED_TO_UPLOAD_PDF,
   UPLOAD_COVER_SUCCESSFUL,
-  UPLOAD_PDF_SUCCESSFUL
+  UPLOAD_PDF_SUCCESSFUL,
+  CLEAR_UPLOAD_STATE
 } = types;
 
 const initialState = {
@@ -44,6 +45,13 @@ export const uploadCover = (state = initialState, action = {}) => {
         errors: action.payLoad,
       };
     }
+    case CLEAR_UPLOAD_STATE: {
+      return {
+        isLoading: false,
+        errors: {},
+        uploaded: "",
+      }
+    }
     default: return state;
   }
 };
@@ -75,6 +83,13 @@ export const uploadPdf = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
         errors: action.payLoad,
+      };
+    }
+    case CLEAR_UPLOAD_STATE: {
+      return {
+        isLoading: false,
+        errors: {},
+        uploaded: "",
       };
     }
     default: return state;
