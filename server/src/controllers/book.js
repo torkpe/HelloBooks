@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Book, BorrowBook } = model;
+const { Book, BorrowBook, BookGenre } = model;
 export default {
   /**
    * @description Create a new book
@@ -74,7 +74,10 @@ export default {
       .findAll({
         where: {
           deleted: false,
-        }
+        },
+        order: [
+          ['id', 'ASC']
+        ]
       })
       .then((book) => {
         if (book.length < 1) {
@@ -89,6 +92,69 @@ export default {
       .catch(() => response.status(500).send({
         message: 'Something went wrong'
       }));
+  },
+  /**
+   * @description Create a new genre for books
+   * 
+   * @param {object} request
+   * @param {object} response
+   * 
+   * @returns {object} response
+   */
+  addBookGenre(request, response) {
+    const { bookGenre } = request.body;
+    if (bookGenre) {
+      if (bookGenre.length < 3) {
+        return response.status(400).send({
+          message: 'Length of Genre is too short'
+        });
+      }
+      if (!(/^[A-z]+$/).test(bookGenre)) {
+        return response.status(400).send({
+          message: 'Genre should contain alphabets only'
+        });
+      }
+      const genre = bookGenre.toUpperCase();
+      return BookGenre.findOne({
+        where: {
+          genre
+        }
+      }).then((foundGenre) => {
+        if (foundGenre) {
+          return response.status(409).send({
+            message: 'Genre already exists'
+          });
+        }
+        BookGenre.create({
+          genre
+        }).then(createdGenre => response.status(201).send({
+          message: 'Genre created',
+          createdGenre: createdGenre.genre
+        }));
+      })
+      .catch(() => response.status(500).send({
+          message: 'Something went wrong'
+        }))
+    }
+    return response.status(400).send({
+      message: 'Genre is required'
+    });
+  },
+  /**
+   * @description Fetch all genre from database
+   * 
+   * @param {object} request
+   * @param {object} response
+   * 
+   * @returns {object} response
+   */
+  findAllGenre(request, response) {
+    return BookGenre.findAll({}).then((genre) => {
+      const organizedGenre = genre.map(aGenre => aGenre.genre);
+      return response.status(200).send({
+        genre: organizedGenre
+      });
+    });
   },
   /**
    * @description Delete a book
