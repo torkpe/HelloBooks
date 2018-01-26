@@ -290,7 +290,7 @@ export class UploadBook extends Component {
               />
               <button
                 name="return"
-                className="btn btn-success">
+                className="btn btn-default">
                   Add Genre
               </button>
             </div>

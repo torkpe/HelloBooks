@@ -74,7 +74,10 @@ export default {
       .findAll({
         where: {
           deleted: false,
-        }
+        },
+        order: [
+          ['id', 'ASC']
+        ]
       })
       .then((book) => {
         if (book.length < 1) {
