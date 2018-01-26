@@ -1,5 +1,5 @@
 let localStorage = {};
-
+// Mock local storage
 export default {
   setItem(key, value) {
     return {
