@@ -161,7 +161,6 @@ export const clearDeleteBookState = () => dispatch => dispatch({
  * @description Get a book
  * 
  * @param {number} id
- * 
  * @param {number} userId
  * 
  * @return {object} Axios promise
@@ -219,7 +218,6 @@ export const getBorrows = id => (dispatch) => {
  * @description Borrow a book action
  * 
  * @param {number} id
- * 
  * @param {number} bookId
  * @param {object} data
  * 
@@ -394,7 +392,6 @@ export const deleteBook = data => (dispatch) => {
  * @description Edit a book
  * 
  * @param {object} data
- * 
  * @param {number} bookId
  * 
  * @return {object} Axios promise

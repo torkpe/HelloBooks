@@ -1,3 +1,4 @@
+// Action types
 export default {
   GET_BOOKS: 'GET_BOOKS',
   GET_BOOKS_SUCCESSFUL: 'GET_BOOKS_SUCCESSFUL',
