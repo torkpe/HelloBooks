@@ -157,7 +157,7 @@ export const clearSignupState = () => dispatch => dispatch({
  * @return {void}
  */
 export const clearSigninState = () => dispatch => dispatch({
-  type: CLEAR_SIGNUP_STATE
+  type: CLEAR_SIGNIN_STATE
 });
 /**
  * @description Send password reset link
