@@ -21,7 +21,7 @@ export class Home extends Component {
     }
   }
   /**
-   * @description renders Home component
+   * @description Renders Home component
    * 
    * @return {XML} JSX
    */
@@ -35,6 +35,7 @@ export class Home extends Component {
             <div className="mdl-cell mdl-cell--2-col" />
           </div>
           <div className="contents">
+            <span className="star">Membership level: {this.props.auth.user.star}</span>
             <h5>All Books</h5>
             <hr />
           </div>
