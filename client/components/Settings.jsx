@@ -10,7 +10,7 @@ import {
 } from '../actions/updateUser';
 
 /**
- * @classdesc returns Settings component
+ * @classdesc Returns Settings component
  */
 class Settings extends Component {
   /**
@@ -103,6 +103,8 @@ class Settings extends Component {
     this.props.updateUser(this.props.auth.user.id, this.state);
   }
   /**
+   * @description Renders Settings component
+   * 
    * @return {XML} JSX
    */
   render() {

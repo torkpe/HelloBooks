@@ -4,7 +4,7 @@ import { categories } from '../utils/index';
 
 const borrowBook = model.BorrowBook;
 /**
- * @description Function to determine number of times user is allowed to borrow book
+ * @description Determine number of times user is allowed to borrow book
  * 
  * @param {number} id
  * 

@@ -94,7 +94,7 @@ export default {
       }));
   },
   /**
-   * @description Creates a new genre for books
+   * @description Create a new genre for books
    * 
    * @param {object} request
    * @param {object} response
@@ -127,25 +127,21 @@ export default {
         }
         BookGenre.create({
           genre
-        }).then((createdGenre) => {
-          return response.status(201).send({
-            message: 'Genre created',
-            createdGenre: createdGenre.genre
-          })
-        })
+        }).then(createdGenre => response.status(201).send({
+          message: 'Genre created',
+          createdGenre: createdGenre.genre
+        }));
       })
-      .catch(() => {
-        return response.status(500).send({
+        .catch(() => response.status(500).send({
           message: 'Something went wrong'
-        });
-      })
+        }));
     }
     return response.status(400).send({
       message: 'Genre is required'
     });
   },
   /**
-   * @description Fetches all genre from database
+   * @description Fetch all genre from database
    * 
    * @param {object} request
    * @param {object} response
@@ -154,7 +150,7 @@ export default {
    */
   findAllGenre(request, response) {
     return BookGenre.findAll({}).then((genre) => {
-      const organizedGenre = genre.map((aGenre) => aGenre.genre);
+      const organizedGenre = genre.map(aGenre => aGenre.genre);
       return response.status(200).send({
         genre: organizedGenre
       });

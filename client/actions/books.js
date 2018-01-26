@@ -107,7 +107,7 @@ export const getABook = id => (dispatch) => {
       return null;
     }).catch((error) => {
       if (error) {
-        if(error.response){
+        if (error.response) {
           return dispatch({
             type: FAILED_TO_GET_BOOK,
             payload: error.response.data,
@@ -161,7 +161,6 @@ export const clearDeleteBookState = () => dispatch => dispatch({
  * @description Get a book
  * 
  * @param {number} id
- * 
  * @param {number} userId
  * 
  * @return {object} Axios promise
@@ -219,7 +218,6 @@ export const getBorrows = id => (dispatch) => {
  * @description Borrow a book action
  * 
  * @param {number} id
- * 
  * @param {number} bookId
  * @param {object} data
  * 
@@ -253,8 +251,8 @@ export const borrowBook = (id, bookId) => (dispatch) => {
  * 
  * @return {object} Axios promise
  */
-export const addBookGenre = (genre) => (dispatch) => {
-  dispatch({ type: ADD_GENRE })
+export const addBookGenre = genre => (dispatch) => {
+  dispatch({ type: ADD_GENRE });
   return axios.post(`${url}/books/genre`, genre)
     .then((response) => {
       if (response) {
@@ -273,7 +271,7 @@ export const addBookGenre = (genre) => (dispatch) => {
       }
       return null;
     });
-}
+};
 /**
  * @description Get all genre action
  * 
@@ -281,8 +279,8 @@ export const addBookGenre = (genre) => (dispatch) => {
  * 
  * @return {object} Axios promise
  */
-export const getAllGenre = (genre) => (dispatch) => {
-  dispatch({ type: GET_GENRE })
+export const getAllGenre = genre => (dispatch) => {
+  dispatch({ type: GET_GENRE });
   return axios.get(`${url}/books/genre`, genre)
     .then((response) => {
       if (response) {
@@ -301,12 +299,12 @@ export const getAllGenre = (genre) => (dispatch) => {
       }
       return null;
     });
-}
+};
 /**
  * @description Return a book action
  *
+ * @param {number} id
  * @param {number} bookId
- * @param {object} data
  * 
  * @return {object} Axios promise
  */
@@ -394,7 +392,6 @@ export const deleteBook = data => (dispatch) => {
  * @description Edit a book
  * 
  * @param {object} data
- * 
  * @param {number} bookId
  * 
  * @return {object} Axios promise

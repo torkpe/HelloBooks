@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { userSignin, clearSigninState } from '../actions/user';
 
 /**
- * @classdesc returns Signin component
+ * @classdesc Returns Signin component
  */
 export class Signin extends Component {
   /**
@@ -68,6 +68,8 @@ export class Signin extends Component {
     this.props.userSignin(this.state);
   }
   /**
+   * @description Renders Signin component
+   * 
    * @return {XML} JSX
    */
   render() {
