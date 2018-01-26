@@ -19,6 +19,7 @@ exports[`<UpdateBook /> renders <UpdateBook /> component 1`] = `
         >
           <input
             className=""
+            defaultValue="book.title"
             id="title"
             name="title"
             onChange={[Function]}
@@ -53,14 +54,15 @@ exports[`<UpdateBook /> renders <UpdateBook /> component 1`] = `
         <div
           className="card-content input-wrapper"
         >
-          <input
-            className=""
-            id="genre"
+          <select
             name="genre"
             onChange={[Function]}
-            required={true}
-            type="text"
-          />
+          >
+            <option
+              className="default"
+              value="..."
+            />
+          </select>
         </div>
         <div
           className="card-content input-wrapper"

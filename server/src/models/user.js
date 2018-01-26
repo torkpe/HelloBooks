@@ -21,10 +21,6 @@ const user = (sequelize, DataTypes) => {
           args: true,
           msg: 'Empty field for email is not allowed',
         },
-        len: {
-          args: [10, 50],
-          msg: 'Email Length should be between 10 to 50 characters',
-        },
       },
     },
     password: {
