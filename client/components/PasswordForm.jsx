@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 /**
  * @description Form for password
+ * 
  * @param {object} props
+ * 
  * @return {XML} JSX
  */
 const PasswordForm = props => (
