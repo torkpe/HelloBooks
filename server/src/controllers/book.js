@@ -94,7 +94,7 @@ export default {
       }));
   },
   /**
-   * @description Creates a new genre for books
+   * @description Create a new genre for books
    * 
    * @param {object} request
    * @param {object} response
@@ -145,7 +145,7 @@ export default {
     });
   },
   /**
-   * @description Fetches all genre from database
+   * @description Fetch all genre from database
    * 
    * @param {object} request
    * @param {object} response

@@ -18,7 +18,7 @@ const borrowBook = model.BorrowBook;
 
 export default {
   /**
-   * @description Creates a new user
+   * @description Create a new user
    * 
    * @param {object} request
    * @param {object} response
