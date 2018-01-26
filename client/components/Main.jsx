@@ -72,6 +72,11 @@ export class Main extends Component {
     event.preventDefault();
     this.props.logout();
   }
+  toggleNavBar(event) {
+    event.preventDefault();
+    $('#navbar-vertical').removeClass('is-visible');
+    $('.mdl-layout__obfuscator').removeClass('is-visible');
+  }
   /**
    * @description Calls notifications action
    * 
@@ -181,14 +186,7 @@ export class Main extends Component {
     mdl-textfield--expandable 
     mdl-textfield--align-right`;
     const userLinks = (
-      <nav className="mdl-navigation">
-        <a
-        className="mdl-navigation__link"
-        name="signout"
-        onClick={this.logout.bind(this)} href="">
-        Signout
-        </a>
-      </nav>
+      determineNav(isAdmin)
     );
     const guestLinks = (
       <nav className="mdl-navigation">
@@ -210,7 +208,9 @@ export class Main extends Component {
             </nav>
           </div>
         </header>
-        <div className="mdl-layout__drawer">
+        <div id="navbar-vertical"
+        onClick={this.toggleNavBar.bind(this)}
+        className="mdl-layout__drawer">
           {determineNav(isAdmin)}
         </div>
         <main className="mdl-layout__content">

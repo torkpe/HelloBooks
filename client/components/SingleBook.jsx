@@ -12,7 +12,7 @@ import {
 } from '../actions/books';
 
 /**
- * @classdesc returns Book component
+ * @classdesc Returns Book component
  */
 class Book extends Component {
   /**
@@ -90,6 +90,7 @@ class Book extends Component {
   }
   /**
    * @description Renders component
+   * 
    * @return {XML} JSX
    */
   render() {

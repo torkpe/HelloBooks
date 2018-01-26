@@ -4,8 +4,10 @@ import Proptypes from 'prop-types';
 import { browserHistory } from 'react-router';
 
 /**
- * Is user
+ * @description Check if it is a user
+ * 
  * @param {object} ComposedComponent
+ * 
  * @return {void}
  */
 const isUser = (ComposedComponent) => {
@@ -25,7 +27,10 @@ const isUser = (ComposedComponent) => {
     isAdmin: Proptypes.bool.isRequired,
   };
   /**
+   * @description Map state to props
+   * 
    * @param {object} state
+   * 
    * @return {object} props
    */
   const mapStateToProps = state => ({
