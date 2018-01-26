@@ -33,7 +33,7 @@ const initialState = {
 };
 
 /**
- * @classdesc returns UploadBook component
+ * @classdesc Returns UploadBook component
  */
 export class UploadBook extends Component {
   /**
@@ -136,7 +136,6 @@ export class UploadBook extends Component {
    * @description React life cycle
    * 
    * @param {object} prevProps
-   * 
    * @param {object} prevState
    * 
    * @return {undefined}
@@ -264,7 +263,7 @@ export class UploadBook extends Component {
     event.target.reset();
   }
   /**
-   * @description Renders component
+   * @description Renders UploadBook component
    * 
    * @return {XML} JSX
    */

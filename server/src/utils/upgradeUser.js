@@ -5,6 +5,8 @@ import categories from './categories';
 const { createNotification } = notification;
 const { Book, BorrowBook, Users } = model;
 
+// Upgrade user and create notification
+
 const upgradeUser = () => {
   Users.findAll({})
     .then((users) => {
