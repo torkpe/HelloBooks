@@ -10,7 +10,7 @@ import {
 import uploader from '../actions/upload';
 
 /**
- * @classdesc returns component to edit book
+ * @classdesc Returns component to edit book
  */
 export class UpdateBook extends Component {
   /**
@@ -193,7 +193,9 @@ export class UpdateBook extends Component {
   }
   /**
    * @description Handle file selection for pdf
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   pdfChange(event) {
@@ -205,6 +207,8 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Renders UpdateBook component
+   * 
    * @return {XML} JSX
    */
   render() {
