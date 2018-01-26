@@ -6,7 +6,7 @@ const User = model.Users;
 
 export default {
   /**
-   * @description Creates notifications
+   * @description Create notifications
    * 
    * @param {string} message
    * @param {string} type
@@ -48,7 +48,7 @@ export default {
    * @description Get notifications for admin
    * 
    * @param {object} request
-   * @param {*} response
+   * @param {object} response
    * 
    * @returns {object} response
    */
