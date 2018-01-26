@@ -4,7 +4,7 @@ import {
   getBooks, getABook,
   borrowBook, returnBook, returnBookState,
   getBorrows, createBook, deleteBook,
-  editBook
+  editBook, addGenre
 } from '../../reducers/book';
 import setPassword from '../../reducers/changePassword';
 import getPdf from '../../reducers/getPdf';
@@ -39,7 +39,7 @@ const {
   cover, pdf, userSignup, userSigninResponse,
   signupInitialState, userConfirmationResponse,
   confirmationInitalState, resetUserPassword,
-  signinInitialState
+  signinInitialState, addGenreState
 } = mockData;
 
 describe('Auth reducer', () => {
@@ -436,6 +436,37 @@ describe('User reducer', () => {
       successfullySignedin: userConfirmationResponse,
       isLoading: false,
       errors: {},
+    });
+  });
+});
+describe('Add category', () => {
+  it('should update state when admin successfully adds new genre', () => {
+    expect(addGenre(addGenreState, {
+      type: types.ADD_GENRE_SUCCESSFUL,
+      payload: userConfirmationResponse,
+    })).toEqual({
+      response: userConfirmationResponse,
+      requesting: false,
+      errors: {}
+    });
+  });
+  it('should update state when admin adds new genre fails', () => {
+    expect(addGenre(addGenreState, {
+      type: types.FAILED_TO_ADD_GENRE,
+      payload: userConfirmationResponse,
+    })).toEqual({
+      response: {},
+      requesting: false,
+      errors: userConfirmationResponse
+    });
+  });
+  it('should update state when clearAddGenre action is called', () => {
+    expect(addGenre(addGenreState, {
+      type: types.CLEAR_ADD_GENRE_STATE,
+    })).toEqual({
+      response: {},
+      requesting: false,
+      errors: {}
     });
   });
 });
