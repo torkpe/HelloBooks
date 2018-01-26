@@ -13,6 +13,12 @@ configure({ adapter: new Adapter() });
 
 describe('<Home />', () => {
   const props = {
+    auth: {
+      user: {
+        star: 'gh',
+        id: 1
+      },
+    },
     getBooks: jest.fn(),
     books: [{
       title: 'eze goes to school',
