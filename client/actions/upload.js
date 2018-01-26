@@ -9,7 +9,8 @@ const {
   FAILED_TO_UPLOAD_COVER,
   FAILED_TO_UPLOAD_PDF,
   UPLOAD_COVER_SUCCESSFUL,
-  UPLOAD_PDF_SUCCESSFUL
+  UPLOAD_PDF_SUCCESSFUL,
+  CLEAR_UPLOAD_STATE
 } = types;
 /**
  * @description Upload file to cloudinary
@@ -77,4 +78,7 @@ const uploader = (data, uploadType) => (dispatch) => {
     });
   });
 };
+export const clearUploadState = () => dispatch => dispatch({
+  type: CLEAR_UPLOAD_STATE
+});
 export default uploader;

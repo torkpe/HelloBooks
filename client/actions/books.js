@@ -36,7 +36,14 @@ const {
   EDIT_BOOK,
   EDIT_BOOK_SUCCESSFUL,
   FAILED_TO_EDIT_BOOK,
-  CHECK_IF_BORROWED
+  CHECK_IF_BORROWED,
+  ADD_GENRE,
+  ADD_GENRE_SUCCESSFUL,
+  FAILED_TO_ADD_GENRE,
+  GET_GENRE,
+  GET_GENRE_SUCCESSFUL,
+  FAILED_TO_GET_GENRE,
+  CLEAR_ADD_GENRE_STATE
 } = types;
 /**
  * @description Get all books
@@ -100,10 +107,12 @@ export const getABook = id => (dispatch) => {
       return null;
     }).catch((error) => {
       if (error) {
-        return dispatch({
-          type: FAILED_TO_GET_BOOK,
-          payload: error.response.data,
-        });
+        if(error.response){
+          return dispatch({
+            type: FAILED_TO_GET_BOOK,
+            payload: error.response.data,
+          });
+        }
       }
       return null;
     });
@@ -131,6 +140,14 @@ export const clearCreatedBookState = () => dispatch => dispatch({
  */
 export const clearBooksState = () => dispatch => dispatch({
   type: CLEAR_BOOKS_STATE
+});
+/**
+ * @description Clear all add genre state
+ * 
+ * @return {object} Dispatch
+ */
+export const clearAddGenreState = () => dispatch => dispatch({
+  type: CLEAR_ADD_GENRE_STATE
 });
 /**
  * @description Clear deleted book state
@@ -171,7 +188,7 @@ export const checkIfBorrowed = (id, userId) => (dispatch) => {
     });
 };
 /**
- * @description Get list of borrowed books
+ * @description Get list of borrowed books action
  * 
  * @param {number} id
  * 
@@ -199,7 +216,7 @@ export const getBorrows = id => (dispatch) => {
     });
 };
 /**
- * @description Borrow a book
+ * @description Borrow a book action
  * 
  * @param {number} id
  * 
@@ -229,9 +246,64 @@ export const borrowBook = (id, bookId) => (dispatch) => {
       return null;
     });
 };
-
 /**
- * @description Return a book
+ * @description Add book genre action
+ * 
+ * @param {object} genre
+ * 
+ * @return {object} Axios promise
+ */
+export const addBookGenre = (genre) => (dispatch) => {
+  dispatch({ type: ADD_GENRE })
+  return axios.post(`${url}/books/genre`, genre)
+    .then((response) => {
+      if (response) {
+        return dispatch({
+          type: ADD_GENRE_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+      return null;
+    }).catch((error) => {
+      if (error) {
+        return dispatch({
+          type: FAILED_TO_ADD_GENRE,
+          payload: error.response.data,
+        });
+      }
+      return null;
+    });
+}
+/**
+ * @description Get all genre action
+ * 
+ * @param {object} genre
+ * 
+ * @return {object} Axios promise
+ */
+export const getAllGenre = (genre) => (dispatch) => {
+  dispatch({ type: GET_GENRE })
+  return axios.get(`${url}/books/genre`, genre)
+    .then((response) => {
+      if (response) {
+        return dispatch({
+          type: GET_GENRE_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+      return null;
+    }).catch((error) => {
+      if (error) {
+        return dispatch({
+          type: FAILED_TO_GET_GENRE,
+          payload: error.response.data,
+        });
+      }
+      return null;
+    });
+}
+/**
+ * @description Return a book action
  *
  * @param {number} bookId
  * @param {object} data
@@ -290,7 +362,7 @@ export const postBook = data => (dispatch) => {
 };
 
 /**
- * @description Delete a book
+ * @description Delete a book action
  * 
  * @param {object} data
  * 

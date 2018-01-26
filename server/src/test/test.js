@@ -75,7 +75,9 @@ const book3 = {
   quantity: 0,
   genre: 'Educational',
 };
-
+const genre = {
+  bookGenre: 'endghcvdshgj'
+}
 const Admin = {
   email: 'admin@hellobooks.com',
   password: 'silver',
@@ -807,6 +809,52 @@ describe('User', () => {
         expect(response.status).to.equal(200);
         expect(typeof (response.body)).to.equal('object');
         expect((response.body.length)).to.above(0);
+        done();
+      });
+  });
+  it('should add new genre', (done) => {
+    chai.request(app)
+      .post(`/api/v1/books/genre`)
+      .send(genre)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(201);
+        expect(typeof (response.body)).to.equal('object');
+        expect((response.body)).to.have.property('message');
+        expect((response.body)).to.have.property('createdGenre');
+        expect((response.body.message)).to.equal('Genre created');
+        done();
+      });
+  });
+  it('should recieve error when add new genre fails', (done) => {
+    chai.request(app)
+      .post(`/api/v1/books/genre`)
+      .send({
+        bookGenre: 'gh'
+      })
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(error.response.status).to.equal(400);
+        expect(typeof (error.response.body)).to.equal('object');
+        expect((error.response.body))
+        .to.have.property('message');
+        expect((error.response.body.message))
+        .to.equal('Length of Genre is too short');
+        done();
+      });
+  });
+  it('should get all genres', (done) => {
+    chai.request(app)
+      .get(`/api/v1/books/genre`)
+      .set('x-access-token', adminToken)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        expect(response.status).to.equal(200);
+        expect(typeof (response.body)).to.equal('object');
+        expect((response.body.genre[0])).to.have.property('genre');
+        expect((response.body.genre[0].genre)).to.equal('ENDGHCVDSHGJ');
         done();
       });
   });

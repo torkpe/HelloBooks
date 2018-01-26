@@ -3,8 +3,14 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 import { browserHistory } from 'react-router';
-import { postBook, clearCreatedBookState } from '../actions/books';
-import uploader from '../actions/upload';
+import Select from 'react-select-plus';
+
+import {
+  postBook, clearCreatedBookState,
+  addBookGenre, getAllGenre,
+  clearAddGenreState
+} from '../actions/books';
+import uploader, { clearUploadState }from '../actions/upload';
 
 // Set initial state
 const initialState = {
@@ -14,12 +20,14 @@ const initialState = {
   author: '',
   description: '',
   quantity: '',
-  genre: '',
+  allGenre: [],
+  bookGenre: '',
   isLoading: false,
   isCoverAndPdf: false,
   isCoverSet: false,
   isPdfSet: false,
   error: '',
+  genre:'',
   isPostCover: false,
   isPostPdf: false
 };
@@ -44,6 +52,20 @@ export class UploadBook extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onPostCover = this.onPostCover.bind(this);
     this.onPostPdf = this.onPostPdf.bind(this);
+    this.onHandleAddGenre = this.onHandleAddGenre.bind(this);
+  }
+  /**
+   * @description React life cycle
+   * 
+   * @param {object} nextProps
+   * 
+   * @return {undefined}
+   */
+  componentDidMount() {
+    this.setState({
+      initialState
+    });
+    this.props.getAllGenre();
   }
   /**
    * @description React life cycle
@@ -54,7 +76,10 @@ export class UploadBook extends Component {
    */
   componentWillReceiveProps(nextProps) {
     const {
-      cover, pdf, createBook, error
+      cover, pdf,
+      createBook, error,
+      genre, addedGenre,
+      addGenreFailed
     } = nextProps;
     if (cover) {
       this.setState({
@@ -87,6 +112,23 @@ export class UploadBook extends Component {
         this.setState({
           error
         });
+      }
+      if (genre.length > 0) {
+        this.setState({
+          allGenre: genre
+        })
+      }
+      const { message, createdGenre } = addedGenre
+      if (createdGenre) {
+        if (!this.state.genre.includes(createdGenre)) {
+          this.state.allGenre.push(createdGenre);
+          toastr.success(message);
+          this.props.clearAddGenreState();
+        }
+      }
+      if (addGenreFailed) {
+        toastr.error(addGenreFailed);
+        this.props.clearAddGenreState();
       }
     }
   }
@@ -123,9 +165,7 @@ export class UploadBook extends Component {
    */
   componentWillUnmount() {
     this.props.clearCreatedBookState();
-    this.setState({
-      initialState
-    });
+    this.props.clearUploadState();
   }
   /**
    * @description Handles form submission
@@ -212,6 +252,18 @@ export class UploadBook extends Component {
     });
   }
   /**
+   * @description Handles new genre createion
+   * 
+   * @param {object} event
+   * 
+   * @return {undefined}
+   */
+  onHandleAddGenre(event) {
+    event.preventDefault();
+    this.props.addBookGenre(this.state);
+    event.target.reset();
+  }
+  /**
    * @description Renders component
    * 
    * @return {XML} JSX
@@ -226,13 +278,30 @@ export class UploadBook extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
+          <span className="star">Add new genre</span>
+          <form onSubmit={this.onHandleAddGenre}>
+            <div
+              className="category card-content input-wrapper">
+              <input
+              type="text"
+              onChange={this.onChange}
+              name="bookGenre" id="bookGenre"
+              placeholder="Genre"
+              />
+              <button
+                name="return"
+                className="btn btn-success">
+                  Add Genre
+              </button>
+            </div>
+          </form>
           {error && <div className="errors"> {error} </div>}
           {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
           {isPostPdf ? <div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
           <div
           className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
             <form ref="bookForm">
-              <h5>Book Details</h5>
+              <h5>Upload Book</h5>
               <div
                 className="card-content input-wrapper">
                 <input
@@ -262,12 +331,13 @@ export class UploadBook extends Component {
               </div>
               <div
               className="card-content input-wrapper">
-                <input
-                  type="text"
-                  className=""
-                  onChange={this.onChange}
-                  name="genre" id="genre"
-                  placeholder="Genre" />
+                <select name="genre" onChange={this.onChange}>
+                  <option className="default" value="...">
+                    Select Genre
+                  </option>
+                  {this.state.allGenre && this.state.allGenre.map((aGenre, index) =>
+                  <option key={index} value={aGenre}>{aGenre}</option>)}
+                </select>
               </div>
               <div
               className="card-content input-wrapper">
@@ -357,11 +427,15 @@ const mapStateToProps = state => ({
   pdf: state.uploadPdf.uploaded,
   createBook: state.createBook.book,
   message: state.createBook.message,
-  error: state.createBook.errors.message
+  error: state.createBook.errors.message,
+  genre: state.getAllGenre.response.genre,
+  addedGenre: state.addGenre.response,
+  addGenreFailed: state.addGenre.errors.message
 });
 
 export default connect(mapStateToProps, {
   postBook,
-  uploader,
-  clearCreatedBookState
+  uploader, getAllGenre,
+  clearCreatedBookState, addBookGenre,
+  clearAddGenreState, clearUploadState
 })(UploadBook);

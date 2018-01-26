@@ -39,7 +39,11 @@ export const getAllBooks = [
     updatedAt: "2017-12-09T12:47:33.259Z"
   }
 ];
-
+export const addGenreState = {
+  requesting: false,
+  response: {},
+  errors: {},
+};
 export const userSignup = {
   message: "A mail has been sent to your email",
   key: "B7uqPzx9PbOoEW9mCB1z61vAXA7eAscoKTDuzGuRWHnSXbnviE"

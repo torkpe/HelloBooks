@@ -6,6 +6,10 @@ import validator from '../middleware/validator';
 const bookControllers = controllers.book;
 const borrowBookController = controllers.borrowedBook;
 const router = express.Router();
+// add book genre
+router.post('/books/genre', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.addBookGenre);
+// add book genre
+router.get('/books/genre', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.findAllGenre);
 // add a book
 router.post('/books', authorize.checkAuthentication, authorize.authorizeAdmin, validator.bookValidator, bookControllers.create);
 // get all books

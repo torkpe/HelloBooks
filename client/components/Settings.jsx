@@ -46,13 +46,12 @@ class Settings extends Component {
    * @return {undefined}
    */
   componentWillReceiveProps(nextProps) {
-   
     const { user, updatedOrNot } = nextProps;
-      this.setState({
-        email: user.user.email,
-        name: updatedOrNot.response.name,
-      });
-    const { name, message } = updatedOrNot.response
+    this.setState({
+      email: user.user.email,
+      name: updatedOrNot.response.name,
+    });
+    const { name, message } = updatedOrNot.response;
     if (message) {
       toastr.success(message);
       this.setState({
@@ -73,7 +72,7 @@ class Settings extends Component {
    */
   componentWillUnmount() {
     this.props.clearUpdateUserState();
-    const { user } = this.props.user
+    const { user } = this.props.user;
   }
   /**
    * @description Read input form
