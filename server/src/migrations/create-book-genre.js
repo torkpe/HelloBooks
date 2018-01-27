@@ -1,6 +1,6 @@
 const bookGenre = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('BookGenres', {
+  up: (queryInterface, Sequelize) =>
+    queryInterface.createTable('BookGenres', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -18,11 +18,9 @@ const bookGenre = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('BookGenres');
-  }
+    }),
+  down: (queryInterface, Sequelize) =>
+    queryInterface.dropTable('BookGenres'),
 };
 
 module.exports = bookGenre;
