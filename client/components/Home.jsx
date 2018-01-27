@@ -21,7 +21,7 @@ export class Home extends Component {
     }
   }
   /**
-   * @description renders Home component
+   * @description Renders Home component
    * 
    * @return {XML} JSX
    */
@@ -41,7 +41,7 @@ export class Home extends Component {
           </div>
           <div className="ask">{this.props.fetching ? 'Loading' : ''}</div>
           <div className="mdl-grid">
-            {books.length > 0 ? books.map(book => (<Books
+            {books&& books.length > 0 ? books.map(book => (<Books
               {...this.props}
               key={book.id}
               book={book}

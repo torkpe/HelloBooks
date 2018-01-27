@@ -25,9 +25,9 @@
         <span class='fraction'>45/53</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">78.95% </span>
+        <span class="strong">79.49% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>30/38</span>
+        <span class='fraction'>31/39</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">92.31% </span>
@@ -407,7 +407,31 @@
 362
 363
 364
-365</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -441,6 +465,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
@@ -456,6 +481,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -468,6 +498,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -606,9 +637,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -670,7 +705,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -783,7 +831,7 @@ import {
 import uploader from '../actions/upload';
 &nbsp;
 /**
- * @classdesc returns component to edit book
+ * @classdesc Returns component to edit book
  */
 export class UpdateBook extends Component {
   /**
@@ -803,7 +851,8 @@ export class UpdateBook extends Component {
       isPostCover: false,
       isPostPdf: false,
       allGenre: '',
-      isStateSet: false
+      isStateSet: false,
+      fetching: true
     };
     this.coverChange = this.coverChange.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -829,7 +878,12 @@ export class UpdateBook extends Component {
    * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
-    const { book, cover, pdf, genre } = nextProps;
+    const {
+      book,
+      cover,
+      pdf,
+      genre
+    } = nextProps;
     <span class="missing-if-branch" title="else path not taken" >E</span>if (book &amp;&amp; !this.state.isStateSet) {
       this.setState({
         cover: book.cover,
@@ -840,7 +894,8 @@ export class UpdateBook extends Component {
         quantity: book.quantity,
         genre: book.genre,
         loading: false,
-        isStateSet: true
+        isStateSet: true,
+        fetching: false
       });
     }
     <span class="missing-if-branch" title="if path not taken" >I</span>if (pdf &amp;&amp; this.state.isPostPdf) {
@@ -885,11 +940,11 @@ export class UpdateBook extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { book, error } = this.props.updatedDetail;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (prevProps.updatedDetail.book.updatedBook !== book.updatedBook) {
-<span class="cstat-no" title="statement not covered" >      toastr.success('The title', 'Book updated');</span>
+<span class="cstat-no" title="statement not covered" >      toastr.success('Book updated');</span>
 <span class="cstat-no" title="statement not covered" >      return browserHistory.push('/home');</span>
     }
     <span class="missing-if-branch" title="if path not taken" >I</span>if (prevProps.updatedDetail.error !== error) {
-<span class="cstat-no" title="statement not covered" >      return toastr.error('The title', error.message);</span>
+<span class="cstat-no" title="statement not covered" >      return toastr.error(error.message);</span>
     }
   }
   /**
@@ -966,7 +1021,9 @@ export class UpdateBook extends Component {
   }
   /**
    * @description Handle file selection for pdf
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   pdfChange(event) {
@@ -978,6 +1035,8 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Renders UpdateBook component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -986,13 +1045,16 @@ export class UpdateBook extends Component {
     mdl-js-button
     `;
     const { book, genre } = this.props;
-    const { error, isPostCover, isPostPdf } = this.state;
+    const { error, isPostCover, isPostPdf, fetching } = this.state;
     return (
       &lt;div className="mdl-grid"&gt;
         &lt;div className="contents"&gt;
           {isPostCover ? &lt;div className="contents"&gt; &lt;h5&gt;Uploading Cover...&lt;/h5&gt; &lt;/div&gt; : ''}
           {isPostPdf ? &lt;div className="contents"&gt; &lt;h5&gt;Uploading Pdf...&lt;/h5&gt; &lt;/div&gt; : ''}
-          {genre &amp;&amp; genre.length &gt; 0 &amp;&amp; book &amp;&amp; Object.keys(book).length &gt; 0 ?
+          {fetching ? &lt;div className="contents"&gt; &lt;h5&gt;Fetching...&lt;/h5&gt; &lt;/div&gt; : ''}
+          {
+          genre &amp;&amp; genre.length &gt; 0 &amp;&amp;
+          this.state.pdf &amp;&amp; book &amp;&amp; Object.keys(book).length &gt; 0 ?
             &lt;div
               className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp"&gt;
               &lt;form&gt;
@@ -1012,7 +1074,7 @@ export class UpdateBook extends Component {
                   &lt;input
                   type="text"
                   className=""
-                  value={this.state.author}
+                  defaultValue={book.author}
                   onChange={this.onChange}
                   name="author" id="author"required /&gt;
                 &lt;/div&gt;
@@ -1023,20 +1085,30 @@ export class UpdateBook extends Component {
                   className=""
                   onChange={this.onChange}
                   name="description"
-                  value={this.state.description}
+                  defaultValue={book.description}
                   id="description"required /&gt;
                 &lt;/div&gt;
                 &lt;div
                 className="card-content input-wrapper"&gt;
-                &lt;select name="genre"
-                onChange={this.onChange}&gt;
-                  &lt;option className="default" value="..."&gt;
-                  {this.state.genre}
-                  &lt;/option&gt;
-                  {this.state.allGenre &amp;&amp; this.state.allGenre.map((aGenre, index) =&gt;
-                  &lt;option key={index}
-                  value={aGenre}&gt;{aGenre}&lt;/option&gt;)}
-                &lt;/select&gt;
+                  &lt;select
+                  name="genre"
+                  onChange={this.onChange}&gt;
+                    &lt;option
+                    className="default"
+                    value="..."
+                    &gt;
+                      {this.state.genre}
+                    &lt;/option&gt;
+                    {
+                      genre.map((aGenre, index) =&gt;
+                        &lt;option
+                        key={index}
+                        value={aGenre}
+                        &gt;
+                        {aGenre}
+                      &lt;/option&gt;)
+                    }
+                  &lt;/select&gt;
                 &lt;/div&gt;
                 &lt;div
                 className="card-content input-wrapper"&gt;
@@ -1045,7 +1117,7 @@ export class UpdateBook extends Component {
                   className=""
                   onChange={this.onChange}
                   name="quantity"
-                  value={this.state.quantity}
+                  value={book.quantity}
                   id="text"required /&gt;
                 &lt;/div&gt;
                 &lt;div
@@ -1076,7 +1148,7 @@ export class UpdateBook extends Component {
                   name="pdf" id="file-upload2" /&gt;
                 &lt;/div&gt;
                 {this.state.isCoverSet ?
-                  &lt;button
+<span class="branch-0 cbranch-no" title="branch not covered" >                  &lt;button</span>
                     disabled={this.state.isPostCover}
                     onClick={this.onPostCover}
                     className={`${mdlButton}mdl-button--raised
@@ -1105,7 +1177,7 @@ export class UpdateBook extends Component {
                 &lt;/button&gt;
               &lt;/form&gt;
             &lt;/div&gt;
-          : <span class="branch-1 cbranch-no" title="branch not covered" >''}</span>
+          : ''}
         &lt;/div&gt;
       &lt;/div&gt;
     );
@@ -1134,14 +1206,14 @@ export default connect(mapStateToProps, {
   uploader,
   editBook,
   getAllGenre
- })(UpdateBook);
+})(UpdateBook);
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 26 2018 15:30:52 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Jan 27 2018 00:58:23 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../prettify.js"></script>
