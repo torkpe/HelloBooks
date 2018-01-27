@@ -21,7 +21,8 @@ import {
   deleteBook, editBook, borrowBook,
   clearBooksState, clearBorrowBookState,
   clearCreatedBookState, clearDeleteBookState,
-  clearSingleBookState,
+  clearSingleBookState, addBookGenre,
+  clearAddGenreState
 } from '../../actions/books';
 import {
   changePassword
@@ -1033,6 +1034,42 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(updateUser(2));
       const actions = store.getActions();
       expect(actions[94].type).to.equal(expectedAction.type);
+    done();
+  });
+  it('should create ADD_GENRE_SUCCESSFUL', async (done) => {
+    moxios.stubRequest(apiEndPoints.addGenre, {
+      status: 201,
+    });
+    const expectedAction = {
+      type: actionTypes.ADD_GENRE_SUCCESSFUL,
+    };
+    // Dispatch
+    await store.dispatch(addBookGenre());
+      const actions = store.getActions();
+      expect(actions[96].type).to.equal(expectedAction.type);
+    done();
+  });
+  it('should create CLEAR_ADD_GENRE_STATE', async (done) => {
+    const expectedAction = {
+      type: actionTypes.CLEAR_ADD_GENRE_STATE,
+    };
+    // Dispatch
+    store.dispatch(clearAddGenreState());
+      const actions = store.getActions();
+      expect(actions[97].type).to.equal(expectedAction.type);
+    done();
+  });
+  it('should create FAILED_TO_ADD_GENRE', async (done) => {
+    moxios.stubRequest(apiEndPoints.addGenre, {
+      status: 400,
+    });
+    const expectedAction = {
+      type: actionTypes.FAILED_TO_ADD_GENRE,
+    };
+    // Dispatch
+    await store.dispatch(addBookGenre());
+      const actions = store.getActions();
+      expect(actions[99].type).to.equal(expectedAction.type);
     done();
   });
 });
