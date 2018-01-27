@@ -5,7 +5,8 @@ import auth from './auth';
 import { getBooks, createBook, getBorrows,
   borrowBook, returnBook, getABook,
   editBook, deleteBook,
-  checkIfBorrowed,
+  checkIfBorrowed, addGenre,
+  getAllGenre
 } from './book';
 import { getAllBorrowed, allNotReturned, getBorrowHistory } from './history';
 import { notify, getNotification } from './notification';
@@ -48,7 +49,9 @@ const rootReducer = combineReducers({
   toastr,
   userConfirmationRequest,
   sendPasswordResetLink,
-  resetPassword
+  resetPassword,
+  addGenre,
+  getAllGenre
 });
 
 export default rootReducer;
