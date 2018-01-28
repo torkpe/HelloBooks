@@ -17,7 +17,7 @@
   },
   "engines": {
     "node": "v8.9.x",
-    "npm": "5.5.x"
+    "npm": "5.6.x"
   },
   "jest": {
     "coverageDirectory": "./jest-coverage/",

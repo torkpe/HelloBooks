@@ -8,7 +8,7 @@ import { changePassword,
 import PasswordForm from './PasswordForm.jsx';
 
 /**
- * @classdesc returns ChangePassword component
+ * @classdesc Returns ChangePassword component
  */
 export class ChangePassword extends Component {
   /**
