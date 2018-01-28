@@ -27,22 +27,30 @@
         "import/extensions": "off",
         "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
         "valid-jsdoc": ["error", {
-          "requireReturn": true,
-          "requireReturnType": true,
-          "requireParamDescription": false,
-          "requireReturnDescription": true
-        }],
+            "requireReturn": true,
+            "requireReturnType": true,
+            "requireParamDescription": false,
+            "requireReturnDescription": true
+          }],
+          "require-jsdoc": ["error", {
+            "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": true,
+              "ClassDeclaration": true
+            }
+          }],
         "quotes": 0,
         "no-console": 1,
         "no-debugger": 1,
         "no-var": 1,
         "semi": [1, "always"],
-        "no-trailing-spaces": 2,
+        "no-trailing-spaces": 0,
         "eol-last": 0,
         "no-unused-vars": 0,
         "no-underscore-dangle": 0,
         "no-alert": 0,
         "no-nested-ternary": 0,
+        "no-multi-str": 0,
         "no-lone-blocks": 0,
         "jsx-quotes": 1,
         "import/prefer-default-export": 0,

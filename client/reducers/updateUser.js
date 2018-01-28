@@ -4,7 +4,8 @@ const {
   UPDATE_USER,
   UPDATE_USER_SUCCESSFUL,
   FAILED_TO_UPDATE_USER,
-  CLEAR_UPDATE_USER_STATE
+  CLEAR_UPDATE_USER_STATE,
+  GET_USER_SUCCESSFUL
 } = types;
 
 const updateUserState = {
@@ -49,6 +50,14 @@ export default (state = updateUserState, action = {}) => {
         response: {},
       };
     }
+    case GET_USER_SUCCESSFUL: {
+      return {
+        ...state,
+        isLoading: false,
+        response: action.payload,
+      };
+    }
+
     default: return state;
   }
 };
