@@ -441,32 +441,32 @@ describe('User reducer', () => {
 });
 describe('Add category', () => {
   it('should update state when admin successfully adds new genre', () => {
-      expect(addGenre(addGenreState, {
-        type: types.ADD_GENRE_SUCCESSFUL,
-        payload: userConfirmationResponse,
-      })).toEqual({
-        response: userConfirmationResponse,
-        requesting: false,
-        errors: {}
-      });
+    expect(addGenre(addGenreState, {
+      type: types.ADD_GENRE_SUCCESSFUL,
+      payload: userConfirmationResponse,
+    })).toEqual({
+      response: userConfirmationResponse,
+      requesting: false,
+      errors: {}
     });
-    it('should update state when admin adds new genre fails', () => {
-      expect(addGenre(addGenreState, {
-        type: types.FAILED_TO_ADD_GENRE,
-        payload: userConfirmationResponse,
-      })).toEqual({
-        response: {},
-        requesting: false,
-        errors: userConfirmationResponse
-      });
+  });
+  it('should update state when admin adds new genre fails', () => {
+    expect(addGenre(addGenreState, {
+      type: types.FAILED_TO_ADD_GENRE,
+      payload: userConfirmationResponse,
+    })).toEqual({
+      response: {},
+      requesting: false,
+      errors: userConfirmationResponse
     });
-    it('should update state when clearAddGenre action is called', () => {
-      expect(addGenre(addGenreState, {
-        type: types.CLEAR_ADD_GENRE_STATE,
-      })).toEqual({
-        response: {},
-        requesting: false,
-        errors: {}
-      });
+  });
+  it('should update state when clearAddGenre action is called', () => {
+    expect(addGenre(addGenreState, {
+      type: types.CLEAR_ADD_GENRE_STATE,
+    })).toEqual({
+      response: {},
+      requesting: false,
+      errors: {}
     });
-})
+  });
+});

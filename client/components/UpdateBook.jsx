@@ -10,7 +10,7 @@ import {
 import uploader from '../actions/upload';
 
 /**
- * @classdesc returns component to edit book
+ * @classdesc Returns component to edit book
  */
 export class UpdateBook extends Component {
   /**
@@ -29,8 +29,8 @@ export class UpdateBook extends Component {
       isPdfSet: false,
       isPostCover: false,
       isPostPdf: false,
-      allGenre: '',
-      isStateSet: false
+      isStateSet: false,
+      fetching: true
     };
     this.coverChange = this.coverChange.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -46,7 +46,6 @@ export class UpdateBook extends Component {
    */
   componentDidMount() {
     this.props.getABook(this.props.params.id);
-    this.props.getAllGenre();
   }
   /**
    * @description React life cycle
@@ -56,7 +55,12 @@ export class UpdateBook extends Component {
    * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
-    const { book, cover, pdf, genre } = nextProps;
+    const {
+      book,
+      cover,
+      pdf,
+      genre
+    } = nextProps;
     if (book && !this.state.isStateSet) {
       this.setState({
         cover: book.cover,
@@ -67,7 +71,8 @@ export class UpdateBook extends Component {
         quantity: book.quantity,
         genre: book.genre,
         loading: false,
-        isStateSet: true
+        isStateSet: true,
+        fetching: false
       });
     }
     if (pdf && this.state.isPostPdf) {
@@ -94,11 +99,11 @@ export class UpdateBook extends Component {
         isImageAndPdf: false
       });
     }
-    if (genre.length > 0) {
-      this.setState({
-        allGenre: genre
-      });
-    }
+    // if (genre && genre.length > 0) {
+    //   this.setState({
+    //     allGenre: genre
+    //   });
+    // }
   }
   /**
    * @description React life cycle
@@ -112,11 +117,11 @@ export class UpdateBook extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { book, error } = this.props.updatedDetail;
     if (prevProps.updatedDetail.book.updatedBook !== book.updatedBook) {
-      toastr.success('The title', 'Book updated');
+      toastr.success('Book updated');
       return browserHistory.push('/home');
     }
     if (prevProps.updatedDetail.error !== error) {
-      return toastr.error('The title', error.message);
+      return toastr.error(error.message);
     }
   }
   /**
@@ -193,7 +198,9 @@ export class UpdateBook extends Component {
   }
   /**
    * @description Handle file selection for pdf
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   pdfChange(event) {
@@ -205,6 +212,8 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Renders UpdateBook component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -213,13 +222,21 @@ export class UpdateBook extends Component {
     mdl-js-button
     `;
     const { book, genre } = this.props;
-    const { error, isPostCover, isPostPdf } = this.state;
+    const {
+      error,
+      isPostCover,
+      isPostPdf,
+      fetching
+    } = this.state;
     return (
       <div className="mdl-grid">
         <div className="contents">
           {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
           {isPostPdf ? <div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
-          {genre && genre.length > 0 && book && Object.keys(book).length > 0 ?
+          {fetching ? <div className="contents"> <h5>Fetching...</h5> </div> : ''}
+          {
+          this.state.pdf &&
+          this.state.cover && genre &&
             <div
               className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
               <form>
@@ -239,7 +256,7 @@ export class UpdateBook extends Component {
                   <input
                   type="text"
                   className=""
-                  value={this.state.author}
+                  defaultValue={book.author}
                   onChange={this.onChange}
                   name="author" id="author"required />
                 </div>
@@ -250,20 +267,31 @@ export class UpdateBook extends Component {
                   className=""
                   onChange={this.onChange}
                   name="description"
-                  value={this.state.description}
+                  defaultValue={book.description}
                   id="description"required />
                 </div>
                 <div
                 className="card-content input-wrapper">
-                <select name="genre"
-                onChange={this.onChange}>
-                  <option className="default" value="...">
-                  {this.state.genre}
-                  </option>
-                  {this.state.allGenre && this.state.allGenre.map((aGenre, index) =>
-                  <option key={index}
-                  value={aGenre}>{aGenre}</option>)}
-                </select>
+                  <select
+                  name="genre"
+                  onChange={this.onChange}>
+                    <option
+                    className="default"
+                    value="..."
+                    >
+                      {book.genre}
+                    </option>
+                    {
+                      genre.map((aGenre, index) =>
+                      (<option
+                        key={index}
+                        defaultValue={aGenre}
+                        >
+                        {aGenre}
+                       </option>
+                      ))
+                    }
+                  </select>
                 </div>
                 <div
                 className="card-content input-wrapper">
@@ -272,7 +300,7 @@ export class UpdateBook extends Component {
                   className=""
                   onChange={this.onChange}
                   name="quantity"
-                  value={this.state.quantity}
+                  defaultValue={book.quantity}
                   id="text"required />
                 </div>
                 <div
@@ -332,7 +360,7 @@ export class UpdateBook extends Component {
                 </button>
               </form>
             </div>
-          : ''}
+          }
         </div>
       </div>
     );
@@ -361,4 +389,4 @@ export default connect(mapStateToProps, {
   uploader,
   editBook,
   getAllGenre
- })(UpdateBook);
+})(UpdateBook);

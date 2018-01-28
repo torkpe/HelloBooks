@@ -82,41 +82,9 @@ export const getBooks = () => (dispatch) => {
  * 
  * @return {object} Dispatch
  */
-export const clearBorrowBookState = () => dispatch =>
-  dispatch({
-    type: CLEAR_BORROW_BOOK_STATE
-  });
-
-/**
- * @description Get a book
- * 
- * @param {number} id
- * 
- * @return {object} Axios promise
- */
-export const getABook = id => (dispatch) => {
-  dispatch({ type: GET_BOOK });
-  return axios.get(`${url}/books/${id}`)
-    .then((response) => {
-      if (response) {
-        return dispatch({
-          type: GET_BOOK_SUCCESSFUL,
-          payload: response.data,
-        });
-      }
-      return null;
-    }).catch((error) => {
-      if (error) {
-        if(error.response){
-          return dispatch({
-            type: FAILED_TO_GET_BOOK,
-            payload: error.response.data,
-          });
-        }
-      }
-      return null;
-    });
-};
+export const clearBorrowBookState = () => dispatch => dispatch({
+  type: CLEAR_BORROW_BOOK_STATE
+});
 /**
  * @description Clear single book state
  * 
@@ -161,7 +129,6 @@ export const clearDeleteBookState = () => dispatch => dispatch({
  * @description Get a book
  * 
  * @param {number} id
- * 
  * @param {number} userId
  * 
  * @return {object} Axios promise
@@ -219,7 +186,6 @@ export const getBorrows = id => (dispatch) => {
  * @description Borrow a book action
  * 
  * @param {number} id
- * 
  * @param {number} bookId
  * @param {object} data
  * 
@@ -253,8 +219,8 @@ export const borrowBook = (id, bookId) => (dispatch) => {
  * 
  * @return {object} Axios promise
  */
-export const addBookGenre = (genre) => (dispatch) => {
-  dispatch({ type: ADD_GENRE })
+export const addBookGenre = genre => (dispatch) => {
+  dispatch({ type: ADD_GENRE });
   return axios.post(`${url}/books/genre`, genre)
     .then((response) => {
       if (response) {
@@ -273,7 +239,7 @@ export const addBookGenre = (genre) => (dispatch) => {
       }
       return null;
     });
-}
+};
 /**
  * @description Get all genre action
  * 
@@ -281,8 +247,8 @@ export const addBookGenre = (genre) => (dispatch) => {
  * 
  * @return {object} Axios promise
  */
-export const getAllGenre = (genre) => (dispatch) => {
-  dispatch({ type: GET_GENRE })
+export const getAllGenre = genre => (dispatch) => {
+  dispatch({ type: GET_GENRE });
   return axios.get(`${url}/books/genre`, genre)
     .then((response) => {
       if (response) {
@@ -301,12 +267,43 @@ export const getAllGenre = (genre) => (dispatch) => {
       }
       return null;
     });
-}
+};
+/**
+ * @description Get a book
+ * 
+ * @param {number} id
+ * 
+ * @return {object} Axios promise
+ */
+export const getABook = id => (dispatch) => {
+  dispatch({ type: GET_BOOK });
+  return axios.get(`${url}/books/${id}`)
+    .then((response) => {
+      if (response) {
+        dispatch(getAllGenre());
+        return dispatch({
+          type: GET_BOOK_SUCCESSFUL,
+          payload: response.data,
+        });
+      }
+      return null;
+    }).catch((error) => {
+      if (error) {
+        if (error.response) {
+          return dispatch({
+            type: FAILED_TO_GET_BOOK,
+            payload: error.response.data,
+          });
+        }
+      }
+      return null;
+    });
+};
 /**
  * @description Return a book action
  *
+ * @param {number} id
  * @param {number} bookId
- * @param {object} data
  * 
  * @return {object} Axios promise
  */
@@ -394,7 +391,6 @@ export const deleteBook = data => (dispatch) => {
  * @description Edit a book
  * 
  * @param {object} data
- * 
  * @param {number} bookId
  * 
  * @return {object} Axios promise

@@ -5,7 +5,10 @@ import { browserHistory } from 'react-router';
 import jwt from 'jsonwebtoken';
 import { logout } from '../actions/user';
 /**
+ * @description Higher order component to check if user is authenticated
+ * 
  * @param {object} ComposedComponent
+ * 
  * @return {void}
  */
 export const Authenticate = (ComposedComponent) => {
@@ -35,8 +38,10 @@ export const Authenticate = (ComposedComponent) => {
     isAuthenticated: Proptypes.bool.isRequired,
   };
   /**
-   * return props
+   * @description Map state to props
+   * 
    * @param {object} state
+   * 
    * @return {object} props
    */
   const mapStateToProps = state => ({

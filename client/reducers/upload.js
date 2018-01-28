@@ -50,7 +50,7 @@ export const uploadCover = (state = initialState, action = {}) => {
         isLoading: false,
         errors: {},
         uploaded: "",
-      }
+      };
     }
     default: return state;
   }
@@ -90,7 +90,7 @@ export const uploadPdf = (state = initialState, action = {}) => {
         isLoading: false,
         errors: {},
         uploaded: "",
-      }
+      };
     }
     default: return state;
   }

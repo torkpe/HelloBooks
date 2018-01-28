@@ -19,7 +19,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'server/public/index.html'),
-      filename: 'index.html'
+      filename: 'index.html',
+      inject: false,
     }),
     new webpack.EnvironmentPlugin([
       'PARAM_STRING',
