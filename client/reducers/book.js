@@ -33,7 +33,14 @@ const {
   EDIT_BOOK,
   EDIT_BOOK_SUCCESSFUL,
   FAILED_TO_EDIT_BOOK,
-  CHECK_IF_BORROWED
+  CHECK_IF_BORROWED,
+  ADD_GENRE,
+  ADD_GENRE_SUCCESSFUL,
+  FAILED_TO_ADD_GENRE,
+  GET_GENRE,
+  GET_GENRE_SUCCESSFUL,
+  FAILED_TO_GET_GENRE,
+  CLEAR_ADD_GENRE_STATE
 } = types;
 const initialState = {
   fetching: false,
@@ -250,6 +257,86 @@ export const returnBook = (state = returnBookState, action = {}) => {
       };
     }
     case FAILED_TO_RETURN_BOOK: {
+      return {
+        ...state,
+        requesting: false,
+        errors: action.payload,
+      };
+    }
+    default: return state;
+  }
+};
+
+const addGenreState = {
+  requesting: false,
+  response: {},
+  errors: {},
+};
+/**
+ * @description Add genre book function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
+export const addGenre = (state = addGenreState, action = {}) => {
+  switch (action.type) {
+    case ADD_GENRE: {
+      return {
+        ...state,
+        requesting: true,
+      };
+    }
+    case ADD_GENRE_SUCCESSFUL: {
+      return {
+        ...state,
+        requesting: false,
+        response: action.payload,
+      };
+    }
+    case FAILED_TO_ADD_GENRE: {
+      return {
+        ...state,
+        requesting: false,
+        errors: action.payload,
+      };
+    }
+    case CLEAR_ADD_GENRE_STATE: {
+      return {
+        ...state,
+        requesting: false,
+        response: {},
+        errors: {},
+      };
+    }
+    default: return state;
+  }
+};
+/**
+ * @description Get all genre function for state
+ * 
+ * @param {object} state
+ * @param {object} action
+ * 
+ * @returns {object} state
+ */
+export const getAllGenre = (state = addGenreState, action = {}) => {
+  switch (action.type) {
+    case GET_GENRE: {
+      return {
+        ...state,
+        requesting: true,
+      };
+    }
+    case GET_GENRE_SUCCESSFUL: {
+      return {
+        ...state,
+        requesting: false,
+        response: action.payload,
+      };
+    }
+    case FAILED_TO_GET_GENRE: {
       return {
         ...state,
         requesting: false,
