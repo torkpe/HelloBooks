@@ -5,7 +5,10 @@ import { browserHistory } from 'react-router';
 
 // is already signed in
 /**
+ * @description Higher order component to check if user is already signed in
+ * 
  * @param {object} ComposedComponent
+ * 
  * @return {void}
  */
 const isAlreadySignedin = (ComposedComponent) => {
@@ -29,7 +32,10 @@ const isAlreadySignedin = (ComposedComponent) => {
     isAuthenticated: Proptypes.bool.isRequired
   };
   /**
+   * @description Map state to props
+   * 
    * @param {object} state
+   * 
    * @return {object} props
    */
   const mapStateToProps = state => ({

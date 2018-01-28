@@ -3,11 +3,14 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { toastr } from 'react-redux-toastr';
-import { getABook, editBook } from '../actions/books';
+import {
+  getABook, editBook,
+  getAllGenre
+} from '../actions/books';
 import uploader from '../actions/upload';
 
 /**
- * @classdesc returns component to edit book
+ * @classdesc Returns component to edit book
  */
 export class UpdateBook extends Component {
   /**
@@ -25,7 +28,10 @@ export class UpdateBook extends Component {
       isCoverSet: false,
       isPdfSet: false,
       isPostCover: false,
-      isPostPdf: false
+      isPostPdf: false,
+      allGenre: '',
+      isStateSet: false,
+      fetching: true
     };
     this.coverChange = this.coverChange.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -41,6 +47,7 @@ export class UpdateBook extends Component {
    */
   componentWillMount() {
     this.props.getABook(this.props.params.id);
+    this.props.getAllGenre();
   }
   /**
    * @description React life cycle
@@ -50,8 +57,13 @@ export class UpdateBook extends Component {
    * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
-    const { book, cover, pdf } = nextProps;
-    if (book) {
+    const {
+      book,
+      cover,
+      pdf,
+      genre
+    } = nextProps;
+    if (book && !this.state.isStateSet) {
       this.setState({
         cover: book.cover,
         pdf: book.pdf,
@@ -61,28 +73,37 @@ export class UpdateBook extends Component {
         quantity: book.quantity,
         genre: book.genre,
         loading: false,
+        isStateSet: true,
+        fetching: false
       });
     }
-    if (pdf) {
+    if (pdf && this.state.isPostPdf) {
       this.setState({
         pdf: nextProps.pdf,
         isPdfSet: false,
-        isPostPdf: false
+        isPostPdf: false,
+        loading: false
       });
-      toastr.success('The title', 'Pdf updated');
+      toastr.success('Pdf updated');
     }
-    if (cover) {
+    if (cover && this.state.isPostCover) {
       this.setState({
         cover: nextProps.cover,
         isCoverSet: false,
-        isPostCover: false
+        isPostCover: false,
+        loading: false
       });
-      toastr.success('The title', 'Cover updated');
+      toastr.success('Cover updated');
     }
     if (cover && pdf) {
       this.setState({
         loading: false,
         isImageAndPdf: false
+      });
+    }
+    if (genre.length > 0) {
+      this.setState({
+        allGenre: genre
       });
     }
   }
@@ -98,11 +119,11 @@ export class UpdateBook extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { book, error } = this.props.updatedDetail;
     if (prevProps.updatedDetail.book.updatedBook !== book.updatedBook) {
-      toastr.success('The title', 'Book updated');
+      toastr.success('Book updated');
       return browserHistory.push('/home');
     }
     if (prevProps.updatedDetail.error !== error) {
-      return toastr.error('The title', error.message);
+      return toastr.error(error.message);
     }
   }
   /**
@@ -179,7 +200,9 @@ export class UpdateBook extends Component {
   }
   /**
    * @description Handle file selection for pdf
+   * 
    * @param {object} event
+   * 
    * @return {undefined}
    */
   pdfChange(event) {
@@ -191,6 +214,8 @@ export class UpdateBook extends Component {
     });
   }
   /**
+   * @description Renders UpdateBook component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -198,17 +223,26 @@ export class UpdateBook extends Component {
     mdl-button
     mdl-js-button
     `;
-    const { book } = this.props;
-    const { error, isPostCover, isPostPdf } = this.state;
+    const { book, genre } = this.props;
+    const {
+      error,
+      isPostCover,
+      isPostPdf,
+      fetching
+    } = this.state;
     return (
       <div className="mdl-grid">
         <div className="contents">
           {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
           {isPostPdf ? <div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
-          {Object.keys(book).length > 0 ?
+          {fetching ? <div className="contents"> <h5>Fetching...</h5> </div> : ''}
+          {
+          genre && genre.length > 0
+          && book && this.state.pdf &&
+          this.state.cover && Object.keys(book).length > 0 &&
             <div
               className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
-              <form ref="bookForm">
+              <form>
                 <h5>Book Details</h5>
                 <div
                   className="card-content input-wrapper">
@@ -217,7 +251,7 @@ export class UpdateBook extends Component {
                     className=""
                     onChange={this.onChange}
                     name="title" id="title"
-                    value={this.state.title}
+                    defaultValue={book.title}
                     placeholder="Title" />
                 </div>
                 <div
@@ -225,7 +259,7 @@ export class UpdateBook extends Component {
                   <input
                   type="text"
                   className=""
-                  defaultValue={this.state.author}
+                  defaultValue={book.author}
                   onChange={this.onChange}
                   name="author" id="author"required />
                 </div>
@@ -236,17 +270,31 @@ export class UpdateBook extends Component {
                   className=""
                   onChange={this.onChange}
                   name="description"
-                  defaultValue={this.state.description}
+                  defaultValue={book.description}
                   id="description"required />
                 </div>
                 <div
                 className="card-content input-wrapper">
-                  <input
-                  type="text"
-                  className=""
-                  defaultValue={this.state.genre}
-                  onChange={this.onChange}
-                  name="genre" id="genre"required />
+                  <select
+                  name="genre"
+                  onChange={this.onChange}>
+                    <option
+                    className="default"
+                    value="..."
+                    >
+                      {book.genre}
+                    </option>
+                    {
+                      genre.map((aGenre, index) =>
+                        (<option
+                        key={index}
+                        defaultValue={aGenre}
+                        >
+                          {aGenre}
+                        </option>
+                      ))
+                    }
+                  </select>
                 </div>
                 <div
                 className="card-content input-wrapper">
@@ -255,7 +303,7 @@ export class UpdateBook extends Component {
                   className=""
                   onChange={this.onChange}
                   name="quantity"
-                  defaultValue={this.state.quantity}
+                  defaultValue={book.quantity}
                   id="text"required />
                 </div>
                 <div
@@ -315,7 +363,7 @@ export class UpdateBook extends Component {
                 </button>
               </form>
             </div>
-          : ''}
+          }
         </div>
       </div>
     );
@@ -336,6 +384,12 @@ const mapStateToProps = state => ({
   cover: state.uploadCover.uploaded,
   pdf: state.uploadPdf.uploaded,
   updatedDetail: state.editBook,
+  genre: state.getAllGenre.response.genre,
 });
 
-export default connect(mapStateToProps, { getABook, uploader, editBook })(UpdateBook);
+export default connect(mapStateToProps, {
+  getABook,
+  uploader,
+  editBook,
+  getAllGenre
+})(UpdateBook);
