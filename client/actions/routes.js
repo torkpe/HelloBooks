@@ -1,5 +1,6 @@
 import { browserHistory } from 'react-router';
 
+// Route for components
 export const notifications = () => dispatch => browserHistory.push('/notifications');
 export const uploadBook = () => dispatch => browserHistory.push('/upload-book');
 export const allBooks = () => dispatch => browserHistory.push('/home');

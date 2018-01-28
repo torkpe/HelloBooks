@@ -2,6 +2,14 @@
 
 exports[`<Home /> renders <Home /> component 1`] = `
 <Home
+  auth={
+    Object {
+      "user": Object {
+        "id": 1,
+        "star": "gh",
+      },
+    }
+  }
   books={
     Array [
       Object {
@@ -49,6 +57,12 @@ exports[`<Home /> renders <Home /> component 1`] = `
       <div
         className="contents"
       >
+        <span
+          className="star"
+        >
+          Membership level: 
+          gh
+        </span>
         <h5>
           All Books
         </h5>
@@ -61,6 +75,14 @@ exports[`<Home /> renders <Home /> component 1`] = `
         className="mdl-grid"
       >
         <Books
+          auth={
+            Object {
+              "user": Object {
+                "id": 1,
+                "star": "gh",
+              },
+            }
+          }
           book={
             Object {
               "cover": "xcgvhjkhcvbkjhgcvbjhcv",
