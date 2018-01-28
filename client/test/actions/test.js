@@ -338,15 +338,15 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getABook(1))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[25].type).to.equal(expectedAction.type);
-        expect(actions[25].payload).to.have.property('id');
-        expect(actions[25].payload).to.have.property('title');
-        expect(actions[25].payload).to.have.property('author');
-        expect(actions[25].payload).to.have.property('cover');
-        expect(actions[25].payload).to.have.property('pdf');
-        expect(actions[25].payload).to.have.property('genre');
-        expect(actions[25].payload).to.have.property('quantity');
-        expect(actions[25].payload).to.have.property('description');
+        expect(actions[26].type).to.equal(expectedAction.type);
+        expect(actions[26].payload).to.have.property('id');
+        expect(actions[26].payload).to.have.property('title');
+        expect(actions[26].payload).to.have.property('author');
+        expect(actions[26].payload).to.have.property('cover');
+        expect(actions[26].payload).to.have.property('pdf');
+        expect(actions[26].payload).to.have.property('genre');
+        expect(actions[26].payload).to.have.property('quantity');
+        expect(actions[26].payload).to.have.property('description');
       });
       done();
   });
@@ -366,15 +366,15 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getABook(1))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[27].type).to.equal(expectedAction.type);
-        expect(actions[27].payload).to.have.property('id');
-        expect(actions[27].payload).to.have.property('title');
-        expect(actions[27].payload).to.have.property('author');
-        expect(actions[27].payload).to.have.property('cover');
-        expect(actions[27].payload).to.have.property('pdf');
-        expect(actions[27].payload).to.have.property('genre');
-        expect(actions[27].payload).to.have.property('quantity');
-        expect(actions[27].payload).to.have.property('description');
+        expect(actions[28].type).to.equal(expectedAction.type);
+        expect(actions[28].payload).to.have.property('id');
+        expect(actions[28].payload).to.have.property('title');
+        expect(actions[28].payload).to.have.property('author');
+        expect(actions[28].payload).to.have.property('cover');
+        expect(actions[28].payload).to.have.property('pdf');
+        expect(actions[28].payload).to.have.property('genre');
+        expect(actions[28].payload).to.have.property('quantity');
+        expect(actions[28].payload).to.have.property('description');
       });
       done();
   });
@@ -393,15 +393,15 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getBooks())
       .then(() => {
         const actions = store.getActions();
-        expect(actions[29].type).to.equal(expectedAction.type);
-        expect(actions[29].payload[0]).to.have.property('id');
-        expect(actions[29].payload[0]).to.have.property('title');
-        expect(actions[29].payload[0]).to.have.property('author');
-        expect(actions[29].payload[0]).to.have.property('cover');
-        expect(actions[29].payload[0]).to.have.property('pdf');
-        expect(actions[29].payload[0]).to.have.property('genre');
-        expect(actions[29].payload[0]).to.have.property('quantity');
-        expect(actions[29].payload[0]).to.have.property('description');
+        expect(actions[30].type).to.equal(expectedAction.type);
+        expect(actions[30].payload[0]).to.have.property('id');
+        expect(actions[30].payload[0]).to.have.property('title');
+        expect(actions[30].payload[0]).to.have.property('author');
+        expect(actions[30].payload[0]).to.have.property('cover');
+        expect(actions[30].payload[0]).to.have.property('pdf');
+        expect(actions[30].payload[0]).to.have.property('genre');
+        expect(actions[30].payload[0]).to.have.property('quantity');
+        expect(actions[30].payload[0]).to.have.property('description');
       });
       done();
   });
@@ -420,15 +420,15 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getBooks())
       .then(() => {
         const actions = store.getActions();
-        expect(actions[31].type).to.equal(expectedAction.type);
-        expect(actions[31].payload[0]).to.have.property('id');
-        expect(actions[31].payload[0]).to.have.property('title');
-        expect(actions[31].payload[0]).to.have.property('author');
-        expect(actions[31].payload[0]).to.have.property('cover');
-        expect(actions[31].payload[0]).to.have.property('pdf');
-        expect(actions[31].payload[0]).to.have.property('genre');
-        expect(actions[31].payload[0]).to.have.property('quantity');
-        expect(actions[31].payload[0]).to.have.property('description');
+        expect(actions[32].type).to.equal(expectedAction.type);
+        expect(actions[32].payload[0]).to.have.property('id');
+        expect(actions[32].payload[0]).to.have.property('title');
+        expect(actions[32].payload[0]).to.have.property('author');
+        expect(actions[32].payload[0]).to.have.property('cover');
+        expect(actions[32].payload[0]).to.have.property('pdf');
+        expect(actions[32].payload[0]).to.have.property('genre');
+        expect(actions[32].payload[0]).to.have.property('quantity');
+        expect(actions[32].payload[0]).to.have.property('description');
       });
       done();
   });
@@ -447,7 +447,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(checkIfBorrowed(1, 2))
     .then(() => {
       const actions = store.getActions();
-      expect(actions[33].type).to.equal(expectedAction.type);
+      expect(actions[34].type).to.equal(expectedAction.type);
     });
     done();
   });
@@ -466,7 +466,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(checkIfBorrowed(1, 2))
     .then(() => {
       const actions = store.getActions();
-      expect(actions[35].type).to.equal(expectedAction.type);
+      expect(actions[36].type).to.equal(expectedAction.type);
     });
     done();
   });
@@ -485,7 +485,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getBorrows(2))
     .then(() => {
       const actions = store.getActions();
-      expect(actions[37].type).to.equal(expectedAction.type);
+      expect(actions[38].type).to.equal(expectedAction.type);
     });
     done();
   });
@@ -504,7 +504,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getBorrows(2))
     .then(() => {
       const actions = store.getActions();
-      expect(actions[39].type).to.equal(expectedAction.type);
+      expect(actions[40].type).to.equal(expectedAction.type);
     });
     done();
   });
@@ -523,7 +523,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(borrowBook(1, 2))
     .then(() => {
       const actions = store.getActions();
-      expect(actions[41].type).to.equal(expectedAction.type);
+      expect(actions[42].type).to.equal(expectedAction.type);
     });
     done();
   });
@@ -542,7 +542,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(borrowBook(1, 2))
     .then(() => {
       const actions = store.getActions();
-      expect(actions[43].type).to.equal(expectedAction.type);
+      expect(actions[44].type).to.equal(expectedAction.type);
     });
     done();
   });
@@ -561,7 +561,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(returnBook(2,1))
     .then(() => {
       const actions = store.getActions();
-      expect(actions[45].type).to.equal(expectedAction.type);
+      expect(actions[46].type).to.equal(expectedAction.type);
     });
     done();
   });
@@ -580,7 +580,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(returnBook(2,1))
     .then(() => {
       const actions = store.getActions();
-      expect(actions[47].type).to.equal(expectedAction.type);
+      expect(actions[48].type).to.equal(expectedAction.type);
     });
     done();
   });
@@ -599,7 +599,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(postBook())
       .then(() => {
         const actions = store.getActions();
-        expect(actions[49].type).to.equal(expectedAction.type);
+        expect(actions[50].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -618,7 +618,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(postBook())
       .then(() => {
         const actions = store.getActions();
-        expect(actions[51].type).to.equal(expectedAction.type);
+        expect(actions[52].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -637,7 +637,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(deleteBook(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[53].type).to.equal(expectedAction.type);
+        expect(actions[54].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -656,7 +656,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(deleteBook(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[55].type).to.equal(expectedAction.type);
+        expect(actions[56].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -675,13 +675,13 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(editBook(mockData.aBook,2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[57].type).to.equal(expectedAction.type);
-        expect(actions[57].payload).to.have.property('description');
-        expect(actions[57].payload).to.have.property('author');
-        expect(actions[57].payload).to.have.property('genre');
-        expect(actions[57].payload).to.have.property('quantity');
-        expect(actions[57].payload).to.have.property('pdf');
-        expect(actions[57].payload).to.have.property('cover');
+        expect(actions[58].type).to.equal(expectedAction.type);
+        expect(actions[58].payload).to.have.property('description');
+        expect(actions[58].payload).to.have.property('author');
+        expect(actions[58].payload).to.have.property('genre');
+        expect(actions[58].payload).to.have.property('quantity');
+        expect(actions[58].payload).to.have.property('pdf');
+        expect(actions[58].payload).to.have.property('cover');
       });
       done();
     });
@@ -700,13 +700,13 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(editBook(mockData.aBook,2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[59].type).to.equal(expectedAction.type);
-        expect(actions[59].payload).to.have.property('description');
-        expect(actions[59].payload).to.have.property('author');
-        expect(actions[59].payload).to.have.property('genre');
-        expect(actions[59].payload).to.have.property('quantity');
-        expect(actions[59].payload).to.have.property('pdf');
-        expect(actions[59].payload).to.have.property('cover');
+        expect(actions[60].type).to.equal(expectedAction.type);
+        expect(actions[60].payload).to.have.property('description');
+        expect(actions[60].payload).to.have.property('author');
+        expect(actions[60].payload).to.have.property('genre');
+        expect(actions[60].payload).to.have.property('quantity');
+        expect(actions[60].payload).to.have.property('pdf');
+        expect(actions[60].payload).to.have.property('cover');
       });
       done();
     });
@@ -728,7 +728,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(changePassword(2,password))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[61].type).to.equal(expectedAction.type);
+        expect(actions[62].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -750,7 +750,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(changePassword(2,password))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[63].type).to.equal(expectedAction.type);
+        expect(actions[64].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -768,7 +768,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getPdf(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[65].type).to.equal(expectedAction.type);
+        expect(actions[66].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -786,7 +786,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getPdf(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[67].type).to.equal(expectedAction.type);
+        expect(actions[68].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -804,7 +804,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getUser(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[69].type).to.equal(expectedAction.type);
+        expect(actions[70].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -822,7 +822,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getUser(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[71].type).to.equal(expectedAction.type);
+        expect(actions[72].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -840,7 +840,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getAllBorrowed(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[73].type).to.equal(expectedAction.type);
+        expect(actions[74].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -858,7 +858,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getAllBorrowed(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[75].type).to.equal(expectedAction.type);
+        expect(actions[76].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -876,7 +876,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getNotification('user',2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[77].type).to.equal(expectedAction.type);
+        expect(actions[78].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -894,7 +894,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getNotification('admin',2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[79].type).to.equal(expectedAction.type);
+        expect(actions[80].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -912,7 +912,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(getNotification('user',2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[81].type).to.equal(expectedAction.type);
+        expect(actions[82].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -933,7 +933,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(updateUser(2, userName))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[83].type).to.equal(expectedAction.type);
+        expect(actions[84].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -951,7 +951,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(allNotReturned(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[85].type).to.equal(expectedAction.type);
+        expect(actions[86].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -969,7 +969,7 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(allNotReturned(2))
       .then(() => {
         const actions = store.getActions();
-        expect(actions[87].type).to.equal(expectedAction.type);
+        expect(actions[88].type).to.equal(expectedAction.type);
       });
       done();
     });
@@ -980,7 +980,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     await store.dispatch(clearUpdateUserState());
       const actions = store.getActions();
-      expect(actions[88].type).to.equal(expectedAction.type);
+      expect(actions[89].type).to.equal(expectedAction.type);
     done();
   });
   it('should create CLEAR_SINGLE_BOOK_STATE', async (done) => {
@@ -990,7 +990,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     await store.dispatch(clearSingleBookState());
       const actions = store.getActions();
-      expect(actions[89].type).to.equal(expectedAction.type);
+      expect(actions[90].type).to.equal(expectedAction.type);
     done();
   });
   it('should create CLEAR_CREATED_BOOK_STATE', async (done) => {
@@ -1000,7 +1000,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     await store.dispatch(clearCreatedBookState());
       const actions = store.getActions();
-      expect(actions[90].type).to.equal(expectedAction.type);
+      expect(actions[91].type).to.equal(expectedAction.type);
     done();
   });
   it('should create CLEAR_BOOKS_STATE', async (done) => {
@@ -1010,7 +1010,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     await store.dispatch(clearBooksState());
       const actions = store.getActions();
-      expect(actions[91].type).to.equal(expectedAction.type);
+      expect(actions[92].type).to.equal(expectedAction.type);
     done();
   });
   it('should create CLEAR_DELETE_BOOK_STATE', async (done) => {
@@ -1020,7 +1020,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     await store.dispatch(clearDeleteBookState());
       const actions = store.getActions();
-      expect(actions[92].type).to.equal(expectedAction.type);
+      expect(actions[93].type).to.equal(expectedAction.type);
     done();
   });
   it('should create FAILED_TO_UPDATE_USER', async (done) => {
@@ -1033,7 +1033,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     await store.dispatch(updateUser(2));
       const actions = store.getActions();
-      expect(actions[94].type).to.equal(expectedAction.type);
+      expect(actions[95].type).to.equal(expectedAction.type);
     done();
   });
   it('should create ADD_GENRE_SUCCESSFUL', async (done) => {
@@ -1046,7 +1046,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     await store.dispatch(addBookGenre());
       const actions = store.getActions();
-      expect(actions[96].type).to.equal(expectedAction.type);
+      expect(actions[97].type).to.equal(expectedAction.type);
     done();
   });
   it('should create CLEAR_ADD_GENRE_STATE', async (done) => {
@@ -1056,7 +1056,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     store.dispatch(clearAddGenreState());
       const actions = store.getActions();
-      expect(actions[97].type).to.equal(expectedAction.type);
+      expect(actions[98].type).to.equal(expectedAction.type);
     done();
   });
   it('should create FAILED_TO_ADD_GENRE', async (done) => {
@@ -1069,7 +1069,7 @@ describe('THUNK FUNCTIONS', () => {
     // Dispatch
     await store.dispatch(addBookGenre());
       const actions = store.getActions();
-      expect(actions[99].type).to.equal(expectedAction.type);
+      expect(actions[100].type).to.equal(expectedAction.type);
     done();
   });
 });

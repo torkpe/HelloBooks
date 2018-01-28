@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.33% </span>
+        <span class="strong">93.24% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>70/75</span>
+        <span class='fraction'>69/74</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">66.67% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>14/15</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.59% </span>
+        <span class="strong">94.52% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>70/74</span>
+        <span class='fraction'>69/73</span>
       </div>
     </div>
   </div>
@@ -484,7 +484,12 @@
 439
 440
 441
-442</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+442
+443
+444
+445
+446
+447</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -551,9 +556,6 @@
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -629,18 +631,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
-<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -755,13 +756,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">35x</span>
-<span class="cline-any cline-yes">35x</span>
-<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -925,6 +932,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -937,7 +947,7 @@ import {
   addBookGenre, getAllGenre,
   clearAddGenreState
 } from '../actions/books';
-import uploader, { clearUploadState }from '../actions/upload';
+import uploader, { clearUploadState } from '../actions/upload';
 &nbsp;
 // Set initial state
 const initialState = {
@@ -954,13 +964,13 @@ const initialState = {
   isCoverSet: false,
   isPdfSet: false,
   error: '',
-  genre:'',
+  genre: '',
   isPostCover: false,
   isPostPdf: false
 };
 &nbsp;
 /**
- * @classdesc returns UploadBook component
+ * @classdesc Returns UploadBook component
  */
 export class UploadBook extends Component {
   /**
@@ -989,9 +999,6 @@ export class UploadBook extends Component {
    * @return {undefined}
    */
   componentDidMount() {
-    this.setState({
-      initialState
-    });
     this.props.getAllGenre();
   }
   /**
@@ -1043,9 +1050,9 @@ export class UploadBook extends Component {
       <span class="missing-if-branch" title="else path not taken" >E</span>if (genre.length &gt; 0) {
         this.setState({
           allGenre: genre
-        })
+        });
       }
-      const { message, createdGenre } = addedGenre
+      const { message, createdGenre } = addedGenre;
       <span class="missing-if-branch" title="else path not taken" >E</span>if (createdGenre) {
         <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.state.genre.includes(createdGenre)) {
           this.state.allGenre.push(createdGenre);
@@ -1063,7 +1070,6 @@ export class UploadBook extends Component {
    * @description React life cycle
    * 
    * @param {object} prevProps
-   * 
    * @param {object} prevState
    * 
    * @return {undefined}
@@ -1191,7 +1197,7 @@ export class UploadBook extends Component {
     event.target.reset();
   }
   /**
-   * @description Renders component
+   * @description Renders UploadBook component
    * 
    * @return {XML} JSX
    */
@@ -1258,12 +1264,18 @@ export class UploadBook extends Component {
               &lt;/div&gt;
               &lt;div
               className="card-content input-wrapper"&gt;
-                &lt;select name="genre" onChange={this.onChange}&gt;
-                  &lt;option className="default" value="..."&gt;
+                &lt;select
+                name="genre"
+                onChange={this.onChange}
+                &gt;
+                  &lt;option
+                  className="default"
+                  value="..."
+                  &gt;
                     Select Genre
                   &lt;/option&gt;
                   {this.state.allGenre &amp;&amp; this.state.allGenre.map((aGenre, index) =&gt;
-                  &lt;option key={index} value={aGenre}&gt;{aGenre}&lt;/option&gt;)}
+                    &lt;option key={index} value={aGenre}&gt;{aGenre}&lt;/option&gt;)}
                 &lt;/select&gt;
               &lt;/div&gt;
               &lt;div
@@ -1362,9 +1374,12 @@ const mapStateToProps = <span class="fstat-no" title="function not covered" >st<
 &nbsp;
 export default connect(mapStateToProps, {
   postBook,
-  uploader, getAllGenre,
-  clearCreatedBookState, addBookGenre,
-  clearAddGenreState, clearUploadState
+  uploader,
+  getAllGenre,
+  clearCreatedBookState,
+  addBookGenre,
+  clearAddGenreState,
+  clearUploadState
 })(UploadBook);
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -1372,7 +1387,7 @@ export default connect(mapStateToProps, {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 26 2018 15:30:52 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Jan 28 2018 04:19:14 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../prettify.js"></script>

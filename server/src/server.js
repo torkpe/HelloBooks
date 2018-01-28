@@ -41,12 +41,15 @@ app.use('/api/v1/', landingRoute);
 // Notifications route
 app.use('/api/v1/', notificationsRoute);
 
+// Check if environment is production and serve html from build
 if (process.env.NODE_ENV === 'production') {
   const buildPath = path.join(__dirname, '../../build');
   const htmlPath = path.join(buildPath, 'index.html');
   app.use(express.static(buildPath));
   app.get('*', (req, res) => res.sendFile(htmlPath));
 }
+
+// Check if environment is development use configured webpack for development
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfigDevelopment);
   app.use(webpackMiddleware(compiler, {
