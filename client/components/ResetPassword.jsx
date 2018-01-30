@@ -87,6 +87,8 @@ class ResetPassword extends Component {
     });
   }
   /**
+   * @description ResetPassword Main component
+   * 
    * @return {XML} JSX
    */
   render() {
