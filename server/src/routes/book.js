@@ -7,20 +7,60 @@ const bookControllers = controllers.book;
 const borrowBookController = controllers.borrowedBook;
 const router = express.Router();
 // add book genre
-router.post('/books/genre', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.addBookGenre);
+router.post(
+  '/books/genre',
+  authorize.checkAuthentication,
+  authorize.authorizeAdmin,
+  bookControllers.addBookGenre
+);
 // add book genre
-router.get('/books/genre', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.findAllGenre);
+router.get(
+  '/books/genre',
+  authorize.checkAuthentication,
+  authorize.authorizeAdmin,
+  bookControllers.findAllGenre
+);
 // add a book
-router.post('/books', authorize.checkAuthentication, authorize.authorizeAdmin, validator.bookValidator, bookControllers.create);
+router.post(
+  '/books',
+  authorize.checkAuthentication,
+  authorize.authorizeAdmin,
+  validator.bookValidator,
+  bookControllers.create
+);
 // get all books
-router.get('/books', authorize.checkAuthentication, bookControllers.findAllBooks);
+router.get(
+  '/books',
+  authorize.checkAuthentication,
+  bookControllers.findAllBooks
+);
 // get a book
-router.get('/books/:id', authorize.checkAuthentication, bookControllers.findABook);
+router.get(
+  '/books/:id',
+  authorize.checkAuthentication,
+  bookControllers.findABook
+);
 // edit a book
-router.put('/books/:id', authorize.checkAuthentication, authorize.authorizeAdmin, validator.bookValidator, bookControllers.editBook);
+router.put(
+  '/books/:id',
+  authorize.checkAuthentication,
+  authorize.authorizeAdmin,
+  validator.bookValidator,
+  bookControllers.editBook
+);
 // Delete a book
-router.put('/books/:id/delete', authorize.checkAuthentication, authorize.authorizeAdmin, bookControllers.deleteBook);
+router.put(
+  '/books/:id/delete',
+  authorize.checkAuthentication,
+  authorize.authorizeAdmin,
+  bookControllers.deleteBook
+);
 // Check if the book has been borrowed already
-router.get('/book/:id/:userId', authorize.checkAuthentication, authorize.authorizeUser, borrowBookController.getABorrowedBook);
+router.get(
+  '/book/:id/:userId',
+  authorize.checkAuthentication,
+  authorize.authorizeUser,
+  borrowBookController.getABorrowedBook
+);
 
 export default router;
