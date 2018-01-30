@@ -231,9 +231,27 @@ export class UpdateBook extends Component {
     return (
       <div className="mdl-grid">
         <div className="contents">
-          {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
-          {isPostPdf ? <div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
-          {fetching ? <div className="contents"> <h5>Fetching...</h5> </div> : ''}
+          {
+            isPostCover ?
+            <div className="contents">
+              <h5>Uploading Cover...</h5>
+            </div>
+            : ''
+          }
+          {
+            isPostPdf ?
+            <div className="contents">
+              <h5>Uploading Pdf...</h5>
+            </div>
+            : ''
+          }
+          {
+            fetching ?
+            <div className="contents">
+              <h5>Fetching...</h5>
+            </div>
+            : ''
+          }
           {
           this.state.pdf &&
           this.state.cover && genre &&
