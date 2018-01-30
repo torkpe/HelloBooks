@@ -23,7 +23,7 @@ export default {
         message: 'Invalid pdf!. Please try uploading another pdf'
       });
     }
-    if ((String(title).trim()).length < 5) {
+    if ((String(title).trim()).length < 2) {
       return response.status(400).send({
         message: 'Title is too short!'
       });
