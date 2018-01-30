@@ -1,7 +1,8 @@
-// Function to determine return date for each user
 /**
- *
+ * @description Determine return date for each user
+ * 
  * @param {string} star
+ * 
  * @return {date} date
  */
 const determineDate = (star) => {

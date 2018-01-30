@@ -9,6 +9,8 @@ const Admin = {
   password: 'silver',
 };
 const hash = bcrypt.hashSync(Admin.password, salt);
+
+// Seed the database with admin details
 const seeder = () => {
   User.create({
     email: Admin.email,
