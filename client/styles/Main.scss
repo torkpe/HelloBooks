@@ -1,208 +1,283 @@
-body{
-    margin:0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
+
 .body {
-    background: linear-gradient(
-        rgba(1, 1, 0, 0.45), 
-        rgba(1, 0, 0, 0.45)
-      ),url(./images/books.jpg)no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100%;
+  background: linear-gradient(
+      rgba(1, 1, 0, 0.45), 
+      rgba(1, 0, 0, 0.45)
+    ),url(./images/books.jpg)no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
 }
-html, body, h1, h2, h3, h4, h5, p, .mdl-button--raised{
-    font-family: Nunito !important;
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+.mdl-button--raised {
+  font-family: Nunito !important;
 }
-#button{
-    display:inline-block;
-    width:250px;
+
+.star {
+  font-weight: bolder;
+  text-transform: capitalize;
 }
-#button1{
-    display:inline-block;
-    width:250px;
-}#button2{
-    display:inline-block;
-    width:250px;
+
+#button {
+  display: inline-block;
+  width: 250px;
 }
+
+#button1 {
+  display: inline-block;
+  width: 250px;
+}
+
+#button2 {
+  display: inline-block;
+  width: 250px;
+}
+
 .material-icons {
-    font-family: 'Material Icons';
-    font-weight: 400;
-    font-style: normal;
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    margin-top: 12px;
-    display: inline-block;
-    word-wrap: normal;
-    -moz-font-feature-settings: 'liga';
-    font-feature-settings: 'liga';
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-family: 'Material Icons';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  margin-top: 12px;
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: normal;
+  -moz-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }
-.notifyLink{
-   text-align: right;
-   margin-left: 10px;
-   color: teal;
+
+.notifyLink {
+  color: #008080;
+  text-align: right;
+  margin-left: 10px;
 }
+
+.btn-genre {
+  background-color: teal;
+  color: #FFFFFF;
+}
+
 table {
-    width: 100%
+  width: 100%
 }
+
 .errors {
-    color: red;
-    margin: 10px;
+  color: #FF0000;
+  margin: 10px;
 }
+
 .right {
+  border: 3px solid #73AD21;
+  padding: 10px;
   position: absolute;
   right: 0px;
   width: 300px;
-  border: 3px solid #73AD21;
+}
+
+.content {
+  color: white; 
+  margin: 0 auto;
+  padding-bottom: 20%;
+	text-align: center;
+}
+
+.contents {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+.notifications {
+  margin: 0 auto;
   padding: 10px;
 }
-.content{
-    margin: 0 auto;
-	text-align: center;
-    color:white; 
-    padding-bottom: 20%; 
+
+img {
+  height: 350px;
+  width: 300px;
+  margin: 0 auto;
 }
-.contents{
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 10px;
+
+.contentss {
+  margin: 0 auto;
+  text-align: center;
+  text-decoration: none;
 }
-.notifications{
-    margin:0 auto;
-    padding: 10px;
-}
-img{
-    height: 350px;
-    width:300px;
-    margin: 0px auto;
-}
-.contentss{
-    margin: 0 auto;
-    text-align: center;
-    text-decoration: none;
-}
+
 .mdl-layout__tab {
-    color: rgba(0,0,0,.6) !important;
+  color: rgba(0,0,0,.6) !important;
 }
-.loading{
-    color:n rgba(0,0,0,.6);
+
+.loading {
+  color: rgba(0,0,0,.6);
 }
-.card-content{
-    margin: 0 auto;
-	text-align: center;
-    max-width:auto;
-    height:auto;    
+
+.card-content {
+  height: auto;  
+  margin: 0 auto;
+  text-align: center;
+  max-width: auto;  
 }
+
 #overlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 2;
-    cursor: pointer;
+  background-color: rgba(0,0,0,0.5);
+  bottom: 0;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  cursor: pointer;
 }
-#green{
-    color:#57e4e4;
+
+#green {
+  color: #57e4e4;
 }
+
 .redirect-card {
-    padding: 30px;
-    margin-top: 100px;
+  padding: 30px;
+  margin-top: 100px;
 }
+
 .redirect {
-    font-family: 'Encode Sans Expanded';
-    font-size: 20;
+  font-family: 'Encode Sans Expanded';
+  font-size: 20;
 }
-.content h1{
-    text-shadow: 0px 4px 3px rgba(0,1,0,0.9)
+
+.content h1 {
+  text-shadow: 0 4px 3px rgba(0,1,0,0.9);
 }
-.mdl-button--raised.mdl-button--colored{
-    background: #57e4e4;
-    color: rgb(255,255,255);
+
+.mdl-button--raised.mdl-button--colored {
+  background: #57e4e4;
+  color: rgb(255,255,255);
 }
-.content button{
-    margin:10px;
+
+.content button {
+  margin: 10px;
 }
-.contents button{
-    margin:10px;
+
+.contents button {
+  margin: 10px;
 }
+
 input[type="file"] {
-    display: none;
+  display: none;
 }
-.upload{
-    display: inline;
+
+.upload {
+  display: inline;
 }
-.file-upload{
-    margin:20px;
+
+.file-upload {
+  margin: 20px;
 }
-.btn1{
-    margin: 10px;
+
+.btn1 {
+  margin: 10px;
 }
-.btn2{
-    margin: 10px;
+
+.btn2 {
+  margin: 10px;
 }
 
 .card-wrapper {
-    padding: 5%;
-}
-.input-wrapper{
-    margin-top: 12px;
-}
-.card-wrapper input{
-    width: 100%;
-    border: 0px;
-    border: 1px solid #c0c0c0 !important;
-    border-radius: 4px;
-    padding: 7px;
+  padding: 5%;
 }
 
-.landing-title, .auth-box{
-    margin-top: 8%;
+.category input {
+  border: 1px solid #c0c0c0 !important;
+  border-radius: 4px;
+  height: 1%;
+  padding: 4%;
+  width: 50%;
 }
-.landing-title h1, .mdl-layout-title{
-    font-family: 'Sedgwick Ave Display' !important;
-    color: #fff;
+
+.input-wrapper {
+  margin-top: 12px;
 }
-.mdl-layout__header-row a:hover, .mdl-layout__header-row a:active, .mdl-layout__header-row a:focus{
-    text-decoration: none;
-    color: #fff;
+
+.card-wrapper input {
+  border: 1px solid #c0c0c0 !important;
+  border-radius: 4px;
+  padding: 7px;
+  width: 100%;
 }
-.mdl-card__title-text, .mdl-card__supporting-text{
-    text-transform: capitalize;
-    text-align: left;
+
+.landing-title,
+.auth-box {
+  margin-top: 8%;
 }
-.btn{
-    margin:5px;
+
+.landing-title h1,
+.mdl-layout-title {
+  color: #fff;
+  font-family: 'Sedgwick Ave Display' !important;
 }
-.glyphicon-trash{
-    color: red;
+
+.mdl-layout__header-row a:hover,
+.mdl-layout__header-row a:active,
+.mdl-layout__header-row a:focus {
+  color: #fff;
+  text-decoration: none;
 }
-.glyphicon-edit{
-    color: grey;
+
+.mdl-card__title-text,
+.mdl-card__supporting-text {
+  text-align: left;
+  text-transform: capitalize;
 }
-.glyphicon-eye-open{
-   color: rgb(0,150,136)
+
+.btn {
+  margin: 5px;
 }
-.glyphicon{
-    margin: 10px;
+
+.glyphicon-trash {
+  color: #FF0000;
 }
+
+.glyphicon-edit {
+  color: #808080;
+}
+
+.glyphicon-eye-open {
+  color: #009688;
+}
+
+.glyphicon {
+  margin: 10px;
+}
+
 .form-card {
-    padding: 20px;
-    padding-top:0px;
-    margin-top: 50px;
+  margin-top: 50px;
+  padding: 20px;
+  padding-top: 0;
 }
-.ask{
-    color:black;
-    font-weight: bold;   
-    text-align: center;
+
+.ask {
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
 }
