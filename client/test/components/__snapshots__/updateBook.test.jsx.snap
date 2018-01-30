@@ -10,11 +10,9 @@ exports[`<UpdateBook /> renders <UpdateBook /> component 1`] = `
     <div
       className="contents"
     >
-       
       <h5>
         Fetching...
       </h5>
-       
     </div>
   </div>
 </div>

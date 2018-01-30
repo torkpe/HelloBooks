@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1517109555090" clover="3.2.0">
-  <project timestamp="1517109555090" name="All files">
-    <metrics statements="790" coveredstatements="649" conditionals="407" coveredconditionals="230" methods="235" coveredmethods="202" elements="1432" coveredelements="1081" complexity="0" loc="790" ncloc="790" packages="8" files="43" classes="43">
+<coverage generated="1517314183837" clover="3.2.0">
+  <project timestamp="1517314183837" name="All files">
+    <metrics statements="790" coveredstatements="649" conditionals="405" coveredconditionals="228" methods="235" coveredmethods="202" elements="1430" coveredelements="1079" complexity="0" loc="790" ncloc="790" packages="8" files="43" classes="43">
       <package name="actions">
         <metrics statements="267" coveredstatements="204" conditionals="106" coveredconditionals="48" methods="129" coveredmethods="108"/>
         <file name="books.js" path="/Users/andeladeveloper/Desktop/hellobooks-fix/HelloBooks/client/actions/books.js">
@@ -300,7 +300,7 @@
         </file>
       </package>
       <package name="components">
-        <metrics statements="237" coveredstatements="223" conditionals="124" coveredconditionals="93" methods="77" coveredmethods="65"/>
+        <metrics statements="237" coveredstatements="223" conditionals="122" coveredconditionals="91" methods="77" coveredmethods="65"/>
         <file name="AllBorrowed.jsx" path="/Users/andeladeveloper/Desktop/hellobooks-fix/HelloBooks/client/components/AllBorrowed.jsx">
           <metrics statements="6" coveredstatements="5" conditionals="6" coveredconditionals="5" methods="5" coveredmethods="3"/>
           <line num="17" count="5" type="stmt"/>
@@ -504,11 +504,11 @@
           <line num="224" count="17" type="stmt"/>
           <line num="230" count="17" type="stmt"/>
           <line num="231" count="17" type="stmt"/>
-          <line num="286" count="6" type="stmt"/>
-          <line num="378" count="1" type="stmt"/>
+          <line num="305" count="6" type="stmt"/>
+          <line num="397" count="1" type="stmt"/>
         </file>
         <file name="UploadBook.jsx" path="/Users/andeladeveloper/Desktop/hellobooks-fix/HelloBooks/client/components/UploadBook.jsx">
-          <metrics statements="73" coveredstatements="69" conditionals="42" coveredconditionals="28" methods="15" coveredmethods="14"/>
+          <metrics statements="73" coveredstatements="69" conditionals="40" coveredconditionals="26" methods="15" coveredmethods="14"/>
           <line num="16" count="1" type="stmt"/>
           <line num="47" count="12" type="stmt"/>
           <line num="48" count="12" type="stmt"/>
@@ -579,9 +579,9 @@
           <line num="272" count="23" type="stmt"/>
           <line num="273" count="23" type="stmt"/>
           <line num="274" count="23" type="stmt"/>
-          <line num="341" count="3" type="stmt"/>
-          <line num="415" count="1" type="stmt"/>
+          <line num="352" count="3" type="stmt"/>
           <line num="426" count="1" type="stmt"/>
+          <line num="437" count="1" type="stmt"/>
         </file>
       </package>
       <package name="reducers">
