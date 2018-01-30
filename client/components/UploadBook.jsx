@@ -291,9 +291,20 @@ export class UploadBook extends Component {
               </button>
             </div>
           </form>
-          {error && <div className="errors"> {error} </div>}
-          {isPostCover ? <div className="contents"> <h5>Uploading Cover...</h5> </div> : ''}
-          {isPostPdf ? <div className="contents"> <h5>Uploading Pdf...</h5> </div> : ''}
+          {
+            isPostCover ?
+            <div className="contents"> 
+              <h5>Uploading Cover...</h5>
+            </div>
+            : ''
+          }
+          {
+            isPostPdf ?
+            <div className="contents">
+              <h5>Uploading Pdf...</h5>
+            </div>
+            : ''
+          }
           <div
           className="card-enlarge card-wrapper mdl-card mdl-shadow--3dp">
             <form ref="bookForm">
