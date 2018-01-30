@@ -9,7 +9,8 @@ const {
   FAILED_TO_UPLOAD_COVER,
   FAILED_TO_UPLOAD_PDF,
   UPLOAD_COVER_SUCCESSFUL,
-  UPLOAD_PDF_SUCCESSFUL
+  UPLOAD_PDF_SUCCESSFUL,
+  CLEAR_UPLOAD_STATE
 } = types;
 /**
  * @description Upload file to cloudinary
@@ -22,7 +23,8 @@ const upload = (data) => {
   const cloudName = process.env.CLOUD_NAME;
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const timestamp = Date.now() / 1000;
-  const paramsStr = `timestamp=${timestamp}&upload_preset=${process.env.UPLOAD_PRESET+process.env.PARAM_STRING}`;
+  const paramsStr = `timestamp=\
+${timestamp}&upload_preset=${process.env.UPLOAD_PRESET + process.env.PARAM_STRING}`;
   const signature = sha1(paramsStr);
   const params = {
     api_key: process.env.API_KEY,
@@ -41,7 +43,6 @@ const upload = (data) => {
  * @description Handle file upload
  * 
  * @param {object} data
- * 
  * @param {string} uploadType
  * 
  * @return {object} Dispatch
@@ -77,4 +78,12 @@ const uploader = (data, uploadType) => (dispatch) => {
     });
   });
 };
+/**
+ * @description Clear upload state
+ * 
+ * @return {object} Dispatch
+ */
+export const clearUploadState = () => dispatch => dispatch({
+  type: CLEAR_UPLOAD_STATE
+});
 export default uploader;

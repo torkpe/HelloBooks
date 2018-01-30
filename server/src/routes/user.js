@@ -17,36 +17,52 @@ router.post('/users/signin', userController.signin);
 router.put('/confirmation/:key', userController.updateUser);
 //  api route to allow user borrow book
 router.post(
-  '/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,
-  authBorrow.checkStar, authBorrow.checkForExceededDeadline, borrowBookControllers.borrow
+  '/users/:userId/:bookId/books',
+  authorize.checkAuthentication,
+  authorize.authorizeUser,
+  authBorrow.checkStar,
+  authBorrow.checkForExceededDeadline,
+  borrowBookControllers.borrow
 );
 // get list of borrowed books but not returned
 router.get(
-  '/users/:userId/books', authorize.checkAuthentication, authorize.authorizeUser,
+  '/users/:userId/books',
+  authorize.checkAuthentication,
+  authorize.authorizeUser,
   borrowBookControllers.getBorrowedBooks
 );
 // get list borrowed books, both borrowed and returned
 router.get(
-  '/users/:userId/books/all-borrowed', authorize.checkAuthentication, authorize.authorizeUser,
+  '/users/:userId/books/all-borrowed',
+  authorize.checkAuthentication,
+  authorize.authorizeUser,
   borrowBookControllers.getHistory
 );
 // api route to allow user return a book;
 router.put(
-  '/users/:userId/:bookId/books', authorize.checkAuthentication, authorize.authorizeUser,
+  '/users/:userId/:bookId/books',
+  authorize.checkAuthentication,
+  authorize.authorizeUser,
   borrowBookControllers.returnBook
 );
 // Api to set password
 router.put(
-  '/users/change-password/:id', authorize.checkAuthentication, authorize.authorizeUser,
+  '/users/change-password/:id',
+  authorize.checkAuthentication,
+  authorize.authorizeUser,
   userController.changePassword
 );
 // update username
 router.put(
-  '/users/update-user/:id', authorize.checkAuthentication, authorize.authorizeUser,
+  '/users/update-user/:id',
+  authorize.checkAuthentication,
+  authorize.authorizeUser,
   userController.updateName
 );
 router.get(
-  '/users/:userId', authorize.checkAuthentication, authorize.authorizeUser,
+  '/users/:userId',
+  authorize.checkAuthentication,
+  authorize.authorizeUser,
   userController.getUser
 );
 // reset password

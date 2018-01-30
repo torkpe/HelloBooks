@@ -5,7 +5,10 @@ import { browserHistory } from 'react-router';
 
 // Is not admin
 /**
+ * @description Higher order component to check if user is an admin
+ * 
  * @param {object} ComposedComponent
+ * 
  * @return {void}
  */
 const isAdmin = (ComposedComponent) => {
@@ -26,7 +29,10 @@ const isAdmin = (ComposedComponent) => {
     isAdmin: Proptypes.bool.isRequired,
   };
   /**
+   * @description Map state to props
+   * 
    * @param {object} state
+   * 
    * @return {object} props
    */
   const mapStateToProps = state => ({
