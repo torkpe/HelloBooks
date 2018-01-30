@@ -124,7 +124,7 @@ exports[`<Home /> renders <Home /> component 1`] = `
           userId={1}
         >
           <div
-            className="mdl-cell mdl-cell--4-col"
+            className="col-sm-12 col-md-6 col-lg-4"
           >
             <div
               className="demo-card-square mdl-card mdl-shadow--2dp home-card contents"
@@ -142,11 +142,6 @@ exports[`<Home /> renders <Home /> component 1`] = `
                 alt="Book cover"
                 src="xcgvhjkhcvbkjhgcvbjhcv"
               />
-              <div
-                className="mdl-card__supporting-text"
-              >
-                a boy from the village who finally went to school
-              </div>
               <div
                 className="mdl-card__actions mdl-card--border"
               >
