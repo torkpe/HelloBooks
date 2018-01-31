@@ -17,9 +17,19 @@ describe('<UploadBook />', () => {
     getABook: jest.fn(),
     uploader: jest.fn(),
     postBook: jest.fn(),
+    getAllGenre: jest.fn(),
     clearCreatedBookState: jest.fn(),
+    clearAddGenreState: jest.fn(),
+    clearUploadState: jest.fn(),
+    addBookGenre: jest.fn(),
+    reset: jest.fn(),
     params: {
       key: 34567
+    },
+    genre: ['hjk', 'ghjk', 'gvhbjnk'],
+    addedGenre: {
+      message: 'Genre added',
+      createdGenre: 'cbvnm,'
     },
     createBook: {
       book: {
@@ -33,7 +43,14 @@ describe('<UploadBook />', () => {
       },
       error: {
         message: 'something went wrong'
-      }
+      },
+      cover: 'book.cover',
+      pdf: 'book.pdf',
+      title: 'book.tithjdfkghfdle',
+      author: 'book.author',
+      description: 'book.ddfjhvbdfhvescription',
+      quantity: 'book.quantity',
+      genre: 'cghjkljhgn'
     },
     pdf: {
       pdf: 'ghjkljhgnh'
@@ -49,7 +66,11 @@ describe('<UploadBook />', () => {
       description: 'book.description',
       quantity: 'book.quantity',
       genre: 'cghjkljhgn'
-    }
+    },
+    error: {
+      message: 'hjkhgvbjk'
+    },
+    addGenreFailed: 'dsgfhjgfnh'
   };
   let event = {
     preventDefault: jest.fn(),
@@ -62,6 +83,7 @@ describe('<UploadBook />', () => {
       quantity: 'book.quantity',
       genre: 'book.genre',
       files: ['book.cover'],
+      reset: jest.fn()
     }
   };
   const mockStore = configureMockStore();
@@ -85,6 +107,11 @@ describe('<UploadBook />', () => {
     sinon.spy(UploadBook.prototype, 'coverChange');
     shallowComponent.instance().coverChange(event);
     expect(UploadBook.prototype.onChange.calledOnce).toEqual(false);
+  });
+  it('calls handle onHandleAddGenre event', () => {
+    sinon.spy(UploadBook.prototype, 'onHandleAddGenre');
+    shallowComponent.instance().onHandleAddGenre(event);
+    expect(UploadBook.prototype.onHandleAddGenre.calledOnce).toEqual(false);
   });
   it('calls handle coverChange event', () => {
     sinon.spy(UploadBook.prototype, 'pdfChange');
@@ -127,10 +154,15 @@ describe('<UploadBook />', () => {
     expect(shallowComponent.instance().state.isPostCover).toEqual(false);
     expect(shallowComponent.instance().state.isPostPdf).toEqual(false);
     expect(shallowComponent.instance().state.isLoading).toEqual(false);
+    expect(shallowComponent.instance().props.clearCreatedBookState)
+      .toHaveBeenCalled();
   });
-  it('calls componentWillReceiveProps ', () => {
+  it('calls componentWillUnmount ', () => {
     shallowComponent = shallow(<UploadBook {...props} />);
     shallowComponent.instance().componentWillUnmount(props);
-    expect(shallowComponent.instance().props.clearCreatedBookState).toHaveBeenCalled();
+    expect(shallowComponent.instance()
+      .props.clearCreatedBookState).toHaveBeenCalled();
+    expect(shallowComponent.instance()
+      .props.clearAddGenreState).toHaveBeenCalled();
   });
 });

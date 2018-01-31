@@ -5,10 +5,13 @@ import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
 import PasswordForm from './PasswordForm.jsx';
-import { userConfirmationRequest, clearUserConfirmationState } from '../actions/user';
+import {
+  userConfirmationRequest,
+  clearUserConfirmationState
+} from '../actions/user';
 
 /**
- * @classdesc returns render component
+ * @classdesc Returns render component
  */
 export class Confirm extends Component {
   /**
@@ -80,6 +83,7 @@ export class Confirm extends Component {
   }
   /**
    * @description Renders confirm component
+   * 
    * @return {XML} JSX
    */
   render() {

@@ -5,13 +5,18 @@ import { browserHistory } from 'react-router';
 import jwt from 'jsonwebtoken';
 import { logout } from '../actions/user';
 /**
+ * @description Higher order component to check if user is authenticated
+ * 
  * @param {object} ComposedComponent
+ * 
  * @return {void}
  */
 export const Authenticate = (ComposedComponent) => {
   class AuthenticateUser extends Component {
     componentWillMount() {
-      jwt.verify(window.localStorage.getItem('jwt'), 'khdbhkdwbfjkwenbfkwjenfkwebfhjwebfuerkwbfkwefnjkw', (error, decoded) => {
+      jwt.verify(
+        window.localStorage.getItem('jwt'),
+        process.env.SECRET, (error, decoded) => {
         if (error || !this.props.isAuthenticated) {
           this.props.logout();
           return browserHistory.push('/signin');
@@ -35,8 +40,10 @@ export const Authenticate = (ComposedComponent) => {
     isAuthenticated: Proptypes.bool.isRequired,
   };
   /**
-   * return props
+   * @description Map state to props
+   * 
    * @param {object} state
+   * 
    * @return {object} props
    */
   const mapStateToProps = state => ({

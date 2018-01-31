@@ -50,7 +50,10 @@ module.exports = {
       .waitForElementVisible('input[name=author]', 1000)
       .setValue('input[name=author]', 'jon dabba')
       .waitForElementVisible('input[name=description]', 1000)
-      .setValue('input[name=description]', 'the mysterious boy who was just mysterious')
+      .setValue(
+        'input[name=description]',
+        'the mysterious boy who was just mysterious'
+      )
       .waitForElementVisible('input[name=genre]', 1000)
       .setValue('input[name=genre]', 'educational')
       .waitForElementVisible('input[name=quantity]', 1000)

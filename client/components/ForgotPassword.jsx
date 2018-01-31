@@ -4,11 +4,14 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
-import { sendPasswordResetLink, clearSendPasswordResetLinkState } from '../actions/user';
+import {
+  sendPasswordResetLink,
+  clearSendPasswordResetLinkState
+} from '../actions/user';
 import EmailForm from './EmailForm.jsx';
 
 /**
- * @classdesc return ForgotPassword component
+ * @classdesc Return ForgotPassword component
  */
 class ForgotPassword extends Component {
   /**
@@ -82,7 +85,7 @@ class ForgotPassword extends Component {
     this.props.sendPasswordResetLink(this.state);
   }
   /**
-   * @description renders ForgotPassword component
+   * @description Renders ForgotPassword component
    * 
    * @return {XML} JSX
    */

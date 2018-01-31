@@ -47,7 +47,6 @@ const initialState = {
 const mockStore = configureMockStore();
 let mountedComponent;
 let store;
-let wrapper;
 let shallowComponent;
 
 describe('<Signin />', () => {
@@ -63,17 +62,20 @@ describe('<Signin />', () => {
   it('calls componentWillReceiveProps', () => {
     sinon.spy(Signin.prototype, 'componentWillReceiveProps');
     shallowComponent.instance().componentWillReceiveProps(props);
-    expect(Signin.prototype.componentWillReceiveProps.calledOnce).toEqual(true);
+    expect(Signin.prototype.componentWillReceiveProps.calledOnce)
+      .toEqual(true);
   });
   it('calls componentWillReceiveProps when there is no token', () => {
     props.signin.successfullySignedin.myToken = null;
     shallowComponent.instance().componentWillReceiveProps(props);
-    expect(Signin.prototype.componentWillReceiveProps.calledOnce).toEqual(false);
+    expect(Signin.prototype.componentWillReceiveProps.calledOnce)
+      .toEqual(false);
   });
   it('calls componentWillReceiveProps when there is no error message', () => {
     props.signin.errors.message = null;
     shallowComponent.instance().componentWillReceiveProps(props);
-    expect(Signin.prototype.componentWillReceiveProps.calledOnce).toEqual(false);
+    expect(Signin.prototype.componentWillReceiveProps.calledOnce)
+      .toEqual(false);
   });
   it('calls handle Signup event after login button is clicked', () => {
     sinon.spy(Signin.prototype, 'onSubmit');

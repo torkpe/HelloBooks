@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { userSignin, clearSigninState } from '../actions/user';
 
 /**
- * @classdesc returns Signin component
+ * @classdesc Returns Signin component
  */
 export class Signin extends Component {
   /**
@@ -42,6 +42,7 @@ export class Signin extends Component {
     }
     if (nextProps.signin.errors.message) {
       toastr.error(nextProps.signin.errors.message);
+      this.props.clearSigninState();
     }
   }
   /**
@@ -67,6 +68,8 @@ export class Signin extends Component {
     this.props.userSignin(this.state);
   }
   /**
+   * @description Renders Signin component
+   * 
    * @return {XML} JSX
    */
   render() {
@@ -138,4 +141,7 @@ Signin.propTypes = {
 const mapStateToProps = state => ({
   signin: state.userSignin,
 });
-export default connect(mapStateToProps, { userSignin, clearSigninState })(Signin);
+export default connect(mapStateToProps, {
+  userSignin,
+  clearSigninState
+})(Signin);

@@ -106,7 +106,8 @@ export default {
           });
         }
         return response.status(200).send(books);
-      }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      }).catch(() => response.status(500)
+        .send({ message: 'Something went wrong' }));
   },
   /**
    * @description Get user history of all borrowed books
@@ -133,7 +134,8 @@ export default {
           });
         }
         return response.status(200).send(books);
-      }).catch(() => response.status(500).send({ message: 'Something went wrong' }));
+      }).catch(() => response.status(500)
+        .send({ message: 'Something went wrong' }));
   },
   /**
    * @description Check if book has been borrowed before

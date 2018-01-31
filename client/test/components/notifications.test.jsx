@@ -46,6 +46,7 @@ describe('<Notifications />', () => {
   it('checks if notifications is less than 0', () => {
     props.notifications = [];
     shallowComponent = shallow(<Notifications {...props} />);
-    expect(shallowComponent.instance().props.notifications.length < 1).toEqual(true);
+    expect(shallowComponent.instance().props.notifications.length < 1)
+      .toEqual(true);
   });
 });

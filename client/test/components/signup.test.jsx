@@ -8,7 +8,9 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
 import storeConfiguration from '../../store/store';
-import connectedSignup, { Signup } from '../../components/Signup.jsx';
+import connectedSignup, {
+  Signup
+} from '../../components/Signup.jsx';
 
 configure({ adapter: new Adapter() });
 
@@ -46,7 +48,11 @@ describe('<SignUp />', () => {
     store = mockStore(storeConfiguration());
     mountedComponent = mount(<Signup {...props} />);
     shallowComponent = shallow(<Signup {...props} />);
-    wrapper = mount(<Provider store={storeConfiguration()}><connectedSignup /></Provider>);
+    wrapper = mount(
+      <Provider store={storeConfiguration()}>
+        <connectedSignup />
+      </Provider>
+    );
   });
   it('renders <SignUp /> component', () => {
     const tree = toJson(mountedComponent);
@@ -72,11 +78,13 @@ describe('<SignUp />', () => {
   it('calls componentWillReceiveProps', () => {
     sinon.spy(Signup.prototype, 'componentWillReceiveProps');
     shallowComponent.instance().componentWillReceiveProps(props);
-    expect(Signup.prototype.componentWillReceiveProps.calledOnce).toEqual(true);
+    expect(Signup.prototype.componentWillReceiveProps.calledOnce)
+      .toEqual(true);
   });
   it('calls componentWillReceiveProps when there is no error message', () => {
     props.signup.errors.message = null;
     shallowComponent.instance().componentWillReceiveProps(props);
-    expect(Signup.prototype.componentWillReceiveProps.calledOnce).toEqual(false);
+    expect(Signup.prototype.componentWillReceiveProps.calledOnce)
+      .toEqual(false);
   });
 });
