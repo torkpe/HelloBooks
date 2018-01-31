@@ -25,7 +25,8 @@ export const getExceededDeadlineAndRemind = () => {
             }
           }).then((foundBook) => {
             const type = 'user';
-            const message = `You have exceeded deadline for the book '${foundBook.title}'. Please Return.`;
+            const message = `You have exceeded deadline\
+             for the book '${foundBook.title}'. Please Return.`;
             createNotification(message, type, userId, bookId);
           })
             .catch(() => ({ message: 'something is wrong' }));

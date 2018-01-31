@@ -1,17 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AllNotReturned /> renders <AllNotReturned /> component 1`] = `
-<Provider
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
+<div
+  className="mdl-grid"
 >
-  <connectedAllNotReturned />
-</Provider>
+  <div
+    className="mdl-cell mdl-cell--1-col"
+  />
+  <div
+    className="mdl-cell mdl-cell--10-col"
+  >
+    <div
+      className="mdl-grid"
+    >
+      <div
+        className="mdl-cell mdl-cell--2-col"
+      />
+    </div>
+    <div
+      className="contents"
+    >
+      <span
+        className="ask"
+      >
+        <h5>
+          Books yet to be returned
+        </h5>
+      </span>
+      View all Borrowed books 
+      <Link
+        onlyActiveOnIndex={false}
+        style={Object {}}
+        to="/all-borrowed-books"
+      >
+        here
+      </Link>
+      <hr />
+    </div>
+    <div
+      className="ask"
+    />
+    <div
+      className="mdl-grid"
+    >
+      <div
+        className="contents"
+      >
+        <h5>
+          You have not borrowed any book at this point in time
+        </h5>
+      </div>
+    </div>
+    <div
+      className="mdl-grid "
+    >
+      <div
+        className="mdl-cell mdl-cell--2-col"
+      />
+    </div>
+  </div>
+  <div
+    className="mdl-cell mdl-cell--1-col"
+  />
+</div>
 `;

@@ -60,7 +60,8 @@ export default {
             .then((createdUser) => {
               const link =
 `http://hellobooks-foodman.herokuapp.com/confirmation/${createdUser.key}`;
-              const message = `Hello there, thank you for registering for helloBooks. Please click on the click below to confirm your email addresponses
+              const message = `Hello there, thank you for registering for helloBooks.\
+Please click on the click below to confirm your email addresponses
 ${link}`;
               sendEmail(message, 'user', createdUser.id);
               return response.status(201).send({

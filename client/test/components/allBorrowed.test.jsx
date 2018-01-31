@@ -6,7 +6,9 @@ import render from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
-import connectedAllBorrowed, { AllBorrowed } from '../../components/AllBorrowed.jsx';
+import connectedAllBorrowed, {
+  AllBorrowed
+} from '../../components/AllBorrowed.jsx';
 import storeConfiguration from '../../store/store';
 
 configure({ adapter: new Adapter() });
@@ -25,7 +27,7 @@ describe('<AllBorrowed />', () => {
         books: [
           {
             title: 'eze goes to school',
-            description: 'a boy from the village who finally went to school',
+            description: 'a boy from the village w',
             id: 1,
             cover: 'xcgvhjkhcvbkjhgcvbjhcv',
             pdf: 'fghjkhgfghjgfgg',
@@ -34,7 +36,7 @@ describe('<AllBorrowed />', () => {
           },
           {
             title: 'eze goes to school',
-            description: 'a boy from the village who finally went to school',
+            description: 'a boy from the village w',
             id: 1,
             cover: 'xcgvhjkhcvbkjhgcvbjhcv',
             pdf: 'fghjkhgfghjgfgg',

@@ -185,7 +185,8 @@ export default {
         }).then((foundBorrowedBook) => {
           if (foundBorrowedBook) {
             return response.status(401).send({
-              message: 'This action cannot be completed until all users have returned borrowed books'
+              message: 'This action cannot be completed\
+               until all users have returned borrowed books'
             });
           }
           book.update({

@@ -14,7 +14,9 @@ import { logout } from '../actions/user';
 export const Authenticate = (ComposedComponent) => {
   class AuthenticateUser extends Component {
     componentWillMount() {
-      jwt.verify(window.localStorage.getItem('jwt'), 'khdbhkdwbfjkwenbfkwjenfkwebfhjwebfuerkwbfkwefnjkw', (error, decoded) => {
+      jwt.verify(
+        window.localStorage.getItem('jwt'),
+        process.env.SECRET, (error, decoded) => {
         if (error || !this.props.isAuthenticated) {
           this.props.logout();
           return browserHistory.push('/signin');

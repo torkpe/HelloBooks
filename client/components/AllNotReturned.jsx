@@ -45,10 +45,13 @@ export class AllNotReturned extends Component {
           <div className="contents">
             <span className="ask">
               <h5>Books yet to be returned</h5>
-            </span>View all Borrowed books <Link to="/all-borrowed-books">here</Link>
+            </span>
+            View all Borrowed books <Link to="/all-borrowed-books">here</Link>
             <hr />
           </div>
-          <div className="ask">{this.props.message ? 'this.props.message' : '' }</div>
+          <div className="ask">
+            {this.props.message ? 'this.props.message' : '' }
+          </div>
           <div className="mdl-grid">
             { books && books.length > 0 ? books.map(book => (<Books
               {...this.props}
@@ -59,7 +62,9 @@ export class AllNotReturned extends Component {
                 borrowedBook={this.props.borrowed}
             />)) :
             <div className="contents">
-              <h5>You have not borrowed any book at this point in time</h5>
+              <h5>
+                You have not borrowed any book at this point in time
+              </h5>
             </div>
               }
           </div>

@@ -4,7 +4,10 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
-import { sendPasswordResetLink, clearSendPasswordResetLinkState } from '../actions/user';
+import {
+  sendPasswordResetLink,
+  clearSendPasswordResetLinkState
+} from '../actions/user';
 import EmailForm from './EmailForm.jsx';
 
 /**

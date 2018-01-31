@@ -17,18 +17,15 @@ const Books = (props) => {
     mdl-js-ripple-effect
   `;
   return (
-    <div className="mdl-cell mdl-cell--4-col">
-      <div className="demo-card-square mdl-card mdl-shadow--2dp home-card contents">
+    <div className="col-sm-12 col-md-6 col-lg-4">
+      <div className="demo-card-square mdl-card mdl-shadow--2dp contents">
         <div className="mdl-card__title mdl-card--expand">
           <h2 className="mdl-card__title-text">{book.title}</h2>
         </div>
         <img src={book.cover} alt="Book cover" />
-        <div className="mdl-card__supporting-text">
-          {book.description}
-        </div>
         <div className="mdl-card__actions mdl-card--border">
           <Link to={`single/${book.id}`} className={mdlStyle}>
-              Details
+              View Details
           </Link>
         </div>
       </div>

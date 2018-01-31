@@ -8,7 +8,9 @@ import configureMockStore from 'redux-mock-store';
 import sinon from 'sinon';
 
 import storeConfiguration from '../../store/store';
-import connectedUpdateBook, { UpdateBook } from '../../components/UpdateBook.jsx';
+import connectedUpdateBook, {
+  UpdateBook
+} from '../../components/UpdateBook.jsx';
 
 configure({ adapter: new Adapter() });
 
@@ -72,7 +74,11 @@ describe('<UpdateBook />', () => {
   beforeEach(() => {
     store = mockStore(storeConfiguration());
     shallowComponent = shallow(<UpdateBook {...props} />);
-    wrapper = mount(<Provider store={storeConfiguration()}><connectedUpdateBook /></Provider>);
+    wrapper = mount(
+      <Provider store={storeConfiguration()}>
+        <connectedUpdateBook />
+      </Provider>
+    );
   });
   it('renders <UpdateBook /> component', () => {
     const tree = toJson(shallowComponent);

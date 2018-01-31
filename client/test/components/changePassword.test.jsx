@@ -8,7 +8,9 @@ import configureMockStore from 'redux-mock-store';
 import sinon from 'sinon';
 
 import storeConfiguration from '../../store/store';
-import connectedchangePassword, { ChangePassword } from '../../components/ChangePassword.jsx';
+import connectedchangePassword, {
+  ChangePassword
+} from '../../components/ChangePassword.jsx';
 
 configure({ adapter: new Adapter() });
 
@@ -46,11 +48,9 @@ describe('<ChangePassword />', () => {
   const mockStore = configureMockStore();
   let mountedComponent;
   let store;
-  let wrapper;
   beforeEach(() => {
     store = mockStore(storeConfiguration());
     mountedComponent = mount(<ChangePassword {...props} />);
-    wrapper = mount(<Provider store={storeConfiguration()}><connectedchangePassword /></Provider>);
   });
   it('renders <ChangePassword /> component', () => {
     const tree = toJson(mountedComponent);
@@ -74,7 +74,8 @@ describe('<ChangePassword />', () => {
   it('calls clearSetPasswordState', () => {
     const shallowComponent = shallow(<ChangePassword {...props} />);
     shallowComponent.instance().componentWillUnmount();
-    expect(shallowComponent.instance().props.clearSetPasswordState).toHaveBeenCalled();
+    expect(shallowComponent.instance().props.clearSetPasswordState)
+      .toHaveBeenCalled();
   });
   it('calls componentWillReceiveProps', () => {
     const shallowComponent = shallow(<ChangePassword {...props} />);

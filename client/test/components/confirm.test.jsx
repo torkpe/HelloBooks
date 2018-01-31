@@ -8,7 +8,9 @@ import configureMockStore from 'redux-mock-store';
 import sinon from 'sinon';
 
 import storeConfiguration from '../../store/store';
-import connectedConfirm, { Confirm } from '../../components/Confirm.jsx';
+import connectedConfirm, {
+  Confirm
+} from '../../components/Confirm.jsx';
 
 configure({ adapter: new Adapter() });
 
@@ -53,7 +55,6 @@ describe('<Confirm />', () => {
   const mockStore = configureMockStore();
   let shallowComponent;
   let store;
-  let wrapper;
   beforeEach(() => {
     store = mockStore(storeConfiguration());
     shallowComponent = shallow(<Confirm {...props} />);
@@ -80,7 +81,8 @@ describe('<Confirm />', () => {
   it('calls clearUserConfirmState', () => {
     shallowComponent = shallow(<Confirm {...props} />);
     shallowComponent.instance().componentWillUnmount();
-    expect(shallowComponent.instance().props.clearUserConfirmationState).toHaveBeenCalled();
+    expect(shallowComponent.instance().props.clearUserConfirmationState)
+      .toHaveBeenCalled();
   });
   it('calls handleChange event', () => {
     sinon.spy(Confirm.prototype, 'onChange');

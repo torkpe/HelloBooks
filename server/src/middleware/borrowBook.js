@@ -15,7 +15,8 @@ const findBorrows = id => borrowBook.findAll({
     userId: id,
     returned: false
   }
-}).then(foundBorrowed => foundBorrowed.map(borrowedBook => borrowedBook.dataValues));
+}).then(foundBorrowed => foundBorrowed
+  .map(borrowedBook => borrowedBook.dataValues));
 
 /**
  * @description Permit user to borrow based on user's level
@@ -33,17 +34,20 @@ const checkStar = (request, response, next) => {
     const countBorrowed = foundBorrowedBooks.length;
     if (String(star) === categories.bronze && countBorrowed >= 1) {
       return response.status(401).send({
-        message: 'Sorry!!! This action cannot be completed due to your current star level'
+        message: 'Sorry!!! This action cannot be\
+ completed due to your current star level'
       });
     }
     if (String(star) === categories.silver && countBorrowed >= 2) {
       return response.status(401).send({
-        message: 'Sorry!!! This action cannot be completed due to your current star level'
+        message: 'Sorry!!! This action cannot be\
+ completed due to your current star level'
       });
     }
     if (String(star) === categories.gold && countBorrowed >= 3) {
       return response.status(401).send({
-        message: 'Sorry!!! This action cannot be completed due to your current star level'
+        message: 'Sorry!!! This action cannot be completed\
+ due to your current star level'
       });
     }
     return next();
@@ -71,7 +75,8 @@ const checkForExceededDeadline = (request, response, next) => {
   }).then((foundExceed) => {
     if (foundExceed.length > 0) {
       return response.status(401).send({
-        message: 'Apparently you have book(s) that are due for return. Please return and try to borrow again'
+        message: 'Apparently you have book(s) that are due for\
+          return. Please return and try to borrow again'
       });
     }
     return next();

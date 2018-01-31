@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
 import PasswordForm from './PasswordForm.jsx';
-import { userConfirmationRequest, clearUserConfirmationState } from '../actions/user';
+import {
+  userConfirmationRequest,
+  clearUserConfirmationState
+} from '../actions/user';
 
 /**
  * @classdesc Returns render component

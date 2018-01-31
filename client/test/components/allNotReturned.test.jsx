@@ -6,7 +6,9 @@ import render from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
-import connectedAllNotReturned, { AllNotReturned } from '../../components/AllNotReturned.jsx';
+import connectedAllNotReturned, {
+  AllNotReturned
+} from '../../components/AllNotReturned.jsx';
 import storeConfiguration from '../../store/store';
 
 configure({ adapter: new Adapter() });
@@ -36,20 +38,19 @@ describe('<AllNotReturned />', () => {
   const mockStore = configureMockStore();
   let shallowComponent;
   let store;
-  let wrapper;
   beforeEach(() => {
     store = mockStore(storeConfiguration());
     shallowComponent = shallow(<AllNotReturned {...props} />);
-    wrapper = mount(<Provider store={storeConfiguration()}><connectedAllNotReturned /></Provider>);
   });
   it('renders <AllNotReturned /> component', () => {
-    const tree = toJson(wrapper);
+    const tree = toJson(shallowComponent);
     expect(tree).toMatchSnapshot();
   });
   it('calls clearBooksState', () => {
     shallowComponent = shallow(<AllNotReturned {...props} />);
     shallowComponent.instance().componentWillUnmount();
-    expect(shallowComponent.instance().props.clearBooksState).toHaveBeenCalled();
+    expect(shallowComponent.instance().props.clearBooksState)
+      .toHaveBeenCalled();
   });
   it('checks for message', () => {
     props.message = 'xkjhgfgghjgcf';

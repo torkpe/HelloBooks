@@ -124,7 +124,9 @@ class Settings extends Component {
           <div className="card-enlarge form-card mdl-card mdl-shadow--3dp">
             <form onSubmit={this.onSubmit}>
               <h5> Update User Details</h5>
-              <span className="star">Membership level: {this.props.auth.user.star}</span>
+              <span className="star">
+                Membership level: {this.props.auth.user.star}
+              </span>
               <div
                 className="card-content card-wrapper input-wrapper">
                 <input

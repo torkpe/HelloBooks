@@ -154,12 +154,15 @@ describe('<UploadBook />', () => {
     expect(shallowComponent.instance().state.isPostCover).toEqual(false);
     expect(shallowComponent.instance().state.isPostPdf).toEqual(false);
     expect(shallowComponent.instance().state.isLoading).toEqual(false);
-    expect(shallowComponent.instance().props.clearCreatedBookState).toHaveBeenCalled();
+    expect(shallowComponent.instance().props.clearCreatedBookState)
+      .toHaveBeenCalled();
   });
   it('calls componentWillUnmount ', () => {
     shallowComponent = shallow(<UploadBook {...props} />);
     shallowComponent.instance().componentWillUnmount(props);
-    expect(shallowComponent.instance().props.clearCreatedBookState).toHaveBeenCalled();
-    expect(shallowComponent.instance().props.clearAddGenreState).toHaveBeenCalled();
+    expect(shallowComponent.instance()
+      .props.clearCreatedBookState).toHaveBeenCalled();
+    expect(shallowComponent.instance()
+      .props.clearAddGenreState).toHaveBeenCalled();
   });
 });

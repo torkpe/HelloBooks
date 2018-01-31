@@ -41,11 +41,9 @@ describe('<Home />', () => {
   const mockStore = configureMockStore();
   let mountedComponent;
   let store;
-  let wrapper;
   beforeEach(() => {
     store = mockStore(storeConfiguration());
     mountedComponent = mount(<Home {...props} />);
-    wrapper = mount(<Provider store={storeConfiguration()}><connectedHome /></Provider>);
   });
   it('renders <Home /> component', () => {
     const tree = toJson(mountedComponent);
@@ -66,6 +64,7 @@ describe('<Home />', () => {
   it('checks if books length is less than 1', () => {
     props.books = {};
     const shallowComponent = shallow(<Home {...props} />);
-    expect(Object.keys(shallowComponent.instance().props.books).length < 1).toEqual(true);
+    expect(Object.keys(shallowComponent.instance().props.books).length < 1)
+      .toEqual(true);
   });
 });

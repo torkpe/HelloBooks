@@ -47,25 +47,81 @@ const router = (
     <div>
       <Router history={browserHistory}>
         <Route path="/" component={Main}>
-          <IndexRoute component={isAlreadySignedin(Landing)} />
-          <Route path="/signup" component={isAlreadySignedin(Signup)} />
-          <Route path="/signin" component={isAlreadySignedin(Signin)} />
-          <Route path="/redirect" component={isAlreadySignedin(Redirect)} />
-          <Route path="/confirmation/:key" component={isAlreadySignedin(Confirm)} />
-          <Route path="/home" component={Authenticate(Home)} />
-          <Route path="/upload-book" component={Authenticate(isAdmin(uploadBook))} />
-          <Route path="/book/:id" component={Authenticate(SingleBook)} />
-          <Route path="/settings" component={Authenticate(isUser(Settings))} />
-          <Route path="/all-borrowed-books" component={Authenticate(isUser(AllBorrowed))} />
-          <Route path="/history" component={Authenticate(isUser(AllNotReturned))} />
-          <Route path="/notifications" component={Authenticate(notification)} />
-          <Route path="/single/:id" component={Authenticate(SingleBook)} />
-          <Route path="/read-book/:key" component={Authenticate((Pdf))} />
-          <Route path="/restrict" component={Authenticate((Restrict))} />
-          <Route path="/set-password" component={Authenticate((SetPassword))} />
-          <Route path="/edit-book/:id" component={Authenticate((UpdateBook))} />
-          <Route path="/forgot-password" component={isAlreadySignedin(ForgotPassword)} />
-          <Route path="/reset-password/:key" component={isAlreadySignedin(ResetPassword)} />
+          <IndexRoute
+            component={isAlreadySignedin(Landing)}
+          />
+          <Route
+            path="/signup"
+            component={isAlreadySignedin(Signup)}
+          />
+          <Route
+            path="/signin"
+            component={isAlreadySignedin(Signin)}
+          />
+          <Route
+            path="/redirect"
+            component={isAlreadySignedin(Redirect)}
+          />
+          <Route
+            path="/confirmation/:key"
+            component={isAlreadySignedin(Confirm)}
+          />
+          <Route
+            path="/home"
+            component={Authenticate(Home)}
+          />
+          <Route
+            path="/upload-book"
+            component={Authenticate(isAdmin(uploadBook))}
+          />
+          <Route
+            path="/book/:id"
+            component={Authenticate(SingleBook)}
+          />
+          <Route
+            path="/settings"
+            component={Authenticate(isUser(Settings))}
+          />
+          <Route
+            path="/all-borrowed-books"
+            component={Authenticate(isUser(AllBorrowed))}
+          />
+          <Route
+            path="/history"
+            component={Authenticate(isUser(AllNotReturned))}
+          />
+          <Route
+            path="/notifications"
+            component={Authenticate(notification)}
+          />
+          <Route
+            path="/single/:id"
+            component={Authenticate(SingleBook)}
+          />
+          <Route
+            path="/read-book/:key"
+            component={Authenticate((Pdf))}
+          />
+          <Route
+            path="/restrict"
+            component={Authenticate((Restrict))}
+          />
+          <Route
+            path="/set-password"
+            component={Authenticate((SetPassword))}
+          />
+          <Route
+            path="/edit-book/:id"
+            component={Authenticate((UpdateBook))}
+          />
+          <Route
+            path="/forgot-password"
+            component={isAlreadySignedin(ForgotPassword)}
+          />
+          <Route
+            path="/reset-password/:key"
+            component={isAlreadySignedin(ResetPassword)}
+          />
         </Route>
       </Router>
       <ReduxToastr

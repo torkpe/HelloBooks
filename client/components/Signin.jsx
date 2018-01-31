@@ -141,4 +141,7 @@ Signin.propTypes = {
 const mapStateToProps = state => ({
   signin: state.userSignin,
 });
-export default connect(mapStateToProps, { userSignin, clearSigninState })(Signin);
+export default connect(mapStateToProps, {
+  userSignin,
+  clearSigninState
+})(Signin);

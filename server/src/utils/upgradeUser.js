@@ -29,7 +29,8 @@ const upgradeUser = () => {
               user.update({
                 star: categories.silver
               }).then((upgradedUser) => {
-                const message = `Congratulations! You have just been upgraded to ${upgradedUser.star} level`;
+                const message = `Congratulations! You have just\
+ been upgraded to ${upgradedUser.star} level`;
                 createNotification(message, 'user', id);
                 return ({
                   message: 'successfully upgraded user'
@@ -43,7 +44,8 @@ const upgradeUser = () => {
               user.update({
                 star: categories.gold
               }).then((upgradedUser) => {
-                const message = `Congratulations! You have just been upgraded to ${upgradedUser.star} level`;
+                const message = `Congratulations! You have just\
+been upgraded to ${upgradedUser.star} level`;
                 createNotification(message, 'user', id);
                 return ({
                   message: 'successfully upgraded user'
